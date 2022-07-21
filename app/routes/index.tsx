@@ -26,6 +26,7 @@ export default function Index() {
       <section>
         <div className="container mx-auto">
           <h1 className="">Welcome to BackyTracky</h1>
+          <p>Some samples:</p>
           {/* {JSON.stringify(data)} */}
           <div className="grid gap-4 my-8 bg-slate-100 rounded-md p-4">
             {data.tracks.map((track) => (
