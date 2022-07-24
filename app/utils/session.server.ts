@@ -1,4 +1,4 @@
-import { createCookieSessionStorage, json, redirect } from "@remix-run/node";
+import { createCookieSessionStorage, redirect } from "@remix-run/node";
 import bcrypt from "bcryptjs";
 
 import { db } from "./db.server";
@@ -89,7 +89,7 @@ export async function createUserSession(
 ) {
   const session = await storage.getSession();
   session.set("userId", userId);
-  return json({
+  return redirect(redirectTo, {
     headers: {
       "Set-Cookie": await storage.commitSession(session),
     },
