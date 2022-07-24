@@ -12,7 +12,6 @@ export async function login({ username, password }: LoginForm) {
   const user = await db.user.findUnique({
     where: { username },
   });
-  console.log("Got User: ", user);
   if (!user) return null;
 
   const isCorrectPassword = await bcrypt.compare(password, user.passwordHash);
