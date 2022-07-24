@@ -2,8 +2,8 @@ export default function RegisterRoute() {
   return (
     <main>
       <section>
-        <div className="container mx-auto">
-          <h1>Register</h1>
+        <div className="max-w-sm mx-auto pt-8">
+          <h1>Register 📑</h1>
         </div>
       </section>
     </main>

@@ -1,5 +1,5 @@
 import { ClientOnly } from "remix-utils";
-import TrackPlayer from "~/components/TrackPlayer.client";
+import TrackPlayer from "~/components/track/TrackPlayer.client";
 
 export default function TrackDetailRoute() {
   return (

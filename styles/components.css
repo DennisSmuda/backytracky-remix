@@ -1,0 +1,75 @@
+@tailwind components;
+
+@layer components {
+  main section {
+    @apply py-4 px-6;
+  }
+
+  .button {
+    @apply inline-flex items-center justify-center;
+    @apply bg-zinc-200 dark:bg-zinc-800;
+    @apply text-inherit font-bold py-2 px-4 rounded-md;
+  }
+
+  .button:hover {
+    @apply hover:bg-zinc-100 dark:bg-zinc-700;
+  }
+  .button:active {
+    @apply hover:bg-zinc-300 dark:bg-zinc-900;
+  }
+
+  .button[type="submit"] {
+    @apply bg-emerald-200 dark:bg-emerald-800;
+  }
+  .button[type="submit"]:hover,
+  .button[type="submit"]:focus {
+    @apply bg-emerald-300 dark:bg-emerald-700;
+  }
+  .button[type="submit"]:active {
+    @apply bg-emerald-400 dark:bg-emerald-900;
+  }
+
+  form .button[type="submit"] {
+    @apply mt-4;
+  }
+
+  nav button,
+  nav a {
+    @apply px-2 py-1 rounded-md;
+  }
+
+  nav button:hover,
+  nav a:hover {
+    @apply bg-zinc-100 dark:bg-zinc-800;
+  }
+
+  nav button:active,
+  nav a:active {
+    @apply bg-zinc-200 dark:bg-zinc-700;
+  }
+
+  nav a[aria-current="page"] {
+    @apply bg-zinc-100 dark:bg-zinc-800;
+  }
+
+  form label {
+    @apply grid;
+  }
+
+  form label span {
+    @apply text-xs text-zinc-600 mb-2;
+  }
+
+  form input[type="text"],
+  form input[type="password"] {
+    @apply rounded-md border-none bg-zinc-200 dark:bg-zinc-800;
+  }
+
+  .form-validation-error {
+    @apply text-xs text-red-500 mt-2;
+  }
+
+  .bt-prose {
+    @apply prose dark:prose-invert;
+  }
+}

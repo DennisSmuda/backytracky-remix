@@ -1,31 +1,4 @@
-@tailwind base;
-@tailwind components;
+@import "./base.css";
+@import "./components.css";
+
 @tailwind utilities;
-
-@layer base {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply tracking-tighter;
-    @apply font-black;
-  }
-  h1 {
-    @apply text-4xl;
-  }
-  h2 {
-    @apply text-xl;
-  }
-}
-
-@layer components {
-  main section {
-    @apply p-4;
-  }
-
-  .button {
-    @apply inline-flex bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded;
-  }
-}

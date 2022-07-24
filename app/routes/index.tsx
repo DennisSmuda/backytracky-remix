@@ -1,44 +1,28 @@
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
-import { db } from "~/utils/db.server";
-
-type LoaderData = {
-  tracks: Array<{ id: string; name: string; sheet: string }>;
-};
-
-export const loader: LoaderFunction = async () => {
-  const data: LoaderData = {
-    tracks: await db.track.findMany(),
-  };
-
-  return json(data);
-};
+import { Link } from "@remix-run/react";
 
 export default function Index() {
-  const data = useLoaderData<LoaderData>();
-
   return (
-    <main
-      className="main"
-      style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}
-    >
+    <main className="main">
       <section>
-        <div className="container mx-auto">
-          <h1 className="">Welcome to BackyTracky</h1>
-          <p>Some samples:</p>
-          {/* {JSON.stringify(data)} */}
-          <div className="grid gap-4 my-8 bg-slate-100 rounded-md p-4">
-            {data.tracks.map((track) => (
-              <Link to={`/track/${track.id}`} key={track.id}>
-                {track.name}
-              </Link>
-            ))}
+        <div className="container max-w-4xl mx-auto pt-8">
+          <div className="bt-prose">
+            <h1 className="mb-0">Welcome to BackyTracky 👋</h1>
+
+            <p>
+              Practice scales, licks or solos. Create your own or discover other
+              people's tracks!
+            </p>
           </div>
 
-          <Link className="button" to="/track/new">
-            New Track
-          </Link>
+          <div className="grid gap-4 my-8 grid-flow-col">
+            <Link className="button" to="/tracks">
+              All Tracks
+            </Link>
+
+            <Link className="button" to="/track/new">
+              New Track
+            </Link>
+          </div>
         </div>
       </section>
     </main>
