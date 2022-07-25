@@ -9,7 +9,10 @@
     "dev:css": "postcss ./styles/**/*.css --dir ./app/styles --watch",
     "dev:remix": "remix dev",
     "generate:css": "postcss ./styles/**/*.css --dir ./app/styles --env production",
-    "start": "cross-env NODE_ENV=production netlify dev"
+    "test:build": "cross-env NODE_ENV=testing remix build",
+    "test:e2e": "cypress open",
+    "test:start": "cross-env NODE_ENV=production remix-serve ./build",
+    "start:netlify": "cross-env NODE_ENV=production netlify dev"
   },
   "prisma": {
     "seed": "node --require esbuild-register prisma/seed.ts"
@@ -30,15 +33,18 @@
     "tone": "^14.7.77"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
     "@remix-run/dev": "^1.6.5",
     "@remix-run/eslint-config": "^1.6.5",
     "@remix-run/serve": "^1.6.5",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.4",
+    "@testing-library/cypress": "^8.0.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "autoprefixer": "^10.4.7",
+    "cypress": "^10.3.1",
     "esbuild-register": "^3.3.3",
     "eslint": "^8.15.0",
     "npm-run-all": "^4.1.5",
