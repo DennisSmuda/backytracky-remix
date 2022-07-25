@@ -10,7 +10,7 @@
     "dev:remix": "remix dev",
     "test:e2e": "cypress open",
     "generate:css": "postcss ./styles/**/*.css --dir ./app/styles --env production",
-    "start": "remix-serve ./build",
+    "start": "cross-env NODE_ENV=production remix-serve ./public/build",
     "start:netlify": "cross-env NODE_ENV=production netlify dev"
   },
   "prisma": {
