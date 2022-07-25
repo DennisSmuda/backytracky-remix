@@ -8,9 +8,10 @@
     "dev": "run-p \"dev:*\"",
     "dev:css": "postcss ./styles/**/*.css --dir ./app/styles --watch",
     "dev:remix": "remix dev",
-    "test:e2e": "cypress open",
     "generate:css": "postcss ./styles/**/*.css --dir ./app/styles --env production",
-    "start": "cross-env NODE_ENV=production remix-serve ./public/build",
+    "test:build": "cross-env NODE_ENV=testing remix build",
+    "test:e2e": "cypress open",
+    "test:start": "cross-env NODE_ENV=production remix-serve ./build",
     "start:netlify": "cross-env NODE_ENV=production netlify dev"
   },
   "prisma": {

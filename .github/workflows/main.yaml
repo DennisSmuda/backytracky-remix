@@ -11,14 +11,19 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
+
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          build: npm run dev
+          build: npm run test:build
+          start: npm run test:start
         env:
           DATABASE_URL: "mysql://udv5onp5o56r:pscale_pw_50ovxFgoAufduGcs6oKtj8js7A62OSOli6eQ07lETzA@549qqnllx4g0.eu-central-1.psdb.cloud/backytracky?sslaccept=strict"
           SESSION_SECRET: "AVhsa3ByhX"
