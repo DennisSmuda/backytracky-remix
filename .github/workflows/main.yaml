@@ -24,6 +24,6 @@ jobs:
         with:
           build: npm run test:build
           start: npm run test:start
-        env:
-          DATABASE_URL: "mysql://udv5onp5o56r:pscale_pw_50ovxFgoAufduGcs6oKtj8js7A62OSOli6eQ07lETzA@549qqnllx4g0.eu-central-1.psdb.cloud/backytracky?sslaccept=strict"
-          SESSION_SECRET: "AVhsa3ByhX"
+        # env:
+        #   DATABASE_URL: "mysql://udv5onp5o56r:pscale_pw_50ovxFgoAufduGcs6oKtj8js7A62OSOli6eQ07lETzA@549qqnllx4g0.eu-central-1.psdb.cloud/backytracky?sslaccept=strict"
+        #   SESSION_SECRET: "AVhsa3ByhX"
