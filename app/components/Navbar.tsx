@@ -1,6 +1,6 @@
 import { Form, Link, NavLink } from "@remix-run/react";
 import toast from "react-hot-toast";
-import { Theme, useTheme } from "~/utils/ThemeProvider";
+import { Theme, useTheme } from "../utils/ThemeProvider";
 
 interface NavbarProps {
   user?: {

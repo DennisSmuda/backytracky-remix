@@ -1,5 +1,5 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,
@@ -18,5 +18,8 @@
 
     // Remix takes care of building everything in `remix build`.
     "noEmit": true
-  }
+  },
+  "transformIgnorePatterns": [
+    "/node_modules/@remix-run/(?!web-blob|web-fetch|web-file|web-form-data|web-stream)"
+  ]
 }

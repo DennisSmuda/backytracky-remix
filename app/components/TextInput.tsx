@@ -2,7 +2,7 @@ interface InputProps {
   name: string;
   label: string;
   type?: string;
-  actionData: {
+  actionData?: {
     fields: { name: string };
     fieldErrors: { name: string };
   };
