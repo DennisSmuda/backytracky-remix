@@ -2333,34 +2333,40 @@ main section {
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
 }
 
-.button[type="submit"] {
+.button--submit, 
+  .button[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgb(167 243 208 / var(--tw-bg-opacity));
 }
 
-.dark .button[type="submit"] {
+.dark .button--submit, .dark 
+  .button[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
-.button[type="submit"]:hover, 
+.button--submit, 
+  .button[type="submit"]:hover, 
   .button[type="submit"]:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(110 231 183 / var(--tw-bg-opacity));
 }
 
-.dark .button[type="submit"]:hover, .dark 
+.dark .button--submit, .dark 
+  .button[type="submit"]:hover, .dark 
   .button[type="submit"]:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(4 120 87 / var(--tw-bg-opacity));
 }
 
-.button[type="submit"]:active {
+.button--submit, 
+  .button[type="submit"]:active {
   --tw-bg-opacity: 1;
   background-color: rgb(52 211 153 / var(--tw-bg-opacity));
 }
 
-.dark .button[type="submit"]:active {
+.dark .button--submit, .dark 
+  .button[type="submit"]:active {
   --tw-bg-opacity: 1;
   background-color: rgb(6 78 59 / var(--tw-bg-opacity));
 }
@@ -3086,6 +3092,11 @@ form input[type="text"],
   margin-bottom: 2rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -3148,6 +3159,10 @@ form input[type="text"],
 
 .resize {
   resize: both;
+}
+
+.grid-flow-row {
+  grid-auto-flow: row;
 }
 
 .grid-flow-col {
