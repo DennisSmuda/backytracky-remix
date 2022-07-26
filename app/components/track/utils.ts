@@ -1,8 +1,7 @@
-import * as Tone from "tone";
+import { Sampler } from "tone";
 
 export function loadInstruments() {
-  console.log("Load Instruments");
-  const pianoSampler = new Tone.Sampler({
+  const pianoSampler = new Sampler({
     urls: {
       A0: "A0.mp3",
       C1: "C1.mp3",
@@ -44,7 +43,7 @@ export function loadInstruments() {
     },
   }).toDestination();
 
-  const drumSampler = new Tone.Sampler({
+  const drumSampler = new Sampler({
     urls: {
       C1: "kick.mp3",
       D1: "hihat.mp3",
