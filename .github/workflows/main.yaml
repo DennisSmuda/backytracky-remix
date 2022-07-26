@@ -2,8 +2,8 @@ name: CI Tests
 
 # Run when pushed to master
 on:
-  # push:
-  #   branches: ["master"]
+  push:
+    branches: ["master"]
   pull_request:
     branches: ["master"]
 
