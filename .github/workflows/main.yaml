@@ -8,6 +8,20 @@ on:
     branches: ["master"]
 
 jobs:
+  jest-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run test:unit
+
   cypress-run:
     runs-on: ubuntu-latest
     steps:
@@ -17,9 +31,7 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
+      - name: 🤖 Cypress run
         uses: cypress-io/github-action@v4
         with:
           build: npm run test:build
