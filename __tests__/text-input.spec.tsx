@@ -18,6 +18,7 @@ const setup = (actionData) => {
 describe("Text Input Component", () => {
   it("renders correctly", () => {
     render(<TextInput name="username" label="Username" />);
+    screen.getByLabelText(/username/i);
   });
 
   it("shows a label", async () => {

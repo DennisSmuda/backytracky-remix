@@ -51,7 +51,7 @@ export default function TrackPlayer() {
     ];
 
     const chordsPart = new Tone.Part(function (time, note) {
-      sampler.triggerAttackRelease(note.note, note.duration, time);
+      sampler?.triggerAttackRelease(note.note, note.duration, time);
     }, mainChords).start(0);
     play();
 
