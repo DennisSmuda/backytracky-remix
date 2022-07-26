@@ -1,48 +1,36 @@
-import { useEffect } from "react";
-import * as Tone from "tone";
+import { useEffect, useRef, useState } from "react";
+import { Part, Transport, start } from "tone";
 import type { Sampler } from "tone";
 import { loadInstruments } from "./utils";
 
 export default function TrackPlayer() {
-  // const synth = new Tone.Synth().toDestination();
-  let sampler: Sampler | null = null;
+  const [isPlaying, setIsPlaying] = useState<Boolean>(false);
 
-  // function loadTone() {
-  //   tone = import("tone");
-  // }
+  const piano = useRef<Sampler | null>(null);
+  const drums = useRef<Sampler | null>(null);
+
+  let chordsPart: Part | null = null;
 
   useEffect(() => {
-    console.log("Player Use Effect", Tone);
     const { pianoSampler, drumSampler } = loadInstruments();
-    sampler = pianoSampler;
-    // sampler = new Tone.Sampler({
-    //   urls: {
-    //     C4: "C4.mp3",
-    //     "D#4": "Ds4.mp3",
-    //     "F#4": "Fs4.mp3",
-    //     A4: "A4.mp3",
-    //   },
-    //   release: 1,
-    //   baseUrl: "https://tonejs.github.io/audio/salamander/",
-    // }).toDestination();
-  });
+    piano.current = pianoSampler;
+    drums.current = drumSampler;
 
-  function makeMusic() {}
+    makeMusic();
+  }, []);
 
-  function play() {
-    Tone.Transport.stop(0);
-    Tone.Transport.start();
-  }
-  function stop() {
-    Tone.Transport.stop();
-  }
+  useEffect(() => {
+    return () => {
+      stop();
+      console.log("DISPOSE");
+      chordsPart?.dispose();
+    };
+  }, []);
 
-  function playNote() {
+  function makeMusic(): void {
     const IChord = ["C3", "E3", "G3", "B3"];
     const IIChord = ["D3", "F3", "A3", "C4"];
     const VChord = ["G3", "B3", "D3", "F3"];
-
-    const synth = new Tone.PolySynth(Tone.FMSynth).toDestination();
 
     const mainChords = [
       { time: "0:0", note: IIChord, duration: "2n" },
@@ -50,24 +38,38 @@ export default function TrackPlayer() {
       { time: "1:0", note: IChord, duration: "1n" },
     ];
 
-    const chordsPart = new Tone.Part(function (time, note) {
-      sampler.triggerAttackRelease(note.note, note.duration, time);
-    }, mainChords).start(0);
-    play();
-
-    // const synth = new Tone.Synth().toDestination();
-    // AMinorScaleWithOctave.forEach((note, index) => {
-    //   const now = Tone.now();
-    //   synth.triggerAttackRelease(note, "16n", now + index * 0.1);
-    // });
-
-    // play();
+    chordsPart = new Part(function (time, note) {
+      piano?.current?.triggerAttackRelease(note.note, note.duration, time);
+    }, mainChords);
+    chordsPart.start(0);
+    chordsPart.loop = true;
+    chordsPart.loopEnd = 4;
   }
+
+  function play(): void {
+    setIsPlaying(true);
+    Transport.start();
+    start();
+  }
+
+  function stop(): void {
+    setIsPlaying(false);
+    Transport.stop(0);
+  }
+
   return (
-    <div>
-      <div>
-        <h3>Tonejs loaded?!</h3>
-        <button onClick={() => playNote()}>Play</button>
+    <div className="">
+      <p className="my-2">Basic 2-5-1 to get started 🎺</p>
+      <div className="grid grid-flow-col gap-4 max-w-sm">
+        {isPlaying ? (
+          <button className="button" onClick={stop}>
+            Stop
+          </button>
+        ) : (
+          <button className="button button--submit" onClick={play}>
+            Play
+          </button>
+        )}
       </div>
     </div>
   );
