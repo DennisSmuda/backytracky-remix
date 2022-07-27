@@ -21,8 +21,7 @@ export default function TrackPlayer() {
 
   useEffect(() => {
     return () => {
-      stop();
-      console.log("DISPOSE");
+      if (typeof Transport.stop !== "undefined") stop();
       chordsPart?.dispose();
     };
   }, []);
@@ -48,13 +47,13 @@ export default function TrackPlayer() {
 
   function play(): void {
     setIsPlaying(true);
-    Transport.start();
+    if (typeof Transport.start !== "undefined") Transport.start();
     start();
   }
 
   function stop(): void {
     setIsPlaying(false);
-    Transport.stop(0);
+    if (typeof Transport.stop !== "undefined") stop();
   }
 
   return (

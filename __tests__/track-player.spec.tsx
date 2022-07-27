@@ -1,39 +1,36 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 
 import TrackPayer from "../app/components/track/TrackPlayer.client";
 
 jest.mock("tone", () => ({
-  Sampler: jest.fn().mockImplementation(() => {
-    return { toDestination: jest.fn() };
-  }),
-  Synth: jest.fn().mockImplementation(() => {
-    return { toDestination: jest.fn() };
-  }),
-  Transport: jest.fn().mockImplementation(() => {
-    return { stop: jest.fn() };
-  }),
-  // Transport: jest.fn().mockImplementation(() => {
-  //   return {
-  //     start: jest.fn(),
-  //     loop: jest.fn(),
-  //     stop: jest.fn((x) => x),
-  //     dispose: jest.fn(),
-  //   };
-  // }),
-  Part: jest.fn().mockImplementation(() => {
-    return {
-      start: jest.fn(),
-      // loop: jest.fn(),
-      stop: jest.fn(),
-      dispose: jest.fn(),
-    };
-  }),
+  start: jest.fn(),
+  Sampler: jest.fn(() => ({
+    toDestination: jest.fn(),
+  })),
+  Transport: jest.fn(() => ({
+    start: jest.fn(),
+    stop: jest.fn(),
+    loop: jest.fn(),
+    dispose: jest.fn(),
+  })),
+  Synth: jest.fn(() => ({
+    toDestination: jest.fn(),
+  })),
+  Part: jest.fn().mockImplementation(() => ({
+    start: jest.fn(),
+    stop: jest.fn(),
+    dispose: jest.fn(),
+  })),
 }));
 
 describe("Track Player Component", () => {
   it("renders correctly and shows a play button", () => {
-    render(<TrackPayer />);
-    expect(1 + 2).toBe(3);
+    const player = render(<TrackPayer />);
+    const playButton = player.getByRole("button", { name: /play/i });
+    expect(playButton).toBeInTheDocument();
+    fireEvent.click(playButton);
+    const stopButton = player.getByRole("button", { name: /stop/i });
+    fireEvent.click(stopButton);
   });
 });
