@@ -12,6 +12,7 @@ export default function TrackPlayer() {
   const music = new Music({ numBars: 1 });
 
   let chordsPart: Part | null = null;
+  let drumPart: Part | null = null;
 
   useEffect(() => {
     const { pianoSampler, drumSampler } = loadInstruments();
@@ -29,13 +30,20 @@ export default function TrackPlayer() {
   }, []);
 
   function setupMusic(): void {
-    const mainChords = music.makeMusic();
+    const { chords, groove } = music.makeMusic();
     chordsPart = new Part(function (time, note) {
       piano?.current?.triggerAttackRelease(note.note, note.duration, time);
-    }, mainChords);
+    }, chords);
     chordsPart.start(0);
     chordsPart.loop = true;
     chordsPart.loopEnd = 4;
+
+    drumPart = new Part(function (time, note) {
+      drums?.current?.triggerAttackRelease(note.note, note.duration, time);
+    }, groove);
+    drumPart.start(0);
+    drumPart.loop = true;
+    drumPart.loopEnd = 4;
   }
 
   function play(): void {

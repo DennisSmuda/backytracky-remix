@@ -1,3 +1,5 @@
+import { hihatOnlyGroove } from "./grooves";
+
 interface MusicConfig {
   numBars: number;
 }
@@ -18,7 +20,7 @@ export default class Music {
     this.numBars = music.numBars;
   }
 
-  makeMusic(): Chords {
+  makeMusic() {
     const IChord: Chord = ["C3", "E3", "G3", "B3"];
     const IIChord: Chord = ["D3", "F3", "A3", "C4"];
     const VChord: Chord = ["G3", "B3", "D3", "F3"];
@@ -29,6 +31,9 @@ export default class Music {
       { time: "1:0", note: IChord, duration: "1n" },
     ];
 
-    return mainChords;
+    return {
+      chords: mainChords,
+      groove: hihatOnlyGroove,
+    };
   }
 }
