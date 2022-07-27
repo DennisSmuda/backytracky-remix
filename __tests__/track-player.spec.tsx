@@ -25,7 +25,7 @@ jest.mock("tone", () => ({
 }));
 
 describe("Track Player Component", () => {
-  it("renders correctly and shows a play button", () => {
+  it("renders correctly and can press play/stop buttons to control the track", () => {
     const player = render(<TrackPayer />);
     const playButton = player.getByRole("button", { name: /play/i });
     expect(playButton).toBeInTheDocument();

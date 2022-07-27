@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start } from "tone";
 import type { Sampler } from "tone";
 import { loadInstruments } from "./utils";
+import Music from "./Music";
 
 export default function TrackPlayer() {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
+  const music = new Music({ numBars: 1 });
 
   let chordsPart: Part | null = null;
 
@@ -16,7 +18,7 @@ export default function TrackPlayer() {
     piano.current = pianoSampler;
     drums.current = drumSampler;
 
-    makeMusic();
+    setupMusic();
   }, []);
 
   useEffect(() => {
@@ -26,17 +28,8 @@ export default function TrackPlayer() {
     };
   }, []);
 
-  function makeMusic(): void {
-    const IChord = ["C3", "E3", "G3", "B3"];
-    const IIChord = ["D3", "F3", "A3", "C4"];
-    const VChord = ["G3", "B3", "D3", "F3"];
-
-    const mainChords = [
-      { time: "0:0", note: IIChord, duration: "2n" },
-      { time: "0:2", note: VChord, duration: "2n" },
-      { time: "1:0", note: IChord, duration: "1n" },
-    ];
-
+  function setupMusic(): void {
+    const mainChords = music.makeMusic();
     chordsPart = new Part(function (time, note) {
       piano?.current?.triggerAttackRelease(note.note, note.duration, time);
     }, mainChords);
@@ -53,7 +46,7 @@ export default function TrackPlayer() {
 
   function stop(): void {
     setIsPlaying(false);
-    if (typeof Transport.stop !== "undefined") stop();
+    if (typeof Transport.stop !== "undefined") Transport.stop();
   }
 
   return (
