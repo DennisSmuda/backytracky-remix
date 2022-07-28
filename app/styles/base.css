@@ -592,7 +592,7 @@ select {
 
   .dark .interactive-bg:active {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  background-color: rgb(18 18 19 / var(--tw-bg-opacity));
 }
 
 *, ::before, ::after {

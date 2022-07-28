@@ -27,7 +27,8 @@ export default function TrackPlayer() {
 
   useEffect(() => {
     return () => {
-      if (typeof Transport.stop !== "undefined") stop();
+      // if (typeof Transport.stop !== "undefined")
+      stop();
       chordsPart?.current?.dispose();
     };
   }, []);
@@ -35,12 +36,6 @@ export default function TrackPlayer() {
   useEffect(() => {
     if (chordsPart && drumPart) {
       setIsMusicReady(true);
-      console.log(
-        "Check Readay use effect",
-        chordsPart,
-        drumPart,
-        isMusicReady
-      );
     }
   }, [chordsPart, drumPart, isMusicReady]);
 
@@ -48,6 +43,8 @@ export default function TrackPlayer() {
     const { chords, groove } = music.makeMusic();
 
     chordsPart.current = new Part(function (time, note) {
+      console.log("Time", time);
+
       piano?.current?.triggerAttackRelease(note.note, note.duration, time);
     }, chords);
 
@@ -94,9 +91,13 @@ export default function TrackPlayer() {
     <div className="">
       <p className="my-2">Basic 2-5-1 to get started 🎺</p>
       {JSON.stringify(chordsPartChords.current)}
-      {chordsPartChords.current.map((chord: ChordBeat) => (
-        <div key={chord.time}>{chord.time}</div>
-      ))}
+      <div className="sheet-grid">
+        {chordsPartChords.current.map((chord: ChordBeat) => (
+          <div key={chord.time} className={`interactive-bg ${chord.time}`}>
+            {chord.time}
+          </div>
+        ))}
+      </div>
 
       <div className="grid grid-flow-col place-items-end::TODO gap-4">
         {isPlaying ? (

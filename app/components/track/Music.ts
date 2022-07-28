@@ -26,9 +26,15 @@ export default class Music {
     const VChord: Chord = ["G3", "B3", "D3", "F3"];
 
     const mainChords: Chords = [
-      { time: "0:0", note: IIChord, duration: "2n" },
-      { time: "0:2", note: VChord, duration: "2n" },
-      { time: "1:0", note: IChord, duration: "1n" },
+      { time: "0:0", note: IIChord, duration: "8n." },
+      { time: "0:0:3", note: IIChord, duration: "16n" },
+      { time: "0:2", note: VChord, duration: "8n" },
+      { time: "0:3", note: VChord, duration: "8n" },
+      { time: "1:0", note: IChord, duration: "16n" },
+      { time: "1:2", note: IChord, duration: "16n" },
+      { time: "1:2:2", note: IChord, duration: "16n" },
+      { time: "1:3", note: VChord, duration: "16n" },
+      { time: "1:4", note: IIChord, duration: "16n" },
     ];
 
     return {

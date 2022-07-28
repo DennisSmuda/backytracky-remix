@@ -7,6 +7,14 @@ const hihatOnlyGroove = [
   { time: "0:5", note: "D1", duration: "4n" },
   { time: "0:6", note: "D1", duration: "4n" },
   { time: "0:7", note: "D1", duration: "4n" },
+  { time: "0:8", note: "D1", duration: "4n" },
+  { time: "0:9", note: "D1", duration: "4n" },
+  { time: "0:10", note: "D1", duration: "4n" },
+  { time: "0:11", note: "D1", duration: "4n" },
+  { time: "0:12", note: "D1", duration: "4n" },
+  { time: "0:13", note: "D1", duration: "4n" },
+  { time: "0:14", note: "D1", duration: "4n" },
+  { time: "0:15", note: "D1", duration: "4n" },
 ];
 
 const bossaGroove = [

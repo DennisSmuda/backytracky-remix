@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js,css}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        black: "#121213",
+      },
+    },
   },
   darkMode: "class",
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
