@@ -4,10 +4,10 @@ interface MusicConfig {
   numBars: number;
 }
 
-type Chord = Array<string>;
-type Chords = Array<ChordBeat>;
+export type Chord = Array<string>;
+export type Chords = Array<ChordBeat>;
 
-interface ChordBeat {
+export interface ChordBeat {
   time: string;
   note: Chord;
   duration: string;

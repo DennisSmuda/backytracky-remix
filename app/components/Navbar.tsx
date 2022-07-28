@@ -33,7 +33,7 @@ export default function Navbar({ user }: NavbarProps) {
         {!user ? (
           <>
             <NavLink to="/auth/login">Login</NavLink>
-            <NavLink to="/auth/register">Register</NavLink>
+            {/* <NavLink to="/auth/register">Register</NavLink> */}
           </>
         ) : (
           <Form method="post" action="/auth/logout">

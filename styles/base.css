@@ -24,4 +24,9 @@
   h3 {
     @apply text-xl;
   }
+
+  .interactive-bg {
+    @apply hover:bg-zinc-100 dark:hover:bg-zinc-800;
+    @apply active:bg-zinc-200 dark:active:bg-black;
+  }
 }
