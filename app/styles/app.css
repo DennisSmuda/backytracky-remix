@@ -3094,6 +3094,18 @@ form input[type="text"],
   --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
 }
 
+.sheet-grid {
+  display: grid;
+  gap: 0.5rem;
+
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.sheet-grid__chord {
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
+
 .visible {
   visibility: visible;
 }

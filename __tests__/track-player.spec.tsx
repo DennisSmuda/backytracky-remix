@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 
 import TrackPayer from "../app/components/track/TrackPlayer.client";
 
@@ -27,6 +27,8 @@ jest.mock("tone", () => ({
 describe("Track Player Component", () => {
   it("renders correctly and can press play/stop buttons to control the track", () => {
     const player = render(<TrackPayer />);
+    // const loadingText = player.getByText(/generating/i)
+    // expect(loadingText).toBeInTheDocument();
     const playButton = player.getByRole("button", { name: /play/i });
     expect(playButton).toBeInTheDocument();
     fireEvent.click(playButton);

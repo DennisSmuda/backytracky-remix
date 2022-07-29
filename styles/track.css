@@ -1,0 +1,10 @@
+.sheet-grid {
+  display: grid;
+  gap: 0.5rem;
+
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.sheet-grid__chord {
+  @apply p-2 rounded-md;
+}

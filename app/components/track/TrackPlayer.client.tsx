@@ -7,12 +7,12 @@ import Music, { Chord, Chords } from "./Music";
 
 export default function TrackPlayer() {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
+  const [, setIsReady] = useState<Boolean>(false);
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
   const music = new Music({ numBars: 1 });
 
-  let [isMusicReady, setIsMusicReady] = useState<Boolean>(false);
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
   let drumPart = useRef<Part | null>(null);
@@ -27,25 +27,28 @@ export default function TrackPlayer() {
 
   useEffect(() => {
     return () => {
-      // if (typeof Transport.stop !== "undefined")
       stop();
-      chordsPart?.current?.dispose();
+      disposeParts();
     };
   }, []);
 
   useEffect(() => {
-    if (chordsPart && drumPart) {
-      setIsMusicReady(true);
-    }
-  }, [chordsPart, drumPart, isMusicReady]);
+    console.log("Use Effect", chordsPart);
+    setIsReady(true);
+  }, [chordsPart, drumPart]);
 
   function setupMusic(): void {
     const { chords, groove } = music.makeMusic();
 
     chordsPart.current = new Part(function (time, note) {
-      console.log("Time", time);
+      // console.log("Time", note);
 
-      piano?.current?.triggerAttackRelease(note.note, note.duration, time);
+      piano?.current?.triggerAttackRelease(
+        note.note,
+        note.duration,
+        time,
+        0.35
+      );
     }, chords);
 
     chordsPart.current.start(0);
@@ -64,7 +67,7 @@ export default function TrackPlayer() {
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = 4;
-    setIsMusicReady(true);
+    console.log("Setup music");
   }
 
   function disposeParts() {
@@ -83,6 +86,8 @@ export default function TrackPlayer() {
     if (typeof Transport.stop !== "undefined") Transport.stop();
   }
 
+  console.log("Render", chordsPart.current);
+
   if (!chordsPartChords.current) {
     return <div>Generating Chords</div>;
   }
@@ -90,11 +95,23 @@ export default function TrackPlayer() {
   return (
     <div className="">
       <p className="my-2">Basic 2-5-1 to get started 🎺</p>
-      {JSON.stringify(chordsPartChords.current)}
+      {/* {JSON.stringify(chordsPartChords.current)} */}
       <div className="sheet-grid">
+        {/* <div className="bar-1 beat-1"></div>
+        <div className="bar-1 beat-2"></div>
+        <div className="bar-1 beat-3"></div>
+        <div className="bar-1 beat-4"></div> */}
         {chordsPartChords.current.map((chord: ChordBeat) => (
-          <div key={chord.time} className={`interactive-bg ${chord.time}`}>
+          <div
+            key={chord.time}
+            className={`interactive-bg sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth}`}
+          >
             {chord.time}
+            <div className="chord">
+              <span className="chord-root">{chord.root}</span>
+              <span className="chord-type">{chord.type}</span>
+              <span className="chord-extension">{chord.extension}</span>
+            </div>
           </div>
         ))}
       </div>
