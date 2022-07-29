@@ -1,14 +1,22 @@
+import { hihatOnlyGroove } from "./grooves";
+
 interface MusicConfig {
   numBars: number;
 }
 
-type Chord = Array<string>;
-type Chords = Array<ChordBeat>;
+export type Chord = Array<string>;
+export type Chords = Array<ChordBeat>;
 
-interface ChordBeat {
+export interface ChordBeat {
   time: string;
   note: Chord;
   duration: string;
+  root: string;
+  type?: string;
+  extension?: string;
+  bar: number;
+  beat: number;
+  sixteenth?: number;
 }
 
 export default class Music {
@@ -18,17 +26,87 @@ export default class Music {
     this.numBars = music.numBars;
   }
 
-  makeMusic(): Chords {
+  makeMusic() {
     const IChord: Chord = ["C3", "E3", "G3", "B3"];
     const IIChord: Chord = ["D3", "F3", "A3", "C4"];
     const VChord: Chord = ["G3", "B3", "D3", "F3"];
+    const VIChord: Chord = ["A3", "C#3", "E3", "G3"];
 
     const mainChords: Chords = [
-      { time: "0:0", note: IIChord, duration: "2n" },
-      { time: "0:2", note: VChord, duration: "2n" },
-      { time: "1:0", note: IChord, duration: "1n" },
+      {
+        root: "D",
+        type: "m",
+        extension: "7",
+        time: "0:0",
+        note: IIChord,
+        duration: "2n",
+        bar: 0,
+        beat: 0,
+        sixteenth: 0,
+      },
+      // {
+      //   root: "D",
+      //   type: "m",
+      //   extension: "7",
+      //   time: "0:1",
+      //   note: IIChord,
+      //   duration: "8n",
+      //   bar: 0,
+      //   beat: 0,
+      //   sixteenth: 3,
+      // },
+      {
+        root: "G",
+        extension: "7",
+        time: "0:2",
+        note: VChord,
+        duration: "2n",
+        bar: 0,
+        beat: 2,
+      },
+      // {
+      //   root: "G",
+      //   extension: "7",
+      //   time: "0:3",
+      //   note: VChord,
+      //   duration: "8n",
+      //   bar: 0,
+      //   beat: 3,
+      // },
+      {
+        root: "C",
+        type: "maj",
+        extension: "7",
+        time: "1:0",
+        note: IChord,
+        duration: "2n",
+        bar: 1,
+        beat: 0,
+      },
+      {
+        root: "C",
+        type: "maj",
+        extension: "7",
+        time: "1:2",
+        note: IChord,
+        duration: "4n",
+        bar: 1,
+        beat: 2,
+      },
+      {
+        root: "A",
+        extension: "7",
+        time: "1:3",
+        note: VIChord,
+        duration: "4n",
+        bar: 1,
+        beat: 3,
+      },
     ];
 
-    return mainChords;
+    return {
+      chords: mainChords,
+      groove: hihatOnlyGroove,
+    };
   }
 }

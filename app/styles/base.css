@@ -575,6 +575,26 @@ select {
   line-height: 1.75rem;
 }
 
+  .interactive-bg:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 244 245 / var(--tw-bg-opacity));
+}
+
+  .dark .interactive-bg:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+
+  .interactive-bg:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+}
+
+  .dark .interactive-bg:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 18 19 / var(--tw-bg-opacity));
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;

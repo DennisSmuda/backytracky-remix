@@ -21,7 +21,7 @@ export default function Navbar({ user }: NavbarProps) {
     );
   };
   return (
-    <header className="flex justify-between items-baseline px-4 py-2">
+    <header className="flex justify-between items-baseline px-1 sm:px-4 py-2">
       <nav className="grid gap-4 grid-flow-col items-baseline">
         <Link className="font-black tracking-tighter text-xl" to="/">
           Backytracky
@@ -29,11 +29,11 @@ export default function Navbar({ user }: NavbarProps) {
         <NavLink to="/tracks">Tracks</NavLink>
       </nav>
       <nav className="grid gap-4 grid-flow-col items-center">
-        {user?.username}
+        {/* {user?.username} */}
         {!user ? (
           <>
             <NavLink to="/auth/login">Login</NavLink>
-            <NavLink to="/auth/register">Register</NavLink>
+            {/* <NavLink to="/auth/register">Register</NavLink> */}
           </>
         ) : (
           <Form method="post" action="/auth/logout">

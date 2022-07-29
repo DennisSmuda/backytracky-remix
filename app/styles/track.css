@@ -1,0 +1,32 @@
+.sheet-grid {
+  display: grid;
+  gap: 0.5rem;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  border-right-width: 1px;
+
+  border-left-width: 1px;
+
+  border-color: rgb(113 113 122 / var(--tw-border-opacity));
+
+  --tw-border-opacity: 0.5;
+
+  padding-left: 0.25rem;
+
+  padding-right: 0.25rem;
+}
+
+.sheet-grid__chord {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.duration-2n {
+  grid-column: span 2 / span 2;
+}

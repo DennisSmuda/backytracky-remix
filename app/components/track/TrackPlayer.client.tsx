@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { Part, Transport, start } from "tone";
+import { Part, Transport, start, now } from "tone";
 import type { Sampler } from "tone";
 import { loadInstruments } from "./utils";
-import Music from "./Music";
+import type { ChordBeat, Chord } from "./Music";
+import Music, { Chords } from "./Music";
 
 export default function TrackPlayer() {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
+  const [, setIsReady] = useState<Boolean>(false);
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
-  const music = new Music({ numBars: 1 });
+  const music = new Music({ numBars: 2 });
 
-  let chordsPart: Part | null = null;
+  let chordsPart = useRef<Part | null>(null);
+  let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
+  let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
     const { pianoSampler, drumSampler } = loadInstruments();
@@ -23,19 +27,52 @@ export default function TrackPlayer() {
 
   useEffect(() => {
     return () => {
-      if (typeof Transport.stop !== "undefined") stop();
-      chordsPart?.dispose();
+      stop();
+      disposeParts();
     };
   }, []);
 
+  useEffect(() => {
+    console.log("Use Effect", chordsPart);
+    setIsReady(true);
+  }, [chordsPart, drumPart]);
+
   function setupMusic(): void {
-    const mainChords = music.makeMusic();
-    chordsPart = new Part(function (time, note) {
-      piano?.current?.triggerAttackRelease(note.note, note.duration, time);
-    }, mainChords);
-    chordsPart.start(0);
-    chordsPart.loop = true;
-    chordsPart.loopEnd = 4;
+    const { chords, groove } = music.makeMusic();
+
+    chordsPart.current = new Part(function (time, note) {
+      // console.log("Time", note);
+
+      piano?.current?.triggerAttackRelease(
+        note.note,
+        note.duration,
+        time,
+        0.35
+      );
+    }, chords);
+
+    chordsPart.current.start(0);
+    chordsPart.current.loop = true;
+    chordsPart.current.loopEnd = 4;
+    chordsPartChords.current = chords;
+
+    drumPart.current = new Part(function (time, note) {
+      drums?.current?.triggerAttackRelease(
+        note.note,
+        note.duration,
+        time,
+        0.25
+      );
+    }, groove);
+    drumPart.current.start(0);
+    drumPart.current.loop = true;
+    drumPart.current.loopEnd = 4;
+    console.log("Setup music");
+  }
+
+  function disposeParts() {
+    chordsPart?.current?.dispose();
+    drumPart?.current?.dispose();
   }
 
   function play(): void {
@@ -49,10 +86,39 @@ export default function TrackPlayer() {
     if (typeof Transport.stop !== "undefined") Transport.stop();
   }
 
+  function clickChord(chord: ChordBeat): void {
+    piano?.current?.triggerAttackRelease(chord.note, "8n", now(), 0.35);
+  }
+
+  console.log("Render", chordsPart.current);
+
+  if (!chordsPartChords.current) {
+    return <div>Generating Chords</div>;
+  }
+
   return (
     <div className="">
       <p className="my-2">Basic 2-5-1 to get started 🎺</p>
-      <div className="grid grid-flow-col gap-4 max-w-sm">
+      <div className="sheet-grid my-4">
+        {chordsPartChords.current.map((chord: ChordBeat) => (
+          <button
+            onClick={() => clickChord(chord)}
+            key={chord.time}
+            className={`interactive-bg sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
+          >
+            <span className="opacity-50 text-xs">{chord.time}</span>
+            <div className="chord">
+              <span className="chord-root font-black">{chord.root}</span>
+              <span className="chord-type opacity-50 ml-px">{chord.type}</span>
+              <span className="chord-extension relative text-xs ml-px -top-1">
+                {chord.extension}
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <div className="grid grid-flow-col place-items-end::TODO gap-4">
         {isPlaying ? (
           <button className="button" onClick={stop}>
             Stop

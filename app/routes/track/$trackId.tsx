@@ -3,12 +3,14 @@ import TrackPlayer from "~/components/track/TrackPlayer.client";
 
 export default function TrackDetailRoute() {
   return (
-    <main>
+    <main className="main">
       <section>
-        <h1>Track dies das</h1>
-        <ClientOnly fallback={<p>Loading...</p>}>
-          {() => <TrackPlayer />}
-        </ClientOnly>
+        <div className="max-w-4xl mx-auto">
+          <h1>Sample Track</h1>
+          <ClientOnly fallback={<p>Loading...</p>}>
+            {() => <TrackPlayer />}
+          </ClientOnly>
+        </div>
       </section>
     </main>
   );

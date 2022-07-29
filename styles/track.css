@@ -1,0 +1,17 @@
+.sheet-grid {
+  display: grid;
+  gap: 0.5rem;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  @apply border-r border-l border-zinc-500 border-opacity-50 px-1;
+}
+
+.sheet-grid__chord {
+  @apply p-2 rounded-md select-none;
+  @apply flex flex-col;
+}
+
+.duration-2n {
+  @apply col-span-2;
+}

@@ -1,4 +1,5 @@
 @import "./base.css";
 @import "./components.css";
+@import "./track.css";
 
 @tailwind utilities;

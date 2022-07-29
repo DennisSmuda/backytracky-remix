@@ -107,6 +107,13 @@ export default function LoginRoute() {
               ) : null}
             </div>
           </Form>
+
+          <p className="text-xs text-center mt-4 opacity-50">
+            <a href="https://dennissmuda.com/" className="underline">
+              Contact me
+            </a>{" "}
+            if you want to be part of the beta 🌋
+          </p>
         </div>
       </section>
     </main>

@@ -1266,8 +1266,14 @@
   main section {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+  @media (min-width: 640px) {
+    main section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
 }
 
   .button {
@@ -1308,7 +1314,7 @@
 }
   .dark .button:active {
     --tw-bg-opacity: 1;
-    background-color: rgb(24 24 27 / var(--tw-bg-opacity));
+    background-color: rgb(18 18 19 / var(--tw-bg-opacity));
 }
 
   .button--submit, 
@@ -1323,27 +1329,27 @@
     background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
-  .button--submit, 
+  .button--submit:hover, 
   .button[type="submit"]:hover, 
   .button[type="submit"]:focus {
     --tw-bg-opacity: 1;
     background-color: rgb(110 231 183 / var(--tw-bg-opacity));
 }
 
-  .dark .button--submit, .dark 
+  .dark .button--submit:hover, .dark 
   .button[type="submit"]:hover, .dark 
   .button[type="submit"]:focus {
     --tw-bg-opacity: 1;
     background-color: rgb(4 120 87 / var(--tw-bg-opacity));
 }
 
-  .button--submit, 
+  .button--submit:active, 
   .button[type="submit"]:active {
     --tw-bg-opacity: 1;
     background-color: rgb(52 211 153 / var(--tw-bg-opacity));
 }
 
-  .dark .button--submit, .dark 
+  .dark .button--submit:active, .dark 
   .button[type="submit"]:active {
     --tw-bg-opacity: 1;
     background-color: rgb(6 78 59 / var(--tw-bg-opacity));

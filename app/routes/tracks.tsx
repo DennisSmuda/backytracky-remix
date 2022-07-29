@@ -27,11 +27,17 @@ export default function TracksRoute() {
       <section>
         <div className="container max-w-4xl mx-auto pt-8">
           <h1>Tracks 🎺</h1>
-          <div className="grid gap-4 my-8 border-zinc-500 border-2 rounded-md p-4">
+          <div className="grid gap-4 my-8">
             {data.tracks.map((track) => (
-              <Link to={`/track/${track.id}`} key={track.id}>
-                {track.upvotes}
-                {track.name}
+              <Link
+                to={`/track/${track.id}`}
+                key={track.id}
+                className="flex items-center rounded-lg py-4 interactive-bg"
+              >
+                <span className="bg-orange-400 dark:bg-orange-600 rounded-full p-1 text-xs w-6 h-6 text-center mx-4">
+                  {track.upvotes}
+                </span>
+                <h3>{track.name}</h3>
               </Link>
             ))}
           </div>
