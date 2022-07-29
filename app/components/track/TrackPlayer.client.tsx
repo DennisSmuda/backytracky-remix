@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Part, Transport, start } from "tone";
+import { Part, Transport, start, now } from "tone";
 import type { Sampler } from "tone";
 import { loadInstruments } from "./utils";
-import type { ChordBeat } from "./Music";
-import Music, { Chord, Chords } from "./Music";
+import type { ChordBeat, Chord } from "./Music";
+import Music, { Chords } from "./Music";
 
 export default function TrackPlayer() {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
@@ -11,7 +11,7 @@ export default function TrackPlayer() {
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
-  const music = new Music({ numBars: 1 });
+  const music = new Music({ numBars: 2 });
 
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
@@ -86,6 +86,10 @@ export default function TrackPlayer() {
     if (typeof Transport.stop !== "undefined") Transport.stop();
   }
 
+  function clickChord(chord: ChordBeat): void {
+    piano?.current?.triggerAttackRelease(chord.note, "8n", now(), 0.35);
+  }
+
   console.log("Render", chordsPart.current);
 
   if (!chordsPartChords.current) {
@@ -95,24 +99,22 @@ export default function TrackPlayer() {
   return (
     <div className="">
       <p className="my-2">Basic 2-5-1 to get started 🎺</p>
-      {/* {JSON.stringify(chordsPartChords.current)} */}
-      <div className="sheet-grid">
-        {/* <div className="bar-1 beat-1"></div>
-        <div className="bar-1 beat-2"></div>
-        <div className="bar-1 beat-3"></div>
-        <div className="bar-1 beat-4"></div> */}
+      <div className="sheet-grid my-4">
         {chordsPartChords.current.map((chord: ChordBeat) => (
-          <div
+          <button
+            onClick={() => clickChord(chord)}
             key={chord.time}
-            className={`interactive-bg sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth}`}
+            className={`interactive-bg sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
           >
-            {chord.time}
+            <span className="opacity-50 text-xs">{chord.time}</span>
             <div className="chord">
-              <span className="chord-root">{chord.root}</span>
-              <span className="chord-type">{chord.type}</span>
-              <span className="chord-extension">{chord.extension}</span>
+              <span className="chord-root font-black">{chord.root}</span>
+              <span className="chord-type opacity-50 ml-px">{chord.type}</span>
+              <span className="chord-extension relative text-xs ml-px -top-1">
+                {chord.extension}
+              </span>
             </div>
-          </div>
+          </button>
         ))}
       </div>
 

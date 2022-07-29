@@ -6,7 +6,7 @@ export default function TrackDetailRoute() {
     <main className="main">
       <section>
         <div className="max-w-4xl mx-auto">
-          <h1>Track dies das</h1>
+          <h1>Sample Track</h1>
           <ClientOnly fallback={<p>Loading...</p>}>
             {() => <TrackPlayer />}
           </ClientOnly>

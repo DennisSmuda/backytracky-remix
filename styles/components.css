@@ -2,7 +2,7 @@
 
 @layer components {
   main section {
-    @apply py-4 px-6;
+    @apply py-4 px-3 sm:px-6;
   }
 
   .button {
