@@ -12,7 +12,6 @@ describe("Login Route", () => {
 
     cy.url().should("include", "/tracks");
     cy.getCookie("BT_session").should("exist");
-    cy.contains(user.username).should("exist");
     cy.findByRole("status").should("contain", "You are logged in");
   });
 
