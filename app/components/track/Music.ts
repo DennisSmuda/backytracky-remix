@@ -4,19 +4,44 @@ interface MusicConfig {
   numBars: number;
 }
 
-export type Chord = Array<string>;
+export type ChordNotes = Array<string>;
 export type Chords = Array<ChordBeat>;
 
-export interface ChordBeat {
-  time: string;
-  note: Chord;
-  duration: string;
+export interface IChordBeat {
+  note: ChordNotes;
+  duration: "1n" | "2n" | "4n";
   root: string;
   type?: string;
   extension?: string;
   bar: number;
   beat: number;
   sixteenth?: number;
+}
+
+export class ChordBeat implements IChordBeat {
+  public note: ChordNotes;
+  public duration: "1n" | "2n" | "4n";
+  public root: string;
+  public type?: string;
+  public extension?: string;
+  public bar: number;
+  public beat: number;
+  public sixteenth?: number;
+
+  constructor(config: IChordBeat) {
+    this.note = config.note;
+    this.duration = config.duration;
+    this.root = config.root;
+    this.type = config.type;
+    this.extension = config.extension;
+    this.bar = config.bar;
+    this.beat = config.beat;
+    this.sixteenth = config.sixteenth;
+  }
+
+  get time() {
+    return `${this.bar}:${this.beat}:${this.sixteenth || 0}`;
+  }
 }
 
 export default class Music {
@@ -27,86 +52,113 @@ export default class Music {
   }
 
   makeMusic() {
-    const IChord: Chord = ["C3", "E3", "G3", "B3"];
-    const IIChord: Chord = ["D3", "F3", "A3", "C4"];
-    const VChord: Chord = ["G3", "B3", "D3", "F3"];
-    const VIChord: Chord = ["A3", "C#3", "E3", "G3"];
+    const IChord: ChordNotes = ["C3", "E3", "G3", "B3"];
+    const IIChord: ChordNotes = ["D3", "F3", "A3", "C4"];
+    const VChord: ChordNotes = ["G3", "B3", "D3", "F3"];
+    const VIChord: ChordNotes = ["A3", "C#3", "E3", "G3"];
 
-    const mainChords: Chords = [
-      {
+    const turnaroundChords: Chords = [
+      new ChordBeat({
+        root: "C",
+        type: "maj",
+        extension: "7",
+        note: IChord,
+        duration: "2n",
+        bar: 0,
+        beat: 0,
+      }),
+      new ChordBeat({
+        root: "A",
+        extension: "7",
+        note: VIChord,
+        duration: "2n",
+        bar: 0,
+        beat: 2,
+      }),
+      new ChordBeat({
         root: "D",
         type: "m",
         extension: "7",
-        time: "0:0",
+        note: IIChord,
+        duration: "2n",
+        bar: 1,
+        beat: 0,
+        sixteenth: 0,
+      }),
+      new ChordBeat({
+        root: "G",
+        extension: "7",
+        note: VChord,
+        duration: "2n",
+        bar: 1,
+        beat: 2,
+      }),
+    ];
+
+    const twoFiveOneChords: Chords = [
+      new ChordBeat({
+        root: "D",
+        type: "m",
+        extension: "7",
         note: IIChord,
         duration: "2n",
         bar: 0,
         beat: 0,
         sixteenth: 0,
-      },
-      // {
-      //   root: "D",
-      //   type: "m",
-      //   extension: "7",
-      //   time: "0:1",
-      //   note: IIChord,
-      //   duration: "8n",
-      //   bar: 0,
-      //   beat: 0,
-      //   sixteenth: 3,
-      // },
-      {
+      }),
+      new ChordBeat({
         root: "G",
         extension: "7",
-        time: "0:2",
         note: VChord,
         duration: "2n",
         bar: 0,
         beat: 2,
-      },
-      // {
-      //   root: "G",
-      //   extension: "7",
-      //   time: "0:3",
-      //   note: VChord,
-      //   duration: "8n",
-      //   bar: 0,
-      //   beat: 3,
-      // },
-      {
+      }),
+      new ChordBeat({
         root: "C",
         type: "maj",
         extension: "7",
-        time: "1:0",
         note: IChord,
         duration: "2n",
         bar: 1,
         beat: 0,
-      },
-      {
+      }),
+      new ChordBeat({
         root: "C",
         type: "maj",
         extension: "7",
-        time: "1:2",
         note: IChord,
         duration: "4n",
         bar: 1,
         beat: 2,
-      },
-      {
+      }),
+      new ChordBeat({
         root: "A",
         extension: "7",
-        time: "1:3",
         note: VIChord,
         duration: "4n",
         bar: 1,
         beat: 3,
-      },
+      }),
     ];
 
     return {
-      chords: mainChords,
+      chords: turnaroundChords,
       groove: hihatOnlyGroove,
     };
   }
 }
+
+export const increaseDuration = (duration: "1n" | "2n" | "4n") => {
+  if (duration === "1n") return "1n";
+  if (duration === "2n") return "1n";
+  if (duration === "4n") return "2n";
+  return "4n";
+};
+
+export const decreaseDuration = (duration: "1n" | "2n" | "4n") => {
+  if (duration === "1n") return "2n";
+  if (duration === "2n") return "4n";
+  if (duration === "4n") return "4n";
+  return "4n";
+};

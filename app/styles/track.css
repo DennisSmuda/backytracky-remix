@@ -27,6 +27,25 @@
   flex-direction: column;
 }
 
+.duration-1n {
+  grid-column: span 4 / span 4;
+}
+
 .duration-2n {
   grid-column: span 2 / span 2;
+}
+
+.new-sheet__chord {
+  display: flex;
+  align-items: center;
+}
+
+.duration-line {
+  margin-left: 0.5rem;
+  height: 0.25rem;
+  width: 100%;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(113 113 122 / var(--tw-bg-opacity));
+  opacity: 0.5;
 }

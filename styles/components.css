@@ -5,33 +5,76 @@
     @apply py-4 px-3 sm:px-6;
   }
 
-  .button {
+  .button,
+  .icon-button {
     @apply inline-flex items-center justify-center;
     @apply bg-zinc-200 dark:bg-zinc-800;
-    @apply text-inherit font-bold py-2 px-4 rounded-md;
+    @apply p-2 rounded-md;
   }
 
+  .icon-button[disabled],
+  .button[disabled] {
+    @apply opacity-75 pointer-events-none cursor-not-allowed;
+  }
+
+  .button {
+    @apply text-inherit font-bold py-2 px-4;
+  }
+
+  .icon-button:hover,
   .button:hover {
-    @apply hover:bg-zinc-100 dark:bg-zinc-700;
-  }
-  .button:active {
-    @apply hover:bg-zinc-300 dark:bg-black;
+    @apply bg-zinc-100 dark:bg-zinc-700;
   }
 
+  .icon-button:active,
+  .button:active {
+    @apply bg-zinc-300 dark:bg-black;
+  }
+
+  .submit,
   .button--submit,
   .button[type="submit"] {
     @apply bg-emerald-200 dark:bg-emerald-800;
   }
 
+  .submit:hover,
   .button--submit:hover,
   .button[type="submit"]:hover,
   .button[type="submit"]:focus {
     @apply bg-emerald-300 dark:bg-emerald-700;
   }
 
+  .submit:active,
   .button--submit:active,
   .button[type="submit"]:active {
     @apply bg-emerald-400 dark:bg-emerald-900;
+  }
+
+  .button svg + span {
+    @apply ml-2;
+  }
+
+  .button span + svg {
+    @apply ml-2;
+  }
+
+  .button svg {
+    @apply w-4 h-4;
+  }
+
+  .icon-button svg {
+    @apply w-3 h-3;
+  }
+
+  .icon-button span {
+    @apply sr-only;
+  }
+
+  .button--delete {
+    @apply bg-red-300 dark:bg-red-800;
+  }
+  .button--delete:hover {
+    @apply bg-red-400 dark:bg-red-700;
   }
 
   form .button[type="submit"] {
