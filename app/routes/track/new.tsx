@@ -1,6 +1,7 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
@@ -9,6 +10,7 @@ import { increaseDuration } from "~/components/track/Music";
 import { decreaseDuration } from "~/components/track/Music";
 import { ChordBeat } from "~/components/track/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
+import { createTrack } from "~/utils/tracks.server";
 
 type Duration = "1n" | "2n" | "4n";
 const sampleChordConfig = {
@@ -22,6 +24,18 @@ const sampleChordConfig = {
   sixteenth: 0,
 };
 
+type ActionData = {
+  formError?: string;
+  fieldErrors?: {
+    trackname: string | undefined;
+    sheet: string | undefined;
+  };
+  fields?: {
+    trackname: string;
+    sheet: string;
+  };
+};
+
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
   return json({ user });
@@ -32,21 +46,25 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const trackname = form.get("trackname");
   const chords = form.get("chords");
-  const values = Object.fromEntries(form);
-  // const password = form.get("password");
-  console.log("=== === ===", values);
-  console.log("New Track Name", trackname);
-  console.log("New Track User", userId);
-  console.log("New Track Chords", chords);
 
-  return badRequest({
-    formError: `not implemented`,
-  });
+  if (typeof trackname !== "string" || typeof chords !== "string") {
+    return badRequest({
+      formError: `Form not submitted correctly.`,
+    });
+  }
+
+  const newTrack = await createTrack(trackname, chords, userId);
+  if (!newTrack) {
+    return badRequest({
+      formError: `not implemented`,
+    });
+  }
+
+  return redirect(`/track/${newTrack.id}`);
 };
 const badRequest = (data: any) => json(data, { status: 400 });
 
 export default function NewTrackRoute() {
-  const { user } = useLoaderData();
   let actionData = useActionData();
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
 
@@ -112,8 +130,7 @@ export default function NewTrackRoute() {
   const addChord = (e: MouseEvent) => {
     e.preventDefault();
     const newTime = getTimeForNewChord();
-    console.log("New Time", newTime);
-    // const newChord = { ...sampleChord, time: newTime }; // TODO: Generate new chord instead of taking smaple chord!
+    // console.log("New Time", newTime);
     const newChord = new ChordBeat({
       root: "C",
       type: "maj",
@@ -133,18 +150,11 @@ export default function NewTrackRoute() {
     <main>
       <section>
         <div className="container max-w-4xl mx-auto pt-8">
-          {/* <div className="bt-prose">
-            <h1 className="mb-0">New Track</h1> */}
-          {/* <p className="opacity-50 text-xs mt-1">
-            authoring as: <strong>{user?.username || "not logged in!"}</strong>
-            <strong> id : {user?.id}</strong>
-          </p> */}
-
           <Form className="flex flex-col gap-4" method="post">
             <TextInput
               name="trackname"
               label="Trackname"
-              placeholder="My new awesome backing track"
+              placeholder="My awesome backing track"
               required
               actionData={actionData}
             />
@@ -163,17 +173,25 @@ export default function NewTrackRoute() {
                   className={`sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
                 >
                   {/* <legend>Chord 1:0?</legend> */}
-                  {chord.time} - {chord.duration}
-                  <div className="chord">
-                    <span className="chord-root font-black">{chord.root}</span>
-                    <span className="chord-type opacity-50 ml-px">
-                      {chord.type}
-                    </span>
-                    <span className="chord-extension relative text-xs ml-px -top-1">
-                      {chord.extension}
-                    </span>
+                  <div className="text-left text-xs opacity-50">
+                    {chord.time}
+                    {/* - {chord.duration} */}
                   </div>
-                  <div className="grid gap-2 grid-flow-col">
+                  <div className="new-sheet__chord">
+                    <div>
+                      <span className="chord-root font-black">
+                        {chord.root}
+                      </span>
+                      <span className="chord-type opacity-50 ml-px">
+                        {chord.type}
+                      </span>
+                      <span className="chord-extension relative text-xs ml-px -top-1">
+                        {chord.extension}
+                      </span>
+                    </div>
+                    <div className="duration-line" />
+                  </div>
+                  <div className="grid gap-2 grid-flow-col mt-2">
                     <button
                       disabled={chord.duration === "4n"}
                       className="icon-button"
@@ -182,7 +200,6 @@ export default function NewTrackRoute() {
                       <span>make chord shorter</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-3 h-3"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -200,7 +217,6 @@ export default function NewTrackRoute() {
                       <span>edit</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-3 h-3"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -214,7 +230,6 @@ export default function NewTrackRoute() {
                       <span>delete</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-3 w-3"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -233,7 +248,6 @@ export default function NewTrackRoute() {
                       <span>make chord longer</span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-3 h-3"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -251,7 +265,6 @@ export default function NewTrackRoute() {
             <button className="button" onClick={addChord}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-3 h-3"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >

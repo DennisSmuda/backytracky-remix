@@ -53,9 +53,19 @@
   .button svg + span {
     @apply ml-2;
   }
+
   .button span + svg {
     @apply ml-2;
   }
+
+  .button svg {
+    @apply w-4 h-4;
+  }
+
+  .icon-button svg {
+    @apply w-3 h-3;
+  }
+
   .icon-button span {
     @apply sr-only;
   }

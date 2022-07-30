@@ -1384,9 +1384,21 @@
   .button svg + span {
     margin-left: 0.5rem;
 }
+
   .button span + svg {
     margin-left: 0.5rem;
 }
+
+  .button svg {
+    height: 1rem;
+    width: 1rem;
+}
+
+  .icon-button svg {
+    height: 0.75rem;
+    width: 0.75rem;
+}
+
   .icon-button span {
     position: absolute;
     width: 1px;

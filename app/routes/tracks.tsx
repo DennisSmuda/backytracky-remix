@@ -1,15 +1,16 @@
+import type { Track } from "@prisma/client";
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData, useTransition } from "@remix-run/react";
 
 import { db } from "~/utils/db.server";
 
-type LoaderData = {
-  tracks: Array<{ id: string; name: string; sheet: string; upvotes: number }>;
-};
+// type LoaderData = {
+//   tracks: Array<{ id: string; name: string; sheet: <Json>; upvotes: number }>;
+// };
 
 export const loader: LoaderFunction = async () => {
-  const data: LoaderData = {
+  const data = {
     tracks: await db.track.findMany(),
   };
 
@@ -18,7 +19,7 @@ export const loader: LoaderFunction = async () => {
 
 export default function TracksRoute() {
   // const data = useLoaderData<LoaderData>();
-  const data = useLoaderData<LoaderData>();
+  const data = useLoaderData();
   const transition = useTransition();
   console.log("Tracks: Transition", transition);
 
@@ -28,7 +29,7 @@ export default function TracksRoute() {
         <div className="container max-w-4xl mx-auto pt-8">
           <h1>Tracks 🎺</h1>
           <div className="grid gap-4 my-8">
-            {data.tracks.map((track) => (
+            {data.tracks.map((track: Track) => (
               <Link
                 to={`/track/${track.id}`}
                 key={track.id}
