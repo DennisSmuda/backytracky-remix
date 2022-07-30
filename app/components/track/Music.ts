@@ -9,7 +9,7 @@ export type Chords = Array<ChordBeat>;
 
 export interface IChordBeat {
   note: ChordNotes;
-  duration: string;
+  duration: "1n" | "2n" | "4n";
   root: string;
   type?: string;
   extension?: string;
@@ -20,7 +20,7 @@ export interface IChordBeat {
 
 export class ChordBeat implements IChordBeat {
   public note: ChordNotes;
-  public duration: string;
+  public duration: "1n" | "2n" | "4n";
   public root: string;
   public type?: string;
   public extension?: string;
@@ -148,3 +148,17 @@ export default class Music {
     };
   }
 }
+
+export const increaseDuration = (duration: "1n" | "2n" | "4n") => {
+  if (duration === "1n") return "1n";
+  if (duration === "2n") return "1n";
+  if (duration === "4n") return "2n";
+  return "4n";
+};
+
+export const decreaseDuration = (duration: "1n" | "2n" | "4n") => {
+  if (duration === "1n") return "2n";
+  if (duration === "2n") return "4n";
+  if (duration === "4n") return "4n";
+  return "4n";
+};

@@ -12,6 +12,11 @@
     @apply p-2 rounded-md;
   }
 
+  .icon-button[disabled],
+  .button[disabled] {
+    @apply opacity-75 pointer-events-none cursor-not-allowed;
+  }
+
   .button {
     @apply text-inherit font-bold py-2 px-4;
   }
@@ -50,6 +55,9 @@
   }
   .button span + svg {
     @apply ml-2;
+  }
+  .icon-button span {
+    @apply sr-only;
   }
 
   form .button[type="submit"] {

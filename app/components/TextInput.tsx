@@ -18,7 +18,7 @@ export default function TextInput({
   required = false,
   type = "text",
 }: InputProps) {
-  console.log("Default Value", actionData?.fields, actionData?.fields);
+  // console.log("Default Value", actionData?.fields, actionData?.fields);
   return (
     <label className="form-row" htmlFor={`${name}-input`}>
       <span>{label}</span>

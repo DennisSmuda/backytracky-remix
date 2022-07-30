@@ -5,8 +5,22 @@ import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
 import type { IChordBeat } from "~/components/track/Music";
+import { increaseDuration } from "~/components/track/Music";
+import { decreaseDuration } from "~/components/track/Music";
 import { ChordBeat } from "~/components/track/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
+
+type Duration = "1n" | "2n" | "4n";
+const sampleChordConfig = {
+  root: "C",
+  type: "maj",
+  extension: "7",
+  note: ["C3", "E3", "G3", "B3"],
+  duration: "4n" as Duration,
+  bar: 0,
+  beat: 0,
+  sixteenth: 0,
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
@@ -42,7 +56,30 @@ export default function NewTrackRoute() {
 
   const editChord = (e: MouseEvent, chord: IChordBeat) => {
     e.preventDefault();
-    console.log("Editing Chord", chord);
+    // chord.duration = "2n";
+    console.log("Editing Chord", chords);
+    setChords([...chords]);
+  };
+
+  const shortenChord = (e: MouseEvent, chord: ChordBeat) => {
+    e.preventDefault();
+    chord.duration = decreaseDuration(chord.duration);
+    console.log("Editing Chord", chords);
+    setChords([...chords]);
+  };
+  const lengthenChord = (e: MouseEvent, chord: ChordBeat) => {
+    e.preventDefault();
+    chord.duration = increaseDuration(chord.duration);
+    console.log("Editing Chord", chords);
+    setChords([...chords]);
+  };
+  const deleteChord = (e: MouseEvent, chord: ChordBeat) => {
+    e.preventDefault();
+    console.log("Deleting Chord", chords);
+    const chordIndex = chords.indexOf(chord);
+    console.log("Find that shit: ", chordIndex);
+    chords.splice(chordIndex, 1);
+    setChords([...chords]);
   };
 
   const getTimeForNewChord = () => {
@@ -82,7 +119,7 @@ export default function NewTrackRoute() {
       type: "maj",
       extension: "7",
       note: ["C3", "E3", "G3", "B3"],
-      duration: "1n",
+      duration: "4n",
       bar: newTime.bar,
       beat: newTime.beat,
       sixteenth: newTime.sixteenth,
@@ -90,17 +127,6 @@ export default function NewTrackRoute() {
     if (chords?.length) {
       setChords([...chords, newChord]);
     }
-  };
-
-  const sampleChordConfig = {
-    root: "C",
-    type: "maj",
-    extension: "7",
-    note: ["C3", "E3", "G3", "B3"],
-    duration: "1n",
-    bar: 0,
-    beat: 0,
-    sixteenth: 0,
   };
 
   return (
@@ -137,7 +163,7 @@ export default function NewTrackRoute() {
                   className={`sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
                 >
                   {/* <legend>Chord 1:0?</legend> */}
-                  {chord.time}
+                  {chord.time} - {chord.duration}
                   <div className="chord">
                     <span className="chord-root font-black">{chord.root}</span>
                     <span className="chord-type opacity-50 ml-px">
@@ -147,27 +173,85 @@ export default function NewTrackRoute() {
                       {chord.extension}
                     </span>
                   </div>
-                  <button
-                    className="icon-button"
-                    onClick={(e) => editChord(e, chord)}
-                  >
-                    <span className="sr-only">edit</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
+                  <div className="grid gap-2 grid-flow-col">
+                    <button
+                      disabled={chord.duration === "4n"}
+                      className="icon-button"
+                      onClick={(e) => shortenChord(e, chord)}
                     >
-                      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                    </svg>
-                  </button>
+                      <span>make chord shorter</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-3 h-3"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      className="icon-button"
+                      onClick={(e) => editChord(e, chord)}
+                    >
+                      <span>edit</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-3 h-3"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      </svg>
+                    </button>
+                    <button
+                      className="icon-button"
+                      onClick={(e) => deleteChord(e, chord)}
+                    >
+                      <span>delete</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-3 w-3"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      disabled={chord.duration === "1n"}
+                      className="icon-button"
+                      onClick={(e) => lengthenChord(e, chord)}
+                    >
+                      <span>make chord longer</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-3 h-3"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               ))}
             </fieldset>
             <button className="button" onClick={addChord}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="w-3 h-3"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
