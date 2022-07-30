@@ -1,6 +1,8 @@
 interface InputProps {
   name: string;
   label: string;
+  placeholder?: string;
+  required?: boolean;
   type?: string;
   actionData?: {
     fields: { name: string };
@@ -12,17 +14,23 @@ export default function TextInput({
   name,
   label,
   actionData,
+  placeholder = "",
+  required = false,
   type = "text",
 }: InputProps) {
+  console.log("Default Value", actionData?.fields, actionData?.fields);
   return (
     <label className="form-row" htmlFor={`${name}-input`}>
       <span>{label}</span>
       {/* {JSON.stringify(actionData.fields)} */}
-      {name}
+      {/* {name} */}
+      {/* {JSON.stringify(actionData?.fields)} */}
       <input
         type={type}
         id={`${name}-input`}
         name={name}
+        required={required}
+        placeholder={placeholder}
         defaultValue={actionData?.fields?.name}
         aria-invalid={Boolean(actionData?.fieldErrors?.name)}
         aria-errormessage={
