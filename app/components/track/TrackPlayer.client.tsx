@@ -42,8 +42,6 @@ export default function TrackPlayer() {
     console.log("Setup Music", chords);
 
     chordsPart.current = new Part(function (time, note) {
-      console.log("Time", note);
-
       piano?.current?.triggerAttackRelease(
         note.note,
         note.duration,

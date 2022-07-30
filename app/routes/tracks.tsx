@@ -1,8 +1,15 @@
 import type { Track } from "@prisma/client";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, Link, useLoaderData, useTransition } from "@remix-run/react";
-import type { MouseEvent } from "react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useLoaderData,
+  useTransition,
+} from "@remix-run/react";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
@@ -22,21 +29,53 @@ export const action: ActionFunction = async ({ request }) => {
   const trackId = form.get("trackId");
   const response = await deleteTrack(trackId as string);
 
-  console.log("=== Delete Track: ", response.status);
+  if (response.status === 400) {
+    return badRequest({
+      error: `Error deleting track`,
+    });
+  }
 
-  // return badRequest({
-  //   formError: `not implemented`,
-  // });
-  return json({ message: "Success!!" });
+  return json({ response });
 };
 
 const badRequest = (data: any) => json(data, { status: 400 });
 
+const notifyDeleting = () =>
+  toast.loading("Deleting...", { id: `track-delete-toast` });
+
+const notifyErrorDeleting = () =>
+  toast.error("Couldn't delete track...", {
+    id: `track-delete-toast`,
+  });
+
+const notifySuccessDeleting = () =>
+  toast.success("Deleted track!", { id: `track-delete-toast` });
+
 export default function TracksRoute() {
-  // const data = useLoaderData<LoaderData>();
-  const data = useLoaderData();
+  const actionData = useActionData();
+  const loaderData = useLoaderData();
   const transition = useTransition();
-  console.log("Tracks: Transition", transition);
+
+  useEffect(() => {
+    switch (transition.type) {
+      case "actionSubmission":
+        console.log("Deleting");
+        if (transition.submission.action === "/tracks") {
+          notifyDeleting();
+        }
+        break;
+      case "actionRedirect":
+        console.log("Redirecting=");
+        break;
+      case "actionReload":
+        if (actionData.error) {
+          notifyErrorDeleting();
+        } else {
+          notifySuccessDeleting();
+        }
+        break;
+    }
+  }, [transition, actionData]);
 
   return (
     <main className="main">
@@ -44,7 +83,7 @@ export default function TracksRoute() {
         <div className="container max-w-4xl mx-auto pt-8">
           <h1>Tracks 🎺</h1>
           <div className="grid gap-4 my-8">
-            {data.tracks.map((track: Track) => (
+            {loaderData.tracks.map((track: Track) => (
               <div
                 key={track.id}
                 className="flex items-center justify-between rounded-lg p-4 interactive-bg"
@@ -60,8 +99,8 @@ export default function TracksRoute() {
                     {track.name}
                   </Link>
                 </div>
-                {track.userId === data.user?.id ? (
-                  <Form reloadDocument method="delete">
+                {track.userId === loaderData.user?.id ? (
+                  <Form method="delete">
                     <input type="hidden" name="trackId" value={track.id} />
                     <button className="icon-button button--delete">
                       <span>delete</span>
