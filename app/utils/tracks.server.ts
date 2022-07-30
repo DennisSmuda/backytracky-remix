@@ -23,6 +23,7 @@ export async function deleteTrack(trackId: string) {
     const deletedTrack = await db.track.delete({
       where: { id: trackId },
     });
+    console.log("Deleted Track Server", deleteTrack);
     return json({ message: "Delete Success", track: deletedTrack });
   } catch {
     return json({ message: "Delete Error" }, { status: 400 });
