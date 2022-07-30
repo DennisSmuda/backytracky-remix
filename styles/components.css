@@ -23,12 +23,12 @@
 
   .icon-button:hover,
   .button:hover {
-    @apply hover:bg-zinc-100 dark:bg-zinc-700;
+    @apply bg-zinc-100 dark:bg-zinc-700;
   }
 
   .icon-button:active,
   .button:active {
-    @apply hover:bg-zinc-300 dark:bg-black;
+    @apply bg-zinc-300 dark:bg-black;
   }
 
   .submit,
@@ -68,6 +68,13 @@
 
   .icon-button span {
     @apply sr-only;
+  }
+
+  .button--delete {
+    @apply bg-red-300 dark:bg-red-800;
+  }
+  .button--delete:hover {
+    @apply bg-red-400 dark:bg-red-700;
   }
 
   form .button[type="submit"] {

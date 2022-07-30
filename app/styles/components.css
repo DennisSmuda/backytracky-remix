@@ -1313,8 +1313,8 @@
     color: inherit;
 }
 
-  .icon-button:hover:hover, 
-  .button:hover:hover {
+  .icon-button:hover, 
+  .button:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(244 244 245 / var(--tw-bg-opacity));
 }
@@ -1325,8 +1325,8 @@
     background-color: rgb(63 63 70 / var(--tw-bg-opacity));
 }
 
-  .icon-button:active:hover, 
-  .button:active:hover {
+  .icon-button:active, 
+  .button:active {
     --tw-bg-opacity: 1;
     background-color: rgb(212 212 216 / var(--tw-bg-opacity));
 }
@@ -1409,6 +1409,24 @@
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+}
+
+  .button--delete {
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+  .dark .button--delete {
+    --tw-bg-opacity: 1;
+    background-color: rgb(153 27 27 / var(--tw-bg-opacity));
+}
+  .button--delete:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+  .dark .button--delete:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
   form .button[type="submit"] {
