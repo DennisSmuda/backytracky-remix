@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
 import type { Sampler } from "tone";
 import { loadInstruments } from "./utils";
-import type { ChordBeat } from "./Music";
+import type { IChordBeat } from "./Music";
 import Music from "./Music";
 
 export default function TrackPlayer() {
@@ -14,7 +14,7 @@ export default function TrackPlayer() {
   const music = new Music({ numBars: 2 });
 
   let chordsPart = useRef<Part | null>(null);
-  let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
+  let chordsPartChords = useRef<Array<IChordBeat> | null>(null);
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
@@ -39,9 +39,10 @@ export default function TrackPlayer() {
 
   function setupMusic(): void {
     const { chords, groove } = music.makeMusic();
+    console.log("Setup Music", chords);
 
     chordsPart.current = new Part(function (time, note) {
-      // console.log("Time", note);
+      console.log("Time", note);
 
       piano?.current?.triggerAttackRelease(
         note.note,
@@ -67,7 +68,7 @@ export default function TrackPlayer() {
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = 4;
-    console.log("Setup music");
+    console.log("Done setting up music", chordsPart.current);
   }
 
   function disposeParts() {
@@ -87,7 +88,7 @@ export default function TrackPlayer() {
     if (typeof Transport.stop !== "undefined") Transport.stop();
   }
 
-  function clickChord(chord: ChordBeat): void {
+  function clickChord(chord: IChordBeat): void {
     piano?.current?.triggerAttackRelease(chord.note, "8n", now(), 0.35);
   }
 
@@ -97,17 +98,21 @@ export default function TrackPlayer() {
     return <div>Generating Chords</div>;
   }
 
+  const getChordTime = (chord: IChordBeat) => {
+    return `${chord.bar}:${chord.beat}:${chord.sixteenth || 0}`;
+  };
+
   return (
     <div className="">
       <p className="my-2">Basic 2-5-1 to get started 🎺</p>
       <div className="sheet-grid my-4">
-        {chordsPartChords.current.map((chord: ChordBeat) => (
+        {chordsPartChords.current.map((chord: IChordBeat) => (
           <button
             onClick={() => clickChord(chord)}
-            key={chord.time}
+            key={getChordTime(chord)}
             className={`interactive-bg sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
           >
-            <span className="opacity-50 text-xs">{chord.time}</span>
+            <span className="opacity-50 text-xs">{getChordTime(chord)}</span>
             <div className="chord">
               <span className="chord-root font-black">{chord.root}</span>
               <span className="chord-type opacity-50 ml-px">{chord.type}</span>

@@ -5,15 +5,23 @@
     @apply py-4 px-3 sm:px-6;
   }
 
-  .button {
+  .button,
+  .icon-button {
     @apply inline-flex items-center justify-center;
     @apply bg-zinc-200 dark:bg-zinc-800;
-    @apply text-inherit font-bold py-2 px-4 rounded-md;
+    @apply p-2 rounded-md;
   }
 
+  .button {
+    @apply text-inherit font-bold py-2 px-4;
+  }
+
+  .icon-button:hover,
   .button:hover {
     @apply hover:bg-zinc-100 dark:bg-zinc-700;
   }
+
+  .icon-button:active,
   .button:active {
     @apply hover:bg-zinc-300 dark:bg-black;
   }
@@ -35,6 +43,13 @@
   .button--submit:active,
   .button[type="submit"]:active {
     @apply bg-emerald-400 dark:bg-emerald-900;
+  }
+
+  .button svg + span {
+    @apply ml-2;
+  }
+  .button span + svg {
+    @apply ml-2;
   }
 
   form .button[type="submit"] {

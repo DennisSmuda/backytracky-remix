@@ -4,12 +4,12 @@ import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
-import type { ChordBeat } from "~/components/track/Music";
+import type { IChordBeat } from "~/components/track/Music";
+import { ChordBeat } from "~/components/track/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
-  console.log("Loader USER", user);
   return json({ user });
 };
 
@@ -37,16 +37,16 @@ export default function NewTrackRoute() {
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
 
   useEffect(() => {
-    setChords([sampleChord]);
+    setChords([new ChordBeat(sampleChordConfig)]);
   }, []);
 
-  const editChord = (e: MouseEvent, chord: ChordBeat) => {
+  const editChord = (e: MouseEvent, chord: IChordBeat) => {
     e.preventDefault();
     console.log("Editing Chord", chord);
   };
 
   const getTimeForNewChord = () => {
-    if (!chords.length) return "0:0:0";
+    // if (!chords.length) return "0:0:0";
     const c = chords[chords.length - 1];
     console.log("Adding new Chord", c);
     let duration = 4;
@@ -62,23 +62,40 @@ export default function NewTrackRoute() {
       nextBeat -= 4;
     }
 
-    return `${nextBar}:${nextBeat}:${c.sixteenth}`;
+    let nextSixteenth = 0;
+
+    // return `${nextBar}:${nextBeat}:${c.sixteenth}`;
+    return {
+      bar: nextBar,
+      beat: nextBeat,
+      sixteenth: nextSixteenth,
+    };
   };
 
   const addChord = (e: MouseEvent) => {
     e.preventDefault();
     const newTime = getTimeForNewChord();
-    const newChord = { ...sampleChord, time: newTime }; // TODO: Generate new chord instead of taking smaple chord!
+    console.log("New Time", newTime);
+    // const newChord = { ...sampleChord, time: newTime }; // TODO: Generate new chord instead of taking smaple chord!
+    const newChord = new ChordBeat({
+      root: "C",
+      type: "maj",
+      extension: "7",
+      note: ["C3", "E3", "G3", "B3"],
+      duration: "1n",
+      bar: newTime.bar,
+      beat: newTime.beat,
+      sixteenth: newTime.sixteenth,
+    });
     if (chords?.length) {
       setChords([...chords, newChord]);
     }
   };
 
-  const sampleChord: ChordBeat = {
+  const sampleChordConfig = {
     root: "C",
     type: "maj",
     extension: "7",
-    time: "0:0:0",
     note: ["C3", "E3", "G3", "B3"],
     duration: "1n",
     bar: 0,
@@ -113,48 +130,55 @@ export default function NewTrackRoute() {
               readOnly
             />
 
-            <div className="grid grid-cols-4">
-              <fieldset>
-                {chords.map((chord) => (
-                  <div key={chord.time}>
-                    {/* <legend>Chord 1:0?</legend> */}
-                    {chord.time}
-                    <div className="chord">
-                      <span className="chord-root font-black">
-                        {chord.root}
-                      </span>
-                      <span className="chord-type opacity-50 ml-px">
-                        {chord.type}
-                      </span>
-                      <span className="chord-extension relative text-xs ml-px -top-1">
-                        {chord.extension}
-                      </span>
-                    </div>
-                    <button
-                      className="button"
-                      onClick={(e) => editChord(e, chord)}
-                    >
-                      edit
-                    </button>
-                  </div>
-                ))}
-              </fieldset>
-
-              <button className="button" onClick={addChord}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+            <fieldset className="sheet-grid grid-cols-4">
+              {chords.map((chord) => (
+                <div
+                  key={chord.time}
+                  className={`sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-            </div>
+                  {/* <legend>Chord 1:0?</legend> */}
+                  {chord.time}
+                  <div className="chord">
+                    <span className="chord-root font-black">{chord.root}</span>
+                    <span className="chord-type opacity-50 ml-px">
+                      {chord.type}
+                    </span>
+                    <span className="chord-extension relative text-xs ml-px -top-1">
+                      {chord.extension}
+                    </span>
+                  </div>
+                  <button
+                    className="icon-button"
+                    onClick={(e) => editChord(e, chord)}
+                  >
+                    <span className="sr-only">edit</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+            </fieldset>
+            <button className="button" onClick={addChord}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>add chord</span>
+            </button>
 
             <input type="submit" className="button col-span-4" value="save" />
             <div id="form-error-message">
