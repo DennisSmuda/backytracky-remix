@@ -2361,39 +2361,45 @@ main section {
   background-color: rgb(18 18 19 / var(--tw-bg-opacity));
 }
 
-.button--submit, 
+.submit, 
+  .button--submit, 
   .button[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgb(167 243 208 / var(--tw-bg-opacity));
 }
 
-.dark .button--submit, .dark 
+.dark .submit, .dark 
+  .button--submit, .dark 
   .button[type="submit"] {
   --tw-bg-opacity: 1;
   background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
-.button--submit:hover, 
+.submit:hover, 
+  .button--submit:hover, 
   .button[type="submit"]:hover, 
   .button[type="submit"]:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(110 231 183 / var(--tw-bg-opacity));
 }
 
-.dark .button--submit:hover, .dark 
+.dark .submit:hover, .dark 
+  .button--submit:hover, .dark 
   .button[type="submit"]:hover, .dark 
   .button[type="submit"]:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(4 120 87 / var(--tw-bg-opacity));
 }
 
-.button--submit:active, 
+.submit:active, 
+  .button--submit:active, 
   .button[type="submit"]:active {
   --tw-bg-opacity: 1;
   background-color: rgb(52 211 153 / var(--tw-bg-opacity));
 }
 
-.dark .button--submit:active, .dark 
+.dark .submit:active, .dark 
+  .button--submit:active, .dark 
   .button[type="submit"]:active {
   --tw-bg-opacity: 1;
   background-color: rgb(6 78 59 / var(--tw-bg-opacity));
@@ -3214,6 +3220,14 @@ form input[type="text"],
 
 .ml-px {
   margin-left: 1px;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .block {

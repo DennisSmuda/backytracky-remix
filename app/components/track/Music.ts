@@ -32,7 +32,50 @@ export default class Music {
     const VChord: Chord = ["G3", "B3", "D3", "F3"];
     const VIChord: Chord = ["A3", "C#3", "E3", "G3"];
 
-    const mainChords: Chords = [
+    const turnaroundChords: Chords = [
+      {
+        root: "C",
+        type: "maj",
+        extension: "7",
+        time: "0:0",
+        note: IChord,
+        duration: "2n",
+        bar: 0,
+        beat: 0,
+        sixteenth: 0,
+      },
+      {
+        root: "A",
+        extension: "7",
+        time: "0:2",
+        note: VIChord,
+        duration: "2n",
+        bar: 1,
+        beat: 3,
+      },
+      {
+        root: "D",
+        type: "m",
+        extension: "7",
+        time: "1:0",
+        note: IIChord,
+        duration: "2n",
+        bar: 0,
+        beat: 0,
+        sixteenth: 0,
+      },
+      {
+        root: "G",
+        extension: "7",
+        time: "1:2",
+        note: VChord,
+        duration: "2n",
+        bar: 0,
+        beat: 2,
+      },
+    ];
+
+    const twoFiveOneChords: Chords = [
       {
         root: "D",
         type: "m",
@@ -44,17 +87,6 @@ export default class Music {
         beat: 0,
         sixteenth: 0,
       },
-      // {
-      //   root: "D",
-      //   type: "m",
-      //   extension: "7",
-      //   time: "0:1",
-      //   note: IIChord,
-      //   duration: "8n",
-      //   bar: 0,
-      //   beat: 0,
-      //   sixteenth: 3,
-      // },
       {
         root: "G",
         extension: "7",
@@ -64,15 +96,6 @@ export default class Music {
         bar: 0,
         beat: 2,
       },
-      // {
-      //   root: "G",
-      //   extension: "7",
-      //   time: "0:3",
-      //   note: VChord,
-      //   duration: "8n",
-      //   bar: 0,
-      //   beat: 3,
-      // },
       {
         root: "C",
         type: "maj",
@@ -105,7 +128,7 @@ export default class Music {
     ];
 
     return {
-      chords: mainChords,
+      chords: turnaroundChords,
       groove: hihatOnlyGroove,
     };
   }

@@ -17,6 +17,8 @@ export default function TextInput({
   return (
     <label className="form-row" htmlFor={`${name}-input`}>
       <span>{label}</span>
+      {/* {JSON.stringify(actionData.fields)} */}
+      {name}
       <input
         type={type}
         id={`${name}-input`}

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
 import type { Sampler } from "tone";
 import { loadInstruments } from "./utils";
-import type { ChordBeat, Chord } from "./Music";
-import Music, { Chords } from "./Music";
+import type { ChordBeat } from "./Music";
+import Music from "./Music";
 
 export default function TrackPlayer() {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
@@ -76,6 +76,7 @@ export default function TrackPlayer() {
   }
 
   function play(): void {
+    Transport.swing = 1;
     setIsPlaying(true);
     if (typeof Transport.start !== "undefined") Transport.start();
     start();

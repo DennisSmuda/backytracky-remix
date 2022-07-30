@@ -18,17 +18,20 @@
     @apply hover:bg-zinc-300 dark:bg-black;
   }
 
+  .submit,
   .button--submit,
   .button[type="submit"] {
     @apply bg-emerald-200 dark:bg-emerald-800;
   }
 
+  .submit:hover,
   .button--submit:hover,
   .button[type="submit"]:hover,
   .button[type="submit"]:focus {
     @apply bg-emerald-300 dark:bg-emerald-700;
   }
 
+  .submit:active,
   .button--submit:active,
   .button[type="submit"]:active {
     @apply bg-emerald-400 dark:bg-emerald-900;

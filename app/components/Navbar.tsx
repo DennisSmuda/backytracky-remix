@@ -27,13 +27,18 @@ export default function Navbar({ user }: NavbarProps) {
           Backytracky
         </Link>
         <NavLink to="/tracks">Tracks</NavLink>
+        {user?.username && (
+          <NavLink className="submit" to="/track/new">
+            New
+          </NavLink>
+        )}
       </nav>
       <nav className="grid gap-4 grid-flow-col items-center">
         {/* {user?.username} */}
         {!user ? (
           <>
             <NavLink to="/auth/login">Login</NavLink>
-            {/* <NavLink to="/auth/register">Register</NavLink> */}
+            <NavLink to="/auth/register">Register</NavLink>
           </>
         ) : (
           <Form method="post" action="/auth/logout">

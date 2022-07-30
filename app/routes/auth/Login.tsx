@@ -101,7 +101,7 @@ export default function LoginRoute() {
             </button>
             <div id="form-error-message">
               {actionData?.formError ? (
-                <p className="form-validation-error" role="alert">
+                <p className="form-validation-error text-center" role="alert">
                   {actionData.formError}
                 </p>
               ) : null}
