@@ -1,13 +1,12 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { MouseEvent } from "react";
+import type { IChordBeat } from "~/components/track/Music";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
-import type { IChordBeat } from "~/components/track/Music";
-import { increaseDuration } from "~/components/track/Music";
-import { decreaseDuration } from "~/components/track/Music";
+import { increaseDuration, decreaseDuration } from "~/components/track/Music";
 import { ChordBeat } from "~/components/track/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
@@ -22,18 +21,6 @@ const sampleChordConfig = {
   bar: 0,
   beat: 0,
   sixteenth: 0,
-};
-
-type ActionData = {
-  formError?: string;
-  fieldErrors?: {
-    trackname: string | undefined;
-    sheet: string | undefined;
-  };
-  fields?: {
-    trackname: string;
-    sheet: string;
-  };
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -75,7 +62,7 @@ export default function NewTrackRoute() {
   const editChord = (e: MouseEvent, chord: IChordBeat) => {
     e.preventDefault();
     // chord.duration = "2n";
-    console.log("Editing Chord", chords);
+    console.log("Editing Chord", chord);
     setChords([...chords]);
   };
 
@@ -130,16 +117,13 @@ export default function NewTrackRoute() {
   const addChord = (e: MouseEvent) => {
     e.preventDefault();
     const newTime = getTimeForNewChord();
-    // console.log("New Time", newTime);
     const newChord = new ChordBeat({
       root: "C",
       type: "maj",
       extension: "7",
       note: ["C3", "E3", "G3", "B3"],
       duration: "4n",
-      bar: newTime.bar,
-      beat: newTime.beat,
-      sixteenth: newTime.sixteenth,
+      ...newTime,
     });
     if (chords?.length) {
       setChords([...chords, newChord]);
@@ -153,7 +137,7 @@ export default function NewTrackRoute() {
           <Form className="flex flex-col gap-4" method="post">
             <TextInput
               name="trackname"
-              label="Trackname"
+              label="New Trackname"
               placeholder="My awesome backing track"
               required
               actionData={actionData}
@@ -167,15 +151,14 @@ export default function NewTrackRoute() {
             />
 
             <fieldset className="sheet-grid grid-cols-4">
+              <legend>Sheet</legend>
               {chords.map((chord) => (
                 <div
                   key={chord.time}
                   className={`sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
                 >
-                  {/* <legend>Chord 1:0?</legend> */}
                   <div className="text-left text-xs opacity-50">
                     {chord.time}
-                    {/* - {chord.duration} */}
                   </div>
                   <div className="new-sheet__chord">
                     <div>
@@ -191,7 +174,7 @@ export default function NewTrackRoute() {
                     </div>
                     <div className="duration-line" />
                   </div>
-                  <div className="grid gap-2 grid-flow-col mt-2">
+                  <div className="grid grid-flow-col gap-2 mt-2">
                     <button
                       disabled={chord.duration === "4n"}
                       className="icon-button"
@@ -201,7 +184,6 @@ export default function NewTrackRoute() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
-                        fill="currentColor"
                       >
                         <path
                           fillRule="evenodd"
@@ -218,7 +200,6 @@ export default function NewTrackRoute() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
-                        fill="currentColor"
                       >
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                       </svg>
@@ -231,7 +212,6 @@ export default function NewTrackRoute() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
-                        fill="currentColor"
                       >
                         <path
                           fillRule="evenodd"
@@ -249,7 +229,6 @@ export default function NewTrackRoute() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
-                        fill="currentColor"
                       >
                         <path
                           fillRule="evenodd"
@@ -263,11 +242,7 @@ export default function NewTrackRoute() {
               ))}
             </fieldset>
             <button className="button" onClick={addChord}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
                   d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
@@ -287,7 +262,6 @@ export default function NewTrackRoute() {
             </div>
           </Form>
         </div>
-        {/* </div> */}
       </section>
     </main>
   );

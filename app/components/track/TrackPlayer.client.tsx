@@ -5,13 +5,13 @@ import { loadInstruments } from "./utils";
 import type { IChordBeat } from "./Music";
 import Music from "./Music";
 
-export default function TrackPlayer() {
+export default function TrackPlayer({ sheet }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [, setIsReady] = useState<Boolean>(false);
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
-  const music = new Music({ numBars: 2 });
+  const music = new Music({ sheet });
 
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<IChordBeat> | null>(null);
@@ -21,7 +21,7 @@ export default function TrackPlayer() {
     const { pianoSampler, drumSampler } = loadInstruments();
     piano.current = pianoSampler;
     drums.current = drumSampler;
-
+    // console.log("sheet prop", sheet);
     setupMusic();
   }, []);
 
@@ -33,13 +33,13 @@ export default function TrackPlayer() {
   }, []);
 
   useEffect(() => {
-    console.log("Use Effect", chordsPart);
+    // console.log("Use Effect", chordsPart);
     setIsReady(true);
   }, [chordsPart, drumPart]);
 
   function setupMusic(): void {
-    const { chords, groove } = music.makeMusic();
-    console.log("Setup Music", chords);
+    const { chords, groove } = music.generateMusic();
+    // console.log("Setup Music", chords);
 
     chordsPart.current = new Part(function (time, note) {
       piano?.current?.triggerAttackRelease(
@@ -90,7 +90,7 @@ export default function TrackPlayer() {
     piano?.current?.triggerAttackRelease(chord.note, "8n", now(), 0.35);
   }
 
-  console.log("Render", chordsPart.current);
+  // console.log("Render", chordsPart.current);
 
   if (!chordsPartChords.current) {
     return <div>Generating Chords</div>;
@@ -102,7 +102,7 @@ export default function TrackPlayer() {
 
   return (
     <div className="">
-      <p className="my-2">Basic 2-5-1 to get started 🎺</p>
+      {/* <p className="my-2">Basic 2-5-1 to get started 🎺</p> */}
       <div className="sheet-grid my-4">
         {chordsPartChords.current.map((chord: IChordBeat) => (
           <button

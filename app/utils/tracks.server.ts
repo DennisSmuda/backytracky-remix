@@ -8,13 +8,21 @@ export async function createTrack(
   userId: string
 ) {
   const track = await db.track.create({
-    data: { name: trackname, sheet: chords, upvotes: 0, userId: userId },
+    data: {
+      name: trackname,
+      sheet: JSON.parse(chords),
+      upvotes: 0,
+      userId: userId,
+    },
   });
   return track;
 }
 
-export async function testTrackFunction() {
-  return true;
+export async function getTrack(trackId: string) {
+  const track = await db.track.findUnique({
+    where: { id: trackId },
+  });
+  return track as Track;
 }
 
 export async function deleteTrack(trackId: string) {

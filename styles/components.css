@@ -5,6 +5,13 @@
     @apply py-4 px-3 sm:px-6;
   }
 
+  .bt-prose {
+    @apply prose dark:prose-invert;
+  }
+
+  /**
+   * Buttons
+   */
   .button,
   .icon-button {
     @apply inline-flex items-center justify-center;
@@ -14,7 +21,7 @@
 
   .icon-button[disabled],
   .button[disabled] {
-    @apply opacity-75 pointer-events-none cursor-not-allowed;
+    @apply opacity-50 pointer-events-none cursor-not-allowed;
   }
 
   .button {
@@ -58,6 +65,11 @@
     @apply ml-2;
   }
 
+  .button svg,
+  .icon-button svg {
+    @apply fill-current;
+  }
+
   .button svg {
     @apply w-4 h-4;
   }
@@ -73,14 +85,50 @@
   .button--delete {
     @apply bg-red-300 dark:bg-red-800;
   }
+
   .button--delete:hover {
     @apply bg-red-400 dark:bg-red-700;
   }
 
+  .button--cta {
+    @apply bg-sky-500 dark:bg-sky-800;
+  }
+
+  .button--cta:hover {
+    @apply bg-sky-400 dark:bg-sky-700;
+  }
+
+  /**
+   * Forms
+   */
   form .button[type="submit"] {
     @apply mt-4;
   }
 
+  fieldset legend {
+    @apply text-xs text-zinc-600 mb-2 ml-2;
+  }
+
+  form label {
+    @apply grid;
+  }
+
+  form label span {
+    @apply text-xs text-zinc-600 mb-2 ml-3;
+  }
+
+  form input[type="text"],
+  form input[type="password"] {
+    @apply rounded-md border-none bg-zinc-200 dark:bg-zinc-800;
+  }
+
+  .form-validation-error {
+    @apply text-xs text-red-500 mt-2;
+  }
+
+  /**
+   * Navigation
+   */
   nav button,
   nav a {
     @apply px-2 py-1 rounded-md;
@@ -98,26 +146,5 @@
 
   nav a[aria-current="page"] {
     @apply bg-zinc-100 dark:bg-zinc-800;
-  }
-
-  form label {
-    @apply grid;
-  }
-
-  form label span {
-    @apply text-xs text-zinc-600 mb-2;
-  }
-
-  form input[type="text"],
-  form input[type="password"] {
-    @apply rounded-md border-none bg-zinc-200 dark:bg-zinc-800;
-  }
-
-  .form-validation-error {
-    @apply text-xs text-red-500 mt-2;
-  }
-
-  .bt-prose {
-    @apply prose dark:prose-invert;
   }
 }

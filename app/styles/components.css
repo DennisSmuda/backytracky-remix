@@ -1276,240 +1276,6 @@
     }
 }
 
-  .button, 
-  .icon-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    --tw-bg-opacity: 1;
-    background-color: rgb(228 228 231 / var(--tw-bg-opacity));
-}
-
-  .dark .button, .dark 
-  .icon-button {
-    --tw-bg-opacity: 1;
-    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
-  .button, 
-  .icon-button {
-    border-radius: 0.375rem;
-    padding: 0.5rem;
-}
-
-  .icon-button[disabled], 
-  .button[disabled] {
-    pointer-events: none;
-    cursor: not-allowed;
-    opacity: 0.75;
-}
-
-  .button {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-weight: 700;
-    color: inherit;
-}
-
-  .icon-button:hover, 
-  .button:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(244 244 245 / var(--tw-bg-opacity));
-}
-
-  .dark .icon-button:hover, .dark 
-  .button:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(63 63 70 / var(--tw-bg-opacity));
-}
-
-  .icon-button:active, 
-  .button:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(212 212 216 / var(--tw-bg-opacity));
-}
-
-  .dark .icon-button:active, .dark 
-  .button:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(18 18 19 / var(--tw-bg-opacity));
-}
-
-  .submit, 
-  .button--submit, 
-  .button[type="submit"] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(167 243 208 / var(--tw-bg-opacity));
-}
-
-  .dark .submit, .dark 
-  .button--submit, .dark 
-  .button[type="submit"] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(6 95 70 / var(--tw-bg-opacity));
-}
-
-  .submit:hover, 
-  .button--submit:hover, 
-  .button[type="submit"]:hover, 
-  .button[type="submit"]:focus {
-    --tw-bg-opacity: 1;
-    background-color: rgb(110 231 183 / var(--tw-bg-opacity));
-}
-
-  .dark .submit:hover, .dark 
-  .button--submit:hover, .dark 
-  .button[type="submit"]:hover, .dark 
-  .button[type="submit"]:focus {
-    --tw-bg-opacity: 1;
-    background-color: rgb(4 120 87 / var(--tw-bg-opacity));
-}
-
-  .submit:active, 
-  .button--submit:active, 
-  .button[type="submit"]:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(52 211 153 / var(--tw-bg-opacity));
-}
-
-  .dark .submit:active, .dark 
-  .button--submit:active, .dark 
-  .button[type="submit"]:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(6 78 59 / var(--tw-bg-opacity));
-}
-
-  .button svg + span {
-    margin-left: 0.5rem;
-}
-
-  .button span + svg {
-    margin-left: 0.5rem;
-}
-
-  .button svg {
-    height: 1rem;
-    width: 1rem;
-}
-
-  .icon-button svg {
-    height: 0.75rem;
-    width: 0.75rem;
-}
-
-  .icon-button span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-  .button--delete {
-    --tw-bg-opacity: 1;
-    background-color: rgb(252 165 165 / var(--tw-bg-opacity));
-}
-
-  .dark .button--delete {
-    --tw-bg-opacity: 1;
-    background-color: rgb(153 27 27 / var(--tw-bg-opacity));
-}
-  .button--delete:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-}
-  .dark .button--delete:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-
-  form .button[type="submit"] {
-    margin-top: 1rem;
-}
-
-  nav button, 
-  nav a {
-    border-radius: 0.375rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-}
-
-  nav button:hover, 
-  nav a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(244 244 245 / var(--tw-bg-opacity));
-}
-
-  .dark nav button:hover, .dark 
-  nav a:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
-  nav button:active, 
-  nav a:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(228 228 231 / var(--tw-bg-opacity));
-}
-
-  .dark nav button:active, .dark 
-  nav a:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(63 63 70 / var(--tw-bg-opacity));
-}
-
-  nav a[aria-current="page"] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(244 244 245 / var(--tw-bg-opacity));
-}
-
-  .dark nav a[aria-current="page"] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
-  form label {
-    display: grid;
-}
-
-  form label span {
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    --tw-text-opacity: 1;
-    color: rgb(82 82 91 / var(--tw-text-opacity));
-}
-
-  form input[type="text"], 
-  form input[type="password"] {
-    border-radius: 0.375rem;
-    border-style: none;
-    --tw-bg-opacity: 1;
-    background-color: rgb(228 228 231 / var(--tw-bg-opacity));
-}
-
-  .dark form input[type="text"], .dark 
-  form input[type="password"] {
-    --tw-bg-opacity: 1;
-    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
-  .form-validation-error {
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    --tw-text-opacity: 1;
-    color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
   .bt-prose {
     color: var(--tw-prose-body);
     max-width: 65ch;
@@ -2130,4 +1896,282 @@
     --tw-prose-pre-bg: var(--tw-prose-invert-pre-bg);
     --tw-prose-th-borders: var(--tw-prose-invert-th-borders);
     --tw-prose-td-borders: var(--tw-prose-invert-td-borders);
+}
+
+  /**
+   * Buttons
+   */
+  .button, 
+  .icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    --tw-bg-opacity: 1;
+    background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+}
+  .dark .button, .dark 
+  .icon-button {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+  .button, 
+  .icon-button {
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+}
+
+  .icon-button[disabled], 
+  .button[disabled] {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+  .button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-weight: 700;
+    color: inherit;
+}
+
+  .icon-button:hover, 
+  .button:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(244 244 245 / var(--tw-bg-opacity));
+}
+
+  .dark .icon-button:hover, .dark 
+  .button:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(63 63 70 / var(--tw-bg-opacity));
+}
+
+  .icon-button:active, 
+  .button:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(212 212 216 / var(--tw-bg-opacity));
+}
+
+  .dark .icon-button:active, .dark 
+  .button:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(18 18 19 / var(--tw-bg-opacity));
+}
+
+  .submit, 
+  .button--submit, 
+  .button[type="submit"] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(167 243 208 / var(--tw-bg-opacity));
+}
+
+  .dark .submit, .dark 
+  .button--submit, .dark 
+  .button[type="submit"] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(6 95 70 / var(--tw-bg-opacity));
+}
+
+  .submit:hover, 
+  .button--submit:hover, 
+  .button[type="submit"]:hover, 
+  .button[type="submit"]:focus {
+    --tw-bg-opacity: 1;
+    background-color: rgb(110 231 183 / var(--tw-bg-opacity));
+}
+
+  .dark .submit:hover, .dark 
+  .button--submit:hover, .dark 
+  .button[type="submit"]:hover, .dark 
+  .button[type="submit"]:focus {
+    --tw-bg-opacity: 1;
+    background-color: rgb(4 120 87 / var(--tw-bg-opacity));
+}
+
+  .submit:active, 
+  .button--submit:active, 
+  .button[type="submit"]:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(52 211 153 / var(--tw-bg-opacity));
+}
+
+  .dark .submit:active, .dark 
+  .button--submit:active, .dark 
+  .button[type="submit"]:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(6 78 59 / var(--tw-bg-opacity));
+}
+
+  .button svg + span {
+    margin-left: 0.5rem;
+}
+
+  .button span + svg {
+    margin-left: 0.5rem;
+}
+
+  .button svg, 
+  .icon-button svg {
+    fill: currentColor;
+}
+
+  .button svg {
+    height: 1rem;
+    width: 1rem;
+}
+
+  .icon-button svg {
+    height: 0.75rem;
+    width: 0.75rem;
+}
+
+  .icon-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+  .button--delete {
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+  .dark .button--delete {
+    --tw-bg-opacity: 1;
+    background-color: rgb(153 27 27 / var(--tw-bg-opacity));
+}
+
+  .button--delete:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
+  .dark .button--delete:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
+  .button--cta {
+    --tw-bg-opacity: 1;
+    background-color: rgb(14 165 233 / var(--tw-bg-opacity));
+}
+
+  .dark .button--cta {
+    --tw-bg-opacity: 1;
+    background-color: rgb(7 89 133 / var(--tw-bg-opacity));
+}
+
+  .button--cta:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(56 189 248 / var(--tw-bg-opacity));
+}
+
+  .dark .button--cta:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(3 105 161 / var(--tw-bg-opacity));
+}
+
+  /**
+   * Forms
+   */
+  form .button[type="submit"] {
+    margin-top: 1rem;
+}
+
+  fieldset legend {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(82 82 91 / var(--tw-text-opacity));
+}
+
+  form label {
+    display: grid;
+}
+
+  form label span {
+    margin-bottom: 0.5rem;
+    margin-left: 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(82 82 91 / var(--tw-text-opacity));
+}
+
+  form input[type="text"], 
+  form input[type="password"] {
+    border-radius: 0.375rem;
+    border-style: none;
+    --tw-bg-opacity: 1;
+    background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+}
+
+  .dark form input[type="text"], .dark 
+  form input[type="password"] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+
+  .form-validation-error {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    --tw-text-opacity: 1;
+    color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+  /**
+   * Navigation
+   */
+  nav button, 
+  nav a {
+    border-radius: 0.375rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+  nav button:hover, 
+  nav a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(244 244 245 / var(--tw-bg-opacity));
+}
+
+  .dark nav button:hover, .dark 
+  nav a:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+
+  nav button:active, 
+  nav a:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+}
+
+  .dark nav button:active, .dark 
+  nav a:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(63 63 70 / var(--tw-bg-opacity));
+}
+
+  nav a[aria-current="page"] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(244 244 245 / var(--tw-bg-opacity));
+}
+
+  .dark nav a[aria-current="page"] {
+    --tw-bg-opacity: 1;
+    background-color: rgb(39 39 42 / var(--tw-bg-opacity));
 }

@@ -1,7 +1,8 @@
 import { hihatOnlyGroove } from "./grooves";
+// import { turnaroundChords } from "./track-demos";
 
 interface MusicConfig {
-  numBars: number;
+  sheet: [];
 }
 
 export type ChordNotes = Array<string>;
@@ -45,105 +46,24 @@ export class ChordBeat implements IChordBeat {
 }
 
 export default class Music {
-  private numBars;
+  private sheet;
 
   constructor(music: MusicConfig) {
-    this.numBars = music.numBars;
+    this.sheet = music.sheet;
+    // console.log("Music Constructor", this.sheet);
   }
 
-  makeMusic() {
-    const IChord: ChordNotes = ["C3", "E3", "G3", "B3"];
-    const IIChord: ChordNotes = ["D3", "F3", "A3", "C4"];
-    const VChord: ChordNotes = ["G3", "B3", "D3", "F3"];
-    const VIChord: ChordNotes = ["A3", "C#3", "E3", "G3"];
-
-    const turnaroundChords: Chords = [
-      new ChordBeat({
-        root: "C",
-        type: "maj",
-        extension: "7",
-        note: IChord,
-        duration: "2n",
-        bar: 0,
-        beat: 0,
-      }),
-      new ChordBeat({
-        root: "A",
-        extension: "7",
-        note: VIChord,
-        duration: "2n",
-        bar: 0,
-        beat: 2,
-      }),
-      new ChordBeat({
-        root: "D",
-        type: "m",
-        extension: "7",
-        note: IIChord,
-        duration: "2n",
-        bar: 1,
-        beat: 0,
-        sixteenth: 0,
-      }),
-      new ChordBeat({
-        root: "G",
-        extension: "7",
-        note: VChord,
-        duration: "2n",
-        bar: 1,
-        beat: 2,
-      }),
-    ];
-
-    const twoFiveOneChords: Chords = [
-      new ChordBeat({
-        root: "D",
-        type: "m",
-        extension: "7",
-        note: IIChord,
-        duration: "2n",
-        bar: 0,
-        beat: 0,
-        sixteenth: 0,
-      }),
-      new ChordBeat({
-        root: "G",
-        extension: "7",
-        note: VChord,
-        duration: "2n",
-        bar: 0,
-        beat: 2,
-      }),
-      new ChordBeat({
-        root: "C",
-        type: "maj",
-        extension: "7",
-        note: IChord,
-        duration: "2n",
-        bar: 1,
-        beat: 0,
-      }),
-      new ChordBeat({
-        root: "C",
-        type: "maj",
-        extension: "7",
-        note: IChord,
-        duration: "4n",
-        bar: 1,
-        beat: 2,
-      }),
-      new ChordBeat({
-        root: "A",
-        extension: "7",
-        note: VIChord,
-        duration: "4n",
-        bar: 1,
-        beat: 3,
-      }),
-    ];
+  generateMusic() {
+    // turnaroundChords;
+    // const sheetChords = JSON.parse(this.sheet);
+    const chords = this.sheet.map((chord) => {
+      return new ChordBeat(chord);
+    });
+    console.log("Make Music", chords);
 
     return {
-      chords: turnaroundChords,
+      chords,
+      // chords: turnaroundChords,
       groove: hihatOnlyGroove,
     };
   }
