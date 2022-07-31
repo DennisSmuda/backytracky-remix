@@ -3225,8 +3225,8 @@ nav a[aria-current="page"] {
 
 .sheet-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.5rem;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
   border-right-width: 1px;
   border-left-width: 1px;
   border-color: rgb(113 113 122 / var(--tw-border-opacity));
@@ -3243,6 +3243,7 @@ nav a[aria-current="page"] {
   padding: 0.5rem;
   display: flex;
   min-height: 92px;
+  min-width: 160px;
   flex-direction: column;
 }
 
@@ -3568,6 +3569,14 @@ nav a[aria-current="page"] {
   justify-self: end;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -3586,6 +3595,14 @@ nav a[aria-current="page"] {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-r {
+  border-right-width: 1px;
+}
+
+.border-l {
+  border-left-width: 1px;
 }
 
 .border-b {
@@ -3607,12 +3624,12 @@ nav a[aria-current="page"] {
   border-bottom-color: rgb(241 245 249 / var(--tw-border-opacity));
 }
 
-.border-opacity-40 {
-  --tw-border-opacity: 0.4;
-}
-
 .border-opacity-50 {
   --tw-border-opacity: 0.5;
+}
+
+.border-opacity-40 {
+  --tw-border-opacity: 0.4;
 }
 
 .bg-orange-400 {
@@ -3793,10 +3810,6 @@ nav a[aria-current="page"] {
 }
 
 @media (min-width: 640px) {
-
-  .sm\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 
   .sm\:px-4 {
     padding-left: 1rem;

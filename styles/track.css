@@ -1,11 +1,13 @@
 .sheet-grid {
-  @apply grid gap-2 grid-cols-4;
+  @apply grid gap-2;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+
   @apply border-r border-l border-zinc-500 border-opacity-50 px-1;
 }
 
 .sheet-grid__chord {
   @apply p-2 rounded-md select-none;
-  @apply flex flex-col min-h-[92px];
+  @apply flex flex-col min-h-[92px] min-w-[160px];
 }
 
 .duration-1n {

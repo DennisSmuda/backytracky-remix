@@ -211,23 +211,25 @@ export default function NewTrackRoute() {
               readOnly
             />
 
-            <fieldset className="sheet-grid grid-cols-2 sm:grid-cols-4">
-              <legend>Sheet</legend>
-              {chords.map((chord) => (
-                <EditChord
-                  key={chord.time}
-                  chord={chord}
-                  shortenChord={shortenChord}
-                  lengthenChord={lengthenChord}
-                  editChord={editChord}
-                  deleteChord={deleteChord}
-                />
-              ))}
+            <div className="overflow-x-scroll">
+              <fieldset className="sheet-grid overflow-x-auto">
+                <legend>Sheet</legend>
+                {chords.map((chord) => (
+                  <EditChord
+                    key={chord.time}
+                    chord={chord}
+                    shortenChord={shortenChord}
+                    lengthenChord={lengthenChord}
+                    editChord={editChord}
+                    deleteChord={deleteChord}
+                  />
+                ))}
 
-              {chords.length === 0 && (
-                <p className="opacity-50 p-2">Add some chords!</p>
-              )}
-            </fieldset>
+                {chords.length === 0 && (
+                  <p className="opacity-50 p-2">Add some chords!</p>
+                )}
+              </fieldset>
+            </div>
             <button className="button" onClick={addChord}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path
@@ -239,7 +241,12 @@ export default function NewTrackRoute() {
               <span>add chord</span>
             </button>
 
-            <input type="submit" className="button col-span-4" value="save" />
+            <input
+              disabled={chords.length === 0}
+              type="submit"
+              className="button col-span-4"
+              value="save"
+            />
             <div id="form-error-message">
               {actionData?.formError ? (
                 <p className="form-validation-error text-center" role="alert">

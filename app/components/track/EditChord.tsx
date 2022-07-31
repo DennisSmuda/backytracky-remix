@@ -83,15 +83,7 @@ export function EditChord({
         }`}
       >
         <div className="text-left text-xs opacity-50">
-          {chord.time} | 1 / {chord.duration} | beat: {chord.beat}
-          <br />
-          {/* {hasOverflow() && <div>has overflow madafack</div>} */}
-          {/* {chord.beat >= 2 && chord.duration === "1n" && (
-            <div>has overflow madafack</div>
-          )}
-          {chord.beat >= 2 && chord.duration === "1n" && (
-            <div>has overflow madafack</div>
-          )} */}
+          {chord.time} | 1 / {chord.duration}
         </div>
         <div className="new-sheet__chord">
           <div>
