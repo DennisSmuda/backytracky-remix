@@ -2303,6 +2303,10 @@ select {
   margin-bottom: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 main section {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -3245,6 +3249,8 @@ nav a[aria-current="page"] {
   min-height: 92px;
   min-width: 160px;
   flex-direction: column;
+  align-items: stretch;
+  text-align: left;
 }
 
 .duration-1n {
@@ -3445,6 +3451,10 @@ nav a[aria-current="page"] {
   width: 1rem;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .max-w-4xl {
   max-width: 56rem;
 }
@@ -3495,6 +3505,45 @@ nav a[aria-current="page"] {
 
 .resize {
   resize: both;
+}
+
+.scroll-m-4 {
+  scroll-margin: 1rem;
+}
+
+.scroll-my-0 {
+  scroll-margin-top: 0px;
+  scroll-margin-bottom: 0px;
+}
+
+.scroll-my-8 {
+  scroll-margin-top: 2rem;
+  scroll-margin-bottom: 2rem;
+}
+
+.scroll-my-16 {
+  scroll-margin-top: 4rem;
+  scroll-margin-bottom: 4rem;
+}
+
+.scroll-py-2 {
+  scroll-padding-top: 0.5rem;
+  scroll-padding-bottom: 0.5rem;
+}
+
+.scroll-py-4 {
+  scroll-padding-top: 1rem;
+  scroll-padding-bottom: 1rem;
+}
+
+.scroll-py-8 {
+  scroll-padding-top: 2rem;
+  scroll-padding-bottom: 2rem;
+}
+
+.scroll-py-0 {
+  scroll-padding-top: 0px;
+  scroll-padding-bottom: 0px;
 }
 
 .grid-flow-row {

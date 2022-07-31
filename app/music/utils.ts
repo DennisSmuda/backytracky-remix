@@ -1,63 +1,52 @@
-import { Sampler } from "tone";
+import type { ChordBeat } from "./Music";
 
-export function loadInstruments() {
-  const pianoSampler = new Sampler({
-    urls: {
-      A0: "A0.mp3",
-      C1: "C1.mp3",
-      "D#1": "Ds1.mp3",
-      "F#1": "Fs1.mp3",
-      A1: "A1.mp3",
-      C2: "C2.mp3",
-      "D#2": "Ds2.mp3",
-      "F#2": "Fs2.mp3",
-      A2: "A2.mp3",
-      C3: "C3.mp3",
-      "D#3": "Ds3.mp3",
-      "F#3": "Fs3.mp3",
-      A3: "A3.mp3",
-      C4: "C4.mp3",
-      "D#4": "Ds4.mp3",
-      "F#4": "Fs4.mp3",
-      A4: "A4.mp3",
-      C5: "C5.mp3",
-      "D#5": "Ds5.mp3",
-      "F#5": "Fs5.mp3",
-      A5: "A5.mp3",
-      C6: "C6.mp3",
-      "D#6": "Ds6.mp3",
-      "F#6": "Fs6.mp3",
-      A6: "A6.mp3",
-      C7: "C7.mp3",
-      "D#7": "Ds7.mp3",
-      "F#7": "Fs7.mp3",
-      A7: "A7.mp3",
-      C8: "C8.mp3",
-    },
-    release: 1,
-    baseUrl: "https://tonejs.github.io/audio/salamander/",
-    onload: () => {
-      // console.log("piano loadded");
-      // piano.set(pianoSampler);
-      // Tone.start();
-    },
-  }).toDestination();
+export const hasOverflow = (chord: ChordBeat) => {
+  return (
+    (chord.beat >= 1 && chord.duration === "1n") ||
+    (chord.beat >= 2 && chord.duration === "2n.") ||
+    (chord.beat >= 3 && chord.duration === "2n")
+  );
+};
 
-  const drumSampler = new Sampler({
-    urls: {
-      C1: "kick.mp3",
-      D1: "hihat.mp3",
-      E1: "snare.mp3",
-    },
-    baseUrl: "https://tonejs.github.io/audio/drum-samples/acoustic-kit/",
-    onload: () => {
-      // console.log("Drums Loaded");
-      // drums.set(drumSampler);
-    },
-  }).toDestination();
-
-  return {
-    pianoSampler,
-    drumSampler,
-  };
-}
+export const getSplitDurations = (chord: ChordBeat) => {
+  if (chord.duration === "1n") {
+    switch (chord.beat) {
+      case 1:
+        return {
+          base: 3,
+          ghost: 1,
+        };
+      case 2:
+        return {
+          base: 2,
+          ghost: 2,
+        };
+      case 3:
+        return {
+          base: 1,
+          ghost: 3,
+        };
+    }
+  } else if (chord.duration === "2n.") {
+    switch (chord.beat) {
+      case 2:
+        return {
+          base: 2,
+          ghost: 1,
+        };
+      case 3:
+        return {
+          base: 1,
+          ghost: 2,
+        };
+    }
+  } else if (chord.duration === "2n") {
+    switch (chord.beat) {
+      case 3:
+        return {
+          base: 1,
+          ghost: 1,
+        };
+    }
+  }
+};

@@ -1,6 +1,9 @@
 @tailwind components;
 
 @layer components {
+  html {
+    @apply overflow-x-hidden;
+  }
   main section {
     @apply py-4 px-3 sm:px-6;
   }

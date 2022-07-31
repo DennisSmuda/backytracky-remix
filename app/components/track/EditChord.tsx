@@ -1,4 +1,5 @@
 import type { ChordBeat } from "~/music/Music";
+import { getSplitDurations, hasOverflow } from "~/music/utils";
 
 interface EditChordProps {
   chord: ChordBeat;
@@ -15,59 +16,8 @@ export function EditChord({
   editChord,
   deleteChord,
 }: EditChordProps) {
-  const hasOverflow = () => {
-    return (
-      (chord.beat >= 1 && chord.duration === "1n") ||
-      (chord.beat >= 2 && chord.duration === "2n.") ||
-      (chord.beat >= 3 && chord.duration === "2n")
-    );
-  };
-
-  const getSplitDurations = () => {
-    if (chord.duration === "1n") {
-      switch (chord.beat) {
-        case 1:
-          return {
-            base: 3,
-            ghost: 1,
-          };
-        case 2:
-          return {
-            base: 2,
-            ghost: 2,
-          };
-        case 3:
-          return {
-            base: 1,
-            ghost: 3,
-          };
-      }
-    } else if (chord.duration === "2n.") {
-      switch (chord.beat) {
-        case 2:
-          return {
-            base: 2,
-            ghost: 1,
-          };
-        case 3:
-          return {
-            base: 1,
-            ghost: 2,
-          };
-      }
-    } else if (chord.duration === "2n") {
-      switch (chord.beat) {
-        case 3:
-          return {
-            base: 1,
-            ghost: 1,
-          };
-      }
-    }
-  };
-
   const chordDurationClass = (): string => {
-    if (hasOverflow()) {
+    if (hasOverflow(chord)) {
       return `duration-${chord.duration}`;
     }
     return `duration-${chord.duration}`;
@@ -79,7 +29,7 @@ export function EditChord({
         className={`sheet-grid__chord bar-${chord.bar} beat-${
           chord.beat
         } sixteenth-${chord.sixteenth} ${chordDurationClass()} base-duration-${
-          getSplitDurations()?.base
+          getSplitDurations(chord)?.base
         }`}
       >
         <div className="text-left text-xs opacity-50">
@@ -147,8 +97,8 @@ export function EditChord({
       </div>
       <div
         className={`sheet-grid__chord sheet-grid__chord--ghost
-        ${!hasOverflow() && "hidden"}
-        base-duration-${getSplitDurations()?.ghost}
+        ${!hasOverflow(chord) && "hidden"}
+        base-duration-${getSplitDurations(chord)?.ghost}
         `}
       >
         {/* {chord.root} */}
