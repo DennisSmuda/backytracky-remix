@@ -28,7 +28,7 @@ export default function Navbar({ user }: NavbarProps) {
         </Link>
         <NavLink to="/tracks">Tracks</NavLink>
         {user?.username && (
-          <NavLink className="submit" to="/track/new">
+          <NavLink className="button--cta" to="/track/new">
             New
           </NavLink>
         )}

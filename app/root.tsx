@@ -28,7 +28,9 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "BackyTracky | Home",
+  description:
+    "Practice your scales and solos! Create, share and discover Backing Tracks",
   viewport: "width=device-width,initial-scale=1",
 });
 

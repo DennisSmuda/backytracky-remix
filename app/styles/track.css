@@ -1,20 +1,13 @@
 .sheet-grid {
   display: grid;
   gap: 0.5rem;
-
-  grid-template-columns: repeat(4, 1fr);
-
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
   border-right-width: 1px;
-
   border-left-width: 1px;
-
   border-color: rgb(113 113 122 / var(--tw-border-opacity));
-
   --tw-border-opacity: 0.5;
-
   padding-left: 0.25rem;
-
-  padding-right: 0.25rem;
+  padding-right: 0.25rem
 }
 
 .sheet-grid__chord {
@@ -24,20 +17,34 @@
   border-radius: 0.375rem;
   padding: 0.5rem;
   display: flex;
+  min-height: 92px;
+  min-width: 160px;
   flex-direction: column;
+  align-items: stretch;
+  text-align: left
 }
 
 .duration-1n {
-  grid-column: span 4 / span 4;
+  grid-column: span 4 / span 4
 }
 
+.base-duration-3, 
+.duration-2n\. {
+  grid-column: span 3 / span 3
+}
+
+.base-duration-2, 
 .duration-2n {
-  grid-column: span 2 / span 2;
+  grid-column: span 2 / span 2
+}
+
+.base-duration-1 {
+  grid-column: span 1 / span 1
 }
 
 .new-sheet__chord {
   display: flex;
-  align-items: center;
+  align-items: center
 }
 
 .duration-line {
@@ -47,5 +54,5 @@
   border-radius: 9999px;
   --tw-bg-opacity: 1;
   background-color: rgb(113 113 122 / var(--tw-bg-opacity));
-  opacity: 0.5;
+  opacity: 0.5
 }
