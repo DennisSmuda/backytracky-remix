@@ -43,6 +43,10 @@ export class ChordBeat implements IChordBeat {
   get time() {
     return `${this.bar}:${this.beat}:${this.sixteenth || 0}`;
   }
+
+  get ghostTime() {
+    return "";
+  }
 }
 
 export default class Music {

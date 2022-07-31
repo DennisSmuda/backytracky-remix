@@ -1,15 +1,16 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
-import type { IChordBeat } from "~/components/track/Music";
+import type { IChordBeat } from "~/music/Music";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
-import { increaseDuration, decreaseDuration } from "~/components/track/Music";
-import { ChordBeat } from "~/components/track/Music";
+import { increaseDuration, decreaseDuration } from "~/music/Music";
+import { ChordBeat } from "~/music/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
+import { EditChord } from "~/components/track/EditChord";
 
 type Duration = "1n" | "2n" | "4n";
 const sampleChordConfig = {
@@ -69,36 +70,56 @@ export default function NewTrackRoute() {
   const shortenChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     chord.duration = decreaseDuration(chord.duration);
-    console.log("Shortening Chord", chords);
+    const chordIndex = chords.indexOf(chord);
+    updateFollowingChords(chordIndex + 1);
+
     setChords([...chords]);
   };
   const lengthenChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     chord.duration = increaseDuration(chord.duration);
     const chordIndex = chords.indexOf(chord);
+    updateFollowingChords(chordIndex + 1);
 
-    for (let i = chordIndex + 1; i < chords.length; i++) {
+    setChords([...chords]);
+  };
+
+  const updateFollowingChords = (index: number) => {
+    for (let i = index; i < chords.length; i++) {
       let previousChord = chords[i - 1];
+      console.log("Prev");
       chords[i] = new ChordBeat({
         ...chords[i],
         ...getNextChordTime(previousChord),
       });
     }
-
-    setChords([...chords]);
   };
+
+  const updateChordTimes = () => {
+    chords[0] = new ChordBeat({
+      ...chords[0],
+      bar: 0,
+      beat: 0,
+      sixteenth: 0,
+    });
+    updateFollowingChords(1);
+    console.log("Update all times");
+  };
+
   const deleteChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
-    console.log("Deleting Chord", chords);
     const chordIndex = chords.indexOf(chord);
-    console.log("Find that shit: ", chordIndex);
     chords.splice(chordIndex, 1);
+    console.log("Spliced Array because delete");
+    if (chords.length) updateChordTimes();
+
+    console.log("Set new chords after delete", chords);
     setChords([...chords]);
   };
 
   const getNextChordTime = (previousChord: ChordBeat) => {
     const c = previousChord;
-    console.log("Adding new Chord", c);
+    console.log("Get next chord time", c);
     let duration = 4;
     if (c.duration === "1n") duration = 4;
     if (c.duration === "2n") duration = 2;
@@ -106,7 +127,6 @@ export default function NewTrackRoute() {
 
     let nextBeat = (c.beat as number) + duration;
     let nextBar = c.bar as number;
-    console.log("next beat", nextBar);
     if (nextBeat >= 4) {
       nextBar += 1;
       nextBeat -= 4;
@@ -122,9 +142,16 @@ export default function NewTrackRoute() {
   };
 
   const getTimeForNewChord = () => {
+    if (!chords.length) {
+      return {
+        bar: 0,
+        beat: 0,
+        sixteenth: 0,
+      };
+    }
     // if (!chords.length) return "0:0:0";
     const c = chords[chords.length - 1];
-    console.log("Adding new Chord", c);
+    // console.log("Adding new Chord", c);
     let duration = 4;
     if (c.duration === "1n") duration = 4;
     if (c.duration === "2n") duration = 2;
@@ -132,7 +159,7 @@ export default function NewTrackRoute() {
 
     let nextBeat = (c.beat as number) + duration;
     let nextBar = c.bar as number;
-    console.log("next beat", nextBar);
+    // console.log("next beat", nextBar);
     if (nextBeat >= 4) {
       nextBar += 1;
       nextBeat -= 4;
@@ -160,7 +187,10 @@ export default function NewTrackRoute() {
     });
     if (chords?.length) {
       setChords([...chords, newChord]);
+    } else {
+      setChords([newChord]);
     }
+    // console.log("Chords", chords);
   };
 
   return (
@@ -186,93 +216,19 @@ export default function NewTrackRoute() {
             <fieldset className="sheet-grid grid-cols-4">
               <legend>Sheet</legend>
               {chords.map((chord) => (
-                <div
+                <EditChord
                   key={chord.time}
-                  className={`sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
-                >
-                  <div className="text-left text-xs opacity-50">
-                    {chord.time}
-                  </div>
-                  <div className="new-sheet__chord">
-                    <div>
-                      <span className="chord-root font-black">
-                        {chord.root}
-                      </span>
-                      <span className="chord-type opacity-50 ml-px">
-                        {chord.type}
-                      </span>
-                      <span className="chord-extension relative text-xs ml-px -top-1">
-                        {chord.extension}
-                      </span>
-                    </div>
-                    <div className="duration-line" />
-                  </div>
-                  <div className="grid grid-flow-col gap-2 mt-2">
-                    <button
-                      disabled={chord.duration === "4n"}
-                      className="icon-button"
-                      onClick={(e) => shortenChord(e, chord)}
-                    >
-                      <span>make chord shorter</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                    <button
-                      className="icon-button"
-                      onClick={(e) => editChord(e, chord)}
-                    >
-                      <span>edit</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                      </svg>
-                    </button>
-                    <button
-                      className="icon-button"
-                      onClick={(e) => deleteChord(e, chord)}
-                    >
-                      <span>delete</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                    <button
-                      disabled={chord.duration === "1n"}
-                      className="icon-button"
-                      onClick={(e) => lengthenChord(e, chord)}
-                    >
-                      <span>make chord longer</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+                  chord={chord}
+                  shortenChord={shortenChord}
+                  lengthenChord={lengthenChord}
+                  editChord={editChord}
+                  deleteChord={deleteChord}
+                />
               ))}
+
+              {chords.length === 0 && (
+                <p className="opacity-50 p-2">Add some chords!</p>
+              )}
             </fieldset>
             <button className="button" onClick={addChord}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
