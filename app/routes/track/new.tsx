@@ -69,13 +69,22 @@ export default function NewTrackRoute() {
   const shortenChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     chord.duration = decreaseDuration(chord.duration);
-    console.log("Editing Chord", chords);
+    console.log("Shortening Chord", chords);
     setChords([...chords]);
   };
   const lengthenChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     chord.duration = increaseDuration(chord.duration);
-    console.log("Editing Chord", chords);
+    const chordIndex = chords.indexOf(chord);
+
+    for (let i = chordIndex + 1; i < chords.length; i++) {
+      let previousChord = chords[i - 1];
+      chords[i] = new ChordBeat({
+        ...chords[i],
+        ...getNextChordTime(previousChord),
+      });
+    }
+
     setChords([...chords]);
   };
   const deleteChord = (e: MouseEvent, chord: ChordBeat) => {
@@ -85,6 +94,31 @@ export default function NewTrackRoute() {
     console.log("Find that shit: ", chordIndex);
     chords.splice(chordIndex, 1);
     setChords([...chords]);
+  };
+
+  const getNextChordTime = (previousChord: ChordBeat) => {
+    const c = previousChord;
+    console.log("Adding new Chord", c);
+    let duration = 4;
+    if (c.duration === "1n") duration = 4;
+    if (c.duration === "2n") duration = 2;
+    if (c.duration === "4n") duration = 1;
+
+    let nextBeat = (c.beat as number) + duration;
+    let nextBar = c.bar as number;
+    console.log("next beat", nextBar);
+    if (nextBeat >= 4) {
+      nextBar += 1;
+      nextBeat -= 4;
+    }
+
+    let nextSixteenth = 0;
+
+    return {
+      bar: nextBar,
+      beat: nextBeat,
+      sixteenth: nextSixteenth,
+    };
   };
 
   const getTimeForNewChord = () => {
@@ -106,7 +140,6 @@ export default function NewTrackRoute() {
 
     let nextSixteenth = 0;
 
-    // return `${nextBar}:${nextBeat}:${c.sixteenth}`;
     return {
       bar: nextBar,
       beat: nextBeat,
