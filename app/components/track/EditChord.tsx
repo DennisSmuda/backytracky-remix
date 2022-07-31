@@ -1,17 +1,97 @@
+import type { ChordBeat } from "~/music/Music";
+
+interface EditChordProps {
+  chord: ChordBeat;
+  shortenChord: Function;
+  lengthenChord: Function;
+  editChord: Function;
+  deleteChord: Function;
+}
+
 export function EditChord({
   chord,
   shortenChord,
   lengthenChord,
   editChord,
   deleteChord,
-}: any) {
+}: EditChordProps) {
+  const hasOverflow = () => {
+    return (
+      (chord.beat >= 1 && chord.duration === "1n") ||
+      (chord.beat >= 2 && chord.duration === "2n.") ||
+      (chord.beat >= 3 && chord.duration === "2n")
+    );
+  };
+
+  const getSplitDurations = () => {
+    if (chord.duration === "1n") {
+      switch (chord.beat) {
+        case 1:
+          return {
+            base: 3,
+            ghost: 1,
+          };
+        case 2:
+          return {
+            base: 2,
+            ghost: 2,
+          };
+        case 3:
+          return {
+            base: 1,
+            ghost: 3,
+          };
+      }
+    } else if (chord.duration === "2n.") {
+      switch (chord.beat) {
+        case 2:
+          return {
+            base: 2,
+            ghost: 1,
+          };
+        case 3:
+          return {
+            base: 1,
+            ghost: 2,
+          };
+      }
+    } else if (chord.duration === "2n") {
+      switch (chord.beat) {
+        case 3:
+          return {
+            base: 1,
+            ghost: 1,
+          };
+      }
+    }
+  };
+
+  const chordDurationClass = (): string => {
+    if (hasOverflow()) {
+      return `duration-${chord.duration}`;
+    }
+    return `duration-${chord.duration}`;
+  };
+
   return (
     <>
       <div
-        className={`sheet-grid__chord bar-${chord.bar} beat-${chord.beat} sixteenth-${chord.sixteenth} duration-${chord.duration}`}
+        className={`sheet-grid__chord bar-${chord.bar} beat-${
+          chord.beat
+        } sixteenth-${chord.sixteenth} ${chordDurationClass()} base-duration-${
+          getSplitDurations()?.base
+        }`}
       >
         <div className="text-left text-xs opacity-50">
-          {chord.time} | 1 / {chord.duration}
+          {chord.time} | 1 / {chord.duration} | beat: {chord.beat}
+          <br />
+          {/* {hasOverflow() && <div>has overflow madafack</div>} */}
+          {/* {chord.beat >= 2 && chord.duration === "1n" && (
+            <div>has overflow madafack</div>
+          )}
+          {chord.beat >= 2 && chord.duration === "1n" && (
+            <div>has overflow madafack</div>
+          )} */}
         </div>
         <div className="new-sheet__chord">
           <div>
@@ -73,8 +153,23 @@ export function EditChord({
           </button>
         </div>
       </div>
-      <div className="sheet-grid__chord sheet-grid__chord--ghost hidden">
-        {chord.root}
+      <div
+        className={`sheet-grid__chord sheet-grid__chord--ghost
+        ${!hasOverflow() && "hidden"}
+        base-duration-${getSplitDurations()?.ghost}
+        `}
+      >
+        {/* {chord.root} */}
+        <div className="new-sheet__chord">
+          <div>
+            <span className="chord-root font-black">{chord.root}</span>
+            <span className="chord-type opacity-50 ml-px">{chord.type}</span>
+            <span className="chord-extension relative text-xs ml-px -top-1">
+              {chord.extension}
+            </span>
+          </div>
+          <div className="duration-line" />
+        </div>
       </div>
     </>
   );

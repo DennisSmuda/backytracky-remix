@@ -1,51 +1,85 @@
 .sheet-grid {
-  display: grid;
-  gap: 0.5rem;
 
-  grid-template-columns: repeat(4, 1fr);
+    display: grid;
 
-  border-right-width: 1px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
-  border-left-width: 1px;
+    gap: 0.5rem;
 
-  border-color: rgb(113 113 122 / var(--tw-border-opacity));
+    border-right-width: 1px;
 
-  --tw-border-opacity: 0.5;
+    border-left-width: 1px;
 
-  padding-left: 0.25rem;
+    border-color: rgb(113 113 122 / var(--tw-border-opacity));
 
-  padding-right: 0.25rem;
+    --tw-border-opacity: 0.5;
+
+    padding-left: 0.25rem;
+
+    padding-right: 0.25rem
 }
 
 .sheet-grid__chord {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  border-radius: 0.375rem;
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
+
+    -webkit-user-select: none;
+
+       -moz-user-select: none;
+
+            user-select: none;
+
+    border-radius: 0.375rem;
+
+    padding: 0.5rem;
+
+    display: flex;
+
+    min-height: 92px;
+
+    flex-direction: column
 }
 
 .duration-1n {
-  grid-column: span 4 / span 4;
+
+    grid-column: span 4 / span 4
 }
 
+.base-duration-3, 
+.duration-2n\. {
+
+    grid-column: span 3 / span 3
+}
+
+.base-duration-2, 
 .duration-2n {
-  grid-column: span 2 / span 2;
+
+    grid-column: span 2 / span 2
+}
+
+.base-duration-1 {
+
+    grid-column: span 1 / span 1
 }
 
 .new-sheet__chord {
-  display: flex;
-  align-items: center;
+
+    display: flex;
+
+    align-items: center
 }
 
 .duration-line {
-  margin-left: 0.5rem;
-  height: 0.25rem;
-  width: 100%;
-  border-radius: 9999px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(113 113 122 / var(--tw-bg-opacity));
-  opacity: 0.5;
+
+    margin-left: 0.5rem;
+
+    height: 0.25rem;
+
+    width: 100%;
+
+    border-radius: 9999px;
+
+    --tw-bg-opacity: 1;
+
+    background-color: rgb(113 113 122 / var(--tw-bg-opacity));
+
+    opacity: 0.5
 }

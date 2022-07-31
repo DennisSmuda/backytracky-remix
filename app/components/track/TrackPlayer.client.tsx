@@ -1,8 +1,9 @@
+import type { Sampler } from "tone";
+import type { IChordBeat } from "../../music/Music";
+
 import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
-import type { Sampler } from "tone";
 import { loadInstruments } from "../../music/utils";
-import type { IChordBeat } from "../../music/Music";
 import Music from "../../music/Music";
 
 export default function TrackPlayer({ sheet }: any) {

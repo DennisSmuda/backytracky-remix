@@ -62,7 +62,6 @@ export default function NewTrackRoute() {
 
   const editChord = (e: MouseEvent, chord: IChordBeat) => {
     e.preventDefault();
-    // chord.duration = "2n";
     console.log("Editing Chord", chord);
     setChords([...chords]);
   };
@@ -122,6 +121,7 @@ export default function NewTrackRoute() {
     console.log("Get next chord time", c);
     let duration = 4;
     if (c.duration === "1n") duration = 4;
+    if (c.duration === "2n.") duration = 3;
     if (c.duration === "2n") duration = 2;
     if (c.duration === "4n") duration = 1;
 
@@ -149,11 +149,10 @@ export default function NewTrackRoute() {
         sixteenth: 0,
       };
     }
-    // if (!chords.length) return "0:0:0";
     const c = chords[chords.length - 1];
-    // console.log("Adding new Chord", c);
     let duration = 4;
     if (c.duration === "1n") duration = 4;
+    if (c.duration === "2n.") duration = 3;
     if (c.duration === "2n") duration = 2;
     if (c.duration === "4n") duration = 1;
 
@@ -190,7 +189,6 @@ export default function NewTrackRoute() {
     } else {
       setChords([newChord]);
     }
-    // console.log("Chords", chords);
   };
 
   return (
@@ -213,7 +211,7 @@ export default function NewTrackRoute() {
               readOnly
             />
 
-            <fieldset className="sheet-grid grid-cols-4">
+            <fieldset className="sheet-grid grid-cols-2 sm:grid-cols-4">
               <legend>Sheet</legend>
               {chords.map((chord) => (
                 <EditChord

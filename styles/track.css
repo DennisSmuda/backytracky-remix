@@ -1,23 +1,29 @@
 .sheet-grid {
-  display: grid;
-  gap: 0.5rem;
-
-  grid-template-columns: repeat(4, 1fr);
-
+  @apply grid gap-2 grid-cols-4;
   @apply border-r border-l border-zinc-500 border-opacity-50 px-1;
 }
 
 .sheet-grid__chord {
   @apply p-2 rounded-md select-none;
-  @apply flex flex-col;
+  @apply flex flex-col min-h-[92px];
 }
 
 .duration-1n {
   @apply col-span-4;
 }
 
+.base-duration-3,
+.duration-2n\. {
+  @apply col-span-3;
+}
+
+.base-duration-2,
 .duration-2n {
   @apply col-span-2;
+}
+
+.base-duration-1 {
+  @apply col-span-1;
 }
 
 .new-sheet__chord {
