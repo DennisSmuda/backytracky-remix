@@ -1,6 +1,5 @@
 import type { Subdivision } from "tone/build/esm/core/type/Units";
 import { hihatOnlyGroove } from "./grooves";
-// import { turnaroundChords } from "./track-demos";
 
 interface MusicConfig {
   sheet: string | object;
@@ -59,20 +58,15 @@ export default class Music {
     } else {
       this.sheet = music.sheet;
     }
-    // console.log("Music Constructor", this.sheet);
   }
 
   generateMusic() {
-    // turnaroundChords;
-    // const sheetChords = JSON.parse(this.sheet);
     const chords = this.sheet.map((chord: ChordBeat) => {
       return new ChordBeat(chord);
     });
-    console.log("Make Music", chords);
 
     return {
       chords,
-      // chords: turnaroundChords,
       groove: hihatOnlyGroove,
     };
   }
