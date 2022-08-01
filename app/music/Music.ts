@@ -64,6 +64,22 @@ export default class Music {
     const chords = this.sheet.map((chord: ChordBeat) => {
       return new ChordBeat(chord);
     });
+    const { bar, beat, duration } = chords[chords.length - 1];
+    const loopEndPoint = {
+      bar: bar,
+      beat: beat,
+    };
+
+    if (duration === "4n") {
+      loopEndPoint.beat += 1;
+      if (beat >= 8) {
+        loopEndPoint.beat -= 8;
+        loopEndPoint.bar += 1;
+      }
+    }
+    // console.log("Figure out duration", loopEndPoint);
+    // const hihatGroove = loopEndPoint.bar.forEeach(bar => )
+    // TODO: Make groove depending on sheet-length (/last chord determines when loop ends?)
 
     return {
       chords,
