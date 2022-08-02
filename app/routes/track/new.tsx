@@ -1,6 +1,7 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
 import type { IChordBeat } from "~/music/Music";
+import { getBarsForDuration } from "~/music/Music";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
@@ -44,7 +45,7 @@ export const action: ActionFunction = async ({ request }) => {
   const newTrack = await createTrack(trackname, chords, userId);
   if (!newTrack) {
     return badRequest({
-      formError: `not implemented`,
+      formError: `couldn't create track!`,
     });
   }
 
@@ -102,28 +103,20 @@ export default function NewTrackRoute() {
       sixteenth: 0,
     });
     updateFollowingChords(1);
-    console.log("Update all times");
   };
 
   const deleteChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     const chordIndex = chords.indexOf(chord);
     chords.splice(chordIndex, 1);
-    console.log("Spliced Array because delete");
     if (chords.length) updateChordTimes();
 
-    console.log("Set new chords after delete", chords);
     setChords([...chords]);
   };
 
   const getNextChordTime = (previousChord: ChordBeat) => {
     const c = previousChord;
-    console.log("Get next chord time", c);
-    let duration = 4;
-    if (c.duration === "1n") duration = 4;
-    if (c.duration === "2n.") duration = 3;
-    if (c.duration === "2n") duration = 2;
-    if (c.duration === "4n") duration = 1;
+    const duration = getBarsForDuration(c.duration);
 
     let nextBeat = (c.beat as number) + duration;
     let nextBar = c.bar as number;
@@ -150,15 +143,11 @@ export default function NewTrackRoute() {
       };
     }
     const c = chords[chords.length - 1];
-    let duration = 4;
-    if (c.duration === "1n") duration = 4;
-    if (c.duration === "2n.") duration = 3;
-    if (c.duration === "2n") duration = 2;
-    if (c.duration === "4n") duration = 1;
+    const duration = getBarsForDuration(c.duration);
 
     let nextBeat = (c.beat as number) + duration;
     let nextBar = c.bar as number;
-    // console.log("next beat", nextBar);
+
     if (nextBeat >= 4) {
       nextBar += 1;
       nextBeat -= 4;

@@ -21,7 +21,25 @@
   min-width: 160px;
   flex-direction: column;
   align-items: stretch;
-  text-align: left
+  text-align: left;
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms
+}
+
+.sheet-grid__chord.active, 
+.sheet-grid__chord.active + .sheet-grid__chord {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
+  transition-duration: 75ms
+}
+
+.dark .sheet-grid__chord.active, .dark 
+.sheet-grid__chord.active + .sheet-grid__chord {
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 18 19 / var(--tw-bg-opacity))
 }
 
 .duration-1n {

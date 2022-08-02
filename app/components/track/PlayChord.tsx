@@ -37,12 +37,14 @@ export function PlayChord({ chord, clickChord }: PlayChordProps) {
         <div className="new-sheet__chord">
           <span className="opacity-50 text-xs">...</span>
           <div className="flex items-center">
-            <span className="chord-root font-black">{chord.root}</span>
-            <span className="chord-type opacity-50 ml-px">{chord.type}</span>
-            <span className="chord-extension relative text-xs ml-px -top-1">
+            <span className="chord-root font-black opacity-50">
+              {chord.root}
+            </span>
+            <span className="chord-type opacity-25 ml-px">{chord.type}</span>
+            <span className="chord-extension relative text-xs ml-px -top-1 opacity-50">
               {chord.extension}
             </span>
-            <div className="duration-line" />
+            <div className="duration-line opacity-50" />
           </div>
         </div>
       </button>

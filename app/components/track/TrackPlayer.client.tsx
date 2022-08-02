@@ -1,4 +1,6 @@
 import type { Sampler } from "tone";
+import { TransportTime } from "tone";
+import { Time } from "tone";
 import type { ChordBeat } from "../../music/Music";
 
 import { useEffect, useRef, useState } from "react";
@@ -14,6 +16,7 @@ export default function TrackPlayer({ sheet }: any) {
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
   const music = new Music({ sheet });
+  const currentChordTime = useRef<string>("0:0:0");
 
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
@@ -42,6 +45,15 @@ export default function TrackPlayer({ sheet }: any) {
     const { chords, groove, numBars } = music.generateMusic();
 
     chordsPart.current = new Part(function (time, note) {
+      document
+        .querySelector(`button.sheet-grid__chord.active`)
+        ?.classList.remove("active");
+
+      const activeElement = document.querySelector(
+        `button.sheet-grid__chord.bar-${note.bar}.beat-${note.beat}`
+      );
+
+      activeElement?.classList.add("active");
       piano?.current?.triggerAttackRelease(
         note.note,
         note.duration,
@@ -83,6 +95,9 @@ export default function TrackPlayer({ sheet }: any) {
 
   function stop(): void {
     setIsPlaying(false);
+    document
+      .querySelector(`button.sheet-grid__chord.active`)
+      ?.classList.remove("active");
     if (typeof Transport.stop !== "undefined") Transport.stop();
   }
 
