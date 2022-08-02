@@ -86,18 +86,26 @@ export default function TracksRoute() {
             {loaderData.tracks.map((track: Track) => (
               <div
                 key={track.id}
-                className="flex items-center justify-between rounded-lg p-4 interactive-bg"
+                className="flex items-center justify-between rounded-lg p-4 bg-zinc-100 dark:bg-gray-1000"
               >
                 <div className="flex items-center">
-                  <span className="bg-orange-400 dark:bg-orange-600 rounded-full p-1 text-xs w-6 h-6 text-center mr-4">
-                    {track.upvotes}
+                  <span className="bg-zinc-200 dark:bg-zinc-800 p-1 text-xs rounded-md text-center mr-4 font-black">
+                    {track.upvotes} 👌
                   </span>
-                  <Link
-                    to={`/track/${track.id}`}
-                    className="text-xl font-black hover:underline"
-                  >
-                    {track.name}
-                  </Link>
+                  <div className="flex flex-col">
+                    <span className="opacity-50 text-xs">
+                      {new Date(track.createdAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                      })}
+                    </span>
+                    <Link
+                      to={`/track/${track.id}`}
+                      className="text-xl font-black hover:underline"
+                    >
+                      {track.name}
+                    </Link>
+                  </div>
                 </div>
                 {track.userId === loaderData.user?.id ? (
                   <Form method="delete">

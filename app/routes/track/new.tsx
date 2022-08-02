@@ -64,6 +64,7 @@ export default function NewTrackRoute() {
   const editChord = (e: MouseEvent, chord: IChordBeat) => {
     e.preventDefault();
     console.log("Editing Chord", chord);
+    // TODO: Edit chord notes!
     setChords([...chords]);
   };
 

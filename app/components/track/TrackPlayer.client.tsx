@@ -78,7 +78,6 @@ export default function TrackPlayer({ sheet }: any) {
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = numBars;
-    // console.log("Done setting up music", chordsPart.current);
   }
 
   function disposeParts() {

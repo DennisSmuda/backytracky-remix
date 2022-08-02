@@ -93,6 +93,10 @@
     @apply bg-red-400 dark:bg-red-700;
   }
 
+  .button--delete:active {
+    @apply bg-red-500 dark:bg-red-900;
+  }
+
   .button--cta {
     @apply bg-sky-500 dark:bg-sky-800;
   }
