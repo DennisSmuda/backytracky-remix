@@ -27,7 +27,7 @@ export function PlayChord({ chord, clickChord }: PlayChordProps) {
           <div className="duration-line" />
         </div>
       </button>
-      <div
+      <button
         onClick={() => clickChord(chord)}
         className={`interactive-bg sheet-grid__chord sheet-grid__chord--ghost
         ${!hasOverflow(chord) && "hidden"}
@@ -35,16 +35,17 @@ export function PlayChord({ chord, clickChord }: PlayChordProps) {
         `}
       >
         <div className="new-sheet__chord">
-          <div>
+          <span className="opacity-50 text-xs">...</span>
+          <div className="flex items-center">
             <span className="chord-root font-black">{chord.root}</span>
             <span className="chord-type opacity-50 ml-px">{chord.type}</span>
             <span className="chord-extension relative text-xs ml-px -top-1">
               {chord.extension}
             </span>
+            <div className="duration-line" />
           </div>
-          <div className="duration-line" />
         </div>
-      </div>
+      </button>
     </>
   );
 }
