@@ -60,13 +60,13 @@ export default function TrackPlayer({ sheet }: any) {
         note?.note,
         note?.duration,
         time,
-        0.25
+        0.2
       );
     }, groove);
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = numBars;
-    console.log("Done setting up music", chordsPart.current);
+    // console.log("Done setting up music", chordsPart.current);
   }
 
   function disposeParts() {
