@@ -39,7 +39,7 @@ export default function TrackPlayer({ sheet }: any) {
   }, [chordsPart, drumPart]);
 
   function setupMusic(): void {
-    const { chords, groove } = music.generateMusic();
+    const { chords, groove, numBars } = music.generateMusic();
 
     chordsPart.current = new Part(function (time, note) {
       piano?.current?.triggerAttackRelease(
@@ -52,20 +52,20 @@ export default function TrackPlayer({ sheet }: any) {
 
     chordsPart.current.start(0);
     chordsPart.current.loop = true;
-    chordsPart.current.loopEnd = 4;
+    chordsPart.current.loopEnd = numBars;
     chordsPartChords.current = chords;
 
     drumPart.current = new Part(function (time, note) {
       drums?.current?.triggerAttackRelease(
-        note.note,
-        note.duration,
+        note?.note,
+        note?.duration,
         time,
         0.25
       );
     }, groove);
     drumPart.current.start(0);
     drumPart.current.loop = true;
-    drumPart.current.loopEnd = 4;
+    drumPart.current.loopEnd = numBars;
     console.log("Done setting up music", chordsPart.current);
   }
 

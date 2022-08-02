@@ -101,9 +101,9 @@ export function EditChord({
         base-duration-${getSplitDurations(chord)?.ghost}
         `}
       >
-        {/* {chord.root} */}
+        <span className="opacity-50 text-xs">...</span>
         <div className="new-sheet__chord">
-          <div>
+          <div className="flex items-center">
             <span className="chord-root font-black">{chord.root}</span>
             <span className="chord-type opacity-50 ml-px">{chord.type}</span>
             <span className="chord-extension relative text-xs ml-px -top-1">

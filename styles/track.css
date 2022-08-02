@@ -7,7 +7,7 @@
 
 .sheet-grid__chord {
   @apply p-2 rounded-md select-none;
-  @apply flex flex-col items-stretch text-left min-h-[92px] min-w-[160px];
+  @apply flex flex-col items-stretch text-left min-h-[96px] min-w-[160px];
 }
 
 .duration-1n {
@@ -29,9 +29,9 @@
 }
 
 .new-sheet__chord {
-  @apply flex items-center;
+  @apply flex flex-col items-stretch;
 }
 
 .duration-line {
-  @apply ml-2 h-1 rounded-full w-full bg-zinc-500 opacity-50;
+  @apply h-1 rounded-full w-full bg-zinc-500 opacity-50;
 }

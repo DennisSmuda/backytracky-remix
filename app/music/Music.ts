@@ -1,6 +1,4 @@
 import type { Subdivision } from "tone/build/esm/core/type/Units";
-import { hihatOnlyGroove } from "./grooves";
-// import { turnaroundChords } from "./track-demos";
 
 interface MusicConfig {
   sheet: string | object;
@@ -59,24 +57,72 @@ export default class Music {
     } else {
       this.sheet = music.sheet;
     }
-    // console.log("Music Constructor", this.sheet);
   }
 
   generateMusic() {
-    // turnaroundChords;
-    // const sheetChords = JSON.parse(this.sheet);
+    const groove: Array<{
+      time: string;
+      note: string | Array<string>;
+      duration: Subdivision;
+    }> = [];
+    let totalBeatCount = 0;
+
     const chords = this.sheet.map((chord: ChordBeat) => {
       return new ChordBeat(chord);
     });
-    console.log("Make Music", chords);
+
+    chords.forEach((chord: ChordBeat) => {
+      const bars = getBarsForDuration(chord.duration);
+      totalBeatCount += bars;
+      for (let i = 0; i < bars; i++) {
+        const next = increaseChordTimeByBeats(chord, i);
+        groove.push({
+          time: `${next.bar}:${next.beat}`,
+          note: next.beat === 0 ? ["C1", "D1"] : "D1",
+          duration: "8n",
+        });
+      }
+    });
 
     return {
       chords,
-      // chords: turnaroundChords,
-      groove: hihatOnlyGroove,
+      groove,
+      numBars: totalBeatCount / 2,
     };
   }
 }
+
+export const getBarsForDuration = (duration: Subdivision) => {
+  switch (duration) {
+    case "1n":
+      return 4;
+    case "2n.":
+      return 3;
+    case "2n":
+      return 2;
+    case "4n":
+      return 1;
+    default:
+      return 1;
+  }
+};
+
+export const increaseChordTimeByBeats = (chord: ChordBeat, beats: number) => {
+  let nextBeat = chord.beat as number;
+  let nextBar = chord.bar as number;
+
+  nextBeat += beats;
+  while (nextBeat >= 4) {
+    nextBar += 1;
+    nextBeat -= 4;
+  }
+
+  return {
+    beat: nextBeat,
+    bar: nextBar,
+    sixteenth: 0,
+  };
+};
 
 export const increaseDuration = (duration: Subdivision) => {
   if (duration === "1n") return "1n";
