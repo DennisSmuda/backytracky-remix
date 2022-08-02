@@ -2062,6 +2062,16 @@
     background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
 
+  .button--delete:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
+  .dark .button--delete:active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(127 29 29 / var(--tw-bg-opacity));
+}
+
   .button--cta {
     --tw-bg-opacity: 1;
     background-color: rgb(14 165 233 / var(--tw-bg-opacity));

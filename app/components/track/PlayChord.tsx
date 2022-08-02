@@ -34,7 +34,7 @@ export function PlayChord({ chord, clickChord }: PlayChordProps) {
         base-duration-${getSplitDurations(chord)?.ghost}
         `}
       >
-        <div className="new-sheet__chord">
+        <div className="new-sheet__chord opacity-40">
           <span className="opacity-50 text-xs">...</span>
           <div className="flex items-center">
             <span className="chord-root font-black">{chord.root}</span>

@@ -8,6 +8,12 @@
 .sheet-grid__chord {
   @apply p-2 rounded-md select-none;
   @apply flex flex-col items-stretch text-left min-h-[96px] min-w-[160px];
+  @apply transition-colors duration-500;
+}
+
+.sheet-grid__chord.active,
+.sheet-grid__chord.active + .sheet-grid__chord {
+  @apply bg-zinc-200 dark:bg-black duration-75;
 }
 
 .duration-1n {

@@ -8,9 +8,9 @@ export default function Index() {
           <div className="bt-prose">
             <h1 className="mb-0">Welcome to BackyTracky 👋</h1>
             <p>
-              Backing Tracks for Musicians. Create and play Lead-Sheets to level
-              up your chops! Practice scales, licks or solos. Discover chord
-              progressions others are using or make your own!
+              Backing Tracks for Musicians. <s>Create and</s> play Lead-Sheets
+              to level up your chops! Practice scales, licks or solos. Discover
+              chord progressions others are using or make your own!
             </p>
           </div>
           <div className="grid gap-4 my-8 grid-flow-col max-w-md">
