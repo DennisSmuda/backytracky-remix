@@ -43,7 +43,6 @@ export default function ChordEditor({
       `${newType}${newExtension}`,
       `${newRoot}${newOctave}`
     );
-    console.log("New Chord", newChord);
 
     currentChord.note = newChord.notes;
     currentChord.root = newRoot;

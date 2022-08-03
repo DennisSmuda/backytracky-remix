@@ -73,7 +73,6 @@ export default function NewTrackRoute() {
 
   const editChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
-
     selectedChord.current = chord;
     setIsChordEditorOpen(true);
   };

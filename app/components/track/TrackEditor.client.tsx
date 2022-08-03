@@ -29,9 +29,7 @@ export default function TrackEditor({
 
   const playChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
-    if (!piano.current) return;
-    console.log("Play chord", piano.current.loaded);
-    if (piano.current.loaded) {
+    if (piano?.current?.loaded) {
       piano?.current?.triggerAttackRelease(chord.note, "4n", now(), 0.35);
     }
   };
