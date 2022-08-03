@@ -2096,10 +2096,12 @@
     font-size: 0.75rem;
     line-height: 1rem;
 }
+
   .chord-editor-modal .button.active {
     --tw-bg-opacity: 1;
     background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
+
   .dark .chord-editor-modal .button.active {
     --tw-bg-opacity: 1;
     background-color: rgb(30 58 138 / var(--tw-bg-opacity));

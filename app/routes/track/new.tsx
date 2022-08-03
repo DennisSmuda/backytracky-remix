@@ -1,13 +1,16 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
 import { useRef } from "react";
-import { getBarsForDuration } from "~/music/Music";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
-import { increaseDuration, decreaseDuration } from "~/music/Music";
+import {
+  increaseDuration,
+  decreaseDuration,
+  converDurationToBars,
+} from "~/music/utils";
 import { ChordBeat } from "~/music/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
@@ -132,7 +135,7 @@ export default function NewTrackRoute() {
 
   const getNextChordTime = (previousChord: ChordBeat) => {
     const c = previousChord;
-    const duration = getBarsForDuration(c.duration);
+    const duration = converDurationToBars(c.duration);
 
     let nextBeat = (c.beat as number) + duration;
     let nextBar = c.bar as number;

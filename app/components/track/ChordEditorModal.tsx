@@ -72,7 +72,9 @@ export default function ChordEditor({
         <div className="fixed inset-0 flex items-center justify-center p-2">
           <Dialog.Panel className="w-full max-w-sm rounded bg-white p-4 dark:bg-black">
             <Dialog.Title>Change Chord</Dialog.Title>
-            {/* <Dialog.Description>Bla blub</Dialog.Description> */}
+            <Dialog.Description className="text-xs opacity-50">
+              Listen to know what works! Not every combination is possible.
+            </Dialog.Description>
 
             <span className="opacity-50 text-xs">root</span>
             <div className="grid grid-flow-col gap-2 mb-2">

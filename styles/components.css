@@ -108,6 +108,7 @@
   .chord-editor-modal .button {
     @apply text-xs;
   }
+
   .chord-editor-modal .button.active {
     @apply bg-blue-300 dark:bg-blue-900;
   }
