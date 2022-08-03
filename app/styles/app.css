@@ -3541,18 +3541,14 @@ nav a[aria-current="page"] {
   background-color: rgb(228 228 231 / var(--tw-bg-opacity));
 }
 
-.bg-black\/30 {
-  background-color: rgb(18 18 19 / 0.3);
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 18 19 / var(--tw-bg-opacity));
 }
 
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(18 18 19 / var(--tw-bg-opacity));
 }
 
 .bg-gray-1000 {
@@ -3563,6 +3559,10 @@ nav a[aria-current="page"] {
 .bg-zinc-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+}
+
+.bg-black\/30 {
+  background-color: rgb(18 18 19 / 0.3);
 }
 
 .p-4 {
