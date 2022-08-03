@@ -11,7 +11,7 @@ import { increaseDuration, decreaseDuration } from "~/music/Music";
 import { ChordBeat } from "~/music/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
-import { ChordEditor } from "~/components/track/ChordEditorModal";
+import ChordEditor from "~/components/track/ChordEditorModal";
 import TrackEditor from "~/components/track/TrackEditor.client";
 import { ClientOnly } from "remix-utils";
 
@@ -226,7 +226,7 @@ export default function NewTrackRoute() {
               disabled={chords.length === 0}
               type="submit"
               className="button col-span-4"
-              value="save"
+              value="save track"
             />
             <div id="form-error-message">
               {actionData?.formError ? (

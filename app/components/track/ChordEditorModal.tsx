@@ -3,8 +3,8 @@ import { Chord } from "@tonaljs/tonal";
 import { Fragment, useEffect, useRef, useState } from "react";
 import type { Sampler } from "tone";
 import { now } from "tone";
-import { loadInstruments } from "~/music/loader";
-import type { ChordBeat } from "~/music/Music";
+import { loadInstruments } from "../../music/loader";
+import type { ChordBeat } from "../../music/Music";
 
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
@@ -12,7 +12,7 @@ const octaves: Array<string> = ["2", "3", "4", "5", "6"];
 const chordTypes: Array<string> = ["", "maj", "min", "dim"];
 const extensions: Array<string> = ["", "7", "9", "13"];
 
-export function ChordEditor({
+export default function ChordEditor({
   isOpen = false,
   currentChord,
   onClose,
@@ -43,6 +43,7 @@ export function ChordEditor({
       `${newType}${newExtension}`,
       `${newRoot}${newOctave}`
     );
+    console.log("New Chord", newChord);
 
     currentChord.note = newChord.notes;
     currentChord.root = newRoot;
@@ -51,21 +52,6 @@ export function ChordEditor({
 
     piano?.current?.triggerAttackRelease(currentChord.note, "8n", now(), 0.35);
   }, [newRoot, newType, newExtension, newOctave, currentChord]);
-
-  const changeType = (type: string) => {
-    if (!currentChord) return;
-    setNewType(type);
-  };
-
-  const changeExtension = (ext: string) => {
-    if (!currentChord) return;
-    setNewExtension(ext);
-  };
-
-  const changeOctave = (octave: string) => {
-    if (!currentChord) return;
-    setNewOctave(octave);
-  };
 
   return (
     <Transition
@@ -106,7 +92,7 @@ export function ChordEditor({
                 <button
                   key={root}
                   onClick={() => setNewRoot(root)}
-                  className="button"
+                  className={`button ${root === newRoot ? "active" : ""}`}
                 >
                   {root}
                 </button>
@@ -118,8 +104,8 @@ export function ChordEditor({
               {chordTypes.map((type) => (
                 <button
                   key={type}
-                  onClick={() => changeType(type)}
-                  className="button"
+                  onClick={() => setNewType(type)}
+                  className={`button ${type === newType ? "active" : ""}`}
                 >
                   {type}
                 </button>
@@ -131,8 +117,8 @@ export function ChordEditor({
               {extensions.map((ext) => (
                 <button
                   key={ext}
-                  onClick={() => changeExtension(ext)}
-                  className="button"
+                  onClick={() => setNewExtension(ext)}
+                  className={`button ${ext === newExtension ? "active" : ""}`}
                 >
                   {ext}
                 </button>
@@ -144,8 +130,8 @@ export function ChordEditor({
               {octaves.map((octave) => (
                 <button
                   key={octave}
-                  onClick={() => changeOctave(octave)}
-                  className="button"
+                  onClick={() => setNewOctave(octave)}
+                  className={`button ${octave === newOctave ? "active" : ""}`}
                 >
                   {octave}
                 </button>
@@ -156,7 +142,7 @@ export function ChordEditor({
               className="button button--submit w-full"
               onClick={() => onClose()}
             >
-              Save
+              save chord
             </button>
           </Dialog.Panel>
         </div>

@@ -7,6 +7,9 @@ module.exports = {
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },
+  moduleNameMapper: {
+    "^~/$": "<rootDir>/app/",
+  },
   globals: {
     "ts-jest": {
       isolatedModules: true,
