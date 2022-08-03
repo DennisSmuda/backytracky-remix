@@ -1,4 +1,5 @@
 import type { Subdivision } from "tone/build/esm/core/type/Units";
+import { converDurationToBars, increaseChordTimeByBeats } from "./utils";
 
 interface MusicConfig {
   sheet: string | object;
@@ -72,7 +73,7 @@ export default class Music {
     });
 
     chords.forEach((chord: ChordBeat) => {
-      const bars = getBarsForDuration(chord.duration);
+      const bars = converDurationToBars(chord.duration);
       totalBeatCount += bars;
       for (let i = 0; i < bars; i++) {
         const next = increaseChordTimeByBeats(chord, i);
@@ -91,51 +92,3 @@ export default class Music {
     };
   }
 }
-
-export const getBarsForDuration = (duration: Subdivision) => {
-  switch (duration) {
-    case "1n":
-      return 4;
-    case "2n.":
-      return 3;
-    case "2n":
-      return 2;
-    case "4n":
-      return 1;
-    default:
-      return 1;
-  }
-};
-
-export const increaseChordTimeByBeats = (chord: ChordBeat, beats: number) => {
-  let nextBeat = chord.beat as number;
-  let nextBar = chord.bar as number;
-
-  nextBeat += beats;
-  while (nextBeat >= 4) {
-    nextBar += 1;
-    nextBeat -= 4;
-  }
-
-  return {
-    beat: nextBeat,
-    bar: nextBar,
-    sixteenth: 0,
-  };
-};
-
-export const increaseDuration = (duration: Subdivision) => {
-  if (duration === "1n") return "1n";
-  if (duration === "2n.") return "1n";
-  if (duration === "2n") return "2n.";
-  if (duration === "4n") return "2n";
-  return "1n";
-};
-
-export const decreaseDuration = (duration: Subdivision) => {
-  if (duration === "1n") return "2n.";
-  if (duration === "2n.") return "2n";
-  if (duration === "2n") return "4n";
-  if (duration === "4n") return "4n";
-  return "4n";
-};
