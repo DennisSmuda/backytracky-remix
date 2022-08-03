@@ -59,13 +59,11 @@ export default function TracksRoute() {
   useEffect(() => {
     switch (transition.type) {
       case "actionSubmission":
-        console.log("Deleting");
         if (transition.submission.action === "/tracks") {
           notifyDeleting();
         }
         break;
       case "actionRedirect":
-        console.log("Redirecting=");
         break;
       case "actionReload":
         if (actionData.error) {

@@ -8,7 +8,9 @@ export const hasOverflow = (chord: ChordBeat) => {
   );
 };
 
-export const getSplitDurations = (chord: ChordBeat) => {
+export const getSplitDurations = (
+  chord: ChordBeat
+): { base: number; ghost: number } => {
   if (chord.duration === "1n") {
     switch (chord.beat) {
       case 1:
@@ -49,4 +51,8 @@ export const getSplitDurations = (chord: ChordBeat) => {
         };
     }
   }
+  return {
+    base: 0,
+    ghost: 0,
+  };
 };

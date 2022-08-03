@@ -1,6 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
-import type { IChordBeat } from "~/music/Music";
+import { useRef } from "react";
 import { getBarsForDuration } from "~/music/Music";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -11,7 +11,9 @@ import { increaseDuration, decreaseDuration } from "~/music/Music";
 import { ChordBeat } from "~/music/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
-import { EditChord } from "~/components/track/EditChord";
+import ChordEditor from "~/components/track/ChordEditorModal";
+import TrackEditor from "~/components/track/TrackEditor.client";
+import { ClientOnly } from "remix-utils";
 
 type Duration = "1n" | "2n" | "4n";
 const sampleChordConfig = {
@@ -53,18 +55,31 @@ export const action: ActionFunction = async ({ request }) => {
 };
 const badRequest = (data: any) => json(data, { status: 400 });
 
+/**
+ * New Track Route
+ *
+ * @returns React.Component
+ */
 export default function NewTrackRoute() {
-  let actionData = useActionData();
+  const actionData = useActionData();
+
+  const [isChordEditorOpen, setIsChordEditorOpen] = useState(false);
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
+  const selectedChord = useRef<ChordBeat | null>(null);
 
   useEffect(() => {
     setChords([new ChordBeat(sampleChordConfig)]);
   }, []);
 
-  const editChord = (e: MouseEvent, chord: IChordBeat) => {
+  const editChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
-    console.log("Editing Chord", chord);
-    // TODO: Edit chord notes!
+    selectedChord.current = chord;
+    setIsChordEditorOpen(true);
+  };
+
+  const finishEditingChord = () => {
+    selectedChord.current = null;
+    setIsChordEditorOpen(false);
     setChords([...chords]);
   };
 
@@ -76,6 +91,7 @@ export default function NewTrackRoute() {
 
     setChords([...chords]);
   };
+
   const lengthenChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     chord.duration = increaseDuration(chord.duration);
@@ -88,7 +104,6 @@ export default function NewTrackRoute() {
   const updateFollowingChords = (index: number) => {
     for (let i = index; i < chords.length; i++) {
       let previousChord = chords[i - 1];
-      console.log("Prev");
       chords[i] = new ChordBeat({
         ...chords[i],
         ...getNextChordTime(previousChord),
@@ -135,37 +150,14 @@ export default function NewTrackRoute() {
     };
   };
 
-  const getTimeForNewChord = () => {
-    if (!chords.length) {
-      return {
-        bar: 0,
-        beat: 0,
-        sixteenth: 0,
-      };
-    }
-    const c = chords[chords.length - 1];
-    const duration = getBarsForDuration(c.duration);
-
-    let nextBeat = (c.beat as number) + duration;
-    let nextBar = c.bar as number;
-
-    if (nextBeat >= 4) {
-      nextBar += 1;
-      nextBeat -= 4;
-    }
-
-    let nextSixteenth = 0;
-
-    return {
-      bar: nextBar,
-      beat: nextBeat,
-      sixteenth: nextSixteenth,
-    };
-  };
-
   const addChord = (e: MouseEvent) => {
     e.preventDefault();
-    const newTime = getTimeForNewChord();
+
+    const newTime =
+      chords.length > 0
+        ? getNextChordTime(chords[chords.length - 1])
+        : { bar: 0, beat: 0, sixteenth: 0 };
+
     const newChord = new ChordBeat({
       root: "C",
       type: "maj",
@@ -174,6 +166,7 @@ export default function NewTrackRoute() {
       duration: "4n",
       ...newTime,
     });
+
     if (chords?.length) {
       setChords([...chords, newChord]);
     } else {
@@ -203,21 +196,18 @@ export default function NewTrackRoute() {
 
             <div className="overflow-x-scroll">
               <fieldset className="sheet-grid overflow-x-auto">
-                <legend>Sheet</legend>
-                {chords.map((chord) => (
-                  <EditChord
-                    key={chord.time}
-                    chord={chord}
-                    shortenChord={shortenChord}
-                    lengthenChord={lengthenChord}
-                    editChord={editChord}
-                    deleteChord={deleteChord}
-                  />
-                ))}
-
-                {chords.length === 0 && (
-                  <p className="opacity-50 p-2">Add some chords!</p>
-                )}
+                <legend>Sheet - one full row = count to 4</legend>
+                <ClientOnly fallback={<p>Loading...</p>}>
+                  {() => (
+                    <TrackEditor
+                      chords={chords}
+                      shortenChord={shortenChord}
+                      lengthenChord={lengthenChord}
+                      editChord={editChord}
+                      deleteChord={deleteChord}
+                    />
+                  )}
+                </ClientOnly>
               </fieldset>
             </div>
             <button className="button" onClick={addChord}>
@@ -235,7 +225,7 @@ export default function NewTrackRoute() {
               disabled={chords.length === 0}
               type="submit"
               className="button col-span-4"
-              value="save"
+              value="save track"
             />
             <div id="form-error-message">
               {actionData?.formError ? (
@@ -247,6 +237,12 @@ export default function NewTrackRoute() {
           </Form>
         </div>
       </section>
+
+      <ChordEditor
+        isOpen={isChordEditorOpen}
+        currentChord={selectedChord.current}
+        onClose={() => finishEditingChord()}
+      />
     </main>
   );
 }

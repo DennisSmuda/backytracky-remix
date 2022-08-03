@@ -38,7 +38,6 @@ export function loadInstruments() {
     baseUrl: "https://tonejs.github.io/audio/salamander/",
     onload: () => {
       // console.log("piano loadded");
-      // piano.set(pianoSampler);
       // Tone.start();
     },
   }).toDestination();
