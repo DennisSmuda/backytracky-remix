@@ -12,6 +12,7 @@ import { ChordBeat } from "~/music/Music";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
 import { EditChord } from "~/components/track/EditChord";
+import { Dialog } from "@headlessui/react";
 
 type Duration = "1n" | "2n" | "4n";
 const sampleChordConfig = {
@@ -54,6 +55,8 @@ export const action: ActionFunction = async ({ request }) => {
 const badRequest = (data: any) => json(data, { status: 400 });
 
 export default function NewTrackRoute() {
+  let [isChordEditorOpen, setIsChordEditorOpen] = useState(true);
+
   let actionData = useActionData();
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
 
@@ -64,6 +67,8 @@ export default function NewTrackRoute() {
   const editChord = (e: MouseEvent, chord: IChordBeat) => {
     e.preventDefault();
     console.log("Editing Chord", chord);
+    setIsChordEditorOpen(true);
+    // chord.duration = "1n";
     // TODO: Edit chord notes!
     setChords([...chords]);
   };
@@ -247,6 +252,27 @@ export default function NewTrackRoute() {
           </Form>
         </div>
       </section>
+      <Dialog
+        open={isChordEditorOpen}
+        onClose={() => setIsChordEditorOpen(false)}
+      >
+        <Dialog.Panel>
+          <Dialog.Title>Deactivate account</Dialog.Title>
+          <Dialog.Description>
+            This will permanently deactivate your account
+          </Dialog.Description>
+
+          <p>
+            Are you sure you want to deactivate your account? All of your data
+            will be permanently removed. This action cannot be undone.
+          </p>
+
+          <button onClick={() => setIsChordEditorOpen(false)}>
+            Deactivate
+          </button>
+          <button onClick={() => setIsChordEditorOpen(false)}>Cancel</button>
+        </Dialog.Panel>
+      </Dialog>
     </main>
   );
 }
