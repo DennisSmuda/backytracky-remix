@@ -7,6 +7,7 @@ interface EditChordProps {
   lengthenChord: Function;
   editChord: Function;
   deleteChord: Function;
+  playChord: Function;
 }
 
 export function EditChord({
@@ -15,6 +16,7 @@ export function EditChord({
   lengthenChord,
   editChord,
   deleteChord,
+  playChord,
 }: EditChordProps) {
   const chordDurationClass = (): string => {
     if (hasOverflow(chord)) {
@@ -64,6 +66,19 @@ export function EditChord({
             <span>edit</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+          </button>
+          <button
+            className="icon-button button--submit"
+            onClick={(e) => playChord(e, chord)}
+          >
+            <span>play</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                clipRule="evenodd"
+              />
             </svg>
           </button>
           <button
