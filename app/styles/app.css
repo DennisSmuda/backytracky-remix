@@ -3138,6 +3138,21 @@ main section {
   background-color: rgb(3 105 161 / var(--tw-bg-opacity));
 }
 
+.chord-editor-modal .button {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.chord-editor-modal .button.active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 197 253 / var(--tw-bg-opacity));
+}
+
+.dark .chord-editor-modal .button.active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
+}
+
 /**
    * Forms
    */
@@ -3442,6 +3457,10 @@ nav a[aria-current="page"] {
   margin-top: 0.75rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -3633,8 +3652,16 @@ nav a[aria-current="page"] {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .place-items-end {

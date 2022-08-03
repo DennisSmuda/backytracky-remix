@@ -1,12 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Chord } from "@tonaljs/tonal";
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import type { Sampler } from "tone";
 import { now } from "tone";
 import { loadInstruments } from "~/music/loader";
 import type { ChordBeat } from "~/music/Music";
 
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
+const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
 const octaves: Array<string> = ["2", "3", "4", "5", "6"];
 const chordTypes: Array<string> = ["", "maj", "min", "dim"];
 const extensions: Array<string> = ["", "7", "9", "13"];
@@ -23,58 +24,47 @@ export function ChordEditor({
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
 
-  const newRoot = useRef<string>("C");
-  const newType = useRef<string>("maj");
-  const newExtension = useRef<string>("7");
-  const newOctave = useRef<string>("3");
+  const [newRoot, setNewRoot] = useState<string>("C");
+  const [newType, setNewType] = useState<string>("maj");
+  const [newExtension, setNewExtension] = useState<string>("7");
+  const [newOctave, setNewOctave] = useState<string>("3");
 
   useEffect(() => {
+    // on-mount effect-hook to load instruments
     const { pianoSampler, drumSampler } = loadInstruments();
     piano.current = pianoSampler;
     drums.current = drumSampler;
   }, []);
 
-  const changeRoot = (root: string) => {
+  useEffect(() => {
+    // Effect hook to generate new chord based on user input
     if (!currentChord) return;
-    newRoot.current = root;
-    changeChord();
-  };
+    const newChord = Chord.getChord(
+      `${newType}${newExtension}`,
+      `${newRoot}${newOctave}`
+    );
+
+    currentChord.note = newChord.notes;
+    currentChord.root = newRoot;
+    currentChord.type = newType;
+    currentChord.extension = newExtension;
+
+    piano?.current?.triggerAttackRelease(currentChord.note, "8n", now(), 0.35);
+  }, [newRoot, newType, newExtension, newOctave, currentChord]);
 
   const changeType = (type: string) => {
     if (!currentChord) return;
-    newType.current = type;
-    changeChord();
+    setNewType(type);
   };
 
   const changeExtension = (ext: string) => {
     if (!currentChord) return;
-    newExtension.current = ext;
-    changeChord();
+    setNewExtension(ext);
   };
 
   const changeOctave = (octave: string) => {
     if (!currentChord) return;
-    newOctave.current = octave;
-    changeChord();
-  };
-
-  const changeChord = () => {
-    if (!currentChord) return;
-    const newChord = Chord.getChord(
-      `${newType.current}${newExtension.current}`,
-      `${newRoot.current}${newOctave.current}`
-    );
-
-    currentChord.note = newChord.notes;
-    currentChord.root = newRoot.current;
-    currentChord.type = newType.current;
-    currentChord.extension = newExtension.current;
-
-    playChord();
-  };
-  const playChord = () => {
-    if (!currentChord) return;
-    piano?.current?.triggerAttackRelease(currentChord.note, "8n", now(), 0.35);
+    setNewOctave(octave);
   };
 
   return (
@@ -88,26 +78,43 @@ export function ChordEditor({
       leaveTo="transform scale-95 opacity-0"
       as={Fragment}
     >
-      <Dialog onClose={() => onClose()} className="fixed inset-0 z-50">
+      <Dialog
+        onClose={() => onClose()}
+        className="fixed inset-0 z-50 chord-editor-modal"
+      >
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
         <div className="fixed inset-0 flex items-center justify-center p-2">
           <Dialog.Panel className="w-full max-w-sm rounded bg-white p-4 dark:bg-black">
             <Dialog.Title>Change Chord</Dialog.Title>
-            <Dialog.Description>Bla blub</Dialog.Description>
+            {/* <Dialog.Description>Bla blub</Dialog.Description> */}
 
-            <div className="grid grid-flow-col">
+            <span className="opacity-50 text-xs">root</span>
+            <div className="grid grid-flow-col gap-2 mb-2">
               {roots.map((root) => (
                 <button
                   key={root}
-                  onClick={() => changeRoot(root)}
+                  onClick={() => setNewRoot(root)}
+                  className={`button ${root === newRoot ? "active" : ""}`}
+                >
+                  {root}
+                </button>
+              ))}
+            </div>
+            <div className="grid grid-flow-col gap-2">
+              {flatRoots.map((root) => (
+                <button
+                  key={root}
+                  onClick={() => setNewRoot(root)}
                   className="button"
                 >
                   {root}
                 </button>
               ))}
             </div>
-            <div className="grid grid-flow-col">
+
+            <span className="opacity-50 text-xs">type</span>
+            <div className="grid grid-flow-col gap-2 mb-2">
               {chordTypes.map((type) => (
                 <button
                   key={type}
@@ -119,7 +126,8 @@ export function ChordEditor({
               ))}
             </div>
 
-            <div className="grid grid-flow-col">
+            <span className="opacity-50 text-xs">extension</span>
+            <div className="grid grid-flow-col gap-2 mb-2">
               {extensions.map((ext) => (
                 <button
                   key={ext}
@@ -130,7 +138,9 @@ export function ChordEditor({
                 </button>
               ))}
             </div>
-            <div className="grid grid-flow-col">
+
+            <span className="opacity-50 text-xs">octave</span>
+            <div className="grid grid-flow-col gap-2 mb-4">
               {octaves.map((octave) => (
                 <button
                   key={octave}
@@ -142,7 +152,10 @@ export function ChordEditor({
               ))}
             </div>
 
-            <button className="button button--submit" onClick={() => onClose()}>
+            <button
+              className="button button--submit w-full"
+              onClick={() => onClose()}
+            >
               Save
             </button>
           </Dialog.Panel>
