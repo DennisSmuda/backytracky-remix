@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
-import type { Sampler } from "tone";
 import { now } from "tone";
-import { loadInstruments } from "~/music/loader";
+
+import type { Sampler } from "tone";
 import type ChordBeat from "../../music/ChordBeat";
+
+import { loadInstruments } from "../../music/loader";
 import EditChord from "./EditChord";
 
 export default function TrackEditor({
