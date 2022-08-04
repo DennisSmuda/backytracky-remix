@@ -3,7 +3,7 @@ import type { Sampler } from "tone";
 import { now } from "tone";
 import { loadInstruments } from "~/music/loader";
 import type { ChordBeat } from "~/music/Music";
-import { EditChord } from "./EditChord";
+import EditChord from "./EditChord";
 
 export default function TrackEditor({
   chords,
@@ -22,7 +22,9 @@ export default function TrackEditor({
   const drums = useRef<Sampler | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
+    const { pianoSampler, drumSampler } = loadInstruments(() =>
+      console.log("Loaded Instruments")
+    );
     piano.current = pianoSampler;
     drums.current = drumSampler;
   }, []);

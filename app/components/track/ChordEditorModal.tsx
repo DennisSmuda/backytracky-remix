@@ -31,7 +31,9 @@ export default function ChordEditor({
 
   useEffect(() => {
     // on-mount effect-hook to load instruments
-    const { pianoSampler, drumSampler } = loadInstruments();
+    const { pianoSampler, drumSampler } = loadInstruments(() =>
+      console.log("Instruments Loaded")
+    );
     piano.current = pianoSampler;
     drums.current = drumSampler;
   }, []);

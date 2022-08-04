@@ -5,7 +5,7 @@ interface PlayChordProps {
   chord: ChordBeat;
   clickChord: Function;
 }
-export function PlayChord({ chord, clickChord }: PlayChordProps) {
+export default function PlayChord({ chord, clickChord }: PlayChordProps) {
   return (
     <>
       <button

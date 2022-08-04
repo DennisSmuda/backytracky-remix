@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
 import { loadInstruments } from "../../music/loader";
 import Music from "../../music/Music";
-import { PlayChord } from "./PlayChord";
+import PlayChord from "./PlayChord";
 
 export default function TrackPlayer({ sheet }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
@@ -23,7 +23,9 @@ export default function TrackPlayer({ sheet }: any) {
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
+    const { pianoSampler, drumSampler } = loadInstruments(() =>
+      console.log("Instruments Ready")
+    );
     piano.current = pianoSampler;
     drums.current = drumSampler;
     // console.log("sheet prop", sheet);
