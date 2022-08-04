@@ -11,7 +11,7 @@ import {
   decreaseDuration,
   converDurationToBars,
 } from "~/music/utils";
-import { ChordBeat } from "~/music/Music";
+import ChordBeat from "~/music/ChordBeat";
 import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
 import ChordEditor from "~/components/track/ChordEditorModal";

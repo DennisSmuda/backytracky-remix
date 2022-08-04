@@ -1,4 +1,4 @@
-import type { ChordBeat } from "../../music/Music";
+import type ChordBeat from "../../music/ChordBeat";
 import { getSplitDurations, hasOverflow } from "../../music/utils";
 
 interface EditChordProps {

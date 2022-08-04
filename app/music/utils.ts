@@ -1,5 +1,5 @@
 import type { Subdivision } from "tone/build/esm/core/type/Units";
-import type { ChordBeat } from "./Music";
+import type ChordBeat from "./ChordBeat";
 
 export const increaseChordTimeByBeats = (chord: ChordBeat, beats: number) => {
   let nextBeat = chord.beat as number;

@@ -1,7 +1,5 @@
 import type { Sampler } from "tone";
-import { TransportTime } from "tone";
-import { Time } from "tone";
-import type { ChordBeat } from "../../music/Music";
+import type ChordBeat from "../../music/ChordBeat";
 
 import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
@@ -16,7 +14,6 @@ export default function TrackPlayer({ sheet }: any) {
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
   const music = new Music({ sheet });
-  const currentChordTime = useRef<string>("0:0:0");
 
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
