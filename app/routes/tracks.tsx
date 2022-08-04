@@ -103,7 +103,7 @@ export default function TracksRoute() {
                   </div>
                   <Link
                     to={`/track/${track.id}`}
-                    className="text-xl font-black hover:underline"
+                    className="text-xl font-black hover:underline mt-2"
                   >
                     {track.name}
                   </Link>

@@ -3277,7 +3277,6 @@ nav a[aria-current="page"] {
   border-radius: 0.375rem;
   padding: 0.5rem;
   display: flex;
-  min-height: 96px;
   flex-direction: column;
   align-items: stretch;
   text-align: left;
@@ -3289,7 +3288,11 @@ nav a[aria-current="page"] {
 }
 
 .sheet-grid--editor .sheet-grid__chord {
+  min-height: 96px;
   min-width: 190px;
+}
+
+.sheet-grid--player .sheet-grid__chord {
 }
 
 .sheet-grid__chord.active, 

@@ -113,7 +113,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   return (
     <div>
       <div className="">
-        <div className="sheet-grid my-4">
+        <div className="sheet-grid sheet-grid--player my-4">
           {chordsPartChords.current.map((chord: ChordBeat) => (
             <PlayChord key={chord.time} chord={chord} clickChord={clickChord} />
           ))}

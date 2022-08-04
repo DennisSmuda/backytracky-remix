@@ -131,11 +131,6 @@ export const getChordEndTime = (chord: ChordBeat) => {
 
   let nextBeat = (chord.beat as number) + beats;
   let nextBar = chord.bar as number;
-  // if (nextBeat >= 4) {
-  //   nextBar += 1;
-  //   nextBeat -= 4;
-  // }
-
   let nextSixteenth = 0;
 
   return {

@@ -9,11 +9,13 @@
 
 .sheet-grid__chord {
   @apply p-2 rounded-md select-none;
-  @apply flex flex-col items-stretch text-left min-h-[96px];
+  @apply flex flex-col items-stretch text-left;
   @apply transition-colors duration-500;
 }
 .sheet-grid--editor .sheet-grid__chord {
-  @apply min-w-[190px];
+  @apply min-w-[190px] min-h-[96px];
+}
+.sheet-grid--player .sheet-grid__chord {
 }
 
 .sheet-grid__chord.active,
