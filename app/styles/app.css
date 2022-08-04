@@ -554,12 +554,16 @@ select {
 }
 
   h1, 
+  h2 {
+  letter-spacing: -0.05em;
+}
+
+  h1, 
   h2, 
   h3, 
   h4, 
   h5, 
   h6 {
-  letter-spacing: -0.05em;
   font-weight: 900;
 }
   h1 {
@@ -3403,6 +3407,10 @@ nav a[aria-current="page"] {
   margin-bottom: 0px;
 }
 
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -3419,12 +3427,20 @@ nav a[aria-current="page"] {
   margin-left: 1px;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-0 {
+  margin-top: 0px;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
 }
 
 .block {
@@ -3465,6 +3481,18 @@ nav a[aria-current="page"] {
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
+}
+
+.max-w-2xl {
+  max-width: 42rem;
+}
+
+.max-w-lg {
+  max-width: 32rem;
 }
 
 .flex-shrink {
@@ -3529,6 +3557,10 @@ nav a[aria-current="page"] {
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -3617,6 +3649,18 @@ nav a[aria-current="page"] {
   padding: 0.5rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -3660,6 +3704,14 @@ nav a[aria-current="page"] {
 
 .italic {
   font-style: italic;
+}
+
+.leading-3 {
+  line-height: .75rem;
+}
+
+.leading-none {
+  line-height: 1;
 }
 
 .tracking-tighter {
@@ -3737,8 +3789,19 @@ nav a[aria-current="page"] {
 
 @media (min-width: 640px) {
 
+  .sm\:p-6 {
+    padding: 1.5rem;
+  }
+
   .sm\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .md\:p-6 {
+    padding: 1.5rem;
   }
 }
