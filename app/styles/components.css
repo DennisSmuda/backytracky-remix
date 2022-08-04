@@ -2137,6 +2137,7 @@
 }
 
   form input[type="text"], 
+  form input[type="number"], 
   form input[type="password"] {
     border-radius: 0.375rem;
     border-style: none;
@@ -2145,6 +2146,7 @@
 }
 
   .dark form input[type="text"], .dark 
+  form input[type="number"], .dark 
   form input[type="password"] {
     --tw-bg-opacity: 1;
     background-color: rgb(39 39 42 / var(--tw-bg-opacity));

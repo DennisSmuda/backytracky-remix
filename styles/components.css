@@ -133,6 +133,7 @@
   }
 
   form input[type="text"],
+  form input[type="number"],
   form input[type="password"] {
     @apply rounded-md border-none bg-zinc-200 dark:bg-zinc-800;
   }

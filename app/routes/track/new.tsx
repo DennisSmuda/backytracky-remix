@@ -3,7 +3,7 @@ import type { MouseEvent } from "react";
 import { useRef } from "react";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
 import {
@@ -39,15 +39,31 @@ export const action: ActionFunction = async ({ request }) => {
   const userId = await requireUserId(request);
   const form = await request.formData();
   const trackname = form.get("trackname");
+  const description = form.get("description");
+  const authorName = form.get("author-name");
+  const bpm = form.get("bpm");
   const chords = form.get("chords");
 
-  if (typeof trackname !== "string" || typeof chords !== "string") {
+  if (
+    typeof trackname !== "string" ||
+    typeof chords !== "string" ||
+    typeof description !== "string" ||
+    typeof authorName !== "string" ||
+    typeof bpm !== "string"
+  ) {
     return badRequest({
       formError: `Form not submitted correctly.`,
     });
   }
 
-  const newTrack = await createTrack(trackname, chords, userId);
+  const newTrack = await createTrack(
+    trackname,
+    description,
+    chords,
+    userId,
+    authorName,
+    bpm
+  );
   if (!newTrack) {
     return badRequest({
       formError: `couldn't create track!`,
@@ -65,6 +81,7 @@ const badRequest = (data: any) => json(data, { status: 400 });
  */
 export default function NewTrackRoute() {
   const actionData = useActionData();
+  const loaderData = useLoaderData();
 
   const [isChordEditorOpen, setIsChordEditorOpen] = useState(false);
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
@@ -182,10 +199,31 @@ export default function NewTrackRoute() {
       <section>
         <div className="container max-w-4xl mx-auto pt-8">
           <Form className="flex flex-col gap-4" method="post">
+            <div className="grid grid-cols-6 gap-4">
+              <div className="col-span-5">
+                <TextInput
+                  name="trackname"
+                  label="New Trackname"
+                  placeholder="My awesome backing track"
+                  required
+                  actionData={actionData}
+                />
+              </div>
+              <div className="col-span-1">
+                <TextInput
+                  type="number"
+                  name="bpm"
+                  label="Beats per Minute"
+                  placeholder="120"
+                  required
+                  actionData={actionData}
+                />
+              </div>
+            </div>
             <TextInput
-              name="trackname"
-              label="New Trackname"
-              placeholder="My awesome backing track"
+              name="description"
+              label="Description"
+              placeholder="Short but sweet progression in C major"
               required
               actionData={actionData}
             />
@@ -193,6 +231,13 @@ export default function NewTrackRoute() {
               name="chords"
               type="text"
               value={JSON.stringify(chords)}
+              className="hidden"
+              readOnly
+            />
+            <input
+              name="author-name"
+              type="text"
+              value={JSON.stringify(loaderData.user.username)}
               className="hidden"
               readOnly
             />

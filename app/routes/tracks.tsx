@@ -86,7 +86,7 @@ export default function TracksRoute() {
                 key={track.id}
                 className="flex items-center justify-between rounded-lg p-4 bg-zinc-100 dark:bg-gray-1000"
               >
-                <div className="flex items-center">
+                <div className="flex items-start">
                   <span className="bg-zinc-200 dark:bg-zinc-800 p-1 text-xs rounded-md text-center mr-4 font-black">
                     {track.upvotes} 👌
                   </span>

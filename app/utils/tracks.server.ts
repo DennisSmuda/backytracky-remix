@@ -4,8 +4,11 @@ import { db } from "./db.server";
 
 export async function createTrack(
   trackname: string,
+  description: string,
   chords: string,
-  userId: string
+  userId: string,
+  authorName: string,
+  bpm: string
 ) {
   const track = await db.track.create({
     data: {
