@@ -23,6 +23,9 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     const { pianoSampler, drumSampler } = loadInstruments(() =>
       console.log("Instruments Ready")
     );
+    if (Transport.bpm) {
+      Transport.bpm.value = bpm;
+    }
     piano.current = pianoSampler;
     drums.current = drumSampler;
     // console.log("sheet prop", sheet);
@@ -41,7 +44,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   }, [chordsPart, drumPart]);
 
   function setupMusic(): void {
-    const { chords, groove, numBars } = music.generateMusic();
+    const { chords, groove, loopEnd } = music.generateMusic();
 
     chordsPart.current = new Part(function (time, note) {
       document
@@ -63,7 +66,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
     chordsPart.current.start(0);
     chordsPart.current.loop = true;
-    chordsPart.current.loopEnd = numBars;
+    chordsPart.current.loopEnd = loopEnd;
     chordsPartChords.current = chords;
 
     drumPart.current = new Part(function (time, note) {
@@ -76,10 +79,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     }, groove);
     drumPart.current.start(0);
     drumPart.current.loop = true;
-    drumPart.current.loopEnd = numBars;
-    if (Transport.bpm) {
-      Transport.bpm.set(bpm);
-    }
+    drumPart.current.loopEnd = loopEnd;
   }
 
   function disposeParts() {
@@ -113,7 +113,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   return (
     <div>
       <div className="">
-        <div className="sheet-grid my-4 overflow-x-scroll">
+        <div className="sheet-grid my-4">
           {chordsPartChords.current.map((chord: ChordBeat) => (
             <PlayChord key={chord.time} chord={chord} clickChord={clickChord} />
           ))}

@@ -3256,14 +3256,18 @@ nav a[aria-current="page"] {
 
 .sheet-grid {
   display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.5rem;
-  grid-template-columns: repeat(4, minmax(160px, 1fr));
   border-right-width: 1px;
   border-left-width: 1px;
   border-color: rgb(113 113 122 / var(--tw-border-opacity));
   --tw-border-opacity: 0.5;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
+}
+
+.sheet-grid--editor {
+  grid-template-columns: repeat(4, minmax(190px, 1fr));
 }
 
 .sheet-grid__chord {
@@ -3274,7 +3278,6 @@ nav a[aria-current="page"] {
   padding: 0.5rem;
   display: flex;
   min-height: 96px;
-  min-width: 160px;
   flex-direction: column;
   align-items: stretch;
   text-align: left;
@@ -3283,6 +3286,10 @@ nav a[aria-current="page"] {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
+}
+
+.sheet-grid--editor .sheet-grid__chord {
+  min-width: 190px;
 }
 
 .sheet-grid__chord.active, 
