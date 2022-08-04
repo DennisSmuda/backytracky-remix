@@ -3461,6 +3461,10 @@ nav a[aria-current="page"] {
   flex-shrink: 1;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .border-collapse {
   border-collapse: collapse;
 }
@@ -3493,6 +3497,10 @@ nav a[aria-current="page"] {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -3507,6 +3515,10 @@ nav a[aria-current="page"] {
 
 .items-baseline {
   align-items: baseline;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-center {

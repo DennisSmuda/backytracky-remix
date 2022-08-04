@@ -7,7 +7,7 @@ import { loadInstruments } from "../../music/loader";
 import Music from "../../music/Music";
 import PlayChord from "./PlayChord";
 
-export default function TrackPlayer({ sheet }: any) {
+export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [, setIsReady] = useState<Boolean>(false);
 
@@ -77,6 +77,8 @@ export default function TrackPlayer({ sheet }: any) {
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = numBars;
+
+    Transport.bpm.value = bpm;
   }
 
   function disposeParts() {

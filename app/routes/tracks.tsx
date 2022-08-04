@@ -85,27 +85,31 @@ export default function TracksRoute() {
             {loaderData.tracks.map((track: Track) => (
               <div
                 key={track.id}
-                className="flex items-center justify-between rounded-lg p-4 bg-zinc-100 dark:bg-gray-1000"
+                className="flex items-center rounded-lg p-4 bg-zinc-100 dark:bg-gray-1000"
               >
-                <div className="flex items-start">
-                  <span className="bg-zinc-200 dark:bg-zinc-800 p-1 text-xs rounded-md text-center mr-4 font-black">
-                    {track.upvotes} 👌
-                  </span>
-                  <div className="flex flex-col">
-                    <span className="opacity-50 text-xs">
+                {/* <span className="bg-zinc-200 dark:bg-zinc-800 p-1 rounded-md text-center mr-4 font-black">
+                  {track.upvotes} 👌
+                </span> */}
+                <div className="flex flex-col flex-grow">
+                  <div className="flex items-center gap-4 text-xs opacity-50">
+                    <span>{track.bpm} bpm</span>
+                    <span className="">
                       {new Date(track.createdAt).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "long",
                       })}
                     </span>
-                    <Link
-                      to={`/track/${track.id}`}
-                      className="text-xl font-black hover:underline"
-                    >
-                      {track.name}
-                    </Link>
+                    <span> by {track.authorName}</span>
                   </div>
+                  <Link
+                    to={`/track/${track.id}`}
+                    className="text-xl font-black hover:underline"
+                  >
+                    {track.name}
+                  </Link>
+                  <p className="opacity-50">{track.description}</p>
                 </div>
+
                 {track.userId === loaderData.user?.id ? (
                   <Form method="delete">
                     <input type="hidden" name="trackId" value={track.id} />

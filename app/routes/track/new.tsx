@@ -238,7 +238,7 @@ export default function NewTrackRoute() {
             <input
               name="author-name"
               type="text"
-              value={JSON.stringify(loaderData.user.username)}
+              value={loaderData.user.username}
               className="hidden"
               readOnly
             />
