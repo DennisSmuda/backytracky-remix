@@ -24,7 +24,7 @@ export default function Navbar({ user }: NavbarProps) {
     <header className="flex justify-between items-baseline px-1 sm:px-4 py-2">
       <nav className="grid gap-4 grid-flow-col items-baseline">
         <Link className="font-black tracking-tighter text-xl" to="/">
-          Backytracky
+          BackyTracky
         </Link>
         <NavLink to="/tracks">Tracks</NavLink>
         {user?.username && (

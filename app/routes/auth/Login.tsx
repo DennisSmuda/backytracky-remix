@@ -112,7 +112,7 @@ export default function LoginRoute() {
             <a href="https://dennissmuda.com/" className="underline">
               Contact me
             </a>{" "}
-            if you want to be part of the beta 🌋
+            if you want to know more, <br /> or if you have song requests 🤘
           </p>
         </div>
       </section>

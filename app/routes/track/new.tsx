@@ -9,7 +9,7 @@ import TextInput from "~/components/TextInput";
 import {
   increaseDuration,
   decreaseDuration,
-  converDurationToBars,
+  getNextChordTime,
 } from "~/music/utils";
 import ChordBeat from "~/music/ChordBeat";
 import { getUser, requireUserId } from "~/utils/session.server";
@@ -56,7 +56,6 @@ export const action: ActionFunction = async ({ request }) => {
     });
   }
 
-  // TODO: Save tracks with more data!
   const newTrack = await createTrack(
     trackname,
     description,
@@ -151,26 +150,6 @@ export default function NewTrackRoute() {
     setChords([...chords]);
   };
 
-  const getNextChordTime = (previousChord: ChordBeat) => {
-    const c = previousChord;
-    const duration = converDurationToBars(c.duration);
-
-    let nextBeat = (c.beat as number) + duration;
-    let nextBar = c.bar as number;
-    if (nextBeat >= 4) {
-      nextBar += 1;
-      nextBeat -= 4;
-    }
-
-    let nextSixteenth = 0;
-
-    return {
-      bar: nextBar,
-      beat: nextBeat,
-      sixteenth: nextSixteenth,
-    };
-  };
-
   const addChord = (e: MouseEvent) => {
     e.preventDefault();
 
@@ -214,7 +193,7 @@ export default function NewTrackRoute() {
                 <TextInput
                   type="number"
                   name="bpm"
-                  label="Beats per Minute"
+                  label="BPM"
                   placeholder="120"
                   required
                   actionData={actionData}
@@ -244,7 +223,7 @@ export default function NewTrackRoute() {
             />
 
             <div className="overflow-x-scroll">
-              <fieldset className="sheet-grid overflow-x-auto">
+              <fieldset className="sheet-grid sheet-grid--editor overflow-x-auto">
                 <legend>Sheet - one full row = count to 4</legend>
                 <ClientOnly fallback={<p>Loading...</p>}>
                   {() => (

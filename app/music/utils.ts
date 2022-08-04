@@ -91,7 +91,7 @@ export const decreaseDuration = (duration: Subdivision) => {
   return "4n";
 };
 
-export const converDurationToBars = (duration: Subdivision) => {
+export const convertDurationToBeats = (duration: Subdivision) => {
   switch (duration) {
     case "1n":
       return 4;
@@ -104,4 +104,38 @@ export const converDurationToBars = (duration: Subdivision) => {
     default:
       return 1;
   }
+};
+
+export const getNextChordTime = (previousChord: ChordBeat) => {
+  const c = previousChord;
+  const beats = convertDurationToBeats(c.duration);
+
+  let nextBeat = (c.beat as number) + beats;
+  let nextBar = c.bar as number;
+  if (nextBeat >= 4) {
+    nextBar += 1;
+    nextBeat -= 4;
+  }
+
+  let nextSixteenth = 0;
+
+  return {
+    bar: nextBar,
+    beat: nextBeat,
+    sixteenth: nextSixteenth,
+  };
+};
+
+export const getChordEndTime = (chord: ChordBeat) => {
+  const beats = convertDurationToBeats(chord.duration);
+
+  let nextBeat = (chord.beat as number) + beats;
+  let nextBar = chord.bar as number;
+  let nextSixteenth = 0;
+
+  return {
+    bar: nextBar,
+    beat: nextBeat,
+    sixteenth: nextSixteenth,
+  };
 };

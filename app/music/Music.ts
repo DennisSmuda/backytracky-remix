@@ -1,6 +1,10 @@
 import type { Subdivision } from "tone/build/esm/core/type/Units";
 import ChordBeat from "./ChordBeat";
-import { converDurationToBars, increaseChordTimeByBeats } from "./utils";
+import {
+  convertDurationToBeats,
+  increaseChordTimeByBeats,
+  getChordEndTime,
+} from "./utils";
 
 interface MusicConfig {
   sheet: string | object;
@@ -33,7 +37,7 @@ export default class Music {
     });
 
     chords.forEach((chord: ChordBeat) => {
-      const bars = converDurationToBars(chord.duration);
+      const bars = convertDurationToBeats(chord.duration);
       totalBeatCount += bars;
       for (let i = 0; i < bars; i++) {
         const next = increaseChordTimeByBeats(chord, i);
@@ -45,10 +49,13 @@ export default class Music {
       }
     });
 
+    const loopEnd = getChordEndTime(chords[chords.length - 1]);
+    const loopEndTime = `${loopEnd.bar}:${loopEnd.beat}:0`;
+
     return {
       chords,
       groove,
-      numBars: totalBeatCount / 2,
+      loopEndTime,
     };
   }
 }

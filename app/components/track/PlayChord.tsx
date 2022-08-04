@@ -17,7 +17,6 @@ export default function PlayChord({ chord, clickChord }: PlayChordProps) {
           chord.duration
         } base-duration-${getSplitDurations(chord)?.base}`}
       >
-        <span className="opacity-50 text-xs">{chord.time}</span>
         <div className="flex items-center">
           <span className="chord-root font-black">{chord.root}</span>
           <span className="chord-type opacity-50 ml-px">{chord.type}</span>
@@ -35,7 +34,7 @@ export default function PlayChord({ chord, clickChord }: PlayChordProps) {
         `}
       >
         <div className="new-sheet__chord opacity-40">
-          <span className="opacity-50 text-xs">...</span>
+          {/* <span className="opacity-50 text-xs">...</span> */}
           <div className="flex items-center">
             <span className="chord-root font-black">{chord.root}</span>
             <span className="chord-type opacity-50 ml-px">{chord.type}</span>
