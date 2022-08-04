@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import Footer from "~/components/Footer";
+import Footer from "../components/Footer";
 
 export default function Index() {
   return (
