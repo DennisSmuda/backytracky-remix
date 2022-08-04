@@ -48,13 +48,14 @@ export default class Music {
         });
       }
     });
+
     const loopEnd = getChordEndTime(chords[chords.length - 1]);
-    console.log("Total bar count", loopEnd);
+    const loopEndTime = `${loopEnd.bar}:${loopEnd.beat}:0`;
 
     return {
       chords,
       groove,
-      loopEnd: `${loopEnd.bar}:${loopEnd.beat}:0`,
+      loopEndTime,
     };
   }
 }

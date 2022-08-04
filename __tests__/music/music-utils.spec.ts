@@ -1,6 +1,6 @@
 import type { Subdivision } from "tone/build/esm/core/type/Units";
 import {
-  converDurationToBars,
+  convertDurationToBeats,
   decreaseDuration,
   getSplitDurations,
   hasOverflow,
@@ -64,11 +64,11 @@ describe("Music Utils", () => {
   });
 
   it("can convert a duration to a number of bars", () => {
-    expect(converDurationToBars("4n")).toEqual(1);
-    expect(converDurationToBars("2n")).toEqual(2);
-    expect(converDurationToBars("2n.")).toEqual(3);
-    expect(converDurationToBars("1n")).toEqual(4);
+    expect(convertDurationToBeats("4n")).toEqual(1);
+    expect(convertDurationToBeats("2n")).toEqual(2);
+    expect(convertDurationToBeats("2n.")).toEqual(3);
+    expect(convertDurationToBeats("1n")).toEqual(4);
     // @ts-expect-error
-    expect(converDurationToBars("")).toEqual(1);
+    expect(convertDurationToBeats("")).toEqual(1);
   });
 });

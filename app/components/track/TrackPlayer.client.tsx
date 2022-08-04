@@ -44,7 +44,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   }, [chordsPart, drumPart]);
 
   function setupMusic(): void {
-    const { chords, groove, loopEnd } = music.generateMusic();
+    const { chords, groove, loopEndTime } = music.generateMusic();
 
     chordsPart.current = new Part(function (time, note) {
       document
@@ -66,7 +66,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
     chordsPart.current.start(0);
     chordsPart.current.loop = true;
-    chordsPart.current.loopEnd = loopEnd;
+    chordsPart.current.loopEnd = loopEndTime;
     chordsPartChords.current = chords;
 
     drumPart.current = new Part(function (time, note) {
@@ -79,7 +79,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     }, groove);
     drumPart.current.start(0);
     drumPart.current.loop = true;
-    drumPart.current.loopEnd = loopEnd;
+    drumPart.current.loopEnd = loopEndTime;
   }
 
   function disposeParts() {
