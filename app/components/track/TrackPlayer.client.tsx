@@ -77,8 +77,9 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = numBars;
-
-    Transport.bpm.value = bpm;
+    if (Transport.bpm) {
+      Transport.bpm.set(bpm);
+    }
   }
 
   function disposeParts() {
