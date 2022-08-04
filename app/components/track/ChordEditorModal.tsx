@@ -4,7 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import type { Sampler } from "tone";
 import { now } from "tone";
 import { loadInstruments } from "../../music/loader";
-import type { ChordBeat } from "../../music/Music";
+import type ChordBeat from "../../music/ChordBeat";
 
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
@@ -31,7 +31,9 @@ export default function ChordEditor({
 
   useEffect(() => {
     // on-mount effect-hook to load instruments
-    const { pianoSampler, drumSampler } = loadInstruments();
+    const { pianoSampler, drumSampler } = loadInstruments(() =>
+      console.log("Instruments Loaded")
+    );
     piano.current = pianoSampler;
     drums.current = drumSampler;
   }, []);

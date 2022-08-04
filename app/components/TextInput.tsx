@@ -32,6 +32,8 @@ export default function TextInput({
         required={required}
         placeholder={placeholder}
         defaultValue={actionData?.fields?.name}
+        min={type === "number" ? "30" : undefined}
+        max={type === "number" ? "280" : undefined}
         aria-invalid={Boolean(actionData?.fieldErrors?.name)}
         aria-errormessage={
           actionData?.fieldErrors?.name ? `${name}-error` : undefined

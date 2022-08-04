@@ -17,11 +17,14 @@ model User {
 }
 
 model Track {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
-  sheet     Json
-  userId    String?
-  upvotes   Int
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  description String
+  sheet       Json
+  userId      String
+  authorName  String
+  bpm         Int
+  upvotes     Int
 }

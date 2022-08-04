@@ -19,10 +19,20 @@ export default function TrackDetailRoute() {
     <main className="main">
       <section>
         <div className="max-w-4xl mx-auto pt-8">
+          <div className="opacity-50 text-xs flex items-center gap-4">
+            <span>{track.bpm} bpm</span>
+            <span className="">
+              {new Date(track.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+              })}
+            </span>
+            <span> by {track.authorName}</span>
+          </div>
           <h1>{track.name}</h1>
 
           <ClientOnly fallback={<p>Loading...</p>}>
-            {() => <TrackPlayer sheet={track.sheet} />}
+            {() => <TrackPlayer sheet={track.sheet} bpm={track.bpm} />}
           </ClientOnly>
         </div>
       </section>

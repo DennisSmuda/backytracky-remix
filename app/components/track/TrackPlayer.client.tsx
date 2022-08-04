@@ -1,29 +1,28 @@
 import type { Sampler } from "tone";
-import { TransportTime } from "tone";
-import { Time } from "tone";
-import type { ChordBeat } from "../../music/Music";
+import type ChordBeat from "../../music/ChordBeat";
 
 import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
 import { loadInstruments } from "../../music/loader";
 import Music from "../../music/Music";
-import { PlayChord } from "./PlayChord";
+import PlayChord from "./PlayChord";
 
-export default function TrackPlayer({ sheet }: any) {
+export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [, setIsReady] = useState<Boolean>(false);
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
   const music = new Music({ sheet });
-  const currentChordTime = useRef<string>("0:0:0");
 
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
+    const { pianoSampler, drumSampler } = loadInstruments(() =>
+      console.log("Instruments Ready")
+    );
     piano.current = pianoSampler;
     drums.current = drumSampler;
     // console.log("sheet prop", sheet);
@@ -78,6 +77,9 @@ export default function TrackPlayer({ sheet }: any) {
     drumPart.current.start(0);
     drumPart.current.loop = true;
     drumPart.current.loopEnd = numBars;
+    if (Transport.bpm) {
+      Transport.bpm.set(bpm);
+    }
   }
 
   function disposeParts() {

@@ -1,6 +1,6 @@
 import { Sampler } from "tone";
 
-export function loadInstruments() {
+export function loadInstruments(callback: Function) {
   const pianoSampler = new Sampler({
     urls: {
       A0: "A0.mp3",
@@ -37,8 +37,7 @@ export function loadInstruments() {
     release: 1,
     baseUrl: "https://tonejs.github.io/audio/salamander/",
     onload: () => {
-      // console.log("piano loadded");
-      // Tone.start();
+      if (callback) callback();
     },
   }).toDestination();
 

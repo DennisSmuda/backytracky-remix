@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 
 // App
-import Index from "../app/routes/index";
+import Index from "../../app/routes/index";
 
 describe("Home page", () => {
   it("renders a heading", () => {

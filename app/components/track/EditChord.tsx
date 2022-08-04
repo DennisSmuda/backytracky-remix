@@ -1,5 +1,5 @@
-import type { ChordBeat } from "~/music/Music";
-import { getSplitDurations, hasOverflow } from "~/music/utils";
+import type ChordBeat from "../../music/ChordBeat";
+import { getSplitDurations, hasOverflow } from "../../music/utils";
 
 interface EditChordProps {
   chord: ChordBeat;
@@ -10,7 +10,7 @@ interface EditChordProps {
   playChord: Function;
 }
 
-export function EditChord({
+export default function EditChord({
   chord,
   shortenChord,
   lengthenChord,
