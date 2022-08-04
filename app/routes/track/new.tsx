@@ -56,6 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
     });
   }
 
+  // TODO: Save tracks with more data!
   const newTrack = await createTrack(
     trackname,
     description,

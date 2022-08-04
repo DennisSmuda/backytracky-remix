@@ -13,6 +13,9 @@ export async function createTrack(
   const track = await db.track.create({
     data: {
       name: trackname,
+      description: description,
+      authorName: authorName,
+      bpm: parseInt(bpm),
       sheet: JSON.parse(chords),
       upvotes: 0,
       userId: userId,

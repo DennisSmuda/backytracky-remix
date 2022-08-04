@@ -81,6 +81,7 @@ export default function TracksRoute() {
         <div className="container max-w-4xl mx-auto pt-8">
           <h1>Tracks 🎺</h1>
           <div className="grid gap-4 my-8">
+            {loaderData.tracks.length === 0 ? <div>no Tracks yet</div> : ""}
             {loaderData.tracks.map((track: Track) => (
               <div
                 key={track.id}
