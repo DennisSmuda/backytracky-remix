@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
-import TrackListing from "~/components/track/TrackListing";
-import { jazzBlues, OneTwoFive } from "~/music/featuredTracks";
+import TrackListing from "../components/track/TrackListing";
+import { jazzBlues, OneTwoFive } from "../music/featuredTracks";
 import BackgroundNotes from "../components/BackgroundNotes";
 import Footer from "../components/Footer";
 
