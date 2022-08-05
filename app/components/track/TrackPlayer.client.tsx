@@ -10,6 +10,7 @@ import PlayChord from "./PlayChord";
 export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [, setIsReady] = useState<Boolean>(false);
+  const [currentBpm, setCurrentBpm] = useState<number>();
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
@@ -23,9 +24,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     const { pianoSampler, drumSampler } = loadInstruments(() =>
       console.log("Instruments Ready")
     );
-    if (Transport.bpm) {
-      Transport.bpm.value = bpm;
-    }
+    setCurrentBpm(bpm);
     piano.current = pianoSampler;
     drums.current = drumSampler;
     // console.log("sheet prop", sheet);
@@ -38,6 +37,13 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       disposeParts();
     };
   }, []);
+
+  useEffect(() => {
+    if (Transport.bpm && typeof currentBpm !== "undefined") {
+      console.log("Effect bpm", currentBpm);
+      Transport.bpm.value = currentBpm;
+    }
+  }, [currentBpm]);
 
   useEffect(() => {
     setIsReady(true);
@@ -121,6 +127,17 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       </div>
 
       <div className="grid grid-flow-col gap-4">
+        <label htmlFor="bpm-slider" className="flex flex-col">
+          <span>bpm: {currentBpm}</span>
+          <input
+            onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
+            min="50"
+            max="240"
+            type="range"
+            name="bpm-slider"
+            id="bpm-slider"
+          />
+        </label>
         {isPlaying ? (
           <button className="button" onClick={stop}>
             Stop
