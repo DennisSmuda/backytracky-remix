@@ -40,7 +40,6 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   useEffect(() => {
     if (Transport.bpm && typeof currentBpm !== "undefined") {
-      console.log("Effect bpm", currentBpm);
       Transport.bpm.value = currentBpm;
     }
   }, [currentBpm]);
@@ -128,11 +127,11 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
       <div className="form fixed bottom-0 md:bottom-8 left-0 right-0">
         <div className="max-w-2xl mx-auto grid grid-cols-6 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
-          {/* <div className="col-span-6"></div> */}
           <label htmlFor="bpm-slider" className="flex flex-col col-span-4">
             <span>bpm: {currentBpm}</span>
             <input
               onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
+              defaultValue={currentBpm}
               min="50"
               max="240"
               type="range"
@@ -143,11 +142,33 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
           </label>
           {isPlaying ? (
             <button className="button button--delete col-span-2" onClick={stop}>
-              Stop
+              <span>Stop</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z"
+                  clipRule="evenodd"
+                />
+              </svg>
             </button>
           ) : (
             <button className="button button--submit col-span-2" onClick={play}>
-              Play
+              <span>Play</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                  clipRule="evenodd"
+                />
+              </svg>
             </button>
           )}
         </div>
