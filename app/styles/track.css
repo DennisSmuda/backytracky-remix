@@ -12,6 +12,9 @@
 .sheet-grid--editor {
   grid-template-columns: repeat(4, minmax(190px, 1fr));
 }
+.sheet-grid--player {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
 .sheet-grid__chord {
   -webkit-user-select: none;
      -moz-user-select: none;

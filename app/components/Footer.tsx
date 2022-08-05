@@ -18,8 +18,9 @@ export default function Footer() {
                 href="https://dennissmuda.com/"
                 target="blank"
                 rel="nofollower"
+                className="underline hover:no-underline"
               >
-                dennis smuda
+                dennissmuda
               </a>
             </span>
           </div>
