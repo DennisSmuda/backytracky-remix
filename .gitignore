@@ -6,3 +6,4 @@ coverage
 /.netlify
 /build
 .env
+/app/styles/

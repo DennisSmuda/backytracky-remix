@@ -24,7 +24,7 @@ const sampleChordConfig = {
   type: "maj",
   extension: "7",
   note: ["C3", "E3", "G3", "B3"],
-  duration: "4n" as Duration,
+  duration: "1n" as Duration,
   bar: 0,
   beat: 0,
   sixteenth: 0,
@@ -163,7 +163,7 @@ export default function NewTrackRoute() {
       type: "maj",
       extension: "7",
       note: ["C3", "E3", "G3", "B3"],
-      duration: "4n",
+      duration: "1n",
       ...newTime,
     });
 
