@@ -118,7 +118,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   return (
     <div>
-      <div className="">
+      <div className="mb-32">
         <div className="sheet-grid sheet-grid--player my-4">
           {chordsPartChords.current.map((chord: ChordBeat) => (
             <PlayChord key={chord.time} chord={chord} clickChord={clickChord} />
@@ -126,27 +126,30 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
         </div>
       </div>
 
-      <div className="grid grid-flow-col gap-4">
-        <label htmlFor="bpm-slider" className="flex flex-col">
-          <span>bpm: {currentBpm}</span>
-          <input
-            onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
-            min="50"
-            max="240"
-            type="range"
-            name="bpm-slider"
-            id="bpm-slider"
-          />
-        </label>
-        {isPlaying ? (
-          <button className="button" onClick={stop}>
-            Stop
-          </button>
-        ) : (
-          <button className="button button--submit" onClick={play}>
-            Play
-          </button>
-        )}
+      <div className="form fixed bottom-0 md:bottom-8 left-0 right-0">
+        <div className="max-w-2xl mx-auto grid grid-cols-6 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
+          <label htmlFor="bpm-slider" className="flex flex-col col-span-4">
+            <span>bpm: {currentBpm}</span>
+            <input
+              onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
+              min="50"
+              max="240"
+              type="range"
+              name="bpm-slider"
+              id="bpm-slider"
+              className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
+            />
+          </label>
+          {isPlaying ? (
+            <button className="button button--delete col-span-2" onClick={stop}>
+              Stop
+            </button>
+          ) : (
+            <button className="button button--submit col-span-2" onClick={play}>
+              Play
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
