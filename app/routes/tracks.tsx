@@ -1,5 +1,9 @@
 import type { Track } from "@prisma/client";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Form,
@@ -50,6 +54,12 @@ const notifyErrorDeleting = () =>
 
 const notifySuccessDeleting = () =>
   toast.success("Deleted track!", { id: `track-delete-toast` });
+
+export const meta: MetaFunction = () => ({
+  title: "All Tracks | BackyTracky",
+  description:
+    "Explore all published backing tracks. Grab your instrument and practice some chord changes!",
+});
 
 export default function TracksRoute() {
   const actionData = useActionData();

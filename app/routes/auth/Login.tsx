@@ -3,7 +3,8 @@ import { json } from "@remix-run/node";
 import { Form, useActionData, useTransition } from "@remix-run/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import TextInput from "~/components/TextInput";
+import BackgroundNotes from "../../components/BackgroundNotes";
+import TextInput from "../../components/TextInput";
 import { createUserSession, login } from "~/utils/session.server";
 import { validatePassword, validateUsername } from "./utils";
 
@@ -80,8 +81,8 @@ export default function LoginRoute() {
 
   return (
     <main>
-      <section>
-        <div className="max-w-sm mx-auto pt-8">
+      <section className="relative">
+        <div className="max-w-sm mx-auto pt-8 relative z-10">
           <h1 className="">Login 🔑</h1>
           <Form className="grid gap-4 mt-4" method="post">
             <TextInput
@@ -108,7 +109,7 @@ export default function LoginRoute() {
             </div>
           </Form>
 
-          <p className="text-xs text-center mt-4 opacity-50">
+          <p className="text-xs text-center mt-4 text-opacity-50 bg-white dark:bg-zinc-900 p-2 rounded-md">
             <a href="https://dennissmuda.com/" className="underline">
               Contact me
             </a>{" "}
@@ -116,6 +117,9 @@ export default function LoginRoute() {
           </p>
         </div>
       </section>
+      <div className="relative pt-32">
+        <BackgroundNotes />
+      </div>
     </main>
   );
 }
