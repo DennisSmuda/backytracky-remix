@@ -47,6 +47,7 @@ export default function EditChord({
           </div>
           <div className="duration-line" />
         </div>
+
         <div className="grid grid-flow-col gap-2 mt-2">
           <button
             disabled={chord.duration === "4n"}
