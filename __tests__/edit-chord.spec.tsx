@@ -6,7 +6,20 @@ import type { Subdivision } from "tone/build/esm/core/type/Units";
 
 const sampleChord = {
   note: ["C3", "E3", "G3", "B3"],
-  duration: "4n" as Subdivision,
+  duration: "2n" as Subdivision,
+  time: "0:0:0",
+  root: "C",
+  type: "maj",
+  extension: "7",
+  bar: 0,
+  beat: 0,
+  sixteenth: 0,
+  ghostTime: "0:0:0",
+};
+
+const overflowChord = {
+  note: ["C3", "E3", "G3", "B3"],
+  duration: "1n" as Subdivision,
   time: "0:0:0",
   root: "C",
   type: "maj",
@@ -14,26 +27,62 @@ const sampleChord = {
   bar: 0,
   beat: 2,
   sixteenth: 0,
-  ghostTime: "0:2:0",
+  ghostTime: "0:0:0",
 };
 
 describe("Play Chord Component", () => {
-  it("Can show a chord", () => {
-    const clickChord = jest.fn();
-    const { getByText } = render(
+  const shortenChord = jest.fn();
+  const lengthenChord = jest.fn();
+  const clickChord = jest.fn();
+  const deleteChord = jest.fn();
+  const editChord = jest.fn();
+
+  it("Can show a chord", async () => {
+    const { getByRole } = render(
       <EditChord
-        key={sampleChord.time}
         chord={sampleChord}
-        shortenChord={clickChord}
-        lengthenChord={clickChord}
+        shortenChord={shortenChord}
+        lengthenChord={lengthenChord}
+        deleteChord={deleteChord}
+        editChord={editChord}
+        playChord={clickChord}
+      />
+    );
+    const shortenButton = getByRole("button", { name: /chord shorter/i });
+    const lengthenButton = getByRole("button", { name: /chord longer/i });
+    const editButton = getByRole("button", { name: /edit/i });
+    const deleteButton = getByRole("button", { name: /delete/i });
+
+    fireEvent.click(lengthenButton);
+    expect(lengthenChord).toHaveBeenCalled();
+
+    fireEvent.click(editButton);
+    expect(editChord).toHaveBeenCalled();
+
+    fireEvent.click(deleteButton);
+    expect(deleteChord).toHaveBeenCalled();
+
+    fireEvent.click(shortenButton);
+    expect(shortenChord).toHaveBeenCalled();
+  });
+
+  it("Can show an overflowing chord", async () => {
+    const { getByRole } = render(
+      <EditChord
+        chord={overflowChord}
+        shortenChord={shortenChord}
+        lengthenChord={lengthenChord}
         deleteChord={clickChord}
         editChord={clickChord}
         playChord={clickChord}
       />
     );
-    const lengthen = getByText(/chord longer/i);
+    const shorten = getByRole("button", { name: /chord shorter/i });
+    const lengthenButton = getByRole("button", { name: /chord longer/i });
 
-    fireEvent.click(lengthen);
-    expect(clickChord).toHaveBeenCalled();
+    expect(lengthenButton).toBeDisabled();
+
+    fireEvent.click(shorten);
+    expect(shortenChord).toHaveBeenCalled();
   });
 });

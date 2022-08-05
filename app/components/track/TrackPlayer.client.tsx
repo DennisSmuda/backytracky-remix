@@ -24,10 +24,12 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     const { pianoSampler, drumSampler } = loadInstruments(() =>
       console.log("Instruments Ready")
     );
+
     setCurrentBpm(bpm);
+
     piano.current = pianoSampler;
     drums.current = drumSampler;
-    // console.log("sheet prop", sheet);
+
     setupMusic();
   }, []);
 
