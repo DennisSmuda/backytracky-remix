@@ -128,6 +128,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
       <div className="form fixed bottom-0 md:bottom-8 left-0 right-0">
         <div className="max-w-2xl mx-auto grid grid-cols-6 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
+          {/* <div className="col-span-6"></div> */}
           <label htmlFor="bpm-slider" className="flex flex-col col-span-4">
             <span>bpm: {currentBpm}</span>
             <input
