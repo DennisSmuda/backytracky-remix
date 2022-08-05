@@ -1,12 +1,15 @@
 import { Link } from "@remix-run/react";
+import BackgroundNotes from "../components/BackgroundNotes";
 import Footer from "../components/Footer";
 
 export default function Index() {
   return (
     <main className="main">
-      <section>
-        <div className="container max-w-4xl mx-auto pt-8">
-          <div className="bt-prose">
+      <section className="relative">
+        <BackgroundNotes />
+
+        <div className="container max-w-4xl mx-auto pt-8 relative z-10">
+          <div className="bt-prose mx-auto my-12">
             <h1 className="mb-0">Welcome to BackyTracky 👋</h1>
             <p className="max-w-lg">
               <strong>Backing Tracks</strong> for Musicians. <s>Create and</s>{" "}
@@ -14,9 +17,10 @@ export default function Index() {
               licks or solos. Discover chord progressions others are using or
               make your own!
             </p>
-          </div>
-          <div className="grid gap-4 my-8 grid-flow-col max-w-md">
-            <Link className="button button--submit" to="/tracks">
+            <Link
+              className="button button--submit no-underline px-12 text-white"
+              to="/tracks"
+            >
               See all the Tracks
             </Link>
           </div>
@@ -25,7 +29,7 @@ export default function Index() {
 
       <section>
         <div className="container max-w-4xl mx-auto">
-          <div className="bt-prose">
+          <div className="bt-prose mx-auto my-12">
             <h2 className="mt-2">FAQ</h2>
             <h3>What is all this?</h3>
             <p className="max-w-lg">

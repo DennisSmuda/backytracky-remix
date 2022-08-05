@@ -28,9 +28,9 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "BackyTracky | Home",
+  title: "Free Backing Tracks for Musicians! | BackyTracky Homepage",
   description:
-    "Practice your scales and solos! Create, share and discover Backing Tracks",
+    "Create and play-along Lead-Sheets to level up your chops! Practice scales, licks or solos. Discover chord progressions others are using or make your own!",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -50,6 +50,27 @@ function App() {
         <Meta />
         <Links />
         <ThemeScript ssrTheme={Boolean(ssrTheme)} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#18181b" />
       </head>
       <body>
         <Navbar user={user} />
