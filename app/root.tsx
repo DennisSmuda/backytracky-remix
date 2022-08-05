@@ -71,6 +71,17 @@ function App() {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#18181b" />
+        <meta
+          property="og:title"
+          content="Free Backing Tracks for Musicians | BackyTracky"
+        />
+        <meta
+          property="og:description"
+          content="Create and play-along Lead-Sheets to level up your chops! Practice scales, licks or solos. Discover chord progressions others are using or make your own!"
+        />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:site_name" content="BackyTracky" />
+        <meta property="og:image" content="/og-image.png" />
       </head>
       <body>
         <Navbar user={user} />

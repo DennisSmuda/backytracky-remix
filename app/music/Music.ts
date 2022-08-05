@@ -43,7 +43,8 @@ export default class Music {
         const next = increaseChordTimeByBeats(chord, i);
         groove.push({
           time: `${next.bar}:${next.beat}`,
-          note: next.beat === 0 ? ["C1", "D1"] : "D1",
+          // note: next.beat === 0 ? ["C1", "D1"] : "D1",
+          note: "D1",
           duration: "8n",
         });
       }

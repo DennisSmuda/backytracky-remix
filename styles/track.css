@@ -7,6 +7,10 @@
   grid-template-columns: repeat(4, minmax(190px, 1fr));
 }
 
+.sheet-grid--player {
+  @apply grid-cols-8;
+}
+
 .sheet-grid__chord {
   @apply p-2 rounded-md select-none;
   @apply flex flex-col items-stretch text-left;

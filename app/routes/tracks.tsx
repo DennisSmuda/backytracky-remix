@@ -5,15 +5,12 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {
-  Form,
-  Link,
-  useActionData,
-  useLoaderData,
-  useTransition,
-} from "@remix-run/react";
+import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import BackgroundNotes from "~/components/BackgroundNotes";
+import Footer from "~/components/Footer";
+import TrackListing from "~/components/track/TrackListing";
 
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
@@ -87,65 +84,29 @@ export default function TracksRoute() {
 
   return (
     <main className="main">
+      <div className="fixed bottom-24 md:bottom-32 right-0 md:right-20">
+        <BackgroundNotes />
+      </div>
       <section>
-        <div className="container max-w-4xl mx-auto pt-8">
-          <h1>Tracks 🎺</h1>
-          <div className="grid gap-4 my-8">
-            {loaderData.tracks.length === 0 ? <div>no Tracks yet</div> : ""}
-            {loaderData.tracks.map((track: Track) => (
-              <div
-                key={track.id}
-                className="flex items-center rounded-lg p-4 bg-zinc-100 dark:bg-gray-1000"
-              >
-                {/* <span className="bg-zinc-200 dark:bg-zinc-800 p-1 rounded-md text-center mr-4 font-black">
-                  {track.upvotes} 👌
-                </span> */}
-                <div className="flex flex-col flex-grow">
-                  <div className="flex items-center gap-4 text-xs opacity-50">
-                    <span>{track.bpm} bpm</span>
-                    <span className="">
-                      {new Date(track.createdAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                      })}
-                    </span>
-                    <span> by {track.authorName}</span>
-                  </div>
-                  <Link
-                    to={`/track/${track.id}`}
-                    className="text-xl font-black hover:underline mt-2"
-                  >
-                    {track.name}
-                  </Link>
-                  <p className="opacity-50">{track.description}</p>
-                </div>
-
-                {track.userId === loaderData.user?.id ? (
-                  <Form method="delete">
-                    <input type="hidden" name="trackId" value={track.id} />
-                    <button className="icon-button button--delete">
-                      <span>delete</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                  </Form>
-                ) : (
-                  ""
-                )}
-              </div>
-            ))}
+        <div className="container max-w-4xl mx-auto pt-8 relative">
+          <div className="bt-prose mx-auto my-12">
+            <h1 className="font-black">All Tracks 🎺</h1>
+            <div className="grid gap-12 my-12">
+              {loaderData.tracks.length === 0 ? <div>no Tracks yet</div> : ""}
+              {loaderData.tracks.map((track: Track) => (
+                <TrackListing
+                  key={track.id}
+                  track={track}
+                  showDescription={true}
+                  currentUserId={loaderData.user?.id}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }
