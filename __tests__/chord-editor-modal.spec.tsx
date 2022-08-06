@@ -54,31 +54,42 @@ const sampleChord = {
 
 describe("Chord Editor Modal Component", () => {
   it.only("renders correctly and has clickable buttons to change a chord", () => {
-    // const setStateMock = jest.fn();
-    // const useStateMock: any = (useState: any) => [useState, setStateMock];
-
-    // jest.spyOn(React, "useState").mockImplementation(useStateMock);
-
-    const { getByText } = render(
+    const close = jest.fn();
+    const { getByText, baseElement } = render(
       <ChordEditorModal
         isOpen={true}
         currentChord={sampleChord}
-        onClose={jest.fn()}
+        onClose={close}
       />
     );
 
     getByText(/change chord/i);
     const saveButton = getByText(/save/i);
     const rootButton = getByText(/Bb/i);
-    const octaveButton = getByText(/1/i);
+    const octaveButton = getByText(/4/i);
     const typeButton = getByText(/maj/i);
+    const extensionButton = getByText(/7b9/i);
 
     fireEvent.click(rootButton);
     fireEvent.click(octaveButton);
     fireEvent.click(typeButton);
+    fireEvent.click(extensionButton);
 
     fireEvent.click(saveButton);
 
     getByText(/change chord/i);
+
+    fireEvent.click(baseElement);
+    expect(close).toHaveBeenCalled();
+  });
+
+  it.only("renders correctly and has clickable buttons to change a chord", () => {
+    render(
+      <ChordEditorModal
+        isOpen={false}
+        currentChord={sampleChord}
+        onClose={jest.fn()}
+      />
+    );
   });
 });

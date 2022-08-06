@@ -12,10 +12,10 @@ const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
 const octaves: Array<string> = ["2", "3", "4", "5", "6"];
 const chordTypes: Array<string> = ["", "maj", "min", "dim"];
-const extensions: Array<string> = ["", "7", "9", "13"];
+const extensions: Array<string> = ["", "7", "7b9", "9", "7#9", "11", "13"];
 
 export default function ChordEditor({
-  isOpen = false,
+  isOpen,
   currentChord,
   onClose,
 }: {
@@ -41,10 +41,20 @@ export default function ChordEditor({
   // Effect hook to generate new chord based on user input
   useEffect(() => {
     if (!currentChord) return;
+
     const newChord = Chord.getChord(
       `${newType}${newExtension}`,
       `${newRoot}${newOctave}`
     );
+
+    // Sometimes tonal.js CAN'T generate notes that tone.js agrees with
+    let isChordBroken = newChord.empty;
+    newChord.notes.forEach((note) => {
+      if (note.includes("##")) isChordBroken = true;
+      if (note.includes("bb")) isChordBroken = true;
+    });
+
+    if (isChordBroken) return;
 
     currentChord.note = newChord.notes;
     currentChord.root = newRoot;
@@ -72,7 +82,7 @@ export default function ChordEditor({
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
         <div className="fixed inset-0 flex items-center justify-center p-2">
-          <Dialog.Panel className="w-full max-w-sm rounded bg-white p-4 dark:bg-black">
+          <Dialog.Panel className="w-full max-w-md rounded bg-white p-4 dark:bg-black">
             <Dialog.Title>Change Chord</Dialog.Title>
             <Dialog.Description className="text-xs opacity-50">
               Listen to know what works! Not every combination is possible.
