@@ -21,9 +21,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments(() =>
-      console.log("Instruments Ready")
-    );
+    const { pianoSampler, drumSampler } = loadInstruments();
 
     setCurrentBpm(bpm);
 

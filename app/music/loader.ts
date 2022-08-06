@@ -1,6 +1,6 @@
 import { Sampler } from "tone";
 
-export function loadInstruments(callback: Function) {
+export function loadInstruments(callback?: Function) {
   const pianoSampler = new Sampler({
     urls: {
       A0: "A0.mp3",
@@ -36,9 +36,7 @@ export function loadInstruments(callback: Function) {
     },
     release: 1,
     baseUrl: "https://tonejs.github.io/audio/salamander/",
-    onload: () => {
-      if (callback) callback();
-    },
+    onload: () => {},
   }).toDestination();
 
   const drumSampler = new Sampler({
@@ -48,11 +46,9 @@ export function loadInstruments(callback: Function) {
       E1: "snare.mp3",
     },
     baseUrl: "https://tonejs.github.io/audio/drum-samples/acoustic-kit/",
-    onload: () => {
-      // console.log("Drums Loaded");
-      // drums.set(drumSampler);
-    },
   }).toDestination();
+
+  if (callback) callback(true);
 
   return {
     pianoSampler,

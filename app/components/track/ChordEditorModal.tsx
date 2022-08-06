@@ -1,10 +1,12 @@
+import type { Sampler } from "tone";
+import type ChordBeat from "../../music/ChordBeat";
+
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Chord } from "@tonaljs/tonal";
-import { Fragment, useEffect, useRef, useState } from "react";
-import type { Sampler } from "tone";
 import { now } from "tone";
+
 import { loadInstruments } from "../../music/loader";
-import type ChordBeat from "../../music/ChordBeat";
 
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
@@ -29,17 +31,15 @@ export default function ChordEditor({
   const [newExtension, setNewExtension] = useState<string>("7");
   const [newOctave, setNewOctave] = useState<string>("3");
 
+  // on-mount effect-hook to load instruments
   useEffect(() => {
-    // on-mount effect-hook to load instruments
-    const { pianoSampler, drumSampler } = loadInstruments(() =>
-      console.log("Instruments Loaded")
-    );
+    const { pianoSampler, drumSampler } = loadInstruments();
     piano.current = pianoSampler;
     drums.current = drumSampler;
   }, []);
 
+  // Effect hook to generate new chord based on user input
   useEffect(() => {
-    // Effect hook to generate new chord based on user input
     if (!currentChord) return;
     const newChord = Chord.getChord(
       `${newType}${newExtension}`,
