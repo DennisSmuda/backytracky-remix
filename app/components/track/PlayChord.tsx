@@ -17,7 +17,7 @@ export default function PlayChord({ chord, clickChord }: PlayChordProps) {
           chord.duration
         } base-duration-${getSplitDurations(chord)?.base}`}
       >
-        <div className="flex items-center">
+        <div className="flex items-center text-xs sm:text-sm md:text-base">
           <span className="chord-root font-black">{chord.root}</span>
           <span className="chord-type opacity-50 ml-px">{chord.type}</span>
           <span className="chord-extension relative text-xs ml-px -top-1">
