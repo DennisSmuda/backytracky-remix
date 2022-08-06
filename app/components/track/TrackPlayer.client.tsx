@@ -10,6 +10,7 @@ import PlayChord from "./PlayChord";
 export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [, setIsReady] = useState<Boolean>(false);
+  const [currentBpm, setCurrentBpm] = useState<number>();
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
@@ -20,15 +21,13 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments(() =>
-      console.log("Instruments Ready")
-    );
-    if (Transport.bpm) {
-      Transport.bpm.value = bpm;
-    }
+    const { pianoSampler, drumSampler } = loadInstruments();
+
+    setCurrentBpm(bpm);
+
     piano.current = pianoSampler;
     drums.current = drumSampler;
-    // console.log("sheet prop", sheet);
+
     setupMusic();
   }, []);
 
@@ -38,6 +37,12 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       disposeParts();
     };
   }, []);
+
+  useEffect(() => {
+    if (Transport.bpm && typeof currentBpm !== "undefined") {
+      Transport.bpm.value = currentBpm;
+    }
+  }, [currentBpm]);
 
   useEffect(() => {
     setIsReady(true);
@@ -112,7 +117,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   return (
     <div>
-      <div className="">
+      <div className="mb-32">
         <div className="sheet-grid sheet-grid--player my-4">
           {chordsPartChords.current.map((chord: ChordBeat) => (
             <PlayChord key={chord.time} chord={chord} clickChord={clickChord} />
@@ -120,16 +125,53 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
         </div>
       </div>
 
-      <div className="grid grid-flow-col gap-4">
-        {isPlaying ? (
-          <button className="button" onClick={stop}>
-            Stop
-          </button>
-        ) : (
-          <button className="button button--submit" onClick={play}>
-            Play
-          </button>
-        )}
+      <div className="form fixed bottom-0 md:bottom-8 left-0 right-0">
+        <div className="max-w-2xl mx-auto grid grid-cols-6 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
+          <label htmlFor="bpm-slider" className="flex flex-col col-span-4">
+            <span>bpm: {currentBpm}</span>
+            <input
+              onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
+              defaultValue={currentBpm}
+              min="50"
+              max="240"
+              type="range"
+              name="bpm-slider"
+              id="bpm-slider"
+              className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
+            />
+          </label>
+          {isPlaying ? (
+            <button className="button button--delete col-span-2" onClick={stop}>
+              <span>Stop</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          ) : (
+            <button className="button button--submit col-span-2" onClick={play}>
+              <span>Play</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

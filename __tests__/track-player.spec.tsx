@@ -39,7 +39,7 @@ jest.mock("tone", () => ({
 }));
 
 describe("Track Player Component", () => {
-  it("renders correctly and can press play/stop buttons to control the track", () => {
+  it("renders correctly and can press controls to play/stop/control the track", () => {
     const player = render(<TrackPayer sheet={[sampleChord]} bpm={120} />);
 
     const playButton = player.getByRole("button", { name: /play/i });
@@ -49,5 +49,8 @@ describe("Track Player Component", () => {
 
     const stopButton = player.getByRole("button", { name: /stop/i });
     fireEvent.click(stopButton);
+
+    const bpmRange = player.getByRole("slider", { name: /bpm:/i });
+    fireEvent.click(bpmRange);
   });
 });

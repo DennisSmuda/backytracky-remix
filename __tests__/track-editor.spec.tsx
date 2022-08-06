@@ -67,4 +67,20 @@ describe("Track Editor Component", () => {
     expect(clickChord).toHaveBeenCalled();
     fireEvent.click(playButton);
   });
+
+  it("shows appropriate message if there are no chords", () => {
+    const clickChord = jest.fn();
+
+    const { getByText } = render(
+      <TrackEditor
+        chords={[]}
+        shortenChord={clickChord}
+        lengthenChord={clickChord}
+        deleteChord={clickChord}
+        editChord={clickChord}
+      />
+    );
+
+    expect(getByText(/add some chords/i));
+  });
 });

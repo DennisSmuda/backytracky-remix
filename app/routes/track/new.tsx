@@ -24,7 +24,7 @@ const sampleChordConfig = {
   type: "maj",
   extension: "7",
   note: ["C3", "E3", "G3", "B3"],
-  duration: "4n" as Duration,
+  duration: "1n" as Duration,
   bar: 0,
   beat: 0,
   sixteenth: 0,
@@ -86,6 +86,7 @@ export default function NewTrackRoute() {
   const [isChordEditorOpen, setIsChordEditorOpen] = useState(false);
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
   const selectedChord = useRef<ChordBeat | null>(null);
+  const lastChord = useRef<ChordBeat | null>(null);
 
   useEffect(() => {
     setChords([new ChordBeat(sampleChordConfig)]);
@@ -94,6 +95,7 @@ export default function NewTrackRoute() {
   const editChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
     selectedChord.current = chord;
+    lastChord.current = chord;
     setIsChordEditorOpen(true);
   };
 
@@ -159,11 +161,11 @@ export default function NewTrackRoute() {
         : { bar: 0, beat: 0, sixteenth: 0 };
 
     const newChord = new ChordBeat({
-      root: "C",
-      type: "maj",
-      extension: "7",
-      note: ["C3", "E3", "G3", "B3"],
-      duration: "4n",
+      root: lastChord?.current?.root || "C",
+      type: lastChord?.current?.type || "maj",
+      extension: lastChord?.current?.extension || "7",
+      note: lastChord?.current?.note || ["C3", "E3", "G3", "B3"],
+      duration: lastChord?.current?.duration || "1n",
       ...newTime,
     });
 
@@ -189,6 +191,7 @@ export default function NewTrackRoute() {
                   actionData={actionData}
                 />
               </div>
+
               <div className="col-span-1">
                 <TextInput
                   type="number"
@@ -200,6 +203,7 @@ export default function NewTrackRoute() {
                 />
               </div>
             </div>
+
             <TextInput
               name="description"
               label="Description"
@@ -238,7 +242,9 @@ export default function NewTrackRoute() {
                 </ClientOnly>
               </fieldset>
             </div>
+
             <button className="button" onClick={addChord}>
+              <span>add chord</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path
                   fillRule="evenodd"
@@ -246,15 +252,17 @@ export default function NewTrackRoute() {
                   clipRule="evenodd"
                 />
               </svg>
-              <span>add chord</span>
             </button>
 
-            <input
-              disabled={chords.length === 0}
-              type="submit"
-              className="button col-span-4"
-              value="save track"
-            />
+            <label className="form-row" htmlFor="newChord">
+              <input
+                name="newChord"
+                disabled={chords.length === 0}
+                type="submit"
+                className="button col-span-4"
+                value="save track"
+              />
+            </label>
             <div id="form-error-message">
               {actionData?.formError ? (
                 <p className="form-validation-error text-center" role="alert">

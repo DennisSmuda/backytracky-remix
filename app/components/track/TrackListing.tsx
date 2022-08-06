@@ -11,7 +11,11 @@ export default function TrackListing({
   currentUserId: string | null;
 }) {
   return (
-    <div key={track.id} className="flex items-center rounded-lg">
+    <div
+      key={track.id}
+      className="flex items-center rounded-lg"
+      data-testid="track-listing"
+    >
       <div className="flex flex-col flex-grow">
         <div className="flex items-center gap-4 text-xs opacity-50">
           <span>{track.bpm} bpm</span>

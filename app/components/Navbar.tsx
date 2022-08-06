@@ -35,17 +35,19 @@ export default function Navbar({ user }: NavbarProps) {
       </nav>
       <nav className="grid gap-4 grid-flow-col items-center">
         {/* {user?.username} */}
-        {!user ? (
-          <>
-            <NavLink to="/auth/login">Login</NavLink>
-            {/* <NavLink to="/auth/register">Register</NavLink> */}
-          </>
-        ) : (
+        {user ? (
           <Form method="post" action="/auth/logout">
             <button onClick={notifyLogout} type="submit">
               Logout
             </button>
           </Form>
+        ) : (
+          <>
+            <NavLink className="hidden sm:block" to="/auth/login">
+              Login
+            </NavLink>
+            {/* <NavLink to="/auth/register">Register</NavLink> */}
+          </>
         )}
 
         <button className="text-xl" onClick={toggleTheme}>

@@ -84,7 +84,7 @@ export default function TracksRoute() {
 
   return (
     <main className="main">
-      <div className="fixed bottom-24 md:bottom-32 right-0 md:right-20">
+      <div className="absolute bottom-24 md:bottom-32 right-0 md:right-20">
         <BackgroundNotes />
       </div>
       <section>

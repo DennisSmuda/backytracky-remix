@@ -24,9 +24,7 @@ export default function TrackEditor({
   const drums = useRef<Sampler | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments(() =>
-      console.log("Loaded Instruments")
-    );
+    const { pianoSampler, drumSampler } = loadInstruments();
     piano.current = pianoSampler;
     drums.current = drumSampler;
   }, []);
