@@ -11,8 +11,21 @@ import { loadInstruments } from "../../music/loader";
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
 const octaves: Array<string> = ["2", "3", "4", "5", "6"];
-const chordTypes: Array<string> = ["", "maj", "min", "dim"];
-const extensions: Array<string> = ["", "7", "7b9", "9", "7#9", "11", "13"];
+const chordTypes: Array<string> = ["", "M", "maj", "min", "dim", "aug"];
+const extensions: Array<string> = [
+  "",
+  "7",
+  "7sus4",
+  "7b9",
+  "6",
+  "9",
+  "7#9",
+  "11",
+  "7#11",
+  "13",
+  "13#11",
+  "7#9#11",
+];
 
 export default function ChordEditor({
   isOpen,
@@ -25,6 +38,7 @@ export default function ChordEditor({
 }) {
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
+  const [newChordName, setNewChordName] = useState<string>("");
 
   const [newRoot, setNewRoot] = useState<string>("C");
   const [newType, setNewType] = useState<string>("maj");
@@ -51,17 +65,17 @@ export default function ChordEditor({
     let isChordBroken = newChord.empty;
     newChord.notes.forEach((note) => {
       if (note.includes("##")) isChordBroken = true;
-      if (note.includes("bb")) isChordBroken = true;
     });
 
-    if (isChordBroken) return;
+    if (isChordBroken) return setNewChordName("Try something else..");
 
     currentChord.note = newChord.notes;
     currentChord.root = newRoot;
     currentChord.type = newType;
     currentChord.extension = newExtension;
+    setNewChordName(newChord.symbol);
 
-    piano?.current?.triggerAttackRelease(currentChord.note, "8n", now(), 0.35);
+    piano?.current?.triggerAttackRelease(currentChord.note, "4n", now(), 0.35);
   }, [newRoot, newType, newExtension, newOctave, currentChord]);
 
   return (
@@ -83,7 +97,7 @@ export default function ChordEditor({
 
         <div className="fixed inset-0 flex items-center justify-center p-2">
           <Dialog.Panel className="w-full max-w-md rounded bg-white p-4 dark:bg-black">
-            <Dialog.Title>Change Chord</Dialog.Title>
+            <Dialog.Title>{newChordName || "Change chord"}</Dialog.Title>
             <Dialog.Description className="text-xs opacity-50">
               Listen to know what works! Not every combination is possible.
             </Dialog.Description>
@@ -126,7 +140,7 @@ export default function ChordEditor({
             </div>
 
             <span className="opacity-50 text-xs">extension</span>
-            <div className="grid grid-flow-col gap-2 mb-2">
+            <div className="grid grid-rows-2 grid-cols-6 gap-2 mb-2">
               {extensions.map((ext) => (
                 <button
                   key={ext}

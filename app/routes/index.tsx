@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
-import TrackListing from "../components/track/TrackListing";
-import { jazzBlues, OneTwoFive } from "../music/featuredTracks";
+// import TrackListing from "../components/track/TrackListing";
+// import { jazzBlues, OneTwoFive } from "../music/featuredTracks";
 import BackgroundNotes from "../components/BackgroundNotes";
 import Footer from "../components/Footer";
 
@@ -28,7 +28,8 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section>
+
+      {/* <section>
         <div className="container max-w-4xl mx-auto">
           <div className="bt-prose mx-auto">
             <h2 className="font-black mt-0">Featured Tracks</h2>
@@ -46,7 +47,7 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section>
         <div className="container max-w-4xl mx-auto">

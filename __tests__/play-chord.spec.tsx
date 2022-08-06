@@ -20,6 +20,7 @@ const sampleChord = {
 describe("Play Chord Component", () => {
   it("Can show a chord", () => {
     const clickChord = jest.fn();
+
     const { getAllByText } = render(
       <PlayChord
         key={sampleChord.time}
