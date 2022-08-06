@@ -9,15 +9,6 @@ global.IntersectionObserver = class FakeIntersectionObserver {
   disconnect() {}
 };
 
-// jest.mock("@headlessui/react", () => ({
-//   Transition: jest.fn(),
-//   Dialog: jest.autoMockOn(),
-// }));
-
-// jest.mock("@tonaljs/tonal", () => ({
-//   Chord: jest.autoMockOn(),
-// }));
-
 jest.mock("tone", () => ({
   start: jest.fn(),
   Sampler: jest.fn(() => ({
@@ -55,7 +46,7 @@ const sampleChord = {
 describe("Chord Editor Modal Component", () => {
   it.only("renders correctly and has clickable buttons to change a chord", () => {
     const close = jest.fn();
-    const { getByText, baseElement } = render(
+    const { getByText, baseElement, getByRole } = render(
       <ChordEditorModal
         isOpen={true}
         currentChord={sampleChord}
@@ -63,11 +54,11 @@ describe("Chord Editor Modal Component", () => {
       />
     );
 
-    getByText(/change chord/i);
-    const saveButton = getByText(/save/i);
-    const rootButton = getByText(/Bb/i);
-    const octaveButton = getByText(/4/i);
-    const typeButton = getByText(/maj/i);
+    getByText(/Cmaj7/);
+    const saveButton = getByRole("button", { name: /save/i });
+    const rootButton = getByRole("button", { name: /Bb/i });
+    const octaveButton = getByRole("button", { name: /2/i });
+    const typeButton = getByRole("button", { name: /maj/i });
     const extensionButton = getByText(/7b9/i);
 
     fireEvent.click(rootButton);
@@ -76,8 +67,6 @@ describe("Chord Editor Modal Component", () => {
     fireEvent.click(extensionButton);
 
     fireEvent.click(saveButton);
-
-    getByText(/change chord/i);
 
     fireEvent.click(baseElement);
     expect(close).toHaveBeenCalled();
