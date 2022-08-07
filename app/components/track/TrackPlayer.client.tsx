@@ -9,8 +9,8 @@ import PlayChord from "./PlayChord";
 
 export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
-  const [, setIsReady] = useState<Boolean>(false);
   const [currentBpm, setCurrentBpm] = useState<number>();
+  const [currentSwing] = useState<number>(1.0);
   const [currentGroove, setCurrentGroove] = useState<string>("hihat");
 
   const piano = useRef<Sampler | null>(null);
@@ -43,16 +43,10 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   }, [currentBpm]);
 
   useEffect(() => {
-    console.log("Set Groove!", currentGroove);
-    // if (Transport.bpm && typeof currentBpm !== "undefined") {
-    //   Transport.bpm.value = currentBpm;
-    // }
     function setupMusic(): void {
       const music = new Music({ sheet });
       const { chords, groove, loopEndTime } =
         music.generateMusic(currentGroove);
-
-      console.log("Groove Generated", groove);
 
       chordsPart.current = new Part(function (time, note) {
         document
@@ -87,16 +81,13 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       }, groove);
       drumPart.current.start(0);
       drumPart.current.loop = true;
-      // drumPart.current.loopEnd = loopEndTime;
+      drumPart.current.loopEnd = loopEndTime;
     }
+
     stop();
     disposeParts();
     setupMusic();
-  }, [currentGroove, sheet]);
-
-  // useEffect(() => {
-  //   setIsReady(true);
-  // }, [chordsPart, drumPart]);
+  }, [currentGroove, sheet, currentSwing]);
 
   function disposeParts() {
     chordsPart?.current?.dispose();
@@ -104,7 +95,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   }
 
   function play(): void {
-    Transport.swing = 1;
+    Transport.swing = currentSwing;
     setIsPlaying(true);
     if (typeof Transport.start !== "undefined") Transport.start();
     start();
@@ -136,14 +127,24 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
         </div>
       </div>
 
-      <div className="form fixed bottom-0 md:bottom-8 left-0 right-0">
+      <div className="form track-player-form fixed bottom-0 md:bottom-8 left-0 right-0">
         <div className="max-w-2xl mx-auto grid grid-cols-6 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
-          <button onClick={() => setCurrentGroove("hihat")}>hihat</button>
-          <button onClick={() => setCurrentGroove("fourOnTheFloor")}>
-            4 on the Floor
-          </button>
-          <button onClick={() => setCurrentGroove("bossa")}>Bossa</button>
-          <label htmlFor="bpm-slider" className="flex flex-col col-span-4">
+          {/* Sounds kinda bad tbh.. */}
+          {/* <label htmlFor="swing-slider" className="flex flex-col col-span-3">
+            <span>Swing: {currentSwing}</span>
+            <input
+              onChange={(e) => setCurrentSwing(parseFloat(e.target.value))}
+              defaultValue={currentBpm}
+              min="0"
+              max="1"
+              step="0.05"
+              type="range"
+              name="bpm-slider"
+              id="bpm-slider"
+              className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
+            />
+          </label> */}
+          <label htmlFor="bpm-slider" className="flex flex-col col-span-6">
             <span>bpm: {currentBpm}</span>
             <input
               onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
@@ -156,8 +157,24 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
               className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
             />
           </label>
+          <button
+            className={`button col-span-1 ${
+              currentGroove === "hihat" ? "active" : ""
+            }`}
+            onClick={() => setCurrentGroove("hihat")}
+          >
+            hihat
+          </button>
+          <button
+            className={`button col-span-1 ${
+              currentGroove === "fourToTheFloor" ? "active" : ""
+            }`}
+            onClick={() => setCurrentGroove("fourToTheFloor")}
+          >
+            4 Floor
+          </button>
           {isPlaying ? (
-            <button className="button button--delete col-span-2" onClick={stop}>
+            <button className="button button--delete col-span-4" onClick={stop}>
               <span>Stop</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +189,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
               </svg>
             </button>
           ) : (
-            <button className="button button--submit col-span-2" onClick={play}>
+            <button className="button button--submit col-span-4" onClick={play}>
               <span>Play</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

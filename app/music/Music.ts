@@ -6,6 +6,12 @@ import {
   getChordEndTime,
 } from "./utils";
 
+enum grooves {
+  hihat = "hihat",
+  fourToTheFloor = "fourToTheFloor",
+  bossa = "bossa",
+}
+
 interface MusicConfig {
   sheet: string | object;
 }
@@ -40,13 +46,7 @@ export default class Music {
       for (let i = 0; i < bars; i++) {
         const next = increaseChordTimeByBeats(chord, i);
         const nextGrooveBeats = this.getNextGrooveBeats(next, currentGroove);
-        // groove.push({
-        //   time: `${next.bar}:${next.beat}`,
-        //   // note: next.beat === 0 ? ["C1", "D1"] : "D1",
-        //   note: this.getDrumBeatNotes(currentGroove, next.bar, next.beat),
-        //   duration: "8n",
-        // });
-        console.log("Groove", nextGrooveBeats);
+
         groove.push(...nextGrooveBeats);
       }
     });
@@ -63,7 +63,7 @@ export default class Music {
 
   getNextGrooveBeats(
     next: { bar: number; beat: number },
-    groove: string = "hihat"
+    groove: string = grooves.hihat
   ) {
     return [
       {
@@ -71,41 +71,21 @@ export default class Music {
         note: this.getDrumBeatNotes(groove, next.bar, next.beat),
         duration: "16n" as Subdivision,
       },
-      // In Betweeners
-      groove === "bossa"
-        ? {
-            time: `${next.bar}:${next.beat}:1`,
-            note: (next.beat + 4) % 4 === 0 ? "C1" : "D1",
-            duration: "16n" as Subdivision,
-          }
-        : {
-            // 16nth hihat
-            time: `${next.bar}:${next.beat}:1`,
-            note: "D1",
-            duration: "16n" as Subdivision,
-          },
+      {
+        time: `${next.bar}:${next.beat}:1`,
+        note: "D1", // 16nth note hihat
+        duration: "16n" as Subdivision,
+      },
     ];
   }
 
-  getDrumBeatNotes(groove: string = "hihat", bar: number, beat: number) {
-    if (groove === "hihat") {
+  getDrumBeatNotes(groove: string = grooves.hihat, bar: number, beat: number) {
+    if (groove === grooves.hihat) {
       return "D1";
     }
 
-    if (groove === "fourOnTheFloor") {
+    if (groove === grooves.fourToTheFloor) {
       return beat % 2 === 1 ? ["C1", "D1", "E1"] : ["C1", "D1"];
-    }
-
-    if (groove === "bossa") {
-      if (bar === 0 && beat === 0) {
-        return ["C1", "D1"];
-      }
-      if (bar === 0 && beat === 1) {
-        return ["D1", "E1"];
-      }
-      if (bar === 0 && beat === 2) {
-        return ["D1"];
-      }
     }
 
     return "D1";

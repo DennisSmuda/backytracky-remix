@@ -12,9 +12,9 @@ const sampleChord = {
   type: "maj",
   extension: "7",
   bar: 0,
-  beat: 2,
+  beat: 1,
   sixteenth: 0,
-  ghostTime: "0:2:0",
+  ghostTime: "0:0:0",
 };
 
 jest.mock("tone", () => ({
@@ -50,7 +50,24 @@ describe("Track Player Component", () => {
     const stopButton = player.getByRole("button", { name: /stop/i });
     fireEvent.click(stopButton);
 
+    const fourFloorButton = player.getByRole("button", { name: /4 floor/i });
+    fireEvent.click(fourFloorButton);
+
+    const hihatButton = player.getByRole("button", { name: /hihat/i });
+    fireEvent.click(hihatButton);
+
+    const bpmSlider = player.getByRole("slider", { name: /bpm/i });
+    fireEvent.change(bpmSlider, { target: { value: 220 } });
+    expect(bpmSlider).toHaveValue("220");
+
     const bpmRange = player.getByRole("slider", { name: /bpm:/i });
     fireEvent.click(bpmRange);
+  });
+
+  it("can click on chords", () => {
+    const player = render(<TrackPayer sheet={[sampleChord]} bpm={120} />);
+    const chords = player.getAllByRole("button", { name: /c maj 7/i });
+
+    fireEvent.click(chords[0]);
   });
 });
