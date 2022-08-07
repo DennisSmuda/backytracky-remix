@@ -12,6 +12,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [currentBpm, setCurrentBpm] = useState<number>();
   const [currentSwing] = useState<number>(1.0);
   const [currentGroove, setCurrentGroove] = useState<string>("hihat");
+  const [sixteenthHit, setSixteenthHit] = useState<boolean>(false);
 
   const piano = useRef<Sampler | null>(null);
   const drums = useRef<Sampler | null>(null);
@@ -45,8 +46,10 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   useEffect(() => {
     function setupMusic(): void {
       const music = new Music({ sheet });
-      const { chords, groove, loopEndTime } =
-        music.generateMusic(currentGroove);
+      const { chords, groove, loopEndTime } = music.generateMusic(
+        currentGroove,
+        sixteenthHit
+      );
 
       chordsPart.current = new Part(function (time, note) {
         document
@@ -87,7 +90,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     stop();
     disposeParts();
     setupMusic();
-  }, [currentGroove, sheet, currentSwing]);
+  }, [currentGroove, sheet, currentSwing, sixteenthHit]);
 
   function disposeParts() {
     chordsPart?.current?.dispose();
@@ -128,7 +131,21 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       </div>
 
       <div className="form track-player-form fixed bottom-0 md:bottom-8 left-0 right-0">
-        <div className="max-w-2xl mx-auto grid grid-cols-6 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
+        <div className="max-w-2xl mx-auto grid grid-cols-9 gap-4 p-4 bg-zinc-100 dark:bg-gray-1000 rounded-t-lg md:rounded-b-lg">
+          <label
+            htmlFor="sixteenthHitCheckBox"
+            className="flex flex-col col-span-1"
+          >
+            <span>16nth</span>
+            <input
+              onChange={() => setSixteenthHit(!sixteenthHit)}
+              defaultChecked={sixteenthHit}
+              type="checkbox"
+              name="sixteenthHitCheckBox"
+              id="sixteenthHitCheckBox"
+              className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
+            />
+          </label>
           {/* Sounds kinda bad tbh.. */}
           {/* <label htmlFor="swing-slider" className="flex flex-col col-span-3">
             <span>Swing: {currentSwing}</span>
@@ -144,7 +161,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
               className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
             />
           </label> */}
-          <label htmlFor="bpm-slider" className="flex flex-col col-span-6">
+          <label htmlFor="bpm-slider" className="flex flex-col col-span-8">
             <span>bpm: {currentBpm}</span>
             <input
               onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
@@ -174,7 +191,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
             4 Floor
           </button>
           {isPlaying ? (
-            <button className="button button--delete col-span-4" onClick={stop}>
+            <button className="button button--delete col-span-7" onClick={stop}>
               <span>Stop</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +206,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
               </svg>
             </button>
           ) : (
-            <button className="button button--submit col-span-4" onClick={play}>
+            <button className="button button--submit col-span-7" onClick={play}>
               <span>Play</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

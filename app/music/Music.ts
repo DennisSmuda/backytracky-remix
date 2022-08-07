@@ -30,7 +30,7 @@ export default class Music {
     }
   }
 
-  generateMusic(currentGroove: string) {
+  generateMusic(currentGroove: string, sixteenthHit: boolean = false) {
     const groove: Array<{
       time: string;
       note: string | Array<string>;
@@ -45,7 +45,11 @@ export default class Music {
       const bars = convertDurationToBeats(chord.duration);
       for (let i = 0; i < bars; i++) {
         const next = increaseChordTimeByBeats(chord, i);
-        const nextGrooveBeats = this.getNextGrooveBeats(next, currentGroove);
+        const nextGrooveBeats = this.getNextGrooveBeats(
+          next,
+          currentGroove,
+          sixteenthHit
+        );
 
         groove.push(...nextGrooveBeats);
       }
@@ -63,20 +67,26 @@ export default class Music {
 
   getNextGrooveBeats(
     next: { bar: number; beat: number },
-    groove: string = grooves.hihat
+    groove: string = grooves.hihat,
+    sixteenthHit: boolean
   ) {
-    return [
+    const beats = [
       {
         time: `${next.bar}:${next.beat}:0`,
         note: this.getDrumBeatNotes(groove, next.bar, next.beat),
-        duration: "16n" as Subdivision,
-      },
-      {
-        time: `${next.bar}:${next.beat}:1`,
-        note: "D1", // 16nth note hihat
-        duration: "16n" as Subdivision,
+        duration: "4n" as Subdivision,
       },
     ];
+
+    if (sixteenthHit) {
+      beats.push({
+        time: `${next.bar}:${next.beat}:1`,
+        note: "D1", // 16nth note hihat
+        duration: "4n" as Subdivision,
+      });
+    }
+
+    return beats;
   }
 
   getDrumBeatNotes(groove: string = grooves.hihat, bar: number, beat: number) {
