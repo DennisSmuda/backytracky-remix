@@ -109,8 +109,13 @@
     @apply text-xs;
   }
 
+  .track-player-form .button.active,
   .chord-editor-modal .button.active {
     @apply bg-blue-300 dark:bg-blue-900;
+  }
+
+  .track-player-form .button {
+    @apply text-xs font-normal whitespace-nowrap;
   }
 
   /**

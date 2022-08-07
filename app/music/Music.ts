@@ -6,6 +6,12 @@ import {
   getChordEndTime,
 } from "./utils";
 
+enum grooves {
+  hihat = "hihat",
+  fourToTheFloor = "fourToTheFloor",
+  bossa = "bossa",
+}
+
 interface MusicConfig {
   sheet: string | object;
 }
@@ -24,13 +30,12 @@ export default class Music {
     }
   }
 
-  generateMusic() {
+  generateMusic(currentGroove: string) {
     const groove: Array<{
       time: string;
       note: string | Array<string>;
       duration: Subdivision;
     }> = [];
-    let totalBeatCount = 0;
 
     const chords = this.sheet.map((chord: ChordBeat) => {
       return new ChordBeat(chord);
@@ -38,15 +43,11 @@ export default class Music {
 
     chords.forEach((chord: ChordBeat) => {
       const bars = convertDurationToBeats(chord.duration);
-      totalBeatCount += bars;
       for (let i = 0; i < bars; i++) {
         const next = increaseChordTimeByBeats(chord, i);
-        groove.push({
-          time: `${next.bar}:${next.beat}`,
-          // note: next.beat === 0 ? ["C1", "D1"] : "D1",
-          note: "D1",
-          duration: "8n",
-        });
+        const nextGrooveBeats = this.getNextGrooveBeats(next, currentGroove);
+
+        groove.push(...nextGrooveBeats);
       }
     });
 
@@ -58,5 +59,35 @@ export default class Music {
       groove,
       loopEndTime,
     };
+  }
+
+  getNextGrooveBeats(
+    next: { bar: number; beat: number },
+    groove: string = grooves.hihat
+  ) {
+    return [
+      {
+        time: `${next.bar}:${next.beat}:0`,
+        note: this.getDrumBeatNotes(groove, next.bar, next.beat),
+        duration: "16n" as Subdivision,
+      },
+      {
+        time: `${next.bar}:${next.beat}:1`,
+        note: "D1", // 16nth note hihat
+        duration: "16n" as Subdivision,
+      },
+    ];
+  }
+
+  getDrumBeatNotes(groove: string = grooves.hihat, bar: number, beat: number) {
+    if (groove === grooves.hihat) {
+      return "D1";
+    }
+
+    if (groove === grooves.fourToTheFloor) {
+      return beat % 2 === 1 ? ["C1", "D1", "E1"] : ["C1", "D1"];
+    }
+
+    return "D1";
   }
 }
