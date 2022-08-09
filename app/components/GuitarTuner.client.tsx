@@ -1,7 +1,7 @@
 import type { Sampler } from "tone";
 import { now } from "tone";
 import { useEffect, useRef, useState } from "react";
-import { useInstruments } from "~/hooks/useInstruments";
+import { useInstruments } from "../hooks/useInstruments";
 
 const standardTuning = ["E2", "A2", "D3", "G3", "B3", "E4"];
 const standardFlatTuning = ["Eb2", "B2", "Db3", "Gb3", "Bb3", "Eb4"];

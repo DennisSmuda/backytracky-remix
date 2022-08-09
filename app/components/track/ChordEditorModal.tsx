@@ -6,7 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Chord } from "@tonaljs/tonal";
 import { now } from "tone";
 
-import { loadInstruments } from "../../music/loader";
+import { useInstruments } from "../../hooks/useInstruments";
 
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
@@ -36,8 +36,9 @@ export default function ChordEditor({
   currentChord: ChordBeat | null;
   onClose: Function;
 }) {
-  const piano = useRef<Sampler | null>(null);
-  const drums = useRef<Sampler | null>(null);
+  const [instruments] = useInstruments();
+  const piano = useRef<Sampler>();
+  const drums = useRef<Sampler>();
   const [newChordName, setNewChordName] = useState<string>("");
 
   const [newRoot, setNewRoot] = useState<string>("C");
@@ -47,10 +48,9 @@ export default function ChordEditor({
 
   // on-mount effect-hook to load instruments
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
-    piano.current = pianoSampler;
-    drums.current = drumSampler;
-  }, []);
+    piano.current = instruments?.pianoSampler;
+    drums.current = instruments?.drumSampler;
+  }, [instruments]);
 
   // Effect hook to generate new chord based on user input
   useEffect(() => {

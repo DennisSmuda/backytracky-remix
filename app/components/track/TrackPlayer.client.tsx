@@ -3,32 +3,29 @@ import type ChordBeat from "../../music/ChordBeat";
 
 import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
-import { loadInstruments } from "../../music/loader";
 import Music from "../../music/Music";
 import PlayChord from "./PlayChord";
+import { useInstruments } from "../../hooks/useInstruments";
 
 export default function TrackPlayer({ sheet, bpm = 120 }: any) {
+  const [instruments] = useInstruments();
+  const piano = useRef<Sampler>();
+  const drums = useRef<Sampler>();
+
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [currentBpm, setCurrentBpm] = useState<number>();
   const [currentSwing] = useState<number>(1.0);
   const [currentGroove, setCurrentGroove] = useState<string>("hihat");
   const [sixteenthHit, setSixteenthHit] = useState<boolean>(false);
 
-  const piano = useRef<Sampler | null>(null);
-  const drums = useRef<Sampler | null>(null);
-
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
-
-    setCurrentBpm(bpm);
-
-    piano.current = pianoSampler;
-    drums.current = drumSampler;
-  }, []);
+    piano.current = instruments?.pianoSampler;
+    drums.current = instruments?.drumSampler;
+  }, [instruments]);
 
   useEffect(() => {
     return () => {
