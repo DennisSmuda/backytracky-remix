@@ -6,12 +6,13 @@ export function useInstruments() {
   const [instruments, setInstruments] = useState<{
     pianoSampler: Sampler;
     drumSampler: Sampler;
+    bassSampler: Sampler;
   }>();
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
+    const { pianoSampler, drumSampler, bassSampler } = loadInstruments();
 
-    setInstruments({ pianoSampler, drumSampler });
+    setInstruments({ pianoSampler, bassSampler, drumSampler });
   }, []);
 
   return [instruments];

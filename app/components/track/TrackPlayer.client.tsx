@@ -11,6 +11,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [instruments] = useInstruments();
   const piano = useRef<Sampler>();
   const drums = useRef<Sampler>();
+  const bass = useRef<Sampler>();
 
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [currentBpm, setCurrentBpm] = useState<number>();
@@ -20,11 +21,13 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
+  let bassLinePart = useRef<Part>();
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
     piano.current = instruments?.pianoSampler;
     drums.current = instruments?.drumSampler;
+    bass.current = instruments?.bassSampler;
   }, [instruments]);
 
   useEffect(() => {
@@ -43,7 +46,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   useEffect(() => {
     function setupMusic(): void {
       const music = new Music({ sheet });
-      const { chords, groove, loopEndTime } = music.generateMusic(
+      const { chords, groove, bassLine, loopEndTime } = music.generateMusic(
         currentGroove,
         sixteenthHit
       );
@@ -62,7 +65,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
           note.note,
           note.duration,
           time,
-          0.35
+          0.3
         );
       }, chords);
 
@@ -71,12 +74,24 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       chordsPart.current.loopEnd = loopEndTime;
       chordsPartChords.current = chords;
 
+      bassLinePart.current = new Part(function (time, bassNote) {
+        bass.current?.triggerAttackRelease(
+          bassNote.note,
+          bassNote.duration,
+          time,
+          0.25
+        );
+      }, bassLine);
+      bassLinePart.current.start(0);
+      bassLinePart.current.loop = true;
+      bassLinePart.current.loopEnd = loopEndTime;
+
       drumPart.current = new Part(function (time, note) {
         drums?.current?.triggerAttackRelease(
           note?.note,
           note?.duration,
           time,
-          0.2
+          0.15
         );
       }, groove);
       drumPart.current.start(0);
@@ -92,6 +107,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   function disposeParts() {
     chordsPart?.current?.dispose();
     drumPart?.current?.dispose();
+    bassLinePart?.current?.dispose();
   }
 
   function play(): void {
