@@ -1,10 +1,7 @@
-import { useEffect, useRef } from "react";
 import { now } from "tone";
 
-import type { Sampler } from "tone";
 import type ChordBeat from "../../music/ChordBeat";
-
-import { loadInstruments } from "../../music/loader";
+import { useInstruments } from "../../hooks/useInstruments";
 import EditChord from "./EditChord";
 
 export default function TrackEditor({
@@ -20,20 +17,18 @@ export default function TrackEditor({
   editChord: Function;
   deleteChord: Function;
 }) {
-  const piano = useRef<Sampler | null>(null);
-  const drums = useRef<Sampler | null>(null);
-
-  useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
-    piano.current = pianoSampler;
-    drums.current = drumSampler;
-  }, []);
+  const [instruments] = useInstruments();
 
   const playChord = (e: MouseEvent, chord: ChordBeat) => {
     e.preventDefault();
-    if (piano?.current?.loaded) {
-      piano?.current?.triggerAttackRelease(chord.note, "4n", now(), 0.35);
-    }
+    if (!instruments?.pianoSampler?.loaded) return;
+
+    instruments?.pianoSampler?.triggerAttackRelease(
+      chord.note,
+      "4n",
+      now(),
+      0.35
+    );
   };
   return (
     <>

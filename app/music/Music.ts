@@ -37,6 +37,12 @@ export default class Music {
       duration: Subdivision;
     }> = [];
 
+    const bassLine: Array<{
+      time: string;
+      note: string | Array<string>;
+      duration: Subdivision;
+    }> = [];
+
     const chords = this.sheet.map((chord: ChordBeat) => {
       return new ChordBeat(chord);
     });
@@ -52,6 +58,11 @@ export default class Music {
         );
 
         groove.push(...nextGrooveBeats);
+        bassLine.push({
+          time: `${next.bar}:${next.beat}:0`,
+          note: `${chord.root}2`,
+          duration: "8n" as Subdivision,
+        });
       }
     });
 
@@ -60,6 +71,7 @@ export default class Music {
 
     return {
       chords,
+      bassLine,
       groove,
       loopEndTime,
     };

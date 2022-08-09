@@ -1,12 +1,11 @@
-import type { Sampler } from "tone";
 import type ChordBeat from "../../music/ChordBeat";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Chord } from "@tonaljs/tonal";
 import { now } from "tone";
 
-import { loadInstruments } from "../../music/loader";
+import { useInstruments } from "../../hooks/useInstruments";
 
 const roots: Array<string> = ["C", "D", "E", "F", "G", "A", "B"];
 const flatRoots: Array<string> = ["Db", "Eb", "Gb", "Ab", "Bb"];
@@ -36,21 +35,13 @@ export default function ChordEditor({
   currentChord: ChordBeat | null;
   onClose: Function;
 }) {
-  const piano = useRef<Sampler | null>(null);
-  const drums = useRef<Sampler | null>(null);
+  const [instruments] = useInstruments();
   const [newChordName, setNewChordName] = useState<string>("");
 
   const [newRoot, setNewRoot] = useState<string>("C");
   const [newType, setNewType] = useState<string>("maj");
   const [newExtension, setNewExtension] = useState<string>("7");
   const [newOctave, setNewOctave] = useState<string>("3");
-
-  // on-mount effect-hook to load instruments
-  useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
-    piano.current = pianoSampler;
-    drums.current = drumSampler;
-  }, []);
 
   // Effect hook to generate new chord based on user input
   useEffect(() => {
@@ -75,8 +66,13 @@ export default function ChordEditor({
     currentChord.extension = newExtension;
     setNewChordName(newChord.symbol);
 
-    piano?.current?.triggerAttackRelease(currentChord.note, "4n", now(), 0.35);
-  }, [newRoot, newType, newExtension, newOctave, currentChord]);
+    instruments?.pianoSampler?.triggerAttackRelease(
+      currentChord.note,
+      "4n",
+      now(),
+      0.35
+    );
+  }, [newRoot, newType, newExtension, newOctave, currentChord, instruments]);
 
   return (
     <Transition

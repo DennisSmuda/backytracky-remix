@@ -1,36 +1,28 @@
-import type { Sampler } from "tone";
 import type ChordBeat from "../../music/ChordBeat";
 
 import { useEffect, useRef, useState } from "react";
 import { Part, Transport, start, now } from "tone";
-import { loadInstruments } from "../../music/loader";
 import Music from "../../music/Music";
 import PlayChord from "./PlayChord";
+import { useInstruments } from "../../hooks/useInstruments";
 
 export default function TrackPlayer({ sheet, bpm = 120 }: any) {
+  const [instruments] = useInstruments();
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
+
   const [currentBpm, setCurrentBpm] = useState<number>();
-  const [currentSwing] = useState<number>(1.0);
+  const [currentSwing, setCurrentSwing] = useState<number>(1.0);
   const [currentGroove, setCurrentGroove] = useState<string>("hihat");
   const [sixteenthHit, setSixteenthHit] = useState<boolean>(false);
 
-  const piano = useRef<Sampler | null>(null);
-  const drums = useRef<Sampler | null>(null);
-
   let chordsPart = useRef<Part | null>(null);
   let chordsPartChords = useRef<Array<ChordBeat> | null>(null);
+  let bassLinePart = useRef<Part>();
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    const { pianoSampler, drumSampler } = loadInstruments();
-
     setCurrentBpm(bpm);
 
-    piano.current = pianoSampler;
-    drums.current = drumSampler;
-  }, []);
-
-  useEffect(() => {
     return () => {
       stop();
       disposeParts();
@@ -46,7 +38,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   useEffect(() => {
     function setupMusic(): void {
       const music = new Music({ sheet });
-      const { chords, groove, loopEndTime } = music.generateMusic(
+      const { chords, groove, bassLine, loopEndTime } = music.generateMusic(
         currentGroove,
         sixteenthHit
       );
@@ -61,11 +53,11 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
         );
 
         activeElement?.classList.add("active");
-        piano?.current?.triggerAttackRelease(
+        instruments?.pianoSampler?.triggerAttackRelease(
           note.note,
           note.duration,
           time,
-          0.35
+          0.3
         );
       }, chords);
 
@@ -74,12 +66,24 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       chordsPart.current.loopEnd = loopEndTime;
       chordsPartChords.current = chords;
 
+      bassLinePart.current = new Part(function (time, bassNote) {
+        instruments?.bassSampler?.triggerAttackRelease(
+          bassNote.note,
+          bassNote.duration,
+          time,
+          0.25
+        );
+      }, bassLine);
+      bassLinePart.current.start(0);
+      bassLinePart.current.loop = true;
+      bassLinePart.current.loopEnd = loopEndTime;
+
       drumPart.current = new Part(function (time, note) {
-        drums?.current?.triggerAttackRelease(
+        instruments?.drumSampler?.triggerAttackRelease(
           note?.note,
           note?.duration,
           time,
-          0.2
+          0.15
         );
       }, groove);
       drumPart.current.start(0);
@@ -90,11 +94,12 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     stop();
     disposeParts();
     setupMusic();
-  }, [currentGroove, sheet, currentSwing, sixteenthHit]);
+  }, [currentGroove, sheet, currentSwing, sixteenthHit, instruments]);
 
   function disposeParts() {
     chordsPart?.current?.dispose();
     drumPart?.current?.dispose();
+    bassLinePart?.current?.dispose();
   }
 
   function play(): void {
@@ -113,7 +118,12 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   }
 
   function clickChord(chord: ChordBeat): void {
-    piano?.current?.triggerAttackRelease(chord.note, "8n", now(), 0.35);
+    instruments?.pianoSampler?.triggerAttackRelease(
+      chord.note,
+      "8n",
+      now(),
+      0.35
+    );
   }
 
   if (!chordsPartChords.current) {
@@ -122,7 +132,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   return (
     <div>
-      <div className="mb-32">
+      <div className="mb-48">
         <div className="sheet-grid sheet-grid--player my-4">
           {chordsPartChords.current.map((chord: ChordBeat) => (
             <PlayChord key={chord.time} chord={chord} clickChord={clickChord} />
@@ -146,22 +156,21 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
               className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
             />
           </label>
-          {/* Sounds kinda bad tbh.. */}
-          {/* <label htmlFor="swing-slider" className="flex flex-col col-span-3">
+          <label htmlFor="swing-slider" className="flex flex-col col-span-2">
             <span>Swing: {currentSwing}</span>
             <input
               onChange={(e) => setCurrentSwing(parseFloat(e.target.value))}
-              defaultValue={currentBpm}
-              min="0"
+              defaultValue={currentSwing}
+              min="0.5"
               max="1"
               step="0.05"
               type="range"
-              name="bpm-slider"
-              id="bpm-slider"
+              name="swing-slider"
+              id="swing-slider"
               className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
             />
-          </label> */}
-          <label htmlFor="bpm-slider" className="flex flex-col col-span-8">
+          </label>
+          <label htmlFor="bpm-slider" className="flex flex-col col-span-6">
             <span>bpm: {currentBpm}</span>
             <input
               onChange={(e) => setCurrentBpm(parseInt(e.target.value))}

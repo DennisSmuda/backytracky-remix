@@ -1,6 +1,4 @@
 import { Link } from "@remix-run/react";
-// import TrackListing from "../components/track/TrackListing";
-// import { jazzBlues, OneTwoFive } from "../music/featuredTracks";
 import BackgroundNotes from "../components/BackgroundNotes";
 import Footer from "../components/Footer";
 
@@ -23,31 +21,23 @@ export default function Index() {
               className="button button--submit no-underline px-12 dark:text-white"
               to="/tracks"
             >
-              See all the Tracks
+              <span>See all the Tracks</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
             </Link>
           </div>
         </div>
       </section>
-
-      {/* <section>
-        <div className="container max-w-4xl mx-auto">
-          <div className="bt-prose mx-auto">
-            <h2 className="font-black mt-0">Featured Tracks</h2>
-            <div className="grid gap-12 my-6">
-              <TrackListing
-                track={OneTwoFive}
-                showDescription={false}
-                currentUserId={null}
-              />
-              <TrackListing
-                track={jazzBlues}
-                showDescription={false}
-                currentUserId={null}
-              />
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       <section>
         <div className="container max-w-4xl mx-auto">
