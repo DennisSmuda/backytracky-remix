@@ -62,6 +62,10 @@ describe("Track Player Component", () => {
 
     const bpmRange = player.getByRole("slider", { name: /bpm:/i });
     fireEvent.click(bpmRange);
+
+    const swingSlider = player.getByRole("slider", { name: /swing/i });
+    fireEvent.change(swingSlider, { target: { value: 0.5 } });
+    expect(swingSlider).toHaveValue("0.5");
   });
 
   it("can click on chords", () => {

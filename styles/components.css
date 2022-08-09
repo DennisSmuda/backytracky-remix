@@ -140,6 +140,7 @@
   }
 
   select,
+  input[type="checkbox"],
   form input[type="text"],
   form input[type="number"],
   form input[type="password"] {

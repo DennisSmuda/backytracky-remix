@@ -15,7 +15,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [currentBpm, setCurrentBpm] = useState<number>();
-  const [currentSwing] = useState<number>(1.0);
+  const [currentSwing, setCurrentSwing] = useState<number>(1.0);
   const [currentGroove, setCurrentGroove] = useState<string>("hihat");
   const [sixteenthHit, setSixteenthHit] = useState<boolean>(false);
 
@@ -135,7 +135,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   return (
     <div>
-      <div className="mb-32">
+      <div className="mb-48">
         <div className="sheet-grid sheet-grid--player my-4">
           {chordsPartChords.current.map((chord: ChordBeat) => (
             <PlayChord key={chord.time} chord={chord} clickChord={clickChord} />
@@ -159,22 +159,21 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
               className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
             />
           </label>
-          {/* Sounds kinda bad tbh.. */}
-          {/* <label htmlFor="swing-slider" className="flex flex-col col-span-3">
+          <label htmlFor="swing-slider" className="flex flex-col col-span-2">
             <span>Swing: {currentSwing}</span>
             <input
               onChange={(e) => setCurrentSwing(parseFloat(e.target.value))}
-              defaultValue={currentBpm}
-              min="0"
+              defaultValue={currentSwing}
+              min="0.5"
               max="1"
               step="0.05"
               type="range"
-              name="bpm-slider"
-              id="bpm-slider"
+              name="swing-slider"
+              id="swing-slider"
               className="form-range bg-zinc-200 dark:bg-zinc-800 rounded-lg appearance-none w-full h-6 p-0 focus:outline-none focus:ring-2 focus:shadow-none"
             />
-          </label> */}
-          <label htmlFor="bpm-slider" className="flex flex-col col-span-8">
+          </label>
+          <label htmlFor="bpm-slider" className="flex flex-col col-span-6">
             <span>bpm: {currentBpm}</span>
             <input
               onChange={(e) => setCurrentBpm(parseInt(e.target.value))}
