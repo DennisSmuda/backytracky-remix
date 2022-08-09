@@ -6,7 +6,9 @@ import TrackEditor from "../app/components/track/TrackEditor.client";
 
 jest.mock("tone", () => ({
   start: jest.fn(),
+  now: jest.fn(),
   Sampler: jest.fn(() => ({
+    triggerAttackRelease: jest.fn(),
     toDestination: jest.fn(),
   })),
   Transport: jest.fn(() => ({

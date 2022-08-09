@@ -1,4 +1,3 @@
-import type { Sampler } from "tone";
 import type ChordBeat from "../../music/ChordBeat";
 
 import { useEffect, useRef, useState } from "react";
@@ -9,11 +8,8 @@ import { useInstruments } from "../../hooks/useInstruments";
 
 export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   const [instruments] = useInstruments();
-  const piano = useRef<Sampler>();
-  const drums = useRef<Sampler>();
-  const bass = useRef<Sampler>();
-
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
+
   const [currentBpm, setCurrentBpm] = useState<number>();
   const [currentSwing, setCurrentSwing] = useState<number>(1.0);
   const [currentGroove, setCurrentGroove] = useState<string>("hihat");
@@ -25,12 +21,8 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   let drumPart = useRef<Part | null>(null);
 
   useEffect(() => {
-    piano.current = instruments?.pianoSampler;
-    drums.current = instruments?.drumSampler;
-    bass.current = instruments?.bassSampler;
-  }, [instruments]);
+    setCurrentBpm(bpm);
 
-  useEffect(() => {
     return () => {
       stop();
       disposeParts();
@@ -61,7 +53,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
         );
 
         activeElement?.classList.add("active");
-        piano?.current?.triggerAttackRelease(
+        instruments?.pianoSampler?.triggerAttackRelease(
           note.note,
           note.duration,
           time,
@@ -75,7 +67,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       chordsPartChords.current = chords;
 
       bassLinePart.current = new Part(function (time, bassNote) {
-        bass.current?.triggerAttackRelease(
+        instruments?.bassSampler?.triggerAttackRelease(
           bassNote.note,
           bassNote.duration,
           time,
@@ -87,7 +79,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       bassLinePart.current.loopEnd = loopEndTime;
 
       drumPart.current = new Part(function (time, note) {
-        drums?.current?.triggerAttackRelease(
+        instruments?.drumSampler?.triggerAttackRelease(
           note?.note,
           note?.duration,
           time,
@@ -102,7 +94,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
     stop();
     disposeParts();
     setupMusic();
-  }, [currentGroove, sheet, currentSwing, sixteenthHit]);
+  }, [currentGroove, sheet, currentSwing, sixteenthHit, instruments]);
 
   function disposeParts() {
     chordsPart?.current?.dispose();
@@ -126,7 +118,12 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
   }
 
   function clickChord(chord: ChordBeat): void {
-    piano?.current?.triggerAttackRelease(chord.note, "8n", now(), 0.35);
+    instruments?.pianoSampler?.triggerAttackRelease(
+      chord.note,
+      "8n",
+      now(),
+      0.35
+    );
   }
 
   if (!chordsPartChords.current) {

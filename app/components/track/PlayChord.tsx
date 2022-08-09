@@ -1,11 +1,13 @@
 import type ChordBeat from "../../music/ChordBeat";
 import { getSplitDurations, hasOverflow } from "../../music/utils";
 
-interface PlayChordProps {
+export default function PlayChord({
+  chord,
+  clickChord,
+}: {
   chord: ChordBeat;
   clickChord: Function;
-}
-export default function PlayChord({ chord, clickChord }: PlayChordProps) {
+}) {
   return (
     <>
       <button

@@ -1,6 +1,5 @@
-import type { Sampler } from "tone";
 import { now } from "tone";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useInstruments } from "../hooks/useInstruments";
 
 const standardTuning = ["E2", "A2", "D3", "G3", "B3", "E4"];
@@ -11,19 +10,12 @@ const openDTuning = ["D2", "A2", "D3", "Gb3", "A3", "D4"];
 
 export default function GuitarTuner() {
   const [instruments] = useInstruments();
-  const piano = useRef<Sampler>();
-  const drums = useRef<Sampler>();
 
   const [selectedTuning, setSelectedTuning] =
     useState<Array<string>>(standardTuning);
 
-  useEffect(() => {
-    piano.current = instruments?.pianoSampler;
-    drums.current = instruments?.drumSampler;
-  }, [instruments]);
-
   const playNote = (note: string) => {
-    piano?.current?.triggerAttackRelease(note, "1n.", now(), 0.35);
+    instruments?.pianoSampler.triggerAttackRelease(note, "1n.", now(), 0.35);
   };
 
   const changeTuning = (tuning: string) => {
