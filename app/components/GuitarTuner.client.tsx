@@ -51,7 +51,7 @@ export default function GuitarTuner() {
           <select
             onChange={(e) => changeTuning(e.target.value)}
             name="tuning-select"
-            id=""
+            id="tuning-select"
           >
             <optgroup label="Standard Tunings">
               <option value="standardTuning">E Standard</option>
@@ -67,9 +67,13 @@ export default function GuitarTuner() {
           </select>
         </label>
       </div>
-      <div className="grid grid-flow-col gap-4 mt-4">
+      <div className="grid grid-flow-col gap-2 md:gap-8 mt-8 h-[342px]">
         {selectedTuning.map((note) => (
-          <button onClick={() => playNote(note)} className="button" key={note}>
+          <button
+            onClick={() => playNote(note)}
+            className="button text-xs h-full px-0.5 sm:p-4"
+            key={note}
+          >
             {note}
           </button>
         ))}
