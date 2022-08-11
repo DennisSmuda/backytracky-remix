@@ -55,14 +55,27 @@
 /**
  * Sequencer
  */
+.sequencer-section {
+  @apply relative pt-6;
+}
+
 .sequencer-row {
   @apply grid grid-flow-col my-1 gap-1;
 }
 
+.sequencer-section .button {
+  @apply h-2;
+}
+.sequencer-section--open .button {
+  @apply h-8;
+}
 .sequencer-row .button {
   @apply bg-zinc-300 dark:bg-zinc-800;
-  @apply h-8 p-0 border-zinc-300 dark:border-zinc-700 border rounded-none;
+  @apply p-0 border-zinc-300 dark:border-zinc-700 rounded-md;
 }
+/* .sequencer-row .button:hover {
+  @apply bg-zinc-300 dark:bg-zinc-900;
+} */
 
 .sequencer-row .button {
   @apply bg-opacity-50;

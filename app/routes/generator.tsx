@@ -6,7 +6,7 @@ export default function GeneratorRoute() {
     <main>
       <section>
         <div className="container max-w-4xl mx-auto pt-8">
-          <h1>Generator</h1>
+          <h1>Make your own 🦋</h1>
           <ClientOnly fallback={<p>Loading...</p>}>
             {() => <Sequencer />}
           </ClientOnly>

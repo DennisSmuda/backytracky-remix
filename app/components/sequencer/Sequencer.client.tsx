@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { now, Part, start, Transport } from "tone";
+import { useEffect, useRef, useState } from "react";
+import { Part, start, Transport } from "tone";
 import { useInstruments } from "~/hooks/useInstruments";
 import PlayButton from "../PlayButton";
 import DrumSequence from "./DrumSequence";
@@ -39,66 +39,74 @@ const timeBeats = [
   // "1:3:3",
 ];
 
+type BeatTime = {
+  [time: string]: boolean;
+};
+
 export default function Sequencer() {
   const [instruments] = useInstruments();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [kicks, setKicks] = useState<{ [key: string]: boolean }>({});
-  const [snares, setSnares] = useState<{ [key: string]: boolean }>({});
-  const [hihats, setHihats] = useState<{ [key: string]: boolean }>({});
+  const [kicks, setKicks] = useState<BeatTime>({});
+  const [snares, setSnares] = useState<BeatTime>({});
+  const [hihats, setHihats] = useState<BeatTime>({});
   let drumPart = useRef<Part | null>(null);
 
-  const clickKick = (time: string) => {
-    kicks[time] = !kicks[time];
-    setKicks({ ...kicks });
-    instruments?.drumSampler.triggerAttackRelease("C1", "1n", now(), 0.3);
-    stopSequence();
-  };
+  useEffect(() => {
+    // setCurrentBpm(bpm);
+    console.log("Is playing", isPlaying);
 
-  const clickSnare = (time: string) => {
-    snares[time] = !snares[time];
-    setSnares({ ...snares });
-    instruments?.drumSampler.triggerAttackRelease("E1", "1n", now(), 0.3);
-    stopSequence();
-  };
+    return () => {
+      stop();
+      disposeParts();
+    };
+  }, []);
 
-  const clickHihat = (time: string) => {
-    hihats[time] = !hihats[time];
+  const changeDrumBeat = ({
+    hihats,
+    snares,
+    kicks,
+  }: {
+    hihats: BeatTime;
+    snares: BeatTime;
+    kicks: BeatTime;
+  }) => {
+    console.log("Change Beat!", hihats, snares);
     setHihats({ ...hihats });
-    instruments?.drumSampler.triggerAttackRelease("D1", "1n", now(), 0.3);
+    setSnares({ ...snares });
+    setKicks({ ...kicks });
     stopSequence();
-  };
-
-  const changeDrumBeat = () => {
-    console.log("Change Beat!");
   };
 
   const playSequence = (): void => {
     const groove: Array<{ note: string; duration: string; time: string }> = [];
+    console.log("hihats", hihats);
     timeBeats.forEach((beatTime) => {
+      const base = {
+        duration: "4n",
+        time: beatTime,
+      };
       if (kicks[beatTime]) {
         groove.push({
           note: "C1",
-          duration: "4n",
-          time: beatTime,
+          ...base,
         });
       }
       if (snares[beatTime]) {
         groove.push({
           note: "E1",
-          duration: "4n",
-          time: beatTime,
+          ...base,
         });
       }
       if (hihats[beatTime]) {
         groove.push({
           note: "D1",
-          duration: "4n",
-          time: beatTime,
+          ...base,
         });
       }
     });
-    console.log("Groove", groove);
+
     if (!groove.length) return;
+
     drumPart.current = new Part(function (time, note) {
       console.log("Drum part note", note);
       instruments?.drumSampler?.triggerAttackRelease(
@@ -140,45 +148,6 @@ export default function Sequencer() {
       )}
 
       {/* {JSON.stringify(kicks)} */}
-      <div className="sequencer-row">
-        {timeBeats.map((hihatTime) => (
-          <button
-            className={`button button--hihat ${
-              hihats[hihatTime] === true ? "button--active" : ""
-            }`}
-            key={`kick-${hihatTime}`}
-            onClick={() => clickHihat(hihatTime)}
-          >
-            <span className="sr-only">hihat</span>
-          </button>
-        ))}
-      </div>
-      <div className="sequencer-row">
-        {timeBeats.map((snareTime) => (
-          <button
-            className={`button button--snare ${
-              snares[snareTime] === true ? "button--active" : ""
-            }`}
-            key={`kick-${snareTime}`}
-            onClick={() => clickSnare(snareTime)}
-          >
-            <span className="sr-only">snare drum</span>
-          </button>
-        ))}
-      </div>
-      <div className="sequencer-row">
-        {timeBeats.map((kickTime) => (
-          <button
-            className={`button button--kick ${
-              kicks[kickTime] === true ? "button--active" : ""
-            }`}
-            key={`kick-${kickTime}`}
-            onClick={() => clickKick(kickTime)}
-          >
-            <span className="sr-only">kick drum</span>
-          </button>
-        ))}
-      </div>
 
       <PlayButton
         isPlaying={isPlaying}
