@@ -56,12 +56,12 @@
  * Sequencer
  */
 .sequencer-row {
-  @apply grid grid-flow-col;
+  @apply grid grid-flow-col my-1 gap-1;
 }
 
 .sequencer-row .button {
   @apply bg-zinc-300 dark:bg-zinc-800;
-  @apply h-8 p-0 border-zinc-500 border rounded-none;
+  @apply h-8 p-0 border-zinc-300 dark:border-zinc-700 border rounded-none;
 }
 
 .sequencer-row .button {

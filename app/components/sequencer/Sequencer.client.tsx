@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { now, Part, start, Transport } from "tone";
 import { useInstruments } from "~/hooks/useInstruments";
 import PlayButton from "../PlayButton";
+import DrumSequence from "./DrumSequence";
 
 const timeBeats = [
   "0:0:0",
@@ -67,6 +68,10 @@ export default function Sequencer() {
     stopSequence();
   };
 
+  const changeDrumBeat = () => {
+    console.log("Change Beat!");
+  };
+
   const playSequence = (): void => {
     const groove: Array<{ note: string; duration: string; time: string }> = [];
     timeBeats.forEach((beatTime) => {
@@ -127,6 +132,13 @@ export default function Sequencer() {
   return (
     <div>
       <h2>Sequencer</h2>
+      {instruments?.drumSampler && (
+        <DrumSequence
+          drumSampler={instruments?.drumSampler}
+          onChange={changeDrumBeat}
+        />
+      )}
+
       {/* {JSON.stringify(kicks)} */}
       <div className="sequencer-row">
         {timeBeats.map((hihatTime) => (
