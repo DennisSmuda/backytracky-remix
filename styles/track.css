@@ -59,6 +59,24 @@
   @apply grid grid-flow-col;
 }
 
-.sequencer-row .button--active {
-  @apply bg-zinc-200 dark:bg-black duration-75;
+.sequencer-row .button {
+  @apply bg-zinc-300 dark:bg-zinc-800;
+  @apply h-8 p-0 border-zinc-500 border rounded-none;
+}
+
+.sequencer-row .button {
+  @apply bg-opacity-50;
+}
+
+.button--kick {
+  /* @apply dark:bg-red-900; */
+}
+.button--kick.button--active {
+  @apply bg-red-300 dark:bg-red-800;
+}
+.button--snare.button--active {
+  @apply bg-yellow-300 dark:bg-yellow-800;
+}
+.button--hihat.button--active {
+  @apply bg-green-300 dark:bg-green-800;
 }
