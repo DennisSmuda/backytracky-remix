@@ -46,45 +46,45 @@ type BeatTime = {
 
 export default function Sequencer() {
   const [instruments] = useInstruments();
-  const groove = useRef<BeatTime>();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [beatTimes, setBeatTimes] = useState<{
+
+  const beatTimes = useRef<{
     hihats: BeatTime;
     snares: BeatTime;
     kicks: BeatTime;
   }>();
 
+  let currentSixteenth = 0;
+  let currentBeat = 0;
+  let currentBar = 0;
+
   const playInstruments = (beatTime: string, musicTime: number) => {
-    // console.log("Play Notes", beatTimes?.kicks);
-    // console.log("Play Notes", groove?.current);
-    // console.log("Play Notes", groove?.current && groove.current[beatTime]);
-    if (groove?.current && groove.current[beatTime]) {
-      console.log("PLAY THIS NOTE", instruments?.drumSampler);
-      instruments?.drumSampler?.triggerAttackRelease("C1", "4n", musicTime);
-      //   note: "C1",
-      // duration: "4n",
-      // time: beatTime,
+    if (!beatTimes.current) return;
+    const base: [string, number, number] = ["4n", musicTime, 0.2];
+    if (beatTimes.current.kicks[beatTime]) {
+      instruments?.drumSampler?.triggerAttackRelease("C1", ...base);
     }
-    // console.log("Time Event", Time(time).toNotation());
-    // instruments?.drumSampler?.triggerAttackRelease(
-    //   note?.note,
-    //   note?.duration,
-    //   time,
-    //   0.15
-    // );
+    if (beatTimes.current.snares[beatTime]) {
+      instruments?.drumSampler?.triggerAttackRelease("E1", ...base);
+    }
+    if (beatTimes.current.hihats[beatTime]) {
+      instruments?.drumSampler?.triggerAttackRelease("D1", ...base);
+    }
   };
 
   useEffect(() => {
     // setCurrentBpm(bpm);
+    // Transport.loopEnd = 1;
+    // Transport.loopStart = 0;
+
+    return () => {
+      stopSequence();
+    };
+  }, []);
+
+  useEffect(() => {
     console.log("Is playing", isPlaying);
-    let currentSixteenth = 0;
-    let currentBeat = 0;
-    let currentBar = 0;
     Transport.scheduleRepeat((time) => {
-      console.log(
-        "Time Event",
-        `${currentBar}:${currentBeat}:${currentSixteenth}`
-      );
       const beatTime = `${currentBar}:${currentBeat}:${currentSixteenth}`;
       playInstruments(beatTime, time);
 
@@ -97,21 +97,16 @@ export default function Sequencer() {
         currentBeat = 0;
         currentBar += 1;
       }
-      if (currentBar >= 2) {
+      if (currentBar >= 1) {
         currentBar = 0;
         currentBeat = 0;
         currentSixteenth = 0;
       }
     }, "16n");
+
     Transport.loop = true;
     Transport.setLoopPoints(0, "1m");
-    // Transport.loopEnd = 1;
-    // Transport.loopStart = 0;
-
-    return () => {
-      stopSequence();
-    };
-  }, []);
+  }, [instruments]);
 
   const changeDrumBeat = ({
     hihats,
@@ -122,15 +117,11 @@ export default function Sequencer() {
     snares: BeatTime;
     kicks: BeatTime;
   }) => {
-    setBeatTimes({
+    beatTimes.current = {
       hihats,
       snares,
       kicks,
-    });
-    groove.current = kicks;
-    // playInstruments("0:0:0");
-    // stopSequence();
-    // updateSequence();
+    };
   };
 
   const playSequence = (): void => {
@@ -149,6 +140,7 @@ export default function Sequencer() {
       <h2>Sequencer</h2>
       {instruments?.drumSampler && (
         <DrumSequence
+          mute={isPlaying}
           drumSampler={instruments?.drumSampler}
           onChange={changeDrumBeat}
         />
