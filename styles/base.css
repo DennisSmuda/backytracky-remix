@@ -33,4 +33,70 @@
     @apply hover:bg-zinc-100 dark:hover:bg-zinc-800;
     @apply active:bg-zinc-200 dark:active:bg-black;
   }
+
+  .rainbow {
+    animation: colorChange 10s linear alternate infinite;
+  }
+
+  .color-change {
+    animation: colorChange 20s linear alternate infinite;
+  }
+
+  @keyframes colorChange {
+    0% {
+      @apply bg-blue-500 bg-opacity-50;
+    }
+    25% {
+      @apply bg-red-500 bg-opacity-50;
+    }
+    50% {
+      @apply bg-orange-500 bg-opacity-50;
+    }
+    75% {
+      @apply bg-green-500 bg-opacity-50;
+    }
+    100% {
+      @apply bg-yellow-500 bg-opacity-50;
+    }
+  }
+
+  @keyframes rainbow {
+    100%,
+    0% {
+      color: rgb(255, 0, 0);
+    }
+    8% {
+      color: rgb(255, 127, 0);
+    }
+    16% {
+      color: rgb(255, 255, 0);
+    }
+    25% {
+      color: rgb(127, 255, 0);
+    }
+    33% {
+      color: rgb(0, 255, 0);
+    }
+    41% {
+      color: rgb(0, 255, 127);
+    }
+    50% {
+      color: rgb(0, 255, 255);
+    }
+    58% {
+      color: rgb(0, 127, 255);
+    }
+    66% {
+      color: rgb(0, 0, 255);
+    }
+    75% {
+      color: rgb(127, 0, 255);
+    }
+    83% {
+      color: rgb(255, 0, 255);
+    }
+    91% {
+      color: rgb(255, 0, 127);
+    }
+  }
 }

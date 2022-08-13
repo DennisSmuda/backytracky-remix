@@ -8,7 +8,7 @@ export default function DrumSequence({
   mute,
   timeBeats,
 }: {
-  drumSampler: Sampler;
+  drumSampler?: Sampler;
   onChange: Function;
   mute: boolean;
   timeBeats: string[];
@@ -21,21 +21,21 @@ export default function DrumSequence({
   const clickHihat = (time: string) => {
     hihats[time] = !hihats[time];
     setHihats({ ...hihats });
-    if (!mute) drumSampler.triggerAttackRelease("D1", "1n", now(), 0.2);
+    if (!mute) drumSampler?.triggerAttackRelease("D1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
   const clickSnare = (time: string) => {
     snares[time] = !snares[time];
     setSnares({ ...snares });
-    if (!mute) drumSampler.triggerAttackRelease("E1", "1n", now(), 0.2);
+    if (!mute) drumSampler?.triggerAttackRelease("E1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
   const clickKick = (time: string) => {
     kicks[time] = !kicks[time];
     setKicks({ ...kicks });
-    if (!mute) drumSampler.triggerAttackRelease("C1", "1n", now(), 0.2);
+    if (!mute) drumSampler?.triggerAttackRelease("C1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
@@ -45,13 +45,15 @@ export default function DrumSequence({
         isOpen ? "sequencer-section--open" : ""
       }`}
     >
-      <h4>Drums</h4>
+      <h4>Drums:</h4>
+
       <button
         className="absolute top-2 right-0 text-xs opacity-50"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? "shrink" : "expand"}
       </button>
+
       <div className="sequencer-row">
         {timeBeats.map((hihatTime) => (
           <button
@@ -65,6 +67,7 @@ export default function DrumSequence({
           </button>
         ))}
       </div>
+
       <div className="sequencer-row">
         {timeBeats.map((snareTime) => (
           <button
@@ -78,6 +81,7 @@ export default function DrumSequence({
           </button>
         ))}
       </div>
+
       <div className="sequencer-row">
         {timeBeats.map((kickTime) => (
           <button

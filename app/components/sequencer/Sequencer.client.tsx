@@ -1,8 +1,9 @@
 import type { Chord as ChordType } from "@tonaljs/chord";
 import { useEffect, useRef, useState } from "react";
 import { Transport } from "tone";
-import { useInstruments } from "~/hooks/useInstruments";
+import { useInstruments } from "../../hooks/useInstruments";
 import PlayButton from "../PlayButton";
+import BeatTimeIndicator from "./BeatTimeIndicator";
 import ChordsSequence from "./ChordsSequence";
 import DrumSequence from "./DrumSequence";
 import { timeBeats } from "./timeBeats";
@@ -21,6 +22,8 @@ export default function Sequencer() {
     kicks: BeatTime;
   }>();
   const chordBeatTimes = useRef<{ chords: { [key: string]: ChordType } }>();
+  const scheduleId = useRef<number>();
+  const [currentBeatTime, setCurrentBeatTime] = useState<string>("0:0:0");
 
   let currentSixteenth = 0;
   let currentBeat = 0;
@@ -54,19 +57,8 @@ export default function Sequencer() {
   };
 
   useEffect(() => {
-    // drumBeatTimes.current?.kicks = {};
-    // setCurrentBpm(bpm);
-    // Transport.loopEnd = 1;
-    // Transport.loopStart = 0;
-
-    return () => {
-      stopSequence();
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log("Is playing", isPlaying);
-    Transport.scheduleRepeat((time) => {
+    if (!Transport.scheduleRepeat) return;
+    scheduleId.current = Transport.scheduleRepeat((time) => {
       const beatTime = `${currentBar}:${currentBeat}:${currentSixteenth}`;
       playInstruments(beatTime, time);
 
@@ -79,16 +71,28 @@ export default function Sequencer() {
         currentBeat = 0;
         currentBar += 1;
       }
-      if (currentBar >= 1) {
+      if (currentBar >= 2) {
         currentBar = 0;
         currentBeat = 0;
         currentSixteenth = 0;
       }
+
+      setCurrentBeatTime(beatTime);
     }, "16n");
 
     Transport.loop = true;
+    Transport.bpm.value = 100;
     Transport.setLoopPoints(0, "1m");
   }, [instruments]);
+
+  useEffect(() => {
+    return () => {
+      if (Transport && scheduleId.current) {
+        Transport.stop(0);
+        Transport.clear(scheduleId.current);
+      }
+    };
+  }, []);
 
   const changeChords = ({ chords }: any) => {
     chordBeatTimes.current = {
@@ -125,7 +129,6 @@ export default function Sequencer() {
 
   return (
     <div className="py-4">
-      {/* <h2>Sequencer</h2> */}
       {instruments?.pianoSampler && (
         <ChordsSequence
           mute={isPlaying}
@@ -134,6 +137,12 @@ export default function Sequencer() {
           timeBeats={timeBeats}
         />
       )}
+
+      <BeatTimeIndicator
+        timeBeats={timeBeats}
+        currentBeatTime={currentBeatTime}
+      />
+
       {instruments?.drumSampler && (
         <DrumSequence
           mute={isPlaying}
@@ -142,8 +151,11 @@ export default function Sequencer() {
           timeBeats={timeBeats}
         />
       )}
+      <BeatTimeIndicator
+        timeBeats={timeBeats}
+        currentBeatTime={currentBeatTime}
+      />
 
-      {/* {JSON.stringify(kicks)} */}
       <div className="grid mt-8">
         <PlayButton
           isPlaying={isPlaying}

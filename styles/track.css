@@ -75,11 +75,11 @@
 }
 
 .sequencer__chord-name {
-  @apply text-xs absolute z-10 hidden;
-  @apply pointer-events-none top-2 left-2 opacity-50;
+  @apply text-xs absolute z-10 opacity-0;
+  @apply pointer-events-none top-2 left-2;
 }
-.sequencer-section--open .sequencer__chord-name {
-  @apply block;
+.sequencer-section--open:hover .sequencer__chord-name {
+  @apply opacity-50;
 }
 /* .sequencer-row .button:hover {
   @apply bg-zinc-300 dark:bg-zinc-900;
@@ -103,4 +103,7 @@
 }
 .button--chord.button--active {
   @apply bg-blue-300 dark:bg-blue-700;
+}
+.button--beat.button--active {
+  @apply bg-orange-300 dark:bg-orange-700;
 }

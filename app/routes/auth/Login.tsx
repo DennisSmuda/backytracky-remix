@@ -81,7 +81,7 @@ export default function LoginRoute() {
 
   return (
     <main>
-      <section className="relative">
+      <section>
         <div className="max-w-sm mx-auto pt-8 relative z-10">
           <h1 className="">Login 🔑</h1>
           <Form className="grid gap-4 mt-4" method="post">

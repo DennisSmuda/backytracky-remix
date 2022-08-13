@@ -24,7 +24,8 @@ export default function Navbar({ user }: NavbarProps) {
     <header className="flex justify-between items-center px-1 sm:px-4 py-2">
       <nav className="grid gap-4 grid-flow-col items-baseline">
         <Link className="font-black tracking-tighter text-xl" to="/">
-          BackyTracky
+          <span className="hidden sm:inline">BackyTracky</span>
+          <span className="sm:hidden">BT</span>
         </Link>
         <NavLink to="/tracks">Tracks</NavLink>
         <NavLink to="/generator">Generate</NavLink>

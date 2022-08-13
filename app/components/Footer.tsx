@@ -12,6 +12,9 @@ export default function Footer() {
             <Link className="ml-8 text-xs opacity-50" to="/tracks">
               Tracks
             </Link>
+            <Link className="ml-8 text-xs opacity-50" to="/generator">
+              Sequencer
+            </Link>
             <Link className="ml-8 text-xs opacity-50" to="/tuner">
               Guitar Tuner
             </Link>

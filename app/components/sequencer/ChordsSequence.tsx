@@ -1,7 +1,7 @@
 import type { Chord as ChordType } from "@tonaljs/chord";
-import { Chord, Key, Range, Scale } from "@tonaljs/tonal";
-import { useEffect, useState } from "react";
 import type { Sampler } from "tone";
+import { useEffect, useState } from "react";
+import { Chord, Key, Range } from "@tonaljs/tonal";
 import { now } from "tone";
 
 export default function ChordsSequence({
@@ -10,7 +10,7 @@ export default function ChordsSequence({
   mute,
   timeBeats,
 }: {
-  pianoSampler: Sampler;
+  pianoSampler?: Sampler;
   onChange: Function;
   mute: boolean;
   timeBeats: string[];
@@ -30,6 +30,10 @@ export default function ChordsSequence({
       sampleChords = Key.majorKey(root).chords;
     } else if (type === "minor") {
       sampleChords = Key.minorKey(root).natural.chords;
+    } else if (type === "melodic minor") {
+      sampleChords = Key.minorKey(root).melodic.chords;
+    } else if (type === "harmonic minor") {
+      sampleChords = Key.minorKey(root).harmonic.chords;
     }
 
     sampleChords.forEach((chord) => {
@@ -53,7 +57,8 @@ export default function ChordsSequence({
     }
 
     setChords({ ...chords });
-    if (!mute) pianoSampler.triggerAttackRelease(chord.notes, "8n", now(), 0.3);
+    if (!mute)
+      pianoSampler?.triggerAttackRelease(chord.notes, "8n", now(), 0.3);
     onChange({ chords });
   };
 
@@ -63,27 +68,38 @@ export default function ChordsSequence({
         isOpen ? "sequencer-section--open" : ""
       }`}
     >
-      <h4>Chords</h4>
+      <div className="flex items-baseline">
+        <h4>Chords: </h4>
+        <label htmlFor="root-note-select" className="sr-only">
+          root note select
+        </label>
+        <select
+          className="mb-2 mx-4 py-1"
+          onChange={(e) => setRoot(e.target.value)}
+          name="root-note-select"
+          id="root-note-select"
+        >
+          {Range.chromatic(["C3", "B3"], { sharps: true }).map((note) => (
+            <option key={note}>{note}</option>
+          ))}
+        </select>
 
-      <select
-        className="mb-2"
-        onChange={(e) => setRoot(e.target.value)}
-        name="chord-mode-select"
-        id="chord-mode-select"
-      >
-        {Range.chromatic(["C3", "B3"], { sharps: true }).map((note) => (
-          <option key={note}>{note}</option>
-        ))}
-      </select>
-      <select
-        className="mb-2"
-        onChange={(e) => setType(e.target.value)}
-        name="chord-mode-select"
-        id="chord-mode-select"
-      >
-        <option value="major">Major</option>
-        <option value="minor">Minor</option>
-      </select>
+        <label htmlFor="chord-mode-select" className="sr-only">
+          Chord Mode Select
+        </label>
+        <select
+          className="mb-2 py-1"
+          onChange={(e) => setType(e.target.value)}
+          name="chord-mode-select"
+          id="chord-mode-select"
+        >
+          <option value="major">Major</option>
+          <option value="minor">Minor</option>
+          <option value="melodic minor">Melodic Minor</option>
+          <option value="harmonic minor">Harmonic Minor</option>
+        </select>
+      </div>
+
       <button
         className="absolute top-2 right-0 text-xs opacity-50"
         onClick={() => setIsOpen(!isOpen)}
@@ -103,7 +119,7 @@ export default function ChordsSequence({
                 key={`kick-${hihatTime}`}
                 onClick={() => clickChord(hihatTime, chord)}
               >
-                <span className="sr-only">hihat</span>
+                <span className="sr-only">{chord.name}</span>
               </button>
             ))}
           </div>
