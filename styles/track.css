@@ -78,7 +78,7 @@
   @apply text-xs absolute z-10 hidden;
   @apply pointer-events-none top-2 left-2 opacity-50;
 }
-.sequencer-section--open .sequencer__chord-name {
+.sequencer-section--open:hover .sequencer__chord-name {
   @apply block;
 }
 /* .sequencer-row .button:hover {
