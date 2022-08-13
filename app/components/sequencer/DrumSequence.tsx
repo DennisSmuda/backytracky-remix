@@ -45,13 +45,15 @@ export default function DrumSequence({
         isOpen ? "sequencer-section--open" : ""
       }`}
     >
-      <h4>Drums</h4>
+      <h4>Drums:</h4>
+
       <button
         className="absolute top-2 right-0 text-xs opacity-50"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? "shrink" : "expand"}
       </button>
+
       <div className="sequencer-row">
         {timeBeats.map((hihatTime) => (
           <button
@@ -65,6 +67,7 @@ export default function DrumSequence({
           </button>
         ))}
       </div>
+
       <div className="sequencer-row">
         {timeBeats.map((snareTime) => (
           <button
@@ -78,6 +81,7 @@ export default function DrumSequence({
           </button>
         ))}
       </div>
+
       <div className="sequencer-row">
         {timeBeats.map((kickTime) => (
           <button

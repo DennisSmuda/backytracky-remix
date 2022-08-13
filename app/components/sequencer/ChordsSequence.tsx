@@ -1,7 +1,7 @@
 import type { Chord as ChordType } from "@tonaljs/chord";
-import { Chord, Key, Range, Scale } from "@tonaljs/tonal";
-import { useEffect, useState } from "react";
 import type { Sampler } from "tone";
+import { useEffect, useState } from "react";
+import { Chord, Key, Range } from "@tonaljs/tonal";
 import { now } from "tone";
 
 export default function ChordsSequence({
@@ -91,6 +91,7 @@ export default function ChordsSequence({
           <option value="harmonic minor">Harmonic Minor</option>
         </select>
       </div>
+
       <button
         className="absolute top-2 right-0 text-xs opacity-50"
         onClick={() => setIsOpen(!isOpen)}
@@ -110,7 +111,7 @@ export default function ChordsSequence({
                 key={`kick-${hihatTime}`}
                 onClick={() => clickChord(hihatTime, chord)}
               >
-                <span className="sr-only">hihat</span>
+                <span className="sr-only">{chord.name}</span>
               </button>
             ))}
           </div>
