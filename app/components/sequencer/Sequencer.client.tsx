@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Part, start, Transport } from "tone";
+import { now, Part } from "tone";
+import { Time, Transport } from "tone";
 import { useInstruments } from "~/hooks/useInstruments";
 import PlayButton from "../PlayButton";
 import DrumSequence from "./DrumSequence";
@@ -45,19 +46,70 @@ type BeatTime = {
 
 export default function Sequencer() {
   const [instruments] = useInstruments();
+  const groove = useRef<BeatTime>();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [kicks, setKicks] = useState<BeatTime>({});
-  const [snares, setSnares] = useState<BeatTime>({});
-  const [hihats, setHihats] = useState<BeatTime>({});
-  let drumPart = useRef<Part | null>(null);
+  const [beatTimes, setBeatTimes] = useState<{
+    hihats: BeatTime;
+    snares: BeatTime;
+    kicks: BeatTime;
+  }>();
+
+  const playInstruments = (beatTime: string, musicTime: number) => {
+    // console.log("Play Notes", beatTimes?.kicks);
+    // console.log("Play Notes", groove?.current);
+    // console.log("Play Notes", groove?.current && groove.current[beatTime]);
+    if (groove?.current && groove.current[beatTime]) {
+      console.log("PLAY THIS NOTE", instruments?.drumSampler);
+      instruments?.drumSampler?.triggerAttackRelease("C1", "4n", musicTime);
+      //   note: "C1",
+      // duration: "4n",
+      // time: beatTime,
+    }
+    // console.log("Time Event", Time(time).toNotation());
+    // instruments?.drumSampler?.triggerAttackRelease(
+    //   note?.note,
+    //   note?.duration,
+    //   time,
+    //   0.15
+    // );
+  };
 
   useEffect(() => {
     // setCurrentBpm(bpm);
     console.log("Is playing", isPlaying);
+    let currentSixteenth = 0;
+    let currentBeat = 0;
+    let currentBar = 0;
+    Transport.scheduleRepeat((time) => {
+      console.log(
+        "Time Event",
+        `${currentBar}:${currentBeat}:${currentSixteenth}`
+      );
+      const beatTime = `${currentBar}:${currentBeat}:${currentSixteenth}`;
+      playInstruments(beatTime, time);
+
+      currentSixteenth += 1;
+      if (currentSixteenth >= 4) {
+        currentSixteenth = 0;
+        currentBeat += 1;
+      }
+      if (currentBeat >= 4) {
+        currentBeat = 0;
+        currentBar += 1;
+      }
+      if (currentBar >= 2) {
+        currentBar = 0;
+        currentBeat = 0;
+        currentSixteenth = 0;
+      }
+    }, "16n");
+    Transport.loop = true;
+    Transport.setLoopPoints(0, "1m");
+    // Transport.loopEnd = 1;
+    // Transport.loopStart = 0;
 
     return () => {
-      stop();
-      disposeParts();
+      stopSequence();
     };
   }, []);
 
@@ -70,71 +122,26 @@ export default function Sequencer() {
     snares: BeatTime;
     kicks: BeatTime;
   }) => {
-    console.log("Change Beat!", hihats, snares);
-    setHihats({ ...hihats });
-    setSnares({ ...snares });
-    setKicks({ ...kicks });
-    stopSequence();
+    setBeatTimes({
+      hihats,
+      snares,
+      kicks,
+    });
+    groove.current = kicks;
+    // playInstruments("0:0:0");
+    // stopSequence();
+    // updateSequence();
   };
 
   const playSequence = (): void => {
-    const groove: Array<{ note: string; duration: string; time: string }> = [];
-    console.log("hihats", hihats);
-    timeBeats.forEach((beatTime) => {
-      const base = {
-        duration: "4n",
-        time: beatTime,
-      };
-      if (kicks[beatTime]) {
-        groove.push({
-          note: "C1",
-          ...base,
-        });
-      }
-      if (snares[beatTime]) {
-        groove.push({
-          note: "E1",
-          ...base,
-        });
-      }
-      if (hihats[beatTime]) {
-        groove.push({
-          note: "D1",
-          ...base,
-        });
-      }
-    });
-
-    if (!groove.length) return;
-
-    drumPart.current = new Part(function (time, note) {
-      console.log("Drum part note", note);
-      instruments?.drumSampler?.triggerAttackRelease(
-        note?.note,
-        note?.duration,
-        time,
-        0.15
-      );
-    }, groove);
-    drumPart.current.start(0);
-    drumPart.current.loop = true;
-    drumPart.current.loopEnd = 2;
     // Transport.swing = 1;
     setIsPlaying(true);
-    if (typeof Transport.start !== "undefined") Transport.start();
-    start();
+    if (typeof Transport.start !== "undefined") Transport.start(0);
   };
 
   function stopSequence(): void {
     setIsPlaying(false);
-    if (typeof Transport.stop !== "undefined") Transport.stop();
-    disposeParts();
-  }
-
-  function disposeParts() {
-    // chordsPart?.current?.dispose();
-    drumPart?.current?.dispose();
-    // bassLinePart?.current?.dispose();
+    if (typeof Transport.stop !== "undefined") Transport.stop(0);
   }
 
   return (
