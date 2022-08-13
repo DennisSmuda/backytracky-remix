@@ -23,7 +23,6 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
 
   useEffect(() => {
     setCurrentBpm(bpm);
-    console.log("Is playing", isPlaying);
 
     return () => {
       stop();

@@ -11,9 +11,7 @@ jest.mock("tone", () => ({
     triggerAttackRelease: jest.fn(),
     toDestination: jest.fn(),
   })),
-  // "Transport.scheduleRepeat": {},
-  // Transport: jest.fn(() => ({
-  Transport: jest.fn().mockImplementation(() => ({
+  Transport: jest.fn(() => ({
     scheduleRepeat: jest.fn(),
     start: jest.fn(),
     stop: jest.fn(),
@@ -36,6 +34,10 @@ describe("ChordSequencer Component", () => {
 
     const chordButtons = sequencer.getAllByRole("button", { name: /a minor/i });
     chordButtons[0].click();
+    chordButtons[0].click();
+
+    const shrinkButton = sequencer.getByRole("button", { name: /shrink/i });
+    fireEvent.click(shrinkButton);
   });
 
   it("renders correctly and can buttons to change tonic + modes", () => {
@@ -44,20 +46,17 @@ describe("ChordSequencer Component", () => {
       <ChordSequencer onChange={change} timeBeats={timeBeats} mute={false} />
     );
 
-    const noteOption = sequencer.getByRole("option", { name: /D3/i });
-    sequencer.getByRole("combobox", {
+    const noteSelect = sequencer.getByRole("combobox", {
       name: /root note select/i,
     });
-    // select[0].click();
-    fireEvent.select(noteOption);
+    fireEvent.change(noteSelect, { target: { value: "E3" } });
 
-    const modeOption = sequencer.getByRole("option", {
-      name: /melodic minor/i,
-    });
     const modeSelect = sequencer.getByRole("combobox", {
       name: /chord mode select/i,
     });
-    fireEvent.select(modeOption);
     fireEvent.click(modeSelect);
+    fireEvent.change(modeSelect, { target: { value: "melodic minor" } });
+    fireEvent.change(modeSelect, { target: { value: "harmonic minor" } });
+    fireEvent.change(modeSelect, { target: { value: "minor" } });
   });
 });
