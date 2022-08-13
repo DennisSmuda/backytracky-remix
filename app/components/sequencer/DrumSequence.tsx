@@ -8,7 +8,7 @@ export default function DrumSequence({
   mute,
   timeBeats,
 }: {
-  drumSampler: Sampler;
+  drumSampler?: Sampler;
   onChange: Function;
   mute: boolean;
   timeBeats: string[];
@@ -21,21 +21,21 @@ export default function DrumSequence({
   const clickHihat = (time: string) => {
     hihats[time] = !hihats[time];
     setHihats({ ...hihats });
-    if (!mute) drumSampler.triggerAttackRelease("D1", "1n", now(), 0.2);
+    if (!mute) drumSampler?.triggerAttackRelease("D1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
   const clickSnare = (time: string) => {
     snares[time] = !snares[time];
     setSnares({ ...snares });
-    if (!mute) drumSampler.triggerAttackRelease("E1", "1n", now(), 0.2);
+    if (!mute) drumSampler?.triggerAttackRelease("E1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
   const clickKick = (time: string) => {
     kicks[time] = !kicks[time];
     setKicks({ ...kicks });
-    if (!mute) drumSampler.triggerAttackRelease("C1", "1n", now(), 0.2);
+    if (!mute) drumSampler?.triggerAttackRelease("C1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 

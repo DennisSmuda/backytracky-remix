@@ -10,7 +10,7 @@ export default function ChordsSequence({
   mute,
   timeBeats,
 }: {
-  pianoSampler: Sampler;
+  pianoSampler?: Sampler;
   onChange: Function;
   mute: boolean;
   timeBeats: string[];
@@ -57,7 +57,8 @@ export default function ChordsSequence({
     }
 
     setChords({ ...chords });
-    if (!mute) pianoSampler.triggerAttackRelease(chord.notes, "8n", now(), 0.3);
+    if (!mute)
+      pianoSampler?.triggerAttackRelease(chord.notes, "8n", now(), 0.3);
     onChange({ chords });
   };
 
@@ -69,16 +70,23 @@ export default function ChordsSequence({
     >
       <div className="flex items-baseline">
         <h4>Chords: </h4>
+        <label htmlFor="root-note-select" className="sr-only">
+          root note select
+        </label>
         <select
           className="mb-2 mx-4 py-1"
           onChange={(e) => setRoot(e.target.value)}
-          name="chord-mode-select"
-          id="chord-mode-select"
+          name="root-note-select"
+          id="root-note-select"
         >
           {Range.chromatic(["C3", "B3"], { sharps: true }).map((note) => (
             <option key={note}>{note}</option>
           ))}
         </select>
+
+        <label htmlFor="chord-mode-select" className="sr-only">
+          Chord Mode Select
+        </label>
         <select
           className="mb-2 py-1"
           onChange={(e) => setType(e.target.value)}

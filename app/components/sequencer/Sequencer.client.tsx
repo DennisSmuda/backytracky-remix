@@ -1,7 +1,7 @@
 import type { Chord as ChordType } from "@tonaljs/chord";
 import { useEffect, useRef, useState } from "react";
 import { Transport } from "tone";
-import { useInstruments } from "~/hooks/useInstruments";
+import { useInstruments } from "../../hooks/useInstruments";
 import PlayButton from "../PlayButton";
 import BeatTimeIndicator from "./BeatTimeIndicator";
 import ChordsSequence from "./ChordsSequence";
@@ -57,6 +57,7 @@ export default function Sequencer() {
   };
 
   useEffect(() => {
+    if (!Transport.scheduleRepeat) return;
     scheduleId.current = Transport.scheduleRepeat((time) => {
       const beatTime = `${currentBar}:${currentBeat}:${currentSixteenth}`;
       playInstruments(beatTime, time);
