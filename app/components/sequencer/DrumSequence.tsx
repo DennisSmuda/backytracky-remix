@@ -47,7 +47,7 @@ export default function DrumSequence({
     >
       <h4>Drums</h4>
       <button
-        className="absolute top-0 right-0 text-xs opacity-50"
+        className="absolute top-2 right-0 text-xs opacity-50"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? "shrink" : "expand"}

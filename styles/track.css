@@ -1,8 +1,8 @@
 .sheet-grid {
   @apply grid grid-cols-4 gap-2;
-
   @apply border-r border-l border-zinc-500 border-opacity-50 px-1;
 }
+
 .sheet-grid--editor {
   grid-template-columns: repeat(4, minmax(190px, 1fr));
 }
@@ -56,7 +56,7 @@
  * Sequencer
  */
 .sequencer-section {
-  @apply relative;
+  @apply relative my-4;
 }
 
 .sequencer-row {
@@ -71,7 +71,15 @@
 }
 .sequencer-row .button {
   @apply bg-zinc-300 dark:bg-zinc-800;
-  @apply p-0 border-zinc-300 dark:border-zinc-700 rounded-md;
+  @apply p-0 border-zinc-300 dark:border-zinc-700 rounded-md relative;
+}
+
+.sequencer__chord-name {
+  @apply text-xs absolute z-10 hidden;
+  @apply pointer-events-none top-2 left-2 opacity-50;
+}
+.sequencer-section--open .sequencer__chord-name {
+  @apply block;
 }
 /* .sequencer-row .button:hover {
   @apply bg-zinc-300 dark:bg-zinc-900;
@@ -92,4 +100,7 @@
 }
 .button--kick.button--active {
   @apply bg-green-300 dark:bg-green-700;
+}
+.button--chord.button--active {
+  @apply bg-blue-300 dark:bg-blue-700;
 }

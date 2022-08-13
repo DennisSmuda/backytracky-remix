@@ -1,3 +1,4 @@
+import type { Chord as ChordType } from "@tonaljs/chord";
 import { useEffect, useRef, useState } from "react";
 import { Transport } from "tone";
 import { useInstruments } from "~/hooks/useInstruments";
@@ -14,31 +15,46 @@ export default function Sequencer() {
   const [instruments] = useInstruments();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
-  const beatTimes = useRef<{
+  const drumBeatTimes = useRef<{
     hihats: BeatTime;
     snares: BeatTime;
     kicks: BeatTime;
   }>();
+  const chordBeatTimes = useRef<{ chords: { [key: string]: ChordType } }>();
 
   let currentSixteenth = 0;
   let currentBeat = 0;
   let currentBar = 0;
 
   const playInstruments = (beatTime: string, musicTime: number) => {
-    if (!beatTimes.current) return;
-    const base: [string, number, number] = ["4n", musicTime, 0.2];
-    if (beatTimes.current.kicks[beatTime]) {
-      instruments?.drumSampler?.triggerAttackRelease("C1", ...base);
+    const drumBase: [string, number, number] = ["8n", musicTime, 0.15];
+    const chordBase: [string, number, number] = ["4n", musicTime, 0.2];
+    if (drumBeatTimes.current) {
+      if (drumBeatTimes.current.kicks[beatTime]) {
+        instruments?.drumSampler?.triggerAttackRelease("C1", ...drumBase);
+      }
+      if (drumBeatTimes.current.snares[beatTime]) {
+        instruments?.drumSampler?.triggerAttackRelease("E1", ...drumBase);
+      }
+      if (drumBeatTimes.current.hihats[beatTime]) {
+        instruments?.drumSampler?.triggerAttackRelease("D1", ...drumBase);
+      }
     }
-    if (beatTimes.current.snares[beatTime]) {
-      instruments?.drumSampler?.triggerAttackRelease("E1", ...base);
-    }
-    if (beatTimes.current.hihats[beatTime]) {
-      instruments?.drumSampler?.triggerAttackRelease("D1", ...base);
+
+    if (
+      chordBeatTimes.current &&
+      chordBeatTimes.current.chords &&
+      chordBeatTimes.current.chords[beatTime]
+    ) {
+      instruments?.pianoSampler?.triggerAttackRelease(
+        chordBeatTimes.current.chords[beatTime].notes,
+        ...chordBase
+      );
     }
   };
 
   useEffect(() => {
+    // drumBeatTimes.current?.kicks = {};
     // setCurrentBpm(bpm);
     // Transport.loopEnd = 1;
     // Transport.loopStart = 0;
@@ -75,7 +91,9 @@ export default function Sequencer() {
   }, [instruments]);
 
   const changeChords = ({ chords }: any) => {
-    console.log("Change Chords!", chords);
+    chordBeatTimes.current = {
+      chords,
+    };
   };
 
   const changeDrumBeat = ({
@@ -87,7 +105,7 @@ export default function Sequencer() {
     snares: BeatTime;
     kicks: BeatTime;
   }) => {
-    beatTimes.current = {
+    drumBeatTimes.current = {
       hihats,
       snares,
       kicks,
@@ -106,7 +124,7 @@ export default function Sequencer() {
   }
 
   return (
-    <div>
+    <div className="py-4">
       {/* <h2>Sequencer</h2> */}
       {instruments?.pianoSampler && (
         <ChordsSequence
@@ -126,12 +144,13 @@ export default function Sequencer() {
       )}
 
       {/* {JSON.stringify(kicks)} */}
-
-      <PlayButton
-        isPlaying={isPlaying}
-        play={playSequence}
-        stop={stopSequence}
-      />
+      <div className="grid mt-8">
+        <PlayButton
+          isPlaying={isPlaying}
+          play={playSequence}
+          stop={stopSequence}
+        />
+      </div>
     </div>
   );
 }
