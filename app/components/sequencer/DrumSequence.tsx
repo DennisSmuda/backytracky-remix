@@ -2,33 +2,16 @@ import { useState } from "react";
 import type { Sampler } from "tone";
 import { now } from "tone";
 
-const timeBeats = [
-  "0:0:0",
-  "0:0:1",
-  "0:0:2",
-  "0:0:3",
-  "0:1:0",
-  "0:1:1",
-  "0:1:2",
-  "0:1:3",
-  "0:2:0",
-  "0:2:1",
-  "0:2:2",
-  "0:2:3",
-  "0:3:0",
-  "0:3:1",
-  "0:3:2",
-  "0:3:3",
-];
-
 export default function DrumSequence({
   drumSampler,
   onChange,
   mute,
+  timeBeats,
 }: {
   drumSampler: Sampler;
   onChange: Function;
   mute: boolean;
+  timeBeats: string[];
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [hihats, setHihats] = useState<{ [key: string]: boolean }>({});
@@ -38,21 +21,21 @@ export default function DrumSequence({
   const clickHihat = (time: string) => {
     hihats[time] = !hihats[time];
     setHihats({ ...hihats });
-    if (!mute) drumSampler.triggerAttackRelease("D1", "1n", now(), 0.3);
+    if (!mute) drumSampler.triggerAttackRelease("D1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
   const clickSnare = (time: string) => {
     snares[time] = !snares[time];
     setSnares({ ...snares });
-    if (!mute) drumSampler.triggerAttackRelease("E1", "1n", now(), 0.3);
+    if (!mute) drumSampler.triggerAttackRelease("E1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 
   const clickKick = (time: string) => {
     kicks[time] = !kicks[time];
     setKicks({ ...kicks });
-    if (!mute) drumSampler.triggerAttackRelease("C1", "1n", now(), 0.3);
+    if (!mute) drumSampler.triggerAttackRelease("C1", "1n", now(), 0.2);
     onChange({ hihats, snares, kicks });
   };
 

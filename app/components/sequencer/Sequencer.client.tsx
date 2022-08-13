@@ -1,44 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { now, Part } from "tone";
-import { Time, Transport } from "tone";
+import { Transport } from "tone";
 import { useInstruments } from "~/hooks/useInstruments";
 import PlayButton from "../PlayButton";
+import ChordsSequence from "./ChordsSequence";
 import DrumSequence from "./DrumSequence";
-
-const timeBeats = [
-  "0:0:0",
-  "0:0:1",
-  "0:0:2",
-  "0:0:3",
-  "0:1:0",
-  "0:1:1",
-  "0:1:2",
-  "0:1:3",
-  "0:2:0",
-  "0:2:1",
-  "0:2:2",
-  "0:2:3",
-  "0:3:0",
-  "0:3:1",
-  "0:3:2",
-  "0:3:3",
-  // "1:0:0",
-  // "1:0:1",
-  // "1:0:2",
-  // "1:0:3",
-  // "1:1:0",
-  // "1:1:1",
-  // "1:1:2",
-  // "1:1:3",
-  // "1:2:0",
-  // "1:2:1",
-  // "1:2:2",
-  // "1:2:3",
-  // "1:3:0",
-  // "1:3:1",
-  // "1:3:2",
-  // "1:3:3",
-];
+import { timeBeats } from "./timeBeats";
 
 type BeatTime = {
   [time: string]: boolean;
@@ -108,6 +74,10 @@ export default function Sequencer() {
     Transport.setLoopPoints(0, "1m");
   }, [instruments]);
 
+  const changeChords = ({ chords }: any) => {
+    console.log("Change Chords!", chords);
+  };
+
   const changeDrumBeat = ({
     hihats,
     snares,
@@ -137,12 +107,21 @@ export default function Sequencer() {
 
   return (
     <div>
-      <h2>Sequencer</h2>
+      {/* <h2>Sequencer</h2> */}
+      {instruments?.pianoSampler && (
+        <ChordsSequence
+          mute={isPlaying}
+          pianoSampler={instruments?.pianoSampler}
+          onChange={changeChords}
+          timeBeats={timeBeats}
+        />
+      )}
       {instruments?.drumSampler && (
         <DrumSequence
           mute={isPlaying}
           drumSampler={instruments?.drumSampler}
           onChange={changeDrumBeat}
+          timeBeats={timeBeats}
         />
       )}
 
