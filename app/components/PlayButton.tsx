@@ -2,14 +2,17 @@ export default function PlayButton({
   isPlaying,
   play,
   stop,
+  disabled = false,
 }: {
   isPlaying: boolean;
   play: Function;
   stop: Function;
+  disabled?: boolean;
 }) {
   if (isPlaying) {
     return (
       <button
+        disabled={disabled}
         className="button button--delete col-span-7"
         onClick={() => stop()}
       >

@@ -22,6 +22,7 @@ export default function Sequencer() {
     kicks: BeatTime;
   }>();
   const chordBeatTimes = useRef<{ chords: { [key: string]: ChordType } }>();
+  const scheduleId = useRef<number>();
   const [currentBeatTime, setCurrentBeatTime] = useState<string>("0:0:0");
 
   let currentSixteenth = 0;
@@ -56,19 +57,7 @@ export default function Sequencer() {
   };
 
   useEffect(() => {
-    // drumBeatTimes.current?.kicks = {};
-    // setCurrentBpm(bpm);
-    // Transport.loopEnd = 1;
-    // Transport.loopStart = 0;
-
-    return () => {
-      stopSequence();
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log("Is playing", isPlaying);
-    Transport.scheduleRepeat((time) => {
+    scheduleId.current = Transport.scheduleRepeat((time) => {
       const beatTime = `${currentBar}:${currentBeat}:${currentSixteenth}`;
       playInstruments(beatTime, time);
 
@@ -87,15 +76,22 @@ export default function Sequencer() {
         currentSixteenth = 0;
       }
 
-      // currentTime.current = beatTime;
       setCurrentBeatTime(beatTime);
     }, "16n");
 
     Transport.loop = true;
     Transport.bpm.value = 100;
     Transport.setLoopPoints(0, "1m");
-    // Transport.setLoopPoints(0, "2m");
   }, [instruments]);
+
+  useEffect(() => {
+    return () => {
+      if (Transport && scheduleId.current) {
+        Transport.stop(0);
+        Transport.clear(scheduleId.current);
+      }
+    };
+  }, []);
 
   const changeChords = ({ chords }: any) => {
     chordBeatTimes.current = {
@@ -159,7 +155,6 @@ export default function Sequencer() {
         currentBeatTime={currentBeatTime}
       />
 
-      {/* {JSON.stringify(kicks)} */}
       <div className="grid mt-8">
         <PlayButton
           isPlaying={isPlaying}

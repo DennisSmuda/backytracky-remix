@@ -91,6 +91,7 @@ export default function TrackPlayer({ sheet, bpm = 120 }: any) {
       drumPart.current.start(0);
       drumPart.current.loop = true;
       drumPart.current.loopEnd = loopEndTime;
+      Transport.loopEnd = loopEndTime;
     }
 
     stop();
