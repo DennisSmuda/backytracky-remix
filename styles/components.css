@@ -156,7 +156,7 @@
    */
   nav button,
   nav a {
-    @apply px-2 py-1 rounded-md;
+    @apply px-2 py-1 rounded-md text-sm md:text-base;
   }
 
   nav button:hover,

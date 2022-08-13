@@ -27,6 +27,7 @@ export default function Navbar({ user }: NavbarProps) {
           BackyTracky
         </Link>
         <NavLink to="/tracks">Tracks</NavLink>
+        <NavLink to="/generator">Generate</NavLink>
         <NavLink to="/tuner">Tuner</NavLink>
       </nav>
       <nav className="grid gap-4 grid-flow-col items-center">
@@ -47,7 +48,7 @@ export default function Navbar({ user }: NavbarProps) {
           </NavLink>
         )}
         {user ? (
-          <Form method="post" action="/auth/logout">
+          <Form className="hidden sm:block" method="post" action="/auth/logout">
             <button onClick={notifyLogout} type="submit">
               Logout
             </button>

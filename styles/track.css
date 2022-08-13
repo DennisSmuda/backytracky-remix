@@ -1,8 +1,8 @@
 .sheet-grid {
   @apply grid grid-cols-4 gap-2;
-
   @apply border-r border-l border-zinc-500 border-opacity-50 px-1;
 }
+
 .sheet-grid--editor {
   grid-template-columns: repeat(4, minmax(190px, 1fr));
 }
@@ -51,4 +51,56 @@
 
 .duration-line {
   @apply h-1 rounded-full w-full bg-zinc-500 opacity-50;
+}
+/**
+ * Sequencer
+ */
+.sequencer-section {
+  @apply relative my-4;
+}
+
+.sequencer-row {
+  @apply grid grid-flow-col my-1 gap-1;
+}
+
+.sequencer-section .button {
+  @apply h-2;
+}
+.sequencer-section--open .button {
+  @apply h-8;
+}
+.sequencer-row .button {
+  @apply bg-zinc-300 dark:bg-zinc-800;
+  @apply p-0 border-zinc-300 dark:border-zinc-700 rounded-md relative;
+}
+
+.sequencer__chord-name {
+  @apply text-xs absolute z-10 hidden;
+  @apply pointer-events-none top-2 left-2 opacity-50;
+}
+.sequencer-section--open .sequencer__chord-name {
+  @apply block;
+}
+/* .sequencer-row .button:hover {
+  @apply bg-zinc-300 dark:bg-zinc-900;
+} */
+
+.sequencer-row .button {
+  @apply bg-opacity-50;
+}
+
+.button--kick {
+  /* @apply dark:bg-red-900; */
+}
+.button--snare.button--active {
+  @apply bg-red-300 dark:bg-red-700;
+}
+.button--hihat.button--active {
+  @apply bg-yellow-300 dark:bg-yellow-600;
+}
+.button--kick.button--active {
+  @apply bg-green-300 dark:bg-green-700;
+}
+.button--chord.button--active {
+  @apply bg-blue-300 dark:bg-blue-700;
 }
