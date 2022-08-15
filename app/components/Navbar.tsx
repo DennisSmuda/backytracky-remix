@@ -21,7 +21,7 @@ export default function Navbar({ user }: NavbarProps) {
     );
   };
   return (
-    <header className="flex justify-between items-center px-1 sm:px-4 py-2">
+    <header className="flex justify-between items-center px-1 sm:px-4 pb-2 pt-3">
       <nav className="grid gap-4 grid-flow-col items-baseline">
         <Link className="font-black tracking-tighter text-xl" to="/">
           <span className="hidden sm:inline">BackyTracky</span>

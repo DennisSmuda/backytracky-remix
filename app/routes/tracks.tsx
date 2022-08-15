@@ -5,11 +5,17 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useActionData, useLoaderData, useTransition } from "@remix-run/react";
+import {
+  Link,
+  useActionData,
+  useLoaderData,
+  useTransition,
+} from "@remix-run/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import BackgroundNotes from "~/components/BackgroundNotes";
 import Footer from "~/components/Footer";
+import PageHeader from "~/components/PageHeader";
 import TrackListing from "~/components/track/TrackListing";
 
 import { db } from "~/utils/db.server";
@@ -87,21 +93,23 @@ export default function TracksRoute() {
       <div className="absolute bottom-24 md:bottom-32 right-0 md:right-20">
         <BackgroundNotes />
       </div>
+      <PageHeader title="All Tracks 🎺">
+        <Link to="/">Home</Link>
+        <span>{" / "}</span>
+        <Link to="/tracks">Tracks</Link>
+      </PageHeader>
       <section>
-        <div className="container max-w-4xl mx-auto pt-8 relative">
-          <div className="bt-prose mx-auto my-12">
-            <h1 className="font-black">All Tracks 🎺</h1>
-            <div className="grid gap-12 my-12">
-              {loaderData.tracks.length === 0 ? <div>no Tracks yet</div> : ""}
-              {loaderData.tracks.map((track: Track) => (
-                <TrackListing
-                  key={track.id}
-                  track={track}
-                  showDescription={true}
-                  currentUserId={loaderData.user?.id}
-                />
-              ))}
-            </div>
+        <div className="container max-w-4xl mx-auto relative">
+          <div className="grid gap-12 mb-12 mt-4">
+            {loaderData.tracks.length === 0 ? <div>no Tracks yet</div> : ""}
+            {loaderData.tracks.map((track: Track) => (
+              <TrackListing
+                key={track.id}
+                track={track}
+                showDescription={true}
+                currentUserId={loaderData.user?.id}
+              />
+            ))}
           </div>
         </div>
       </section>
