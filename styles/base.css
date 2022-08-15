@@ -34,6 +34,10 @@
     @apply active:bg-zinc-200 dark:active:bg-black;
   }
 
+  .container--narrow {
+    max-width: 65ch;
+  }
+
   .rainbow {
     animation: colorChange 10s linear alternate infinite;
   }
@@ -98,5 +102,12 @@
     91% {
       color: rgb(255, 0, 127);
     }
+  }
+
+  .page-header__breadcrumbs {
+    @apply opacity-50 text-xs;
+  }
+  .page-header__breadcrumbs span {
+    @apply mx-1;
   }
 }

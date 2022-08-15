@@ -5,10 +5,11 @@ import Footer from "../components/Footer";
 export default function Index() {
   return (
     <main className="main relative">
-      <div className="color-change -z-10 bg-opacity-10 absolute -top-48 -left-16 -right-16 h-[320px] pointer-events-none rotate-3">
-        <BackgroundNotes />
+      <div className="bg-white dark:bg-black absolute -top-32 left-0 right-0 h-[280px] -z-10 rotate-1">
+        <div className="color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none"></div>
       </div>
       <section className="relative">
+        <BackgroundNotes />
         <div className="container max-w-4xl mx-auto pt-8 relative z-10">
           <div className="bt-prose mx-auto my-12">
             <h1 className="mb-0 rounded-md relative -ml-2 inline-block px-1 font-black">

@@ -128,7 +128,7 @@ export default function Sequencer() {
   }
 
   return (
-    <div className="py-4">
+    <div>
       {instruments?.pianoSampler && (
         <ChordsSequence
           mute={isPlaying}

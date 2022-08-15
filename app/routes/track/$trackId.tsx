@@ -1,8 +1,9 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
+import PageHeader from "~/components/PageHeader";
 import TrackPlayer from "~/components/track/TrackPlayer.client";
 import { getTrack } from "~/utils/tracks.server";
 
@@ -22,8 +23,15 @@ export default function TrackDetailRoute() {
   const { track } = useLoaderData();
   return (
     <main className="main">
+      <PageHeader title={track.name}>
+        <Link to="/">Home</Link>
+        <span>{" / "}</span>
+        <Link to="/tracks">Tracks</Link>
+        <span>{" / "}</span>
+        <Link to={`/track/${track.id}`}>{track.name}</Link>
+      </PageHeader>
       <section>
-        <div className="max-w-4xl mx-auto pt-8">
+        <div className="max-w-4xl mx-auto">
           <div className="opacity-50 text-xs flex justify-between">
             <span>
               Suggested time: <strong>{track.bpm}</strong> bpm
@@ -38,7 +46,6 @@ export default function TrackDetailRoute() {
               </span>
             </div>
           </div>
-          <h1 className="mt-1">{track.name}</h1>
 
           <ClientOnly fallback={<p>Loading...</p>}>
             {() => <TrackPlayer sheet={track.sheet} bpm={track.bpm} />}
