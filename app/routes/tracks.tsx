@@ -34,8 +34,6 @@ export const loader: LoaderFunction = async ({ request }) => {
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const trackId = form.get("trackId");
-  console.log("Delete a track", trackId);
-  return badRequest({ error: "error deleting track" });
   const response = await deleteTrack(trackId as string);
 
   if (response.status === 400) {
@@ -72,12 +70,18 @@ export default function TracksRoute() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log("Track Route UseEffect", actionData, navigation);
-    // switch (navigation.state) {
-    // case "submitting":
-    //   notifyDeleting();
-    //   break;
-    // }
+    if (
+      navigation.state === "submitting" &&
+      navigation.formMethod === "delete"
+    ) {
+      notifyDeleting();
+    }
+    if (navigation.state === "idle" && actionData?.error) {
+      notifyErrorDeleting();
+    }
+    if (navigation.state === "idle" && actionData?.response) {
+      notifySuccessDeleting();
+    }
   }, [navigation, actionData]);
 
   return (

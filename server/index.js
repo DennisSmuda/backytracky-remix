@@ -2644,56 +2644,55 @@ var import_jsx_dev_runtime17 = require("react/jsx-dev-runtime"), loader5 = async
   };
   return (0, import_node9.json)(data);
 }, action4 = async ({ request }) => {
-  let trackId = (await request.formData()).get("trackId");
-  return console.log("Delete a track", trackId), badRequest3({ error: "error deleting track" });
-  let response = await deleteTrack(trackId);
+  let trackId = (await request.formData()).get("trackId"), response = await deleteTrack(trackId);
   return response.status === 400 ? badRequest3({
     error: "Error deleting track"
   }) : (0, import_node9.json)({ response });
-}, badRequest3 = (data) => (0, import_node9.json)(data, { status: 400 });
-var meta3 = () => ({
+}, badRequest3 = (data) => (0, import_node9.json)(data, { status: 400 }), notifyDeleting = () => import_react_hot_toast3.default.loading("Deleting...", { id: "track-delete-toast" }), notifyErrorDeleting = () => import_react_hot_toast3.default.error("Couldn't delete track...", {
+  id: "track-delete-toast"
+}), notifySuccessDeleting = () => import_react_hot_toast3.default.success("Deleted track!", { id: "track-delete-toast" }), meta3 = () => ({
   title: "All Tracks | BackyTracky",
   description: "Explore all published backing tracks. Grab your instrument and practice some chord changes!"
 });
 function TracksRoute() {
   let actionData = (0, import_react20.useActionData)(), loaderData = (0, import_react20.useLoaderData)(), navigation = (0, import_react20.useNavigation)();
   return (0, import_react21.useEffect)(() => {
-    console.log("Track Route UseEffect", actionData, navigation);
+    navigation.state === "submitting" && navigation.formMethod === "delete" && notifyDeleting(), navigation.state === "idle" && (actionData != null && actionData.error) && notifyErrorDeleting(), navigation.state === "idle" && (actionData != null && actionData.response) && notifySuccessDeleting();
   }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("main", { className: "main", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "absolute bottom-24 md:bottom-32 right-0 md:right-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(BackgroundNotes, {}, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 86,
+      lineNumber: 90,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 85,
+      lineNumber: 89,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(PageHeader, { title: "All Tracks \u{1F3BA}", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react20.Link, { to: "/", children: "Home" }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 89,
+        lineNumber: 93,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("span", { children: " / " }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 90,
+        lineNumber: 94,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react20.Link, { to: "/tracks", children: "Tracks" }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 91,
+        lineNumber: 95,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 88,
+      lineNumber: 92,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "container max-w-4xl mx-auto relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "grid gap-12 mb-12 mt-4", children: [
       loaderData.tracks.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: "no Tracks yet" }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 96,
+        lineNumber: 100,
         columnNumber: 47
       }, this) : "",
       loaderData.tracks.map((track) => {
@@ -2709,7 +2708,7 @@ function TracksRoute() {
           !1,
           {
             fileName: "app/routes/tracks.tsx",
-            lineNumber: 98,
+            lineNumber: 102,
             columnNumber: 15
           },
           this
@@ -2717,25 +2716,25 @@ function TracksRoute() {
       })
     ] }, void 0, !0, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 95,
+      lineNumber: 99,
       columnNumber: 11
     }, this) }, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 94,
+      lineNumber: 98,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 93,
+      lineNumber: 97,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(Footer, {}, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 109,
+      lineNumber: 113,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/tracks.tsx",
-    lineNumber: 84,
+    lineNumber: 88,
     columnNumber: 5
   }, this);
 }
@@ -2805,7 +2804,7 @@ function Tuner() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/_static/build/entry.client-TXYDCXPW.js", imports: ["/_static/build/_shared/chunk-NSPMZDGG.js", "/_static/build/_shared/chunk-MGIKEUUG.js", "/_static/build/_shared/chunk-M2CHRLHC.js", "/_static/build/_shared/chunk-OV6IFOTW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/_static/build/root-F2YKCZKY.js", imports: ["/_static/build/_shared/chunk-OAVV4AYS.js", "/_static/build/_shared/chunk-PKK3VIMV.js", "/_static/build/_shared/chunk-4FKMWGAP.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.login-ZK4FBLCY.js", imports: ["/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.logout-P6VAALUE.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.register-FUC62AOD.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/_static/build/routes/_index-FAKPTDRJ.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/generator-GIL6JNYT.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.$trackId-TPLP5XVG.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.new-SUFFH7AV.js", imports: ["/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tracks-PBCNKFXO.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tuner-22JZ7BDG.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "1d4fe860", hmr: void 0, url: "/_static/build/manifest-1D4FE860.js" };
+var assets_manifest_default = { entry: { module: "/_static/build/entry.client-TXYDCXPW.js", imports: ["/_static/build/_shared/chunk-NSPMZDGG.js", "/_static/build/_shared/chunk-MGIKEUUG.js", "/_static/build/_shared/chunk-M2CHRLHC.js", "/_static/build/_shared/chunk-OV6IFOTW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/_static/build/root-F2YKCZKY.js", imports: ["/_static/build/_shared/chunk-OAVV4AYS.js", "/_static/build/_shared/chunk-PKK3VIMV.js", "/_static/build/_shared/chunk-4FKMWGAP.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.login-ZK4FBLCY.js", imports: ["/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.logout-P6VAALUE.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.register-FUC62AOD.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/_static/build/routes/_index-FAKPTDRJ.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/generator-GIL6JNYT.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.$trackId-TPLP5XVG.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.new-SUFFH7AV.js", imports: ["/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tracks-OI4M5XS3.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tuner-22JZ7BDG.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "78c106f2", hmr: void 0, url: "/_static/build/manifest-78C106F2.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !1, v2_meta: !1, v2_normalizeFormMethod: !1, v2_routeConvention: !0 }, publicPath = "/_static/build/", entry = { module: entry_server_exports }, routes = {
