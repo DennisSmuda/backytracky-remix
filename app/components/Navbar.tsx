@@ -16,6 +16,7 @@ export default function Navbar({ user }: NavbarProps) {
   const [currentTheme, setTheme] = useTheme();
 
   const toggleTheme = () => {
+    console.log("theme"); // TODO: Fix theme button
     setTheme((prevTheme) =>
       prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
     );
@@ -49,14 +50,14 @@ export default function Navbar({ user }: NavbarProps) {
           </NavLink>
         )}
         {user ? (
-          <Form className="hidden sm:block" method="post" action="/auth/logout">
+          <Form className="hidden sm:block" method="post" action="/logout">
             <button onClick={notifyLogout} type="submit">
               Logout
             </button>
           </Form>
         ) : (
           <>
-            <NavLink className="hidden sm:block" to="/auth/login">
+            <NavLink className="hidden sm:block" to="/login">
               Login
             </NavLink>
             {/* <NavLink to="/auth/register">Register</NavLink> */}

@@ -9,7 +9,7 @@ import {
   Link,
   useActionData,
   useLoaderData,
-  useTransition,
+  useNavigation,
 } from "@remix-run/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -34,6 +34,8 @@ export const loader: LoaderFunction = async ({ request }) => {
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const trackId = form.get("trackId");
+  console.log("Delete a track", trackId);
+  return badRequest({ error: "error deleting track" });
   const response = await deleteTrack(trackId as string);
 
   if (response.status === 400) {
@@ -67,26 +69,16 @@ export const meta: MetaFunction = () => ({
 export default function TracksRoute() {
   const actionData = useActionData();
   const loaderData = useLoaderData();
-  const transition = useTransition();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    switch (transition.type) {
-      case "actionSubmission":
-        if (transition.submission.action === "/tracks") {
-          notifyDeleting();
-        }
-        break;
-      case "actionRedirect":
-        break;
-      case "actionReload":
-        if (actionData.error) {
-          notifyErrorDeleting();
-        } else {
-          notifySuccessDeleting();
-        }
-        break;
-    }
-  }, [transition, actionData]);
+    console.log("Track Route UseEffect", actionData, navigation);
+    // switch (navigation.state) {
+    // case "submitting":
+    //   notifyDeleting();
+    //   break;
+    // }
+  }, [navigation, actionData]);
 
   return (
     <main className="main">

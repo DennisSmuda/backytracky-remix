@@ -7,5 +7,5 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export const loader: LoaderFunction = async () => {
-  return redirect("/auth/login");
+  return redirect("/login");
 };

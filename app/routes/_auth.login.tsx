@@ -1,12 +1,12 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useActionData, useTransition } from "@remix-run/react";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
-import BackgroundNotes from "../../components/BackgroundNotes";
-import TextInput from "../../components/TextInput";
+import { Form, useActionData /* useNavigation */ } from "@remix-run/react";
+// import { useEffect } from "react";
+// import toast from "react-hot-toast";
+import BackgroundNotes from "../components/BackgroundNotes";
+import TextInput from "../components/TextInput";
 import { createUserSession, login } from "~/utils/session.server";
-import { validatePassword, validateUsername } from "./utils";
+import { validatePassword, validateUsername } from "./auth/utils";
 
 type ActionData = {
   formError?: string;
@@ -54,30 +54,30 @@ export const action: ActionFunction = async ({ request }) => {
   return createUserSession(user.id);
 };
 
-const notifyLoggingIn = () =>
-  toast.loading("Logging in...", { id: "auth-toast" });
-const notifyErrorLoggingIn = () =>
-  toast.error("There was an error...", { id: "auth-toast" });
-const notifySuccessLoggingIn = () =>
-  toast.success("You are logged in!", { id: "auth-toast" });
+// const notifyLoggingIn = () =>
+//   toast.loading("Logging in...", { id: "auth-toast" });
+// const notifyErrorLoggingIn = () =>
+//   toast.error("There was an error...", { id: "auth-toast" });
+// const notifySuccessLoggingIn = () =>
+//   toast.success("You are logged in!", { id: "auth-toast" });
 
 export default function LoginRoute() {
   const actionData = useActionData();
-  const transition = useTransition();
+  // const transition = useNavigation();
 
-  useEffect(() => {
-    switch (transition.type) {
-      case "actionSubmission":
-        notifyLoggingIn();
-        break;
-      case "actionRedirect":
-        notifySuccessLoggingIn();
-        break;
-      case "actionReload":
-        notifyErrorLoggingIn();
-        break;
-    }
-  }, [transition]);
+  // useEffect(() => {
+  //   switch (transition.type) {
+  //     case "actionSubmission":
+  //       notifyLoggingIn();
+  //       break;
+  //     case "actionRedirect":
+  //       notifySuccessLoggingIn();
+  //       break;
+  //     case "actionReload":
+  //       notifyErrorLoggingIn();
+  //       break;
+  //   }
+  // }, [transition]);
 
   return (
     <main>

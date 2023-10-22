@@ -1,6 +1,5 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
 import PageHeader from "~/components/PageHeader";

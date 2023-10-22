@@ -1,10 +1,8 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
-import { useRef } from "react";
-import { redirect } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { useRef, useEffect, useState } from "react";
+import { redirect, json } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
-import { useEffect, useState } from "react";
 import TextInput from "~/components/TextInput";
 import {
   increaseDuration,

@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 
 describe("Login Route", () => {
   beforeEach(() => {
-    cy.visit("/auth/login");
+    cy.visit("/login");
   });
 
   it("can login a user, sets an session-cookie and shows notification", function () {

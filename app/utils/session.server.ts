@@ -52,7 +52,7 @@ export async function requireUserId(request: Request) {
   const session = await getUserSession(request);
   const userId = session.get("userId");
   if (!userId || typeof userId !== "string") {
-    throw redirect(`/auth/login`);
+    throw redirect(`/login`);
   }
   return userId;
 }
@@ -76,7 +76,7 @@ export async function getUser(request: Request) {
 
 export async function logout(request: Request) {
   const session = await getUserSession(request);
-  return redirect("/auth/login", {
+  return redirect("/login", {
     headers: {
       "Set-Cookie": await storage.destroySession(session),
     },
