@@ -1,6 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { MouseEvent } from "react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, Suspense } from "react";
 import { redirect, json } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import TextInput from "~/components/TextInput";
@@ -14,7 +14,6 @@ import { getUser, requireUserId } from "~/utils/session.server";
 import { createTrack } from "~/utils/tracks.server";
 import ChordEditor from "~/components/track/ChordEditorModal";
 import TrackEditor from "~/components/track/TrackEditor.client";
-import { ClientOnly } from "remix-utils";
 
 type Duration = "1n" | "2n" | "4n";
 const sampleChordConfig = {
@@ -78,8 +77,8 @@ const badRequest = (data: any) => json(data, { status: 400 });
  * @returns React.Component
  */
 export default function NewTrackRoute() {
-  const actionData = useActionData();
-  const loaderData = useLoaderData();
+  const actionData = useActionData<typeof action>();
+  const loaderData = useLoaderData<typeof loader>();
 
   const [isChordEditorOpen, setIsChordEditorOpen] = useState(false);
   const [chords, setChords] = useState<Array<ChordBeat>>([]);
@@ -227,17 +226,15 @@ export default function NewTrackRoute() {
             <div className="overflow-x-scroll">
               <fieldset className="sheet-grid sheet-grid--editor overflow-x-auto">
                 <legend>Sheet - one full row = count to 4</legend>
-                <ClientOnly fallback={<p>Loading...</p>}>
-                  {() => (
-                    <TrackEditor
-                      chords={chords}
-                      shortenChord={shortenChord}
-                      lengthenChord={lengthenChord}
-                      editChord={editChord}
-                      deleteChord={deleteChord}
-                    />
-                  )}
-                </ClientOnly>
+                <Suspense fallback={<p>Loading...</p>}>
+                  <TrackEditor
+                    chords={chords}
+                    shortenChord={shortenChord}
+                    lengthenChord={lengthenChord}
+                    editChord={editChord}
+                    deleteChord={deleteChord}
+                  />
+                </Suspense>
               </fieldset>
             </div>
 

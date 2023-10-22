@@ -55,7 +55,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function LoginRoute() {
-  const actionData = useActionData();
+  const actionData = useActionData<typeof action>();
   const navigation = useNavigation();
 
   useEffect(() => {

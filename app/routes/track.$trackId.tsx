@@ -1,7 +1,7 @@
-import type { LoaderFunction, V2_MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { ClientOnly } from "remix-utils";
+import { Suspense } from "react";
 import PageHeader from "~/components/PageHeader";
 import TrackPlayer from "~/components/track/TrackPlayer.client";
 import { getTrack } from "~/utils/tracks.server";
@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   return json({ track });
 };
 
-export const meta: V2_MetaFunction = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
       title: `${data.track.name} Backing Track | BackyTracky`,
@@ -26,7 +26,7 @@ export const meta: V2_MetaFunction = ({ data }) => {
 };
 
 export default function TrackDetailRoute() {
-  const { track } = useLoaderData();
+  const { track } = useLoaderData<typeof loader>();
   return (
     <main className="main">
       <PageHeader title={track.name}>
@@ -53,9 +53,9 @@ export default function TrackDetailRoute() {
             </div>
           </div>
 
-          <ClientOnly fallback={<p>Loading...</p>}>
-            {() => <TrackPlayer sheet={track.sheet} bpm={track.bpm} />}
-          </ClientOnly>
+          <Suspense fallback={<p>Loading...</p>}>
+            <TrackPlayer sheet={track.sheet} bpm={track.bpm} />
+          </Suspense>
         </div>
       </section>
     </main>

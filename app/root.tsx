@@ -1,8 +1,4 @@
-import type {
-  LinksFunction,
-  LoaderFunction,
-  V2_MetaFunction,
-} from "@remix-run/node";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -22,7 +18,7 @@ import styles from "./styles/app.css";
 import { getUser } from "./utils/session.server";
 import { getThemeSession } from "./utils/theme.server";
 import { Toaster } from "react-hot-toast";
-import { ClientOnly } from "remix-utils";
+import { Suspense } from "react";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
@@ -33,7 +29,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 function App() {
-  const { user, theme: ssrTheme } = useLoaderData();
+  const { user, theme: ssrTheme } = useLoaderData<typeof loader>();
   const [theme] = useTheme();
 
   return (
@@ -82,7 +78,9 @@ function App() {
       <body>
         <Navbar user={user} />
 
-        <ClientOnly>{() => <Toaster />}</ClientOnly>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Toaster />
+        </Suspense>
 
         <Outlet />
 
@@ -95,7 +93,7 @@ function App() {
 }
 
 export default function AppWithProviders() {
-  const { theme } = useLoaderData();
+  const { theme } = useLoaderData<typeof loader>();
   return (
     <ThemeProvider specifiedTheme={theme}>
       <App />

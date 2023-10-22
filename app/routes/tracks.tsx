@@ -3,7 +3,6 @@ import type {
   ActionFunction,
   LoaderFunction,
   MetaFunction,
-  V2_MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -48,7 +47,7 @@ export const action: ActionFunction = async ({ request }) => {
 
 const badRequest = (data: any) => json(data, { status: 400 });
 
-export const meta: V2_MetaFunction = () => [
+export const meta: MetaFunction = () => [
   {
     title: "All Tracks | BackyTracky",
   },
@@ -59,8 +58,8 @@ export const meta: V2_MetaFunction = () => [
 ];
 
 export default function TracksRoute() {
-  const actionData = useActionData();
-  const loaderData = useLoaderData();
+  const actionData = useActionData<typeof action>();
+  const loaderData = useLoaderData<typeof loader>();
   const navigation = useNavigation();
 
   useEffect(() => {

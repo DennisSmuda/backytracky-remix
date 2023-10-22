@@ -1,6 +1,7 @@
 {
   "private": true,
   "sideEffects": false,
+  "type": "module",
   "scripts": {
     "build": "run-s \"build:*\"",
     "build:css": "npm run generate:css -- --minify",
@@ -27,28 +28,27 @@
     "@headlessui/react": "^1.6.6",
     "@netlify/functions": "^1.0.0",
     "@prisma/client": "^4.1.0",
-    "@remix-run/netlify": "^1.6.5",
-    "@remix-run/node": "^1.6.5",
-    "@remix-run/react": "^1.6.5",
+    "@remix-run/netlify": "1.19.3",
+    "@remix-run/node": "2.1.0",
+    "@remix-run/react": "2.1.0",
     "@tonaljs/tonal": "^4.6.5",
     "bcryptjs": "^2.4.3",
     "clsx": "^1.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-hot-toast": "^2.3.0",
-    "remix-utils": "^3.3.0",
+    "remix-utils": "^7.1.0",
     "tone": "^14.7.77"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0",
-    "@remix-run/dev": "^1.6.5",
-    "@remix-run/eslint-config": "^1.6.5",
-    "@remix-run/serve": "^1.6.5",
+    "@remix-run/dev": "2.1.0",
+    "@remix-run/eslint-config": "2.1.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.4",
     "@testing-library/cypress": "^10.0.1",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/react": "^14.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/jest": "^28.1.6",
     "@types/react": "^17.0.45",
@@ -68,7 +68,7 @@
     "prisma": "^4.1.0",
     "tailwindcss": "^3.1.6",
     "ts-jest": "^28.0.7",
-    "typescript": "^4.7.4"
+    "typescript": "^5.1.0"
   },
   "engines": {
     "node": ">=14"

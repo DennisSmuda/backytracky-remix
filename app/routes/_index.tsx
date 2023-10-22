@@ -1,9 +1,9 @@
 import { Link } from "@remix-run/react";
 import BackgroundNotes from "../components/BackgroundNotes";
 import Footer from "../components/Footer";
-import type { V2_MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 
-export const meta: V2_MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return [
     { charset: "utf-8" },
     {

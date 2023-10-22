@@ -1,11 +1,11 @@
-import type { V2_MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import { ClientOnly } from "remix-utils";
+import { Suspense } from "react";
 import Footer from "~/components/Footer";
 import GuitarTuner from "~/components/GuitarTuner.client";
 import PageHeader from "~/components/PageHeader";
 
-export const meta: V2_MetaFunction = () => [
+export const meta: MetaFunction = () => [
   {
     title: "Guitar Tuner | BackyTracky",
   },
@@ -26,9 +26,9 @@ export default function Tuner() {
 
       <section>
         <div className="max-w-4xl mx-auto relative">
-          <ClientOnly fallback={<p>Loading...</p>}>
-            {() => <GuitarTuner />}
-          </ClientOnly>
+          <Suspense fallback={<div>Loading...</div>}>
+            <GuitarTuner />
+          </Suspense>
         </div>
       </section>
 
