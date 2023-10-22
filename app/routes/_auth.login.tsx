@@ -59,7 +59,6 @@ export default function LoginRoute() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log("action", actionData, navigation);
     if (navigation.state === "submitting" && navigation.formMethod === "POST") {
       toast.loading("Logging in...", { id: "auth-toast" });
     }

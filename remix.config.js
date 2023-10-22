@@ -6,6 +6,7 @@ module.exports = {
     v2_normalizeFormMethod: true,
     v2_meta: true,
     v2_headers: true,
+    v2_dev: true,
   },
   // serverBuild deprecation block
   publicPath: "/_static/build/",
