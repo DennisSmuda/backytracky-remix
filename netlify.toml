@@ -1,5 +1,3 @@
-[context.production]
-environment = { NODE_VERSION = "18.18.2" }
 
 [build]
 command = "remix build && cp _app_redirects public/_redirects"
@@ -10,15 +8,15 @@ publish = "public"
 command = "npm run dev"
 targetPort = 3000
 
-# [[redirects]]
-# from = "/auth"
-# to = "/"
-# status = 200
+[[redirects]]
+from = "/auth"
+to = "/"
+status = 200
 
-# [[redirects]]
-# from = "/*"
-# to = "/.netlify/functions/server"
-# status = 200
+[[redirects]]
+from = "/*"
+to = "/.netlify/functions/server"
+status = 200
 
 [[headers]]
 for = "/build/*"
