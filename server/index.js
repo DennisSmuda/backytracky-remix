@@ -69,14 +69,10 @@ var entry_server_exports = {};
 __export(entry_server_exports, {
   default: () => handleRequest
 });
-var import_react = require("@remix-run/react"), import_server = require("react-dom/server"), import_jsx_dev_runtime = require("react/jsx-dev-runtime");
+var import_react = require("@remix-run/react"), import_server = require("react-dom/server"), import_jsx_runtime = require("react/jsx-runtime");
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext) {
   let markup = (0, import_server.renderToString)(
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_react.RemixServer, { context: remixContext, url: request.url }, void 0, !1, {
-      fileName: "app/entry.server.tsx",
-      lineNumber: 12,
-      columnNumber: 5
-    }, this)
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.RemixServer, { context: remixContext, url: request.url })
   );
   return responseHeaders.set("Content-Type", "text/html"), new Response("<!DOCTYPE html>" + markup, {
     status: responseStatusCode,
@@ -94,7 +90,7 @@ __export(root_exports, {
 var import_node3 = require("@remix-run/node"), import_react8 = require("@remix-run/react"), import_clsx = __toESM(require("clsx"));
 
 // app/utils/ThemeProvider.tsx
-var import_react2 = require("@remix-run/react"), import_react3 = require("react"), import_react4 = require("react"), import_react5 = require("react"), import_react6 = require("react"), import_jsx_dev_runtime2 = require("react/jsx-dev-runtime"), Theme = /* @__PURE__ */ ((Theme2) => (Theme2.DARK = "dark", Theme2.LIGHT = "light", Theme2))(Theme || {}), ThemeContext = (0, import_react6.createContext)(void 0), prefersDarkMQ = "(prefers-color-scheme: dark)", getPreferredTheme = () => window.matchMedia(prefersDarkMQ).matches ? "dark" /* DARK */ : "light" /* LIGHT */, clientThemeCode = `
+var import_react2 = require("@remix-run/react"), import_react3 = require("react"), import_react4 = require("react"), import_react5 = require("react"), import_react6 = require("react"), import_jsx_runtime2 = require("react/jsx-runtime"), Theme = /* @__PURE__ */ ((Theme2) => (Theme2.DARK = "dark", Theme2.LIGHT = "light", Theme2))(Theme || {}), ThemeContext = (0, import_react6.createContext)(void 0), prefersDarkMQ = "(prefers-color-scheme: dark)", getPreferredTheme = () => window.matchMedia(prefersDarkMQ).matches ? "dark" /* DARK */ : "light" /* LIGHT */, clientThemeCode = `
 ;(() => {
 const theme = window.matchMedia(${JSON.stringify(prefersDarkMQ)}).matches
     ? 'dark'
@@ -106,32 +102,16 @@ const theme = window.matchMedia(${JSON.stringify(prefersDarkMQ)}).matches
 `;
 function ThemeScript({ ssrTheme }) {
   let [theme] = useTheme();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_jsx_dev_runtime2.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(import_jsx_runtime2.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
       "meta",
       {
         name: "color-scheme",
         content: theme === "light" ? "light dark" : "dark light"
-      },
-      void 0,
-      !1,
-      {
-        fileName: "app/utils/ThemeProvider.tsx",
-        lineNumber: 39,
-        columnNumber: 7
-      },
-      this
+      }
     ),
-    ssrTheme ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("script", { dangerouslySetInnerHTML: { __html: clientThemeCode } }, void 0, !1, {
-      fileName: "app/utils/ThemeProvider.tsx",
-      lineNumber: 45,
-      columnNumber: 9
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/utils/ThemeProvider.tsx",
-    lineNumber: 38,
-    columnNumber: 5
-  }, this);
+    ssrTheme ? null : /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("script", { dangerouslySetInnerHTML: { __html: clientThemeCode } })
+  ] });
 }
 var themes = Object.values(Theme);
 function isTheme(value) {
@@ -155,11 +135,7 @@ function ThemeProvider({
       { theme },
       { action: "action/set-theme", method: "post" }
     );
-  }, [theme]), /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ThemeContext.Provider, { value: [theme, setTheme], children }, void 0, !1, {
-    fileName: "app/utils/ThemeProvider.tsx",
-    lineNumber: 101,
-    columnNumber: 5
-  }, this);
+  }, [theme]), /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(ThemeContext.Provider, { value: [theme, setTheme], children });
 }
 function useTheme() {
   let context = (0, import_react4.useContext)(ThemeContext);
@@ -170,7 +146,7 @@ function useTheme() {
 
 // app/components/Navbar.tsx
 var import_react7 = require("@remix-run/react"), import_react_hot_toast = __toESM(require("react-hot-toast"));
-var import_jsx_dev_runtime3 = require("react/jsx-dev-runtime"), notifyLogout = () => {
+var import_jsx_runtime3 = require("react/jsx-runtime"), notifyLogout = () => {
   import_react_hot_toast.default.success("Logged out", { id: "auth-toast" });
 };
 function Navbar({ user }) {
@@ -179,125 +155,49 @@ function Navbar({ user }) {
       (prevTheme) => prevTheme === "light" /* LIGHT */ ? "dark" /* DARK */ : "light" /* LIGHT */
     );
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("header", { className: "flex justify-between items-center px-1 sm:px-4 pb-2 pt-3", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("nav", { className: "grid gap-4 grid-flow-col items-baseline", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.Link, { className: "font-black tracking-tighter text-xl", to: "/", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("span", { className: "hidden sm:inline", children: "BackyTracky" }, void 0, !1, {
-          fileName: "app/components/Navbar.tsx",
-          lineNumber: 28,
-          columnNumber: 11
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("span", { className: "sm:hidden", children: "BT" }, void 0, !1, {
-          fileName: "app/components/Navbar.tsx",
-          lineNumber: 29,
-          columnNumber: 11
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 27,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.NavLink, { to: "/tracks", children: "Tracks" }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 31,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.NavLink, { to: "/generator", children: "Generate" }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 32,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.NavLink, { to: "/tuner", children: "Tuner" }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 33,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/components/Navbar.tsx",
-      lineNumber: 26,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("nav", { className: "grid gap-4 grid-flow-col items-center", children: [
-      (user == null ? void 0 : user.username) && /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.NavLink, { className: "button--cta", to: "/track/new", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("header", { className: "flex justify-between items-center px-1 sm:px-4 pb-2 pt-3", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("nav", { className: "grid gap-4 grid-flow-col items-baseline", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_react7.Link, { className: "font-black tracking-tighter text-xl", to: "/", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "hidden sm:inline", children: "BackyTracky" }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "sm:hidden", children: "BT" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react7.NavLink, { to: "/tracks", children: "Tracks" }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react7.NavLink, { to: "/generator", children: "Generate" }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react7.NavLink, { to: "/tuner", children: "Tuner" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("nav", { className: "grid gap-4 grid-flow-col items-center", children: [
+      (user == null ? void 0 : user.username) && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react7.NavLink, { className: "button--cta", to: "/track/new", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
         "svg",
         {
           xmlns: "http://www.w3.org/2000/svg",
           className: "h-5 w-5",
           viewBox: "0 0 20 20",
           fill: "currentColor",
-          children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+          children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
             "path",
             {
               fillRule: "evenodd",
               d: "M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z",
               clipRule: "evenodd"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/Navbar.tsx",
-              lineNumber: 44,
-              columnNumber: 15
-            },
-            this
+            }
           )
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/components/Navbar.tsx",
-          lineNumber: 38,
-          columnNumber: 13
-        },
-        this
-      ) }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 37,
-        columnNumber: 11
-      }, this),
-      user ? /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.Form, { className: "hidden sm:block", method: "post", action: "/logout", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { onClick: notifyLogout, type: "submit", children: "Logout" }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 54,
-        columnNumber: 13
-      }, this) }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 53,
-        columnNumber: 11
-      }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_jsx_dev_runtime3.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_react7.NavLink, { className: "hidden sm:block", to: "/login", children: "Login" }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 60,
-        columnNumber: 13
-      }, this) }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 59,
-        columnNumber: 11
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "text-xl", onClick: toggleTheme, children: currentTheme === "light" /* LIGHT */ ? "\u{1F31A}" : "\u{1F60E}" }, void 0, !1, {
-        fileName: "app/components/Navbar.tsx",
-        lineNumber: 67,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/components/Navbar.tsx",
-      lineNumber: 35,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/components/Navbar.tsx",
-    lineNumber: 25,
-    columnNumber: 5
-  }, this);
+        }
+      ) }),
+      user ? /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react7.Form, { className: "hidden sm:block", method: "post", action: "/logout", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { onClick: notifyLogout, type: "submit", children: "Logout" }) }) : /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_jsx_runtime3.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react7.NavLink, { className: "hidden sm:block", to: "/login", children: "Login" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("button", { className: "text-xl", onClick: toggleTheme, children: currentTheme === "light" /* LIGHT */ ? "\u{1F31A}" : "\u{1F60E}" })
+    ] })
+  ] });
 }
 
 // app/styles/app.css
-var app_default = "/_static/build/_assets/app-VC4PS46U.css";
+var app_default = "/_static/build/_assets/app-SIBQ2CLQ.css";
 
 // app/utils/session.server.ts
 var import_node = require("@remix-run/node"), import_bcryptjs = __toESM(require("bcryptjs"));
 
 // app/utils/db.server.ts
 var import_client = require("@prisma/client"), db;
-global.__db || (global.__db = new import_client.PrismaClient()), db = global.__db;
+db = new import_client.PrismaClient();
 
 // app/utils/session.server.ts
 async function login({ username, password }) {
@@ -312,7 +212,7 @@ if (!sessionSecret)
 var storage = (0, import_node.createCookieSessionStorage)({
   cookie: {
     name: "BT_session",
-    secure: !1,
+    secure: !0,
     // insecure for localhost
     secrets: [sessionSecret],
     sameSite: "lax",
@@ -372,7 +272,7 @@ if (!sessionSecret2)
 var themeStorage = (0, import_node2.createCookieSessionStorage)({
   cookie: {
     name: "BT_theme",
-    secure: !1,
+    secure: !0,
     // insecure for localhost
     secrets: [sessionSecret2],
     sameSite: "lax",
@@ -393,221 +293,85 @@ async function getThemeSession(request) {
 }
 
 // app/root.tsx
-var import_react_hot_toast2 = require("react-hot-toast"), import_remix_utils = require("remix-utils"), import_jsx_dev_runtime4 = require("react/jsx-dev-runtime"), links = () => [{ rel: "stylesheet", href: app_default }], loader = async ({ request }) => {
+var import_react_hot_toast2 = require("react-hot-toast"), import_remix_utils = require("remix-utils"), import_jsx_runtime4 = require("react/jsx-runtime"), links = () => [{ rel: "stylesheet", href: app_default }], loader = async ({ request }) => {
   let user = await getUser(request), themeSession = await getThemeSession(request);
   return (0, import_node3.json)({ user, theme: themeSession.getTheme() });
 };
 function App() {
   let { user, theme: ssrTheme } = (0, import_react8.useLoaderData)(), [theme] = useTheme();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("html", { lang: "en", className: (0, import_clsx.default)(theme), children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("head", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react8.Meta, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 42,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react8.Links, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 43,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(ThemeScript, { ssrTheme: Boolean(ssrTheme) }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 44,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("html", { lang: "en", className: (0, import_clsx.default)(theme), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("head", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react8.Meta, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react8.Links, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ThemeScript, { ssrTheme: Boolean(ssrTheme) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         "link",
         {
           rel: "apple-touch-icon",
           sizes: "180x180",
           href: "/apple-touch-icon.png"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/root.tsx",
-          lineNumber: 45,
-          columnNumber: 9
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         "link",
         {
           rel: "icon",
           type: "image/png",
           sizes: "32x32",
           href: "/favicon-32x32.png"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/root.tsx",
-          lineNumber: 50,
-          columnNumber: 9
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         "link",
         {
           rel: "icon",
           type: "image/png",
           sizes: "16x16",
           href: "/favicon-16x16.png"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/root.tsx",
-          lineNumber: 56,
-          columnNumber: 9
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("link", { rel: "manifest", href: "/site.webmanifest" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 62,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("link", { rel: "mask-icon", href: "/safari-pinned-tab.svg", color: "#5bbad5" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 63,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("meta", { name: "msapplication-TileColor", content: "#da532c" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 64,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("link", { rel: "manifest", href: "/site.webmanifest" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("link", { rel: "mask-icon", href: "/safari-pinned-tab.svg", color: "#5bbad5" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("meta", { name: "msapplication-TileColor", content: "#da532c" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         "meta",
         {
           name: "viewport",
           content: "width=device-width,initial-scale=1,viewport-fit=cover"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/root.tsx",
-          lineNumber: 65,
-          columnNumber: 9
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("meta", { name: "theme-color", content: "#18181b" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 69,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("meta", { name: "theme-color", content: "#18181b" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         "meta",
         {
           property: "og:title",
           content: "Free Backing Tracks for Musicians | BackyTracky"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/root.tsx",
-          lineNumber: 70,
-          columnNumber: 9
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
         "meta",
         {
           property: "og:description",
           content: "Create and play-along Lead-Sheets to level up your chops! Practice scales, licks or solos. Discover chord progressions others are using or make your own!"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/root.tsx",
-          lineNumber: 74,
-          columnNumber: 9
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("meta", { property: "og:locale", content: "en_US" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 78,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("meta", { property: "og:site_name", content: "BackyTracky" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 79,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("meta", { property: "og:image", content: "/og-image.png" }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 80,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/root.tsx",
-      lineNumber: 41,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("body", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(Navbar, { user }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 83,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_remix_utils.ClientOnly, { children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react_hot_toast2.Toaster, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 85,
-        columnNumber: 28
-      }, this) }, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 85,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react8.Outlet, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 87,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react8.ScrollRestoration, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 89,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react8.Scripts, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 90,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(import_react8.LiveReload, {}, void 0, !1, {
-        fileName: "app/root.tsx",
-        lineNumber: 91,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/root.tsx",
-      lineNumber: 82,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/root.tsx",
-    lineNumber: 40,
-    columnNumber: 5
-  }, this);
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("meta", { property: "og:locale", content: "en_US" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("meta", { property: "og:site_name", content: "BackyTracky" }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("meta", { property: "og:image", content: "/og-image.png" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("body", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Navbar, { user }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_remix_utils.ClientOnly, { children: () => /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react_hot_toast2.Toaster, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react8.Outlet, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react8.ScrollRestoration, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react8.Scripts, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react8.LiveReload, {})
+    ] })
+  ] });
 }
 function AppWithProviders() {
   let { theme } = (0, import_react8.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(ThemeProvider, { specifiedTheme: theme, children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(App, {}, void 0, !1, {
-    fileName: "app/root.tsx",
-    lineNumber: 101,
-    columnNumber: 7
-  }, this) }, void 0, !1, {
-    fileName: "app/root.tsx",
-    lineNumber: 100,
-    columnNumber: 5
-  }, this);
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(ThemeProvider, { specifiedTheme: theme, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(App, {}) });
 }
 
 // app/routes/_auth.register.tsx
@@ -615,25 +379,9 @@ var auth_register_exports = {};
 __export(auth_register_exports, {
   default: () => RegisterRoute
 });
-var import_jsx_dev_runtime5 = require("react/jsx-dev-runtime");
+var import_jsx_runtime5 = require("react/jsx-runtime");
 function RegisterRoute() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("main", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "max-w-sm mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("h1", { children: "Register \u{1F4D1}" }, void 0, !1, {
-    fileName: "app/routes/_auth.register.tsx",
-    lineNumber: 6,
-    columnNumber: 11
-  }, this) }, void 0, !1, {
-    fileName: "app/routes/_auth.register.tsx",
-    lineNumber: 5,
-    columnNumber: 9
-  }, this) }, void 0, !1, {
-    fileName: "app/routes/_auth.register.tsx",
-    lineNumber: 4,
-    columnNumber: 7
-  }, this) }, void 0, !1, {
-    fileName: "app/routes/_auth.register.tsx",
-    lineNumber: 3,
-    columnNumber: 5
-  }, this);
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("main", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "max-w-sm mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h1", { children: "Register \u{1F4D1}" }) }) }) });
 }
 
 // app/routes/track.$trackId.tsx
@@ -646,42 +394,18 @@ __export(track_trackId_exports, {
 var import_node5 = require("@remix-run/node"), import_react9 = require("@remix-run/react"), import_remix_utils2 = require("remix-utils");
 
 // app/components/PageHeader.tsx
-var import_jsx_dev_runtime6 = require("react/jsx-dev-runtime");
+var import_jsx_runtime6 = require("react/jsx-runtime");
 function PageHeader({
   title,
   children
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("section", { className: "border-b border-zinc-500 border-opacity-10 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-gray-1000", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "bg-white dark:bg-black absolute top-0 left-0 right-0 h-1 -z-10", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none" }, void 0, !1, {
-      fileName: "app/components/PageHeader.tsx",
-      lineNumber: 13,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/components/PageHeader.tsx",
-      lineNumber: 12,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "max-w-4xl mx-auto relative", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "page-header__breadcrumbs", children }, void 0, !1, {
-        fileName: "app/components/PageHeader.tsx",
-        lineNumber: 16,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("h1", { className: "font-black", children: title }, void 0, !1, {
-        fileName: "app/components/PageHeader.tsx",
-        lineNumber: 17,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/components/PageHeader.tsx",
-      lineNumber: 15,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/components/PageHeader.tsx",
-    lineNumber: 11,
-    columnNumber: 5
-  }, this);
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("section", { className: "border-b border-zinc-500 border-opacity-10 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-gray-1000", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "bg-white dark:bg-black absolute top-0 left-0 right-0 h-1 -z-10", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none" }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "max-w-4xl mx-auto relative", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "page-header__breadcrumbs", children }),
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h1", { className: "font-black", children: title })
+    ] })
+  ] });
 }
 
 // app/routes/track.$trackId.tsx
@@ -719,7 +443,7 @@ async function deleteTrack(trackId) {
 }
 
 // app/routes/track.$trackId.tsx
-var import_jsx_dev_runtime7 = require("react/jsx-dev-runtime"), loader2 = async ({ params }) => {
+var import_jsx_runtime7 = require("react/jsx-runtime"), loader2 = async ({ params }) => {
   if (!params.trackId)
     return (0, import_node5.redirect)("/tracks");
   let track = await getTrack(params.trackId);
@@ -735,107 +459,35 @@ var import_jsx_dev_runtime7 = require("react/jsx-dev-runtime"), loader2 = async 
 ];
 function TrackDetailRoute() {
   let { track } = (0, import_react9.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("main", { className: "main", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(PageHeader, { title: track.name, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_react9.Link, { to: "/", children: "Home" }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 33,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("span", { children: " / " }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 34,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_react9.Link, { to: "/tracks", children: "Tracks" }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 35,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("span", { children: " / " }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 36,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_react9.Link, { to: `/track/${track.id}`, children: track.name }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 37,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/track.$trackId.tsx",
-      lineNumber: 32,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "max-w-4xl mx-auto", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "opacity-50 text-xs flex justify-between", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("span", { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("main", { className: "main", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(PageHeader, { title: track.name, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react9.Link, { to: "/", children: "Home" }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: " / " }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react9.Link, { to: "/tracks", children: "Tracks" }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: " / " }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react9.Link, { to: `/track/${track.id}`, children: track.name })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "max-w-4xl mx-auto", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "opacity-50 text-xs flex justify-between", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
           "Suggested time: ",
-          /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("strong", { children: track.bpm }, void 0, !1, {
-            fileName: "app/routes/track.$trackId.tsx",
-            lineNumber: 43,
-            columnNumber: 31
-          }, this),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("strong", { children: track.bpm }),
           " bpm"
-        ] }, void 0, !0, {
-          fileName: "app/routes/track.$trackId.tsx",
-          lineNumber: 42,
-          columnNumber: 13
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("span", { children: [
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
           "Created by ",
-          /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("strong", { children: track.authorName }, void 0, !1, {
-            fileName: "app/routes/track.$trackId.tsx",
-            lineNumber: 47,
-            columnNumber: 28
-          }, this),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("strong", { children: track.authorName }),
           ", in",
           " ",
           new Date(track.createdAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long"
           })
-        ] }, void 0, !0, {
-          fileName: "app/routes/track.$trackId.tsx",
-          lineNumber: 46,
-          columnNumber: 15
-        }, this) }, void 0, !1, {
-          fileName: "app/routes/track.$trackId.tsx",
-          lineNumber: 45,
-          columnNumber: 13
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 41,
-        columnNumber: 11
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_remix_utils2.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("p", { children: "Loading..." }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 56,
-        columnNumber: 33
-      }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_TrackPlayer.default, { sheet: track.sheet, bpm: track.bpm }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 57,
-        columnNumber: 20
-      }, this) }, void 0, !1, {
-        fileName: "app/routes/track.$trackId.tsx",
-        lineNumber: 56,
-        columnNumber: 11
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/track.$trackId.tsx",
-      lineNumber: 40,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/track.$trackId.tsx",
-      lineNumber: 39,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/track.$trackId.tsx",
-    lineNumber: 31,
-    columnNumber: 5
-  }, this);
+        ] }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_remix_utils2.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { children: "Loading..." }), children: () => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_TrackPlayer.default, { sheet: track.sheet, bpm: track.bpm }) })
+    ] }) })
+  ] });
 }
 
 // app/routes/_auth.logout.tsx
@@ -856,177 +508,89 @@ __export(auth_login_exports, {
 var import_node7 = require("@remix-run/node"), import_react10 = require("@remix-run/react"), import_react11 = require("react"), import_react_hot_toast3 = __toESM(require("react-hot-toast"));
 
 // app/components/BackgroundNotes.tsx
-var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 function BackgroundNotes() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_jsx_dev_runtime8.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "background-note animation-float-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(import_jsx_runtime8.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "background-note animation-float-1", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
       "svg",
       {
         viewBox: "0 0 126 188",
         fill: "none",
         xmlns: "http://www.w3.org/2000/svg",
         children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "path",
             {
               d: "M62.3862 0V110.104C54.4518 105.522 45.2285 103.689 36.1475 104.891C27.0664 106.093 18.6355 110.262 12.1631 116.752C5.6906 123.241 1.53848 131.688 0.35106 140.782C-0.836364 149.876 1.00729 159.108 5.59595 167.046C10.1846 174.983 17.2616 181.182 25.7289 184.681C34.1961 188.18 43.58 188.783 52.4244 186.396C61.2688 184.01 69.0792 178.767 74.6434 171.482C80.2077 164.196 83.2147 155.276 83.1979 146.105V41.7233H124.919V0H62.3862Z",
               className: "fill-yellow-500"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/BackgroundNotes.tsx",
-              lineNumber: 10,
-              columnNumber: 11
-            },
-            this
+            }
           ),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "path",
             {
               opacity: "0.1",
               d: "M118.568 0V34.8754H76.8469V139.257C76.8495 147.096 74.6455 154.777 70.4877 161.42C66.3298 168.062 60.3864 173.397 53.339 176.813C46.2915 180.228 38.4254 181.586 30.6426 180.73C22.8597 179.875 15.4753 176.84 9.33594 171.975C14.7022 178.774 22.05 183.731 30.3589 186.157C38.6677 188.584 47.525 188.359 55.7004 185.514C63.8758 182.67 70.9634 177.346 75.9787 170.284C80.994 163.221 83.6879 154.77 83.6864 146.105V41.7233H125.407V0H118.568Z",
               fill: "black"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/BackgroundNotes.tsx",
-              lineNumber: 14,
-              columnNumber: 11
-            },
-            this
+            }
           )
         ]
-      },
-      void 0,
-      !0,
-      {
-        fileName: "app/components/BackgroundNotes.tsx",
-        lineNumber: 5,
-        columnNumber: 9
-      },
-      this
-    ) }, void 0, !1, {
-      fileName: "app/components/BackgroundNotes.tsx",
-      lineNumber: 4,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "background-note animation-float-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+      }
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "background-note animation-float-2", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
       "svg",
       {
         viewBox: "0 0 126 188",
         fill: "none",
         xmlns: "http://www.w3.org/2000/svg",
         children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "path",
             {
               d: "M62.3862 0V110.104C54.4518 105.522 45.2285 103.689 36.1475 104.891C27.0664 106.093 18.6355 110.262 12.1631 116.752C5.6906 123.241 1.53848 131.688 0.35106 140.782C-0.836364 149.876 1.00729 159.108 5.59595 167.046C10.1846 174.983 17.2616 181.182 25.7289 184.681C34.1961 188.18 43.58 188.783 52.4244 186.396C61.2688 184.01 69.0792 178.767 74.6434 171.482C80.2077 164.196 83.2147 155.276 83.1979 146.105V41.7233H124.919V0H62.3862Z",
               className: "fill-blue-500"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/BackgroundNotes.tsx",
-              lineNumber: 27,
-              columnNumber: 11
-            },
-            this
+            }
           ),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "path",
             {
               opacity: "0.1",
               d: "M118.568 0V34.8754H76.8469V139.257C76.8495 147.096 74.6455 154.777 70.4877 161.42C66.3298 168.062 60.3864 173.397 53.339 176.813C46.2915 180.228 38.4254 181.586 30.6426 180.73C22.8597 179.875 15.4753 176.84 9.33594 171.975C14.7022 178.774 22.05 183.731 30.3589 186.157C38.6677 188.584 47.525 188.359 55.7004 185.514C63.8758 182.67 70.9634 177.346 75.9787 170.284C80.994 163.221 83.6879 154.77 83.6864 146.105V41.7233H125.407V0H118.568Z",
               fill: "black"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/BackgroundNotes.tsx",
-              lineNumber: 31,
-              columnNumber: 11
-            },
-            this
+            }
           )
         ]
-      },
-      void 0,
-      !0,
-      {
-        fileName: "app/components/BackgroundNotes.tsx",
-        lineNumber: 22,
-        columnNumber: 9
-      },
-      this
-    ) }, void 0, !1, {
-      fileName: "app/components/BackgroundNotes.tsx",
-      lineNumber: 21,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "background-note animation-float-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+      }
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "background-note animation-float-3", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
       "svg",
       {
         viewBox: "0 0 126 188",
         fill: "none",
         xmlns: "http://www.w3.org/2000/svg",
         children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "path",
             {
               d: "M62.3862 0V110.104C54.4518 105.522 45.2285 103.689 36.1475 104.891C27.0664 106.093 18.6355 110.262 12.1631 116.752C5.6906 123.241 1.53848 131.688 0.35106 140.782C-0.836364 149.876 1.00729 159.108 5.59595 167.046C10.1846 174.983 17.2616 181.182 25.7289 184.681C34.1961 188.18 43.58 188.783 52.4244 186.396C61.2688 184.01 69.0792 178.767 74.6434 171.482C80.2077 164.196 83.2147 155.276 83.1979 146.105V41.7233H124.919V0H62.3862Z",
               className: "fill-red-400"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/BackgroundNotes.tsx",
-              lineNumber: 44,
-              columnNumber: 11
-            },
-            this
+            }
           ),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "path",
             {
               opacity: "0.1",
               d: "M118.568 0V34.8754H76.8469V139.257C76.8495 147.096 74.6455 154.777 70.4877 161.42C66.3298 168.062 60.3864 173.397 53.339 176.813C46.2915 180.228 38.4254 181.586 30.6426 180.73C22.8597 179.875 15.4753 176.84 9.33594 171.975C14.7022 178.774 22.05 183.731 30.3589 186.157C38.6677 188.584 47.525 188.359 55.7004 185.514C63.8758 182.67 70.9634 177.346 75.9787 170.284C80.994 163.221 83.6879 154.77 83.6864 146.105V41.7233H125.407V0H118.568Z",
               fill: "black"
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/BackgroundNotes.tsx",
-              lineNumber: 48,
-              columnNumber: 11
-            },
-            this
+            }
           )
         ]
-      },
-      void 0,
-      !0,
-      {
-        fileName: "app/components/BackgroundNotes.tsx",
-        lineNumber: 39,
-        columnNumber: 9
-      },
-      this
-    ) }, void 0, !1, {
-      fileName: "app/components/BackgroundNotes.tsx",
-      lineNumber: 38,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/components/BackgroundNotes.tsx",
-    lineNumber: 3,
-    columnNumber: 5
-  }, this);
+      }
+    ) })
+  ] });
 }
 
 // app/components/TextInput.tsx
-var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function TextInput({
   name,
   label,
@@ -1036,13 +600,9 @@ function TextInput({
   type = "text"
 }) {
   var _a, _b, _c, _d;
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("label", { className: "form-row", htmlFor: `${name}-input`, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("span", { children: label }, void 0, !1, {
-      fileName: "app/components/TextInput.tsx",
-      lineNumber: 23,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("label", { className: "form-row", htmlFor: `${name}-input`, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
       "input",
       {
         type,
@@ -1055,38 +615,18 @@ function TextInput({
         max: type === "number" ? "280" : void 0,
         "aria-invalid": Boolean((_b = actionData == null ? void 0 : actionData.fieldErrors) == null ? void 0 : _b.name),
         "aria-errormessage": (_c = actionData == null ? void 0 : actionData.fieldErrors) != null && _c.name ? `${name}-error` : void 0
-      },
-      void 0,
-      !1,
-      {
-        fileName: "app/components/TextInput.tsx",
-        lineNumber: 24,
-        columnNumber: 7
-      },
-      this
+      }
     ),
-    (_d = actionData == null ? void 0 : actionData.fieldErrors) != null && _d.name ? /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(
+    (_d = actionData == null ? void 0 : actionData.fieldErrors) != null && _d.name ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
       "span",
       {
         className: "form-validation-error",
         role: "alert",
         id: `${name}-error`,
         children: actionData.fieldErrors.name
-      },
-      void 0,
-      !1,
-      {
-        fileName: "app/components/TextInput.tsx",
-        lineNumber: 39,
-        columnNumber: 9
-      },
-      this
+      }
     ) : null
-  ] }, void 0, !0, {
-    fileName: "app/components/TextInput.tsx",
-    lineNumber: 22,
-    columnNumber: 5
-  }, this);
+  ] });
 }
 
 // app/routes/auth/utils.tsx
@@ -1100,7 +640,7 @@ function validatePassword(password) {
 }
 
 // app/routes/_auth.login.tsx
-var import_jsx_dev_runtime10 = require("react/jsx-dev-runtime"), badRequest = (data) => (0, import_node7.json)(data, { status: 400 }), action2 = async ({ request }) => {
+var import_jsx_runtime10 = require("react/jsx-runtime"), badRequest = (data) => (0, import_node7.json)(data, { status: 400 }), action2 = async ({ request }) => {
   let form = await request.formData(), username = form.get("username"), password = form.get("password");
   if (typeof username != "string" || typeof password != "string")
     return badRequest({
@@ -1122,108 +662,40 @@ function LoginRoute() {
   let actionData = (0, import_react10.useActionData)(), navigation = (0, import_react10.useNavigation)();
   return (0, import_react11.useEffect)(() => {
     navigation.state === "submitting" && navigation.formMethod === "POST" && import_react_hot_toast3.default.loading("Logging in...", { id: "auth-toast" }), navigation.state === "idle" && (actionData != null && actionData.formError) && import_react_hot_toast3.default.error("There was an error...", { id: "auth-toast" }), navigation.state === "loading" && navigation.formMethod === "POST" && import_react_hot_toast3.default.success("You are logged in!", { id: "auth-toast" });
-  }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("main", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "max-w-sm mx-auto pt-8 relative z-10", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("h1", { className: "", children: "Login \u{1F511}" }, void 0, !1, {
-        fileName: "app/routes/_auth.login.tsx",
-        lineNumber: 77,
-        columnNumber: 11
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_react10.Form, { className: "grid gap-4 mt-4", method: "post", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
+  }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("main", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "max-w-sm mx-auto pt-8 relative z-10", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h1", { className: "", children: "Login \u{1F511}" }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(import_react10.Form, { className: "grid gap-4 mt-4", method: "post", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           TextInput,
           {
             name: "username",
             label: "Username",
             actionData
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_auth.login.tsx",
-            lineNumber: 79,
-            columnNumber: 13
-          },
-          this
+          }
         ),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           TextInput,
           {
             name: "password",
             label: "Password",
             type: "password",
             actionData
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_auth.login.tsx",
-            lineNumber: 84,
-            columnNumber: 13
-          },
-          this
+          }
         ),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("button", { type: "submit", className: "button", children: "login" }, void 0, !1, {
-          fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 91,
-          columnNumber: 13
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { id: "form-error-message", children: actionData != null && actionData.formError ? /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("p", { className: "form-validation-error text-center", role: "alert", children: actionData.formError }, void 0, !1, {
-          fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 96,
-          columnNumber: 17
-        }, this) : null }, void 0, !1, {
-          fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 94,
-          columnNumber: 13
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/_auth.login.tsx",
-        lineNumber: 78,
-        columnNumber: 11
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("p", { className: "text-xs text-center mt-4 text-opacity-50 bg-white dark:bg-zinc-900 p-2 rounded-md", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("a", { href: "https://dennissmuda.com/", className: "underline", children: "Contact me" }, void 0, !1, {
-          fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 104,
-          columnNumber: 13
-        }, this),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("button", { type: "submit", className: "button", children: "login" }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { id: "form-error-message", children: actionData != null && actionData.formError ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "form-validation-error text-center", role: "alert", children: actionData.formError }) : null })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("p", { className: "text-xs text-center mt-4 text-opacity-50 bg-white dark:bg-zinc-900 p-2 rounded-md", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: "https://dennissmuda.com/", className: "underline", children: "Contact me" }),
         " ",
         "if you want to know more, ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("br", {}, void 0, !1, {
-          fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 107,
-          columnNumber: 39
-        }, this),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("br", {}),
         " or if you have song requests \u{1F918}"
-      ] }, void 0, !0, {
-        fileName: "app/routes/_auth.login.tsx",
-        lineNumber: 103,
-        columnNumber: 11
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 76,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 75,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "relative pt-32", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(BackgroundNotes, {}, void 0, !1, {
-      fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 112,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 111,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/_auth.login.tsx",
-    lineNumber: 74,
-    columnNumber: 5
-  }, this);
+      ] })
+    ] }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "relative pt-32", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(BackgroundNotes, {}) })
+  ] });
 }
 
 // app/routes/generator.tsx
@@ -1233,7 +705,7 @@ __export(generator_exports, {
   meta: () => meta2
 });
 var import_react12 = require("@remix-run/react"), import_remix_utils3 = require("remix-utils");
-var import_Sequencer = __toESM(require_Sequencer()), import_jsx_dev_runtime11 = require("react/jsx-dev-runtime"), meta2 = () => [
+var import_Sequencer = __toESM(require_Sequencer()), import_jsx_runtime11 = require("react/jsx-runtime"), meta2 = () => [
   {
     title: "Drum-Sequencer and Chord Progression Generator | BackyTracky"
   },
@@ -1242,54 +714,14 @@ var import_Sequencer = __toESM(require_Sequencer()), import_jsx_dev_runtime11 = 
   }
 ];
 function GeneratorRoute() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("main", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(PageHeader, { title: "Make your own \u{1F98B}", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react12.Link, { to: "/", children: "Home" }, void 0, !1, {
-        fileName: "app/routes/generator.tsx",
-        lineNumber: 20,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("span", { children: " / " }, void 0, !1, {
-        fileName: "app/routes/generator.tsx",
-        lineNumber: 21,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react12.Link, { to: "/generator", children: "Sequencer" }, void 0, !1, {
-        fileName: "app/routes/generator.tsx",
-        lineNumber: 22,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/generator.tsx",
-      lineNumber: 19,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("div", { className: "container max-w-4xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_remix_utils3.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("p", { children: "Loading..." }, void 0, !1, {
-      fileName: "app/routes/generator.tsx",
-      lineNumber: 27,
-      columnNumber: 33
-    }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_Sequencer.default, {}, void 0, !1, {
-      fileName: "app/routes/generator.tsx",
-      lineNumber: 28,
-      columnNumber: 20
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/generator.tsx",
-      lineNumber: 27,
-      columnNumber: 11
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/generator.tsx",
-      lineNumber: 25,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/generator.tsx",
-      lineNumber: 24,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/generator.tsx",
-    lineNumber: 18,
-    columnNumber: 5
-  }, this);
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("main", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(PageHeader, { title: "Make your own \u{1F98B}", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_react12.Link, { to: "/", children: "Home" }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { children: " / " }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_react12.Link, { to: "/generator", children: "Sequencer" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "container max-w-4xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_remix_utils3.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { children: "Loading..." }), children: () => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_Sequencer.default, {}) }) }) })
+  ] });
 }
 
 // app/routes/track.new.tsx
@@ -1442,7 +874,7 @@ function useInstruments() {
 }
 
 // app/components/track/ChordEditorModal.tsx
-var import_jsx_dev_runtime12 = require("react/jsx-dev-runtime"), roots = ["C", "D", "E", "F", "G", "A", "B"], flatRoots = ["Db", "Eb", "Gb", "Ab", "Bb"], octaves = ["2", "3", "4", "5", "6"], chordTypes = ["", "M", "maj", "min", "dim", "aug"], extensions = [
+var import_jsx_runtime12 = require("react/jsx-runtime"), roots = ["C", "D", "E", "F", "G", "A", "B"], flatRoots = ["Db", "Eb", "Gb", "Ab", "Bb"], octaves = ["2", "3", "4", "5", "6"], chordTypes = ["", "M", "maj", "min", "dim", "aug"], extensions = [
   "",
   "7",
   "7sus4",
@@ -1480,7 +912,7 @@ function ChordEditor({
       (0, import_tone2.now)(),
       0.35
     );
-  }, [newRoot, newType, newExtension, newOctave, currentChord, instruments]), /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+  }, [newRoot, newType, newExtension, newOctave, currentChord, instruments]), /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
     import_react15.Transition,
     {
       show: isOpen,
@@ -1491,198 +923,83 @@ function ChordEditor({
       leaveFrom: "transform scale-100 opacity-100",
       leaveTo: "transform scale-95 opacity-0",
       as: import_react14.Fragment,
-      children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
         import_react15.Dialog,
         {
           onClose: () => onClose(),
           className: "fixed inset-0 z-50 chord-editor-modal",
           children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "fixed inset-0 bg-black/30", "aria-hidden": "true" }, void 0, !1, {
-              fileName: "app/components/track/ChordEditorModal.tsx",
-              lineNumber: 92,
-              columnNumber: 9
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "fixed inset-0 flex items-center justify-center p-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react15.Dialog.Panel, { className: "w-full max-w-md rounded bg-white p-4 dark:bg-black", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react15.Dialog.Title, { children: newChordName || "Change chord" }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 96,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react15.Dialog.Description, { className: "text-xs opacity-50", children: "Listen to know what works! Not every combination is possible." }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 97,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { className: "opacity-50 text-xs", children: "root" }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 101,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "grid grid-flow-col gap-2 mb-2", children: roots.map((root) => /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "fixed inset-0 bg-black/30", "aria-hidden": "true" }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "fixed inset-0 flex items-center justify-center p-2", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_react15.Dialog.Panel, { className: "w-full max-w-md rounded bg-white p-4 dark:bg-black", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react15.Dialog.Title, { children: newChordName || "Change chord" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_react15.Dialog.Description, { className: "text-xs opacity-50", children: "Listen to know what works! Not every combination is possible." }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "opacity-50 text-xs", children: "root" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-flow-col gap-2 mb-2", children: roots.map((root) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "button",
                 {
                   onClick: () => setNewRoot(root),
                   className: `button ${root === newRoot ? "active" : ""}`,
                   children: root
                 },
-                root,
-                !1,
-                {
-                  fileName: "app/components/track/ChordEditorModal.tsx",
-                  lineNumber: 104,
-                  columnNumber: 17
-                },
-                this
-              )) }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 102,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "grid grid-flow-col gap-2", children: flatRoots.map((root) => /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+                root
+              )) }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-flow-col gap-2", children: flatRoots.map((root) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "button",
                 {
                   onClick: () => setNewRoot(root),
                   className: `button ${root === newRoot ? "active" : ""}`,
                   children: root
                 },
-                root,
-                !1,
-                {
-                  fileName: "app/components/track/ChordEditorModal.tsx",
-                  lineNumber: 115,
-                  columnNumber: 17
-                },
-                this
-              )) }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 113,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { className: "opacity-50 text-xs", children: "type" }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 125,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "grid grid-flow-col gap-2 mb-2", children: chordTypes.map((type) => /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+                root
+              )) }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "opacity-50 text-xs", children: "type" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-flow-col gap-2 mb-2", children: chordTypes.map((type) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "button",
                 {
                   onClick: () => setNewType(type),
                   className: `button ${type === newType ? "active" : ""}`,
                   children: type
                 },
-                type,
-                !1,
-                {
-                  fileName: "app/components/track/ChordEditorModal.tsx",
-                  lineNumber: 128,
-                  columnNumber: 17
-                },
-                this
-              )) }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 126,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { className: "opacity-50 text-xs", children: "extension" }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 138,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "grid grid-rows-2 grid-cols-6 gap-2 mb-2", children: extensions.map((ext) => /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+                type
+              )) }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "opacity-50 text-xs", children: "extension" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-rows-2 grid-cols-6 gap-2 mb-2", children: extensions.map((ext) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "button",
                 {
                   onClick: () => setNewExtension(ext),
                   className: `button ${ext === newExtension ? "active" : ""}`,
                   children: ext
                 },
-                ext,
-                !1,
-                {
-                  fileName: "app/components/track/ChordEditorModal.tsx",
-                  lineNumber: 141,
-                  columnNumber: 17
-                },
-                this
-              )) }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 139,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { className: "opacity-50 text-xs", children: "octave" }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 151,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "grid grid-flow-col gap-2 mb-4", children: octaves.map((octave) => /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+                ext
+              )) }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "opacity-50 text-xs", children: "octave" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "grid grid-flow-col gap-2 mb-4", children: octaves.map((octave) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "button",
                 {
                   onClick: () => setNewOctave(octave),
                   className: `button ${octave === newOctave ? "active" : ""}`,
                   children: octave
                 },
-                octave,
-                !1,
-                {
-                  fileName: "app/components/track/ChordEditorModal.tsx",
-                  lineNumber: 154,
-                  columnNumber: 17
-                },
-                this
-              )) }, void 0, !1, {
-                fileName: "app/components/track/ChordEditorModal.tsx",
-                lineNumber: 152,
-                columnNumber: 13
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
+                octave
+              )) }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "button",
                 {
                   className: "button button--submit w-full",
                   onClick: () => onClose(),
                   children: "save chord"
-                },
-                void 0,
-                !1,
-                {
-                  fileName: "app/components/track/ChordEditorModal.tsx",
-                  lineNumber: 164,
-                  columnNumber: 13
-                },
-                this
+                }
               )
-            ] }, void 0, !0, {
-              fileName: "app/components/track/ChordEditorModal.tsx",
-              lineNumber: 95,
-              columnNumber: 11
-            }, this) }, void 0, !1, {
-              fileName: "app/components/track/ChordEditorModal.tsx",
-              lineNumber: 94,
-              columnNumber: 9
-            }, this)
+            ] }) })
           ]
-        },
-        void 0,
-        !0,
-        {
-          fileName: "app/components/track/ChordEditorModal.tsx",
-          lineNumber: 88,
-          columnNumber: 7
-        },
-        this
+        }
       )
-    },
-    void 0,
-    !1,
-    {
-      fileName: "app/components/track/ChordEditorModal.tsx",
-      lineNumber: 78,
-      columnNumber: 5
-    },
-    this
+    }
   );
 }
 
 // app/routes/track.new.tsx
-var import_TrackEditor = __toESM(require_TrackEditor()), import_remix_utils4 = require("remix-utils"), import_jsx_dev_runtime13 = require("react/jsx-dev-runtime"), sampleChordConfig = {
+var import_TrackEditor = __toESM(require_TrackEditor()), import_remix_utils4 = require("remix-utils"), import_jsx_runtime13 = require("react/jsx-runtime"), sampleChordConfig = {
   root: "C",
   type: "maj",
   extension: "7",
@@ -1761,10 +1078,10 @@ function NewTrackRoute() {
     });
     chords != null && chords.length ? setChords([...chords, newChord]) : setChords([newChord]);
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("main", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_react17.Form, { className: "flex flex-col gap-4", method: "post", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "grid grid-cols-6 gap-4", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "col-span-5", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("main", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_react17.Form, { className: "flex flex-col gap-4", method: "post", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "grid grid-cols-6 gap-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "col-span-5", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           TextInput,
           {
             name: "trackname",
@@ -1772,21 +1089,9 @@ function NewTrackRoute() {
             placeholder: "My awesome backing track",
             required: !0,
             actionData
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/track.new.tsx",
-            lineNumber: 184,
-            columnNumber: 17
-          },
-          this
-        ) }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 183,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "col-span-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+          }
+        ) }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "col-span-1", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           TextInput,
           {
             type: "number",
@@ -1795,26 +1100,10 @@ function NewTrackRoute() {
             placeholder: "120",
             required: !0,
             actionData
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/track.new.tsx",
-            lineNumber: 194,
-            columnNumber: 17
-          },
-          this
-        ) }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 193,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 182,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+          }
+        ) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
         TextInput,
         {
           name: "description",
@@ -1822,17 +1111,9 @@ function NewTrackRoute() {
           placeholder: "Short but sweet progression in C major",
           required: !0,
           actionData
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 205,
-          columnNumber: 13
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
         "input",
         {
           name: "chords",
@@ -1840,17 +1121,9 @@ function NewTrackRoute() {
           value: JSON.stringify(chords),
           className: "hidden",
           readOnly: !0
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 212,
-          columnNumber: 13
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
         "input",
         {
           name: "author-name",
@@ -1858,27 +1131,11 @@ function NewTrackRoute() {
           value: loaderData.user.username,
           className: "hidden",
           readOnly: !0
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 219,
-          columnNumber: 13
-        },
-        this
+        }
       ),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "overflow-x-scroll", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("fieldset", { className: "sheet-grid sheet-grid--editor overflow-x-auto", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("legend", { children: "Sheet - one full row = count to 4" }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 229,
-          columnNumber: 17
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_remix_utils4.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("p", { children: "Loading..." }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 230,
-          columnNumber: 39
-        }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "overflow-x-scroll", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("fieldset", { className: "sheet-grid sheet-grid--editor overflow-x-auto", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("legend", { children: "Sheet - one full row = count to 4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(import_remix_utils4.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { children: "Loading..." }), children: () => /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           import_TrackEditor.default,
           {
             chords,
@@ -1886,61 +1143,21 @@ function NewTrackRoute() {
             lengthenChord,
             editChord,
             deleteChord
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/track.new.tsx",
-            lineNumber: 232,
-            columnNumber: 21
-          },
-          this
-        ) }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 230,
-          columnNumber: 17
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 228,
-        columnNumber: 15
-      }, this) }, void 0, !1, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 227,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("button", { className: "button", onClick: addChord, children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("span", { children: "add chord" }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 245,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+          }
+        ) })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("button", { className: "button", onClick: addChord, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { children: "add chord" }),
+        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
           "path",
           {
             fillRule: "evenodd",
             d: "M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z",
             clipRule: "evenodd"
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/track.new.tsx",
-            lineNumber: 247,
-            columnNumber: 17
-          },
-          this
-        ) }, void 0, !1, {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 246,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 244,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("label", { className: "form-row", htmlFor: "newChord", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+          }
+        ) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("label", { className: "form-row", htmlFor: "newChord", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
         "input",
         {
           name: "newChord",
@@ -1948,63 +1165,19 @@ function NewTrackRoute() {
           type: "submit",
           className: "button col-span-4",
           value: "save track"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/routes/track.new.tsx",
-          lineNumber: 256,
-          columnNumber: 15
-        },
-        this
-      ) }, void 0, !1, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 255,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { id: "form-error-message", children: actionData != null && actionData.formError ? /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("p", { className: "form-validation-error text-center", role: "alert", children: actionData.formError }, void 0, !1, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 266,
-        columnNumber: 17
-      }, this) : null }, void 0, !1, {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 264,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/track.new.tsx",
-      lineNumber: 181,
-      columnNumber: 11
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/track.new.tsx",
-      lineNumber: 180,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/track.new.tsx",
-      lineNumber: 179,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
+        }
+      ) }),
+      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { id: "form-error-message", children: actionData != null && actionData.formError ? /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: "form-validation-error text-center", role: "alert", children: actionData.formError }) : null })
+    ] }) }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
       ChordEditor,
       {
         isOpen: isChordEditorOpen,
         currentChord: selectedChord.current,
         onClose: () => finishEditingChord()
-      },
-      void 0,
-      !1,
-      {
-        fileName: "app/routes/track.new.tsx",
-        lineNumber: 275,
-        columnNumber: 7
-      },
-      this
+      }
     )
-  ] }, void 0, !0, {
-    fileName: "app/routes/track.new.tsx",
-    lineNumber: 178,
-    columnNumber: 5
-  }, this);
+  ] });
 }
 
 // app/routes/_index.tsx
@@ -2016,40 +1189,20 @@ __export(index_exports, {
 var import_react19 = require("@remix-run/react");
 
 // app/components/Footer.tsx
-var import_react18 = require("@remix-run/react"), import_jsx_dev_runtime14 = require("react/jsx-dev-runtime");
+var import_react18 = require("@remix-run/react"), import_jsx_runtime14 = require("react/jsx-runtime");
 function Footer() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("footer", { className: "p-3 sm:p-6 mt-24", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "flex flex-col md:flex-row justify-between", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "flex items-baseline", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "font-black tracking-tighter text-xl", to: "/", children: "BackyTracky\u2122" }, void 0, !1, {
-        fileName: "app/components/Footer.tsx",
-        lineNumber: 9,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/tracks", children: "Tracks" }, void 0, !1, {
-        fileName: "app/components/Footer.tsx",
-        lineNumber: 12,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/generator", children: "Sequencer" }, void 0, !1, {
-        fileName: "app/components/Footer.tsx",
-        lineNumber: 15,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/tuner", children: "Guitar Tuner" }, void 0, !1, {
-        fileName: "app/components/Footer.tsx",
-        lineNumber: 18,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/components/Footer.tsx",
-      lineNumber: 8,
-      columnNumber: 11
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "mt-2 opacity-50 text-xs", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("span", { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("footer", { className: "p-3 sm:p-6 mt-24", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex flex-col md:flex-row justify-between", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "flex items-baseline", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react18.Link, { className: "font-black tracking-tighter text-xl", to: "/", children: "BackyTracky\u2122" }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/tracks", children: "Tracks" }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/generator", children: "Sequencer" }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/tuner", children: "Guitar Tuner" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "mt-2 opacity-50 text-xs", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", { children: [
       (/* @__PURE__ */ new Date()).getFullYear(),
       " created by",
       " ",
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
         "a",
         {
           href: "https://dennissmuda.com/",
@@ -2057,42 +1210,14 @@ function Footer() {
           rel: "nofollower",
           className: "underline hover:no-underline",
           children: "dennissmuda"
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/components/Footer.tsx",
-          lineNumber: 25,
-          columnNumber: 15
-        },
-        this
+        }
       )
-    ] }, void 0, !0, {
-      fileName: "app/components/Footer.tsx",
-      lineNumber: 23,
-      columnNumber: 13
-    }, this) }, void 0, !1, {
-      fileName: "app/components/Footer.tsx",
-      lineNumber: 22,
-      columnNumber: 11
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/components/Footer.tsx",
-    lineNumber: 7,
-    columnNumber: 9
-  }, this) }, void 0, !1, {
-    fileName: "app/components/Footer.tsx",
-    lineNumber: 6,
-    columnNumber: 7
-  }, this) }, void 0, !1, {
-    fileName: "app/components/Footer.tsx",
-    lineNumber: 5,
-    columnNumber: 5
-  }, this);
+    ] }) })
+  ] }) }) });
 }
 
 // app/routes/_index.tsx
-var import_jsx_dev_runtime15 = require("react/jsx-dev-runtime"), meta3 = () => [
+var import_jsx_runtime15 = require("react/jsx-runtime"), meta3 = () => [
   { charset: "utf-8" },
   {
     title: "Free Backing Tracks for Musicians! | BackyTracky Homepage"
@@ -2103,258 +1228,102 @@ var import_jsx_dev_runtime15 = require("react/jsx-dev-runtime"), meta3 = () => [
   }
 ];
 function Index() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("main", { className: "main relative", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "bg-white dark:bg-black absolute -top-32 left-0 right-0 h-[280px] -z-10 rotate-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none" }, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 24,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 23,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("section", { className: "relative", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(BackgroundNotes, {}, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 27,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "container max-w-4xl mx-auto pt-8 relative z-10", children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "bt-prose mx-auto my-12", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h1", { className: "mb-0 rounded-md relative -ml-2 inline-block px-1 font-black", children: "Welcome to BackyTracky" }, void 0, !1, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 30,
-          columnNumber: 13
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("p", { className: "max-w-lg bg-zinc-50 dark:bg-zinc-900 bg-opacity-10 rounded-md", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("span", { className: "sr-only", children: "Free " }, void 0, !1, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 34,
-            columnNumber: 15
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "Backing Tracks" }, void 0, !1, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 35,
-            columnNumber: 15
-          }, this),
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("main", { className: "main relative", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "bg-white dark:bg-black absolute -top-32 left-0 right-0 h-[280px] -z-10 rotate-1", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none" }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("section", { className: "relative", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(BackgroundNotes, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "container max-w-4xl mx-auto pt-8 relative z-10", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "bt-prose mx-auto my-12", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h1", { className: "mb-0 rounded-md relative -ml-2 inline-block px-1 font-black", children: "Welcome to BackyTracky" }),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { className: "max-w-lg bg-zinc-50 dark:bg-zinc-900 bg-opacity-10 rounded-md", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "sr-only", children: "Free " }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "Backing Tracks" }),
           " for Musicians! Play-along some of my favorite lead-sheets to level up your chops... ",
-          /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("i", { children: "or" }, void 0, !1, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 36,
-            columnNumber: 65
-          }, this),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("i", { children: "or" }),
           " go ahead and try making something of your own! Practice scales, licks or solos."
-        ] }, void 0, !0, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 33,
-          columnNumber: 13
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
           import_react19.Link,
           {
             className: "button no-underline px-8 dark:text-white",
             to: "/tracks",
             children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("span", { children: "see some tracks" }, void 0, !1, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 44,
-                columnNumber: 15
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+              /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { children: "see some tracks" }),
+              /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
                 "svg",
                 {
                   xmlns: "http://www.w3.org/2000/svg",
                   className: "h-5 w-5",
                   viewBox: "0 0 20 20",
                   fill: "currentColor",
-                  children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+                  children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
                     "path",
                     {
                       fillRule: "evenodd",
                       d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z",
                       clipRule: "evenodd"
-                    },
-                    void 0,
-                    !1,
-                    {
-                      fileName: "app/routes/_index.tsx",
-                      lineNumber: 51,
-                      columnNumber: 17
-                    },
-                    this
+                    }
                   )
-                },
-                void 0,
-                !1,
-                {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 45,
-                  columnNumber: 15
-                },
-                this
+                }
               )
             ]
-          },
-          void 0,
-          !0,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 40,
-            columnNumber: 13
-          },
-          this
+          }
         ),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
           import_react19.Link,
           {
             className: "button button--submit no-underline px-8 ml-4 dark:text-white",
             to: "/generator",
             children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("span", { children: "make your own" }, void 0, !1, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 62,
-                columnNumber: 15
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+              /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { children: "make your own" }),
+              /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
                 "svg",
                 {
                   xmlns: "http://www.w3.org/2000/svg",
                   className: "h-5 w-5",
                   viewBox: "0 0 20 20",
                   fill: "currentColor",
-                  children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+                  children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
                     "path",
                     {
                       fillRule: "evenodd",
                       d: "M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z",
                       clipRule: "evenodd"
-                    },
-                    void 0,
-                    !1,
-                    {
-                      fileName: "app/routes/_index.tsx",
-                      lineNumber: 69,
-                      columnNumber: 17
-                    },
-                    this
+                    }
                   )
-                },
-                void 0,
-                !1,
-                {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 63,
-                  columnNumber: 15
-                },
-                this
+                }
               )
             ]
-          },
-          void 0,
-          !0,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 58,
-            columnNumber: 13
-          },
-          this
+          }
         )
-      ] }, void 0, !0, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 29,
-        columnNumber: 11
-      }, this) }, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 28,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 26,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "container max-w-4xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "bt-prose mx-auto my-12", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h2", { className: "mt-2 font-black", children: "Features" }, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 82,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("ul", { className: "max-w-lg", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("li", { children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "Lead-sheets" }, void 0, !1, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 85,
-            columnNumber: 17
-          }, this),
+      ] }) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "container max-w-4xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "bt-prose mx-auto my-12", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h2", { className: "mt-2 font-black", children: "Features" }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("ul", { className: "max-w-lg", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("li", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "Lead-sheets" }),
           " for some of my favorite tracks, inspired by some of my favorite standards"
-        ] }, void 0, !0, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 84,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("li", { children: [
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("li", { children: [
           "A full blown ",
-          /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "Sequencer" }, void 0, !1, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 89,
-            columnNumber: 30
-          }, this),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "Sequencer" }),
           " that let's you try out some new wild chord progressions!"
-        ] }, void 0, !0, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 88,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("li", { children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "Guitar Tuner" }, void 0, !1, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 93,
-            columnNumber: 17
-          }, this),
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("li", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "Guitar Tuner" }),
           " to help practice tuning your guitar by ear"
-        ] }, void 0, !0, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 92,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 83,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 81,
-      columnNumber: 11
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 80,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 79,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "container max-w-4xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "bt-prose mx-auto my-12", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h2", { className: "mt-2 font-black", children: "FAQ" }, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 104,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h3", { className: "font-black", children: "What is all this?" }, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 105,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("p", { className: "max-w-lg", children: [
+        ] })
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "container max-w-4xl mx-auto", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "bt-prose mx-auto my-12", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h2", { className: "mt-2 font-black", children: "FAQ" }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h3", { className: "font-black", children: "What is all this?" }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { className: "max-w-lg", children: [
         "The ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "Tracks" }, void 0, !1, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 107,
-          columnNumber: 19
-        }, this),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "Tracks" }),
         " are mainly some chord progressions that I throw together to jam around on. If you have any requests, feel free to",
         " ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           "a",
           {
             href: "https://dennissmuda.com/",
@@ -2362,162 +1331,70 @@ function Index() {
             target: "_blank",
             className: "underline",
             children: "contact me"
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 110,
-            columnNumber: 15
-          },
-          this
+          }
         ),
         "."
-      ] }, void 0, !0, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 106,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h3", { className: "font-black", children: "Code?" }, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 120,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("p", { children: [
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h3", { className: "font-black", children: "Code?" }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { children: [
         "This project is ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "open source" }, void 0, !1, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 122,
-          columnNumber: 31
-        }, this),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "open source" }),
         " and you can",
         " ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           "a",
           {
             target: "_blank",
             href: "https://github.com/DennisSmuda/backytracky-remix/",
             rel: "noopener noreferrer",
             children: "check it out on github"
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 123,
-            columnNumber: 15
-          },
-          this
+          }
         ),
         "! ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("br", {}, void 0, !1, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 130,
-          columnNumber: 17
-        }, this),
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("br", {}),
         "It uses React (",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           "a",
           {
             target: "_blank",
             href: "https://remix.run/",
             rel: "noopener noreferrer",
             children: "remix.run"
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 132,
-            columnNumber: 15
-          },
-          this
+          }
         ),
         "), tailwindcss and prisma and is deployed to netlify. To play and generate music, there is",
         " ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           "a",
           {
             href: "https://tonejs.github.io/",
             target: "_blank",
             rel: "noopener noreferrer",
             children: "Tone.js"
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 141,
-            columnNumber: 15
-          },
-          this
+          }
         ),
         " ",
         "and",
         " ",
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           "a",
           {
             href: "https://github.com/tonaljs/tonal",
             target: "_blank",
             rel: "noopener noreferrer",
             children: "tonal"
-          },
-          void 0,
-          !1,
-          {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 149,
-            columnNumber: 15
-          },
-          this
+          }
         ),
         "."
-      ] }, void 0, !0, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 121,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("h3", { className: "font-black", children: "Does it cost anything?" }, void 0, !1, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 158,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("p", { className: "max-w-lg", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("strong", { children: "No!" }, void 0, !1, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 160,
-          columnNumber: 15
-        }, this),
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h3", { className: "font-black", children: "Does it cost anything?" }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { className: "max-w-lg", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { children: "No!" }),
         " As long as I don't just let anyone create accounts and tracks I can maintain BackyTracky for free."
-      ] }, void 0, !0, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 159,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 103,
-      columnNumber: 11
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 102,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 101,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Footer, {}, void 0, !1, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 166,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/_index.tsx",
-    lineNumber: 22,
-    columnNumber: 5
-  }, this);
+      ] })
+    ] }) }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Footer, {})
+  ] });
 }
 
 // app/routes/tracks.tsx
@@ -2531,147 +1408,76 @@ __export(tracks_exports, {
 var import_node9 = require("@remix-run/node"), import_react21 = require("@remix-run/react"), import_react22 = require("react"), import_react_hot_toast4 = __toESM(require("react-hot-toast"));
 
 // app/components/track/TrackListing.tsx
-var import_react20 = require("@remix-run/react"), import_jsx_dev_runtime16 = require("react/jsx-dev-runtime");
+var import_react20 = require("@remix-run/react"), import_jsx_runtime16 = require("react/jsx-runtime");
 function TrackListing({
   track,
   showDescription,
   currentUserId
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
     "div",
     {
       className: "flex items-center rounded-lg",
       "data-testid": "track-listing",
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { className: "flex flex-col flex-grow", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { className: "flex items-center gap-4 text-xs opacity-50", children: /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("span", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "flex flex-col flex-grow", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "flex items-center gap-4 text-xs opacity-50", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("span", { children: [
             track.bpm,
             " bpm"
-          ] }, void 0, !0, {
-            fileName: "app/components/track/TrackListing.tsx",
-            lineNumber: 21,
-            columnNumber: 11
-          }, this) }, void 0, !1, {
-            fileName: "app/components/track/TrackListing.tsx",
-            lineNumber: 20,
-            columnNumber: 9
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
             import_react20.Link,
             {
               to: `/track/${track.id}`,
               className: `${showDescription ? "text-2xl" : "text-lg"} font-black no-underline hover:underline`,
               children: track.name
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/track/TrackListing.tsx",
-              lineNumber: 23,
-              columnNumber: 9
-            },
-            this
+            }
           ),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { className: "text-xs opacity-50", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("span", { className: "", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "text-xs opacity-50", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("span", { className: "", children: [
               "created",
               " ",
               new Date(track.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long"
               })
-            ] }, void 0, !0, {
-              fileName: "app/components/track/TrackListing.tsx",
-              lineNumber: 32,
-              columnNumber: 11
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("span", { children: [
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("span", { children: [
               ", by ",
               track.authorName
-            ] }, void 0, !0, {
-              fileName: "app/components/track/TrackListing.tsx",
-              lineNumber: 39,
-              columnNumber: 11
-            }, this)
-          ] }, void 0, !0, {
-            fileName: "app/components/track/TrackListing.tsx",
-            lineNumber: 31,
-            columnNumber: 9
-          }, this)
-        ] }, void 0, !0, {
-          fileName: "app/components/track/TrackListing.tsx",
-          lineNumber: 19,
-          columnNumber: 7
-        }, this),
-        track.userId === currentUserId ? /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_react20.Form, { method: "delete", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("input", { type: "hidden", name: "trackId", value: track.id }, void 0, !1, {
-            fileName: "app/components/track/TrackListing.tsx",
-            lineNumber: 50,
-            columnNumber: 11
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("button", { className: "icon-button button--delete", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("span", { children: "delete" }, void 0, !1, {
-              fileName: "app/components/track/TrackListing.tsx",
-              lineNumber: 52,
-              columnNumber: 13
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(
+            ] })
+          ] })
+        ] }),
+        track.userId === currentUserId ? /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_react20.Form, { method: "delete", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("input", { type: "hidden", name: "trackId", value: track.id }),
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("button", { className: "icon-button button--delete", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { children: "delete" }),
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
               "svg",
               {
                 xmlns: "http://www.w3.org/2000/svg",
                 viewBox: "0 0 20 20",
                 fill: "currentColor",
-                children: /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(
+                children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
                   "path",
                   {
                     fillRule: "evenodd",
                     d: "M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z",
                     clipRule: "evenodd"
-                  },
-                  void 0,
-                  !1,
-                  {
-                    fileName: "app/components/track/TrackListing.tsx",
-                    lineNumber: 58,
-                    columnNumber: 15
-                  },
-                  this
+                  }
                 )
-              },
-              void 0,
-              !1,
-              {
-                fileName: "app/components/track/TrackListing.tsx",
-                lineNumber: 53,
-                columnNumber: 13
-              },
-              this
+              }
             )
-          ] }, void 0, !0, {
-            fileName: "app/components/track/TrackListing.tsx",
-            lineNumber: 51,
-            columnNumber: 11
-          }, this)
-        ] }, void 0, !0, {
-          fileName: "app/components/track/TrackListing.tsx",
-          lineNumber: 49,
-          columnNumber: 9
-        }, this) : ""
+          ] })
+        ] }) : ""
       ]
     },
-    track.id,
-    !0,
-    {
-      fileName: "app/components/track/TrackListing.tsx",
-      lineNumber: 14,
-      columnNumber: 5
-    },
-    this
+    track.id
   );
 }
 
 // app/routes/tracks.tsx
-var import_jsx_dev_runtime17 = require("react/jsx-dev-runtime"), loader5 = async ({ request }) => {
+var import_jsx_runtime17 = require("react/jsx-runtime"), loader5 = async ({ request }) => {
   let data = {
     tracks: await db.track.findMany(),
     user: await getUser(request)
@@ -2696,85 +1502,30 @@ function TracksRoute() {
     navigation.state === "submitting" && navigation.formMethod === "delete" && import_react_hot_toast4.default.loading("Deleting...", { id: "track-delete-toast" }), navigation.state === "idle" && (actionData != null && actionData.error) && import_react_hot_toast4.default.error("Couldn't delete track...", {
       id: "track-delete-toast"
     }), navigation.state === "idle" && (actionData != null && actionData.response) && import_react_hot_toast4.default.success("Deleted track!", { id: "track-delete-toast" });
-  }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("main", { className: "main", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "absolute bottom-24 md:bottom-32 right-0 md:right-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(BackgroundNotes, {}, void 0, !1, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 86,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 85,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(PageHeader, { title: "All Tracks \u{1F3BA}", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react21.Link, { to: "/", children: "Home" }, void 0, !1, {
-        fileName: "app/routes/tracks.tsx",
-        lineNumber: 89,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("span", { children: " / " }, void 0, !1, {
-        fileName: "app/routes/tracks.tsx",
-        lineNumber: 90,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react21.Link, { to: "/tracks", children: "Tracks" }, void 0, !1, {
-        fileName: "app/routes/tracks.tsx",
-        lineNumber: 91,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 88,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "container max-w-4xl mx-auto relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "grid gap-12 mb-12 mt-4", children: [
-      loaderData.tracks.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: "no Tracks yet" }, void 0, !1, {
-        fileName: "app/routes/tracks.tsx",
-        lineNumber: 96,
-        columnNumber: 47
-      }, this) : "",
+  }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("main", { className: "main", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "absolute bottom-24 md:bottom-32 right-0 md:right-20", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(BackgroundNotes, {}) }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(PageHeader, { title: "All Tracks \u{1F3BA}", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_react21.Link, { to: "/", children: "Home" }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { children: " / " }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_react21.Link, { to: "/tracks", children: "Tracks" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "container max-w-4xl mx-auto relative", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "grid gap-12 mb-12 mt-4", children: [
+      loaderData.tracks.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { children: "no Tracks yet" }) : "",
       loaderData.tracks.map((track) => {
         var _a;
-        return /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(
+        return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
           TrackListing,
           {
             track,
             showDescription: !0,
             currentUserId: (_a = loaderData.user) == null ? void 0 : _a.id
           },
-          track.id,
-          !1,
-          {
-            fileName: "app/routes/tracks.tsx",
-            lineNumber: 98,
-            columnNumber: 15
-          },
-          this
+          track.id
         );
       })
-    ] }, void 0, !0, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 95,
-      columnNumber: 11
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 94,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 93,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(Footer, {}, void 0, !1, {
-      fileName: "app/routes/tracks.tsx",
-      lineNumber: 109,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/tracks.tsx",
-    lineNumber: 84,
-    columnNumber: 5
-  }, this);
+    ] }) }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Footer, {})
+  ] });
 }
 
 // app/routes/tuner.tsx
@@ -2785,7 +1536,7 @@ __export(tuner_exports, {
 });
 var import_react23 = require("@remix-run/react"), import_remix_utils5 = require("remix-utils");
 var import_GuitarTuner = __toESM(require_GuitarTuner());
-var import_jsx_dev_runtime18 = require("react/jsx-dev-runtime"), meta5 = () => [
+var import_jsx_runtime18 = require("react/jsx-runtime"), meta5 = () => [
   {
     title: "Guitar Tuner | BackyTracky"
   },
@@ -2794,63 +1545,19 @@ var import_jsx_dev_runtime18 = require("react/jsx-dev-runtime"), meta5 = () => [
   }
 ];
 function Tuner() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("main", { className: "main", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(PageHeader, { title: "Tune by ear \u{1F442}", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_react23.Link, { to: "/", children: "Home" }, void 0, !1, {
-        fileName: "app/routes/tuner.tsx",
-        lineNumber: 22,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("span", { children: " / " }, void 0, !1, {
-        fileName: "app/routes/tuner.tsx",
-        lineNumber: 23,
-        columnNumber: 9
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_react23.Link, { to: "/tuner", children: "Tuner" }, void 0, !1, {
-        fileName: "app/routes/tuner.tsx",
-        lineNumber: 24,
-        columnNumber: 9
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 21,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("div", { className: "max-w-4xl mx-auto relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_remix_utils5.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("p", { children: "Loading..." }, void 0, !1, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 29,
-      columnNumber: 33
-    }, this), children: () => /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_GuitarTuner.default, {}, void 0, !1, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 30,
-      columnNumber: 20
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 29,
-      columnNumber: 11
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 28,
-      columnNumber: 9
-    }, this) }, void 0, !1, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 27,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(Footer, {}, void 0, !1, {
-      fileName: "app/routes/tuner.tsx",
-      lineNumber: 35,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/routes/tuner.tsx",
-    lineNumber: 20,
-    columnNumber: 5
-  }, this);
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("main", { className: "main", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(PageHeader, { title: "Tune by ear \u{1F442}", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_react23.Link, { to: "/", children: "Home" }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { children: " / " }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_react23.Link, { to: "/tuner", children: "Tuner" })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "max-w-4xl mx-auto relative", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_remix_utils5.ClientOnly, { fallback: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("p", { children: "Loading..." }), children: () => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_GuitarTuner.default, {}) }) }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Footer, {})
+  ] });
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/_static/build/entry.client-EKQUD6WT.js", imports: ["/_static/build/_shared/chunk-BYESBOYJ.js", "/_static/build/_shared/chunk-MB2FXCIG.js", "/_static/build/_shared/chunk-52WMDDGF.js", "/_static/build/_shared/chunk-4RIY7G6R.js", "/_static/build/_shared/chunk-VDD37JSE.js", "/_static/build/_shared/chunk-O3FF3RXS.js", "/_static/build/_shared/chunk-WN4IQK2U.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/_static/build/root-BSNLNLQK.js", imports: ["/_static/build/_shared/chunk-KBMGKUYT.js", "/_static/build/_shared/chunk-NGMGOBMD.js", "/_static/build/_shared/chunk-42LMI47A.js", "/_static/build/_shared/chunk-FPPW6BYO.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.login-AZ7JK3YZ.js", imports: ["/_static/build/_shared/chunk-RPXIYUND.js", "/_static/build/_shared/chunk-7GJWAZNI.js", "/_static/build/_shared/chunk-NMS2VVZG.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.logout-VLDWQDOV.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.register-QWZVOZQM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/_static/build/routes/_index-GQ3AB2GZ.js", imports: ["/_static/build/_shared/chunk-YEHIGU35.js", "/_static/build/_shared/chunk-RPXIYUND.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/generator-V74SSKKT.js", imports: ["/_static/build/_shared/chunk-YEBP7CFD.js", "/_static/build/_shared/chunk-ZVCISCYS.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-I6A4OOJC.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.$trackId-6JBA7VZB.js", imports: ["/_static/build/_shared/chunk-YEBP7CFD.js", "/_static/build/_shared/chunk-ZVCISCYS.js", "/_static/build/_shared/chunk-KXGFMHSL.js", "/_static/build/_shared/chunk-QFTAU23R.js", "/_static/build/_shared/chunk-I6A4OOJC.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.new-CPUBFAJD.js", imports: ["/_static/build/_shared/chunk-KXGFMHSL.js", "/_static/build/_shared/chunk-QFTAU23R.js", "/_static/build/_shared/chunk-7GJWAZNI.js", "/_static/build/_shared/chunk-NMS2VVZG.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-I6A4OOJC.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tracks-AZJ3EIL4.js", imports: ["/_static/build/_shared/chunk-YEHIGU35.js", "/_static/build/_shared/chunk-RPXIYUND.js", "/_static/build/_shared/chunk-ZVCISCYS.js", "/_static/build/_shared/chunk-QFTAU23R.js", "/_static/build/_shared/chunk-NMS2VVZG.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tuner-SLSOS7LH.js", imports: ["/_static/build/_shared/chunk-YEHIGU35.js", "/_static/build/_shared/chunk-ZVCISCYS.js", "/_static/build/_shared/chunk-I6A4OOJC.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "563ea57c", hmr: { runtime: "/_static/build/_shared/chunk-4RIY7G6R.js", timestamp: 1697984578346 }, url: "/_static/build/manifest-563EA57C.js" };
+var assets_manifest_default = { entry: { module: "/_static/build/entry.client-ANZNA4IW.js", imports: ["/_static/build/_shared/chunk-6JIP7T2U.js", "/_static/build/_shared/chunk-2V6SYTAZ.js", "/_static/build/_shared/chunk-3MRMLTOA.js", "/_static/build/_shared/chunk-IDOYUPXY.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/_static/build/root-NBH22W6Q.js", imports: ["/_static/build/_shared/chunk-VCRFJVC5.js", "/_static/build/_shared/chunk-4U5R7A67.js", "/_static/build/_shared/chunk-2HSPSO5W.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.login-WKSNPG24.js", imports: ["/_static/build/_shared/chunk-5QYQAQP7.js", "/_static/build/_shared/chunk-32PKUXH3.js", "/_static/build/_shared/chunk-TZRESNRP.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.logout-354DVZCM.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.register-R4JULM6Y.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/_static/build/routes/_index-QO5ULQJT.js", imports: ["/_static/build/_shared/chunk-7MY6TLFE.js", "/_static/build/_shared/chunk-5QYQAQP7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/generator-SOA6Z4ZH.js", imports: ["/_static/build/_shared/chunk-DYZB73S4.js", "/_static/build/_shared/chunk-7RWJS7TT.js", "/_static/build/_shared/chunk-CNIH4ILY.js", "/_static/build/_shared/chunk-THF2SXEC.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.$trackId-77ZUAA6Q.js", imports: ["/_static/build/_shared/chunk-DYZB73S4.js", "/_static/build/_shared/chunk-7RWJS7TT.js", "/_static/build/_shared/chunk-NPERGGDU.js", "/_static/build/_shared/chunk-EDVGF6CU.js", "/_static/build/_shared/chunk-THF2SXEC.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.new-HD5S6ORV.js", imports: ["/_static/build/_shared/chunk-NPERGGDU.js", "/_static/build/_shared/chunk-EDVGF6CU.js", "/_static/build/_shared/chunk-32PKUXH3.js", "/_static/build/_shared/chunk-TZRESNRP.js", "/_static/build/_shared/chunk-CNIH4ILY.js", "/_static/build/_shared/chunk-THF2SXEC.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tracks-U4YG2JT4.js", imports: ["/_static/build/_shared/chunk-7MY6TLFE.js", "/_static/build/_shared/chunk-5QYQAQP7.js", "/_static/build/_shared/chunk-7RWJS7TT.js", "/_static/build/_shared/chunk-EDVGF6CU.js", "/_static/build/_shared/chunk-TZRESNRP.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tuner-OS2D2BNY.js", imports: ["/_static/build/_shared/chunk-7MY6TLFE.js", "/_static/build/_shared/chunk-7RWJS7TT.js", "/_static/build/_shared/chunk-THF2SXEC.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "2e9341ec", hmr: void 0, url: "/_static/build/manifest-2E9341EC.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_dev: !0, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !0, v2_meta: !0, v2_normalizeFormMethod: !0, v2_routeConvention: !0 }, publicPath = "/_static/build/", entry = { module: entry_server_exports }, routes = {
@@ -2944,4 +1651,3 @@ var assetsBuildDirectory = "public/build", future = { v2_dev: !0, unstable_postc
   publicPath,
   routes
 });
-//# sourceMappingURL=index.js.map
