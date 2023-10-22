@@ -55,7 +55,7 @@
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
     "autoprefixer": "^10.4.7",
-    "cypress": "^10.3.1",
+    "cypress": "^13.3.2",
     "esbuild-register": "^3.3.3",
     "eslint": "^8.15.0",
     "husky": "^8.0.1",
