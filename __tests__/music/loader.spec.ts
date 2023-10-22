@@ -1,23 +1,24 @@
+import { vi, expect } from "vitest";
 import { loadInstruments } from "../../app/music/loader";
 
-jest.mock("tone", () => ({
-  start: jest.fn(),
-  Sampler: jest.fn(() => ({
-    toDestination: jest.fn(),
+vi.mock("tone", () => ({
+  start: vi.fn(),
+  Sampler: vi.fn(() => ({
+    toDestination: vi.fn(),
   })),
-  Transport: jest.fn(() => ({
-    start: jest.fn(),
-    stop: jest.fn(),
-    loop: jest.fn(),
-    dispose: jest.fn(),
+  Transport: vi.fn(() => ({
+    start: vi.fn(),
+    stop: vi.fn(),
+    loop: vi.fn(),
+    dispose: vi.fn(),
   })),
-  Synth: jest.fn(() => ({
-    toDestination: jest.fn(),
+  Synth: vi.fn(() => ({
+    toDestination: vi.fn(),
   })),
-  Part: jest.fn().mockImplementation(() => ({
-    start: jest.fn(),
-    stop: jest.fn(),
-    dispose: jest.fn(),
+  Part: vi.fn().mockImplementation(() => ({
+    start: vi.fn(),
+    stop: vi.fn(),
+    dispose: vi.fn(),
   })),
 }));
 

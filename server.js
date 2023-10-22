@@ -42,6 +42,6 @@ function getLoadContext(event, context) {
 
 export const handler = createRequestHandler({
   build,
-  getLoadContext,
+  // getLoadContext,
   mode: process.env.NODE_ENV,
 });

@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import type { Subdivision } from "tone/build/esm/core/type/Units";
 import {
   convertDurationToBeats,

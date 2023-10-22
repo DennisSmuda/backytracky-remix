@@ -1,14 +1,18 @@
+const baseConfig =
+  process.env.NODE_ENV === "production"
+    ? // when running the Netify CLI or building on Netlify, we want to use
+      {
+        server: "./server.js",
+        serverBuildPath: ".netlify/functions-internal/server.js",
+      }
+    : // otherwise support running remix dev, i.e. no custom server
+      undefined;
+
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-  // serverBuild deprecation block
-  publicPath: "/_static/build/",
-  serverBuildPath: "server/index.js",
-  //
-  server:
-    process.env.NETLIFY || process.env.NETLIFY_LOCAL
-      ? "./server.js"
-      : undefined,
+  ...baseConfig,
   ignoredRouteFiles: ["**/.*"],
+  serverBuildPath: "server/index.js",
   serverDependenciesToBundle: [
     /^remix-utils.*/,
     // If you installed is-ip optional dependency you will need these too
