@@ -16,6 +16,7 @@
     "paths": {
       "~/*": ["./app/*"]
     },
+    "types": ["cypress", "@testing-library/cypress"],
 
     // Remix takes care of building everything in `remix build`.
     "noEmit": true
