@@ -47,17 +47,6 @@ export const action: ActionFunction = async ({ request }) => {
 
 const badRequest = (data: any) => json(data, { status: 400 });
 
-const notifyDeleting = () =>
-  toast.loading("Deleting...", { id: `track-delete-toast` });
-
-const notifyErrorDeleting = () =>
-  toast.error("Couldn't delete track...", {
-    id: `track-delete-toast`,
-  });
-
-const notifySuccessDeleting = () =>
-  toast.success("Deleted track!", { id: `track-delete-toast` });
-
 export const meta: MetaFunction = () => ({
   title: "All Tracks | BackyTracky",
   description:
@@ -74,13 +63,15 @@ export default function TracksRoute() {
       navigation.state === "submitting" &&
       navigation.formMethod === "delete"
     ) {
-      notifyDeleting();
+      toast.loading("Deleting...", { id: `track-delete-toast` });
     }
     if (navigation.state === "idle" && actionData?.error) {
-      notifyErrorDeleting();
+      toast.error("Couldn't delete track...", {
+        id: `track-delete-toast`,
+      });
     }
     if (navigation.state === "idle" && actionData?.response) {
-      notifySuccessDeleting();
+      toast.success("Deleted track!", { id: `track-delete-toast` });
     }
   }, [navigation, actionData]);
 

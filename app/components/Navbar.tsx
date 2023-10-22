@@ -9,7 +9,7 @@ interface NavbarProps {
 }
 
 const notifyLogout = () => {
-  toast.success("Logged out");
+  toast.success("Logged out", { id: "auth-toast" });
 };
 
 export default function Navbar({ user }: NavbarProps) {

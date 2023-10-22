@@ -1,8 +1,8 @@
 import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Form, useActionData /* useNavigation */ } from "@remix-run/react";
-// import { useEffect } from "react";
-// import toast from "react-hot-toast";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import BackgroundNotes from "../components/BackgroundNotes";
 import TextInput from "../components/TextInput";
 import { createUserSession, login } from "~/utils/session.server";
@@ -54,30 +54,21 @@ export const action: ActionFunction = async ({ request }) => {
   return createUserSession(user.id);
 };
 
-// const notifyLoggingIn = () =>
-//   toast.loading("Logging in...", { id: "auth-toast" });
-// const notifyErrorLoggingIn = () =>
-//   toast.error("There was an error...", { id: "auth-toast" });
-// const notifySuccessLoggingIn = () =>
-//   toast.success("You are logged in!", { id: "auth-toast" });
-
 export default function LoginRoute() {
   const actionData = useActionData();
-  // const transition = useNavigation();
+  const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   switch (transition.type) {
-  //     case "actionSubmission":
-  //       notifyLoggingIn();
-  //       break;
-  //     case "actionRedirect":
-  //       notifySuccessLoggingIn();
-  //       break;
-  //     case "actionReload":
-  //       notifyErrorLoggingIn();
-  //       break;
-  //   }
-  // }, [transition]);
+  useEffect(() => {
+    if (navigation.state === "submitting" && navigation.formMethod === "post") {
+      toast.loading("Logging in...", { id: "auth-toast" });
+    }
+    if (navigation.state === "idle" && actionData?.formError) {
+      toast.error("There was an error...", { id: "auth-toast" });
+    }
+    if (navigation.state === "loading") {
+      toast.success("You are logged in!", { id: "auth-toast" });
+    }
+  }, [navigation, actionData]);
 
   return (
     <main>

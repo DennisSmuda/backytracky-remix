@@ -172,7 +172,7 @@ function useTheme() {
 // app/components/Navbar.tsx
 var import_react7 = require("@remix-run/react"), import_react_hot_toast = __toESM(require("react-hot-toast"));
 var import_jsx_dev_runtime3 = require("react/jsx-dev-runtime"), notifyLogout = () => {
-  import_react_hot_toast.default.success("Logged out");
+  import_react_hot_toast.default.success("Logged out", { id: "auth-toast" });
 };
 function Navbar({ user }) {
   let [currentTheme, setTheme] = useTheme(), toggleTheme = () => {
@@ -839,7 +839,7 @@ __export(auth_login_exports, {
   action: () => action2,
   default: () => LoginRoute
 });
-var import_node7 = require("@remix-run/node"), import_react10 = require("@remix-run/react");
+var import_node7 = require("@remix-run/node"), import_react10 = require("@remix-run/react"), import_react11 = require("react"), import_react_hot_toast3 = __toESM(require("react-hot-toast"));
 
 // app/components/BackgroundNotes.tsx
 var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime");
@@ -1105,12 +1105,14 @@ var import_jsx_dev_runtime10 = require("react/jsx-dev-runtime"), badRequest = (d
   });
 };
 function LoginRoute() {
-  let actionData = (0, import_react10.useActionData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("main", { children: [
+  let actionData = (0, import_react10.useActionData)(), navigation = (0, import_react10.useNavigation)();
+  return (0, import_react11.useEffect)(() => {
+    navigation.state === "submitting" && navigation.formMethod === "post" && import_react_hot_toast3.default.loading("Logging in...", { id: "auth-toast" }), navigation.state === "idle" && (actionData != null && actionData.formError) && import_react_hot_toast3.default.error("There was an error...", { id: "auth-toast" }), navigation.state === "loading" && import_react_hot_toast3.default.success("You are logged in!", { id: "auth-toast" });
+  }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("main", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "max-w-sm mx-auto pt-8 relative z-10", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("h1", { className: "", children: "Login \u{1F511}" }, void 0, !1, {
         fileName: "app/routes/_auth.login.tsx",
-        lineNumber: 86,
+        lineNumber: 77,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_react10.Form, { className: "grid gap-4 mt-4", method: "post", children: [
@@ -1125,7 +1127,7 @@ function LoginRoute() {
           !1,
           {
             fileName: "app/routes/_auth.login.tsx",
-            lineNumber: 88,
+            lineNumber: 79,
             columnNumber: 13
           },
           this
@@ -1142,70 +1144,70 @@ function LoginRoute() {
           !1,
           {
             fileName: "app/routes/_auth.login.tsx",
-            lineNumber: 93,
+            lineNumber: 84,
             columnNumber: 13
           },
           this
         ),
         /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("button", { type: "submit", className: "button", children: "login" }, void 0, !1, {
           fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 100,
+          lineNumber: 91,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { id: "form-error-message", children: actionData != null && actionData.formError ? /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("p", { className: "form-validation-error text-center", role: "alert", children: actionData.formError }, void 0, !1, {
           fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 105,
+          lineNumber: 96,
           columnNumber: 17
         }, this) : null }, void 0, !1, {
           fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 103,
+          lineNumber: 94,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/_auth.login.tsx",
-        lineNumber: 87,
+        lineNumber: 78,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("p", { className: "text-xs text-center mt-4 text-opacity-50 bg-white dark:bg-zinc-900 p-2 rounded-md", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("a", { href: "https://dennissmuda.com/", className: "underline", children: "Contact me" }, void 0, !1, {
           fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 113,
+          lineNumber: 104,
           columnNumber: 13
         }, this),
         " ",
         "if you want to know more, ",
         /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("br", {}, void 0, !1, {
           fileName: "app/routes/_auth.login.tsx",
-          lineNumber: 116,
+          lineNumber: 107,
           columnNumber: 39
         }, this),
         " or if you have song requests \u{1F918}"
       ] }, void 0, !0, {
         fileName: "app/routes/_auth.login.tsx",
-        lineNumber: 112,
+        lineNumber: 103,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 85,
+      lineNumber: 76,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 84,
+      lineNumber: 75,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "relative pt-32", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(BackgroundNotes, {}, void 0, !1, {
       fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 121,
+      lineNumber: 112,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/_auth.login.tsx",
-      lineNumber: 120,
+      lineNumber: 111,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/_auth.login.tsx",
-    lineNumber: 83,
+    lineNumber: 74,
     columnNumber: 5
   }, this);
 }
@@ -1215,12 +1217,12 @@ var generator_exports = {};
 __export(generator_exports, {
   default: () => GeneratorRoute
 });
-var import_react11 = require("@remix-run/react"), import_remix_utils3 = require("remix-utils");
+var import_react12 = require("@remix-run/react"), import_remix_utils3 = require("remix-utils");
 var import_Sequencer = __toESM(require_Sequencer()), import_jsx_dev_runtime11 = require("react/jsx-dev-runtime");
 function GeneratorRoute() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("main", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(PageHeader, { title: "Make your own \u{1F98B}", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react11.Link, { to: "/", children: "Home" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react12.Link, { to: "/", children: "Home" }, void 0, !1, {
         fileName: "app/routes/generator.tsx",
         lineNumber: 10,
         columnNumber: 9
@@ -1230,7 +1232,7 @@ function GeneratorRoute() {
         lineNumber: 11,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react11.Link, { to: "/generator", children: "Sequencer" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_react12.Link, { to: "/generator", children: "Sequencer" }, void 0, !1, {
         fileName: "app/routes/generator.tsx",
         lineNumber: 12,
         columnNumber: 9
@@ -1275,7 +1277,7 @@ __export(track_new_exports, {
   default: () => NewTrackRoute,
   loader: () => loader4
 });
-var import_react15 = require("react"), import_node8 = require("@remix-run/node"), import_react16 = require("@remix-run/react");
+var import_react16 = require("react"), import_node8 = require("@remix-run/node"), import_react17 = require("@remix-run/react");
 
 // app/music/utils.ts
 var increaseDuration = (duration) => duration === "1n" || duration === "2n." ? "1n" : duration === "2n" ? "2n." : duration === "4n" ? "2n" : "1n", decreaseDuration = (duration) => duration === "1n" ? "2n." : duration === "2n." ? "2n" : (duration === "2n" || duration === "4n", "4n"), convertDurationToBeats = (duration) => {
@@ -1314,10 +1316,10 @@ var ChordBeat = class {
 };
 
 // app/components/track/ChordEditorModal.tsx
-var import_react13 = require("react"), import_react14 = require("@headlessui/react"), import_tonal = require("@tonaljs/tonal"), import_tone2 = require("tone");
+var import_react14 = require("react"), import_react15 = require("@headlessui/react"), import_tonal = require("@tonaljs/tonal"), import_tone2 = require("tone");
 
 // app/hooks/useInstruments.ts
-var import_react12 = require("react");
+var import_react13 = require("react");
 
 // app/music/loader.ts
 var import_tone = require("tone");
@@ -1410,8 +1412,8 @@ function loadInstruments(callback) {
 
 // app/hooks/useInstruments.ts
 function useInstruments() {
-  let [instruments, setInstruments] = (0, import_react12.useState)();
-  return (0, import_react12.useEffect)(() => {
+  let [instruments, setInstruments] = (0, import_react13.useState)();
+  return (0, import_react13.useEffect)(() => {
     let { pianoSampler, drumSampler, bassSampler } = loadInstruments();
     setInstruments({ pianoSampler, bassSampler, drumSampler });
   }, []), [instruments];
@@ -1437,8 +1439,8 @@ function ChordEditor({
   currentChord,
   onClose
 }) {
-  let [instruments] = useInstruments(), [newChordName, setNewChordName] = (0, import_react13.useState)(""), [newRoot, setNewRoot] = (0, import_react13.useState)("C"), [newType, setNewType] = (0, import_react13.useState)("maj"), [newExtension, setNewExtension] = (0, import_react13.useState)("7"), [newOctave, setNewOctave] = (0, import_react13.useState)("3");
-  return (0, import_react13.useEffect)(() => {
+  let [instruments] = useInstruments(), [newChordName, setNewChordName] = (0, import_react14.useState)(""), [newRoot, setNewRoot] = (0, import_react14.useState)("C"), [newType, setNewType] = (0, import_react14.useState)("maj"), [newExtension, setNewExtension] = (0, import_react14.useState)("7"), [newOctave, setNewOctave] = (0, import_react14.useState)("3");
+  return (0, import_react14.useEffect)(() => {
     var _a;
     if (!currentChord)
       return;
@@ -1457,7 +1459,7 @@ function ChordEditor({
       0.35
     );
   }, [newRoot, newType, newExtension, newOctave, currentChord, instruments]), /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
-    import_react14.Transition,
+    import_react15.Transition,
     {
       show: isOpen,
       enter: "transition duration-100 ease-out",
@@ -1466,9 +1468,9 @@ function ChordEditor({
       leave: "transition duration-75 ease-out",
       leaveFrom: "transform scale-100 opacity-100",
       leaveTo: "transform scale-95 opacity-0",
-      as: import_react13.Fragment,
+      as: import_react14.Fragment,
       children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(
-        import_react14.Dialog,
+        import_react15.Dialog,
         {
           onClose: () => onClose(),
           className: "fixed inset-0 z-50 chord-editor-modal",
@@ -1478,13 +1480,13 @@ function ChordEditor({
               lineNumber: 92,
               columnNumber: 9
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "fixed inset-0 flex items-center justify-center p-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react14.Dialog.Panel, { className: "w-full max-w-md rounded bg-white p-4 dark:bg-black", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react14.Dialog.Title, { children: newChordName || "Change chord" }, void 0, !1, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "fixed inset-0 flex items-center justify-center p-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react15.Dialog.Panel, { className: "w-full max-w-md rounded bg-white p-4 dark:bg-black", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react15.Dialog.Title, { children: newChordName || "Change chord" }, void 0, !1, {
                 fileName: "app/components/track/ChordEditorModal.tsx",
                 lineNumber: 96,
                 columnNumber: 13
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react14.Dialog.Description, { className: "text-xs opacity-50", children: "Listen to know what works! Not every combination is possible." }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_react15.Dialog.Description, { className: "text-xs opacity-50", children: "Listen to know what works! Not every combination is possible." }, void 0, !1, {
                 fileName: "app/components/track/ChordEditorModal.tsx",
                 lineNumber: 97,
                 columnNumber: 13
@@ -1689,8 +1691,8 @@ var import_TrackEditor = __toESM(require_TrackEditor()), import_remix_utils4 = r
   });
 }, badRequest2 = (data) => (0, import_node8.json)(data, { status: 400 });
 function NewTrackRoute() {
-  let actionData = (0, import_react16.useActionData)(), loaderData = (0, import_react16.useLoaderData)(), [isChordEditorOpen, setIsChordEditorOpen] = (0, import_react15.useState)(!1), [chords, setChords] = (0, import_react15.useState)([]), selectedChord = (0, import_react15.useRef)(null), lastChord = (0, import_react15.useRef)(null);
-  (0, import_react15.useEffect)(() => {
+  let actionData = (0, import_react17.useActionData)(), loaderData = (0, import_react17.useLoaderData)(), [isChordEditorOpen, setIsChordEditorOpen] = (0, import_react16.useState)(!1), [chords, setChords] = (0, import_react16.useState)([]), selectedChord = (0, import_react16.useRef)(null), lastChord = (0, import_react16.useRef)(null);
+  (0, import_react16.useEffect)(() => {
     setChords([new ChordBeat(sampleChordConfig)]);
   }, []);
   let editChord = (e, chord) => {
@@ -1738,7 +1740,7 @@ function NewTrackRoute() {
     chords != null && chords.length ? setChords([...chords, newChord]) : setChords([newChord]);
   };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("main", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_react16.Form, { className: "flex flex-col gap-4", method: "post", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(import_react17.Form, { className: "flex flex-col gap-4", method: "post", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "grid grid-cols-6 gap-4", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "col-span-5", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(
           TextInput,
@@ -1988,29 +1990,29 @@ var index_exports = {};
 __export(index_exports, {
   default: () => Index
 });
-var import_react18 = require("@remix-run/react");
+var import_react19 = require("@remix-run/react");
 
 // app/components/Footer.tsx
-var import_react17 = require("@remix-run/react"), import_jsx_dev_runtime14 = require("react/jsx-dev-runtime");
+var import_react18 = require("@remix-run/react"), import_jsx_dev_runtime14 = require("react/jsx-dev-runtime");
 function Footer() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("footer", { className: "p-3 sm:p-6 mt-24", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "container max-w-4xl mx-auto pt-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "flex flex-col md:flex-row justify-between", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "flex items-baseline", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react17.Link, { className: "font-black tracking-tighter text-xl", to: "/", children: "BackyTracky\u2122" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "font-black tracking-tighter text-xl", to: "/", children: "BackyTracky\u2122" }, void 0, !1, {
         fileName: "app/components/Footer.tsx",
         lineNumber: 9,
         columnNumber: 13
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react17.Link, { className: "ml-8 text-xs opacity-50", to: "/tracks", children: "Tracks" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/tracks", children: "Tracks" }, void 0, !1, {
         fileName: "app/components/Footer.tsx",
         lineNumber: 12,
         columnNumber: 13
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react17.Link, { className: "ml-8 text-xs opacity-50", to: "/generator", children: "Sequencer" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/generator", children: "Sequencer" }, void 0, !1, {
         fileName: "app/components/Footer.tsx",
         lineNumber: 15,
         columnNumber: 13
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react17.Link, { className: "ml-8 text-xs opacity-50", to: "/tuner", children: "Guitar Tuner" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react18.Link, { className: "ml-8 text-xs opacity-50", to: "/tuner", children: "Guitar Tuner" }, void 0, !1, {
         fileName: "app/components/Footer.tsx",
         lineNumber: 18,
         columnNumber: 13
@@ -2115,7 +2117,7 @@ function Index() {
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
-          import_react18.Link,
+          import_react19.Link,
           {
             className: "button no-underline px-8 dark:text-white",
             to: "/tracks",
@@ -2170,7 +2172,7 @@ function Index() {
           this
         ),
         /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(
-          import_react18.Link,
+          import_react19.Link,
           {
             className: "button button--submit no-underline px-8 ml-4 dark:text-white",
             to: "/generator",
@@ -2494,10 +2496,10 @@ __export(tracks_exports, {
   loader: () => loader5,
   meta: () => meta3
 });
-var import_node9 = require("@remix-run/node"), import_react20 = require("@remix-run/react"), import_react21 = require("react"), import_react_hot_toast3 = __toESM(require("react-hot-toast"));
+var import_node9 = require("@remix-run/node"), import_react21 = require("@remix-run/react"), import_react22 = require("react"), import_react_hot_toast4 = __toESM(require("react-hot-toast"));
 
 // app/components/track/TrackListing.tsx
-var import_react19 = require("@remix-run/react"), import_jsx_dev_runtime16 = require("react/jsx-dev-runtime");
+var import_react20 = require("@remix-run/react"), import_jsx_dev_runtime16 = require("react/jsx-dev-runtime");
 function TrackListing({
   track,
   showDescription,
@@ -2523,7 +2525,7 @@ function TrackListing({
             columnNumber: 9
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(
-            import_react19.Link,
+            import_react20.Link,
             {
               to: `/track/${track.id}`,
               className: `${showDescription ? "text-2xl" : "text-lg"} font-black no-underline hover:underline`,
@@ -2569,7 +2571,7 @@ function TrackListing({
           lineNumber: 19,
           columnNumber: 7
         }, this),
-        track.userId === currentUserId ? /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_react19.Form, { method: "delete", children: [
+        track.userId === currentUserId ? /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(import_react20.Form, { method: "delete", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("input", { type: "hidden", name: "trackId", value: track.id }, void 0, !1, {
             fileName: "app/components/track/TrackListing.tsx",
             lineNumber: 50,
@@ -2648,51 +2650,51 @@ var import_jsx_dev_runtime17 = require("react/jsx-dev-runtime"), loader5 = async
   return response.status === 400 ? badRequest3({
     error: "Error deleting track"
   }) : (0, import_node9.json)({ response });
-}, badRequest3 = (data) => (0, import_node9.json)(data, { status: 400 }), notifyDeleting = () => import_react_hot_toast3.default.loading("Deleting...", { id: "track-delete-toast" }), notifyErrorDeleting = () => import_react_hot_toast3.default.error("Couldn't delete track...", {
-  id: "track-delete-toast"
-}), notifySuccessDeleting = () => import_react_hot_toast3.default.success("Deleted track!", { id: "track-delete-toast" }), meta3 = () => ({
+}, badRequest3 = (data) => (0, import_node9.json)(data, { status: 400 }), meta3 = () => ({
   title: "All Tracks | BackyTracky",
   description: "Explore all published backing tracks. Grab your instrument and practice some chord changes!"
 });
 function TracksRoute() {
-  let actionData = (0, import_react20.useActionData)(), loaderData = (0, import_react20.useLoaderData)(), navigation = (0, import_react20.useNavigation)();
-  return (0, import_react21.useEffect)(() => {
-    navigation.state === "submitting" && navigation.formMethod === "delete" && notifyDeleting(), navigation.state === "idle" && (actionData != null && actionData.error) && notifyErrorDeleting(), navigation.state === "idle" && (actionData != null && actionData.response) && notifySuccessDeleting();
+  let actionData = (0, import_react21.useActionData)(), loaderData = (0, import_react21.useLoaderData)(), navigation = (0, import_react21.useNavigation)();
+  return (0, import_react22.useEffect)(() => {
+    navigation.state === "submitting" && navigation.formMethod === "delete" && import_react_hot_toast4.default.loading("Deleting...", { id: "track-delete-toast" }), navigation.state === "idle" && (actionData != null && actionData.error) && import_react_hot_toast4.default.error("Couldn't delete track...", {
+      id: "track-delete-toast"
+    }), navigation.state === "idle" && (actionData != null && actionData.response) && import_react_hot_toast4.default.success("Deleted track!", { id: "track-delete-toast" });
   }, [navigation, actionData]), /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("main", { className: "main", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "absolute bottom-24 md:bottom-32 right-0 md:right-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(BackgroundNotes, {}, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 90,
+      lineNumber: 81,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 89,
+      lineNumber: 80,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(PageHeader, { title: "All Tracks \u{1F3BA}", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react20.Link, { to: "/", children: "Home" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react21.Link, { to: "/", children: "Home" }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 93,
+        lineNumber: 84,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("span", { children: " / " }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 94,
+        lineNumber: 85,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react20.Link, { to: "/tracks", children: "Tracks" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_react21.Link, { to: "/tracks", children: "Tracks" }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 95,
+        lineNumber: 86,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 92,
+      lineNumber: 83,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("section", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "container max-w-4xl mx-auto relative", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { className: "grid gap-12 mb-12 mt-4", children: [
       loaderData.tracks.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("div", { children: "no Tracks yet" }, void 0, !1, {
         fileName: "app/routes/tracks.tsx",
-        lineNumber: 100,
+        lineNumber: 91,
         columnNumber: 47
       }, this) : "",
       loaderData.tracks.map((track) => {
@@ -2708,7 +2710,7 @@ function TracksRoute() {
           !1,
           {
             fileName: "app/routes/tracks.tsx",
-            lineNumber: 102,
+            lineNumber: 93,
             columnNumber: 15
           },
           this
@@ -2716,25 +2718,25 @@ function TracksRoute() {
       })
     ] }, void 0, !0, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 99,
+      lineNumber: 90,
       columnNumber: 11
     }, this) }, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 98,
+      lineNumber: 89,
       columnNumber: 9
     }, this) }, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 97,
+      lineNumber: 88,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(Footer, {}, void 0, !1, {
       fileName: "app/routes/tracks.tsx",
-      lineNumber: 113,
+      lineNumber: 104,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/tracks.tsx",
-    lineNumber: 88,
+    lineNumber: 79,
     columnNumber: 5
   }, this);
 }
@@ -2744,13 +2746,13 @@ var tuner_exports = {};
 __export(tuner_exports, {
   default: () => Tuner
 });
-var import_react22 = require("@remix-run/react"), import_remix_utils5 = require("remix-utils");
+var import_react23 = require("@remix-run/react"), import_remix_utils5 = require("remix-utils");
 var import_GuitarTuner = __toESM(require_GuitarTuner());
 var import_jsx_dev_runtime18 = require("react/jsx-dev-runtime");
 function Tuner() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)("main", { className: "main", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(PageHeader, { title: "Tune by ear \u{1F442}", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_react22.Link, { to: "/", children: "Home" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_react23.Link, { to: "/", children: "Home" }, void 0, !1, {
         fileName: "app/routes/tuner.tsx",
         lineNumber: 11,
         columnNumber: 9
@@ -2760,7 +2762,7 @@ function Tuner() {
         lineNumber: 12,
         columnNumber: 9
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_react22.Link, { to: "/tuner", children: "Tuner" }, void 0, !1, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime18.jsxDEV)(import_react23.Link, { to: "/tuner", children: "Tuner" }, void 0, !1, {
         fileName: "app/routes/tuner.tsx",
         lineNumber: 13,
         columnNumber: 9
@@ -2804,7 +2806,7 @@ function Tuner() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/_static/build/entry.client-TXYDCXPW.js", imports: ["/_static/build/_shared/chunk-NSPMZDGG.js", "/_static/build/_shared/chunk-MGIKEUUG.js", "/_static/build/_shared/chunk-M2CHRLHC.js", "/_static/build/_shared/chunk-OV6IFOTW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/_static/build/root-F2YKCZKY.js", imports: ["/_static/build/_shared/chunk-OAVV4AYS.js", "/_static/build/_shared/chunk-PKK3VIMV.js", "/_static/build/_shared/chunk-4FKMWGAP.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.login-ZK4FBLCY.js", imports: ["/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.logout-P6VAALUE.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.register-FUC62AOD.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/_static/build/routes/_index-FAKPTDRJ.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/generator-GIL6JNYT.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.$trackId-TPLP5XVG.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.new-SUFFH7AV.js", imports: ["/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tracks-OI4M5XS3.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tuner-22JZ7BDG.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "78c106f2", hmr: void 0, url: "/_static/build/manifest-78C106F2.js" };
+var assets_manifest_default = { entry: { module: "/_static/build/entry.client-TXYDCXPW.js", imports: ["/_static/build/_shared/chunk-NSPMZDGG.js", "/_static/build/_shared/chunk-MGIKEUUG.js", "/_static/build/_shared/chunk-M2CHRLHC.js", "/_static/build/_shared/chunk-OV6IFOTW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/_static/build/root-JROJ2Y24.js", imports: ["/_static/build/_shared/chunk-OAVV4AYS.js", "/_static/build/_shared/chunk-PKK3VIMV.js", "/_static/build/_shared/chunk-4FKMWGAP.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.login-WNAI3MWJ.js", imports: ["/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.logout-P6VAALUE.js", imports: void 0, hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/_auth.register-FUC62AOD.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/_static/build/routes/_index-FAKPTDRJ.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/generator-GIL6JNYT.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.$trackId-TPLP5XVG.js", imports: ["/_static/build/_shared/chunk-DW3BUVYY.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/track.new-SUFFH7AV.js", imports: ["/_static/build/_shared/chunk-FSZDRCST.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-JYWYUVGB.js", "/_static/build/_shared/chunk-PLQN7QSM.js", "/_static/build/_shared/chunk-NHT4IXME.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tracks-PVS4FCYO.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-X4ZYQSWZ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-M7RAB7HF.js", "/_static/build/_shared/chunk-PLQN7QSM.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/_static/build/routes/tuner-22JZ7BDG.js", imports: ["/_static/build/_shared/chunk-GILJTBBQ.js", "/_static/build/_shared/chunk-CZMCTG4Y.js", "/_static/build/_shared/chunk-E3TV5QG2.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, version: "9419e91c", hmr: void 0, url: "/_static/build/manifest-9419E91C.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { v2_dev: !1, unstable_postcss: !1, unstable_tailwind: !1, v2_errorBoundary: !0, v2_headers: !1, v2_meta: !1, v2_normalizeFormMethod: !1, v2_routeConvention: !0 }, publicPath = "/_static/build/", entry = { module: entry_server_exports }, routes = {
