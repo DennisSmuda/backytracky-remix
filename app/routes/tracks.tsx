@@ -3,6 +3,7 @@ import type {
   ActionFunction,
   LoaderFunction,
   MetaFunction,
+  V2_MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -47,11 +48,15 @@ export const action: ActionFunction = async ({ request }) => {
 
 const badRequest = (data: any) => json(data, { status: 400 });
 
-export const meta: MetaFunction = () => ({
-  title: "All Tracks | BackyTracky",
-  description:
-    "Explore all published backing tracks. Grab your instrument and practice some chord changes!",
-});
+export const meta: V2_MetaFunction = () => [
+  {
+    title: "All Tracks | BackyTracky",
+  },
+  {
+    description:
+      "Explore all published backing tracks. Grab your instrument and practice some chord changes!",
+  },
+];
 
 export default function TracksRoute() {
   const actionData = useActionData();

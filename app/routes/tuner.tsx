@@ -1,8 +1,19 @@
+import type { V2_MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
 import Footer from "~/components/Footer";
 import GuitarTuner from "~/components/GuitarTuner.client";
 import PageHeader from "~/components/PageHeader";
+
+export const meta: V2_MetaFunction = () => [
+  {
+    title: "Guitar Tuner | BackyTracky",
+  },
+  {
+    description:
+      "Practice tuning your guitar by ear! Supports multiple tunings!",
+  },
+];
 
 export default function Tuner() {
   return (

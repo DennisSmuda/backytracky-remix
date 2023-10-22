@@ -1,7 +1,7 @@
 import type {
   LinksFunction,
   LoaderFunction,
-  MetaFunction,
+  V2_MetaFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -21,18 +21,10 @@ import Navbar from "./components/Navbar";
 import styles from "./styles/app.css";
 import { getUser } from "./utils/session.server";
 import { getThemeSession } from "./utils/theme.server";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { ClientOnly } from "remix-utils";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
-
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "Free Backing Tracks for Musicians! | BackyTracky Homepage",
-  description:
-    "Create and play-along Lead-Sheets to level up your chops! Practice scales, licks or solos. Discover chord progressions others are using or make your own!",
-  viewport: "width=device-width,initial-scale=1",
-});
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
@@ -70,6 +62,10 @@ function App() {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,viewport-fit=cover"
+        />
         <meta name="theme-color" content="#18181b" />
         <meta
           property="og:title"
@@ -106,5 +102,3 @@ export default function AppWithProviders() {
     </ThemeProvider>
   );
 }
-
-const notify = () => toast("Here is your toast");

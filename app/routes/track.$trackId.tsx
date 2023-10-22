@@ -1,4 +1,4 @@
-import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, V2_MetaFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
@@ -13,10 +13,17 @@ export const loader: LoaderFunction = async ({ params }) => {
   return json({ track });
 };
 
-export const meta: MetaFunction = ({ data }) => ({
-  title: `${data.track.name} Backing Track | BackyTracky`,
-  description: data.track.description,
-});
+export const meta: V2_MetaFunction = ({ data }) => {
+  return [
+    {
+      title: `${data.track.name} Backing Track | BackyTracky`,
+    },
+    {
+      name: "description",
+      content: data.track.description,
+    },
+  ];
+};
 
 export default function TrackDetailRoute() {
   const { track } = useLoaderData();

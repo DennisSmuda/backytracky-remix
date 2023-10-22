@@ -1,7 +1,17 @@
+import type { V2_MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { ClientOnly } from "remix-utils";
 import PageHeader from "~/components/PageHeader";
 import Sequencer from "~/components/sequencer/Sequencer.client";
+
+export const meta: V2_MetaFunction = () => [
+  {
+    title: "Drum-Sequencer and Chord Progression Generator | BackyTracky",
+  },
+  {
+    description: "Generate chord progressions and drum beats!",
+  },
+];
 
 export default function GeneratorRoute() {
   return (
