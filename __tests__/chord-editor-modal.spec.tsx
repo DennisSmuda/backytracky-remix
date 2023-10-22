@@ -45,7 +45,7 @@ const sampleChord = {
 };
 
 describe("Chord Editor Modal Component", () => {
-  it.only("renders correctly and has clickable buttons to change a chord", () => {
+  it("renders correctly and has clickable buttons to change a chord", () => {
     const close = vi.fn();
     const { getByText, baseElement, getByRole } = render(
       <ChordEditorModal
@@ -73,7 +73,7 @@ describe("Chord Editor Modal Component", () => {
     expect(close).toHaveBeenCalled();
   });
 
-  it.only("renders correctly and has clickable buttons to change a chord", () => {
+  it("renders correctly and has clickable buttons to change a chord", () => {
     render(
       <ChordEditorModal
         isOpen={false}
