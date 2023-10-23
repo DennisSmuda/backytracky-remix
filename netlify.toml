@@ -8,15 +8,10 @@ publish = "public"
 command = "npm run dev"
 targetPort = 3000
 
-[[redirects]]
-from = "/auth"
-to = "/"
-status = 200
-
-[[redirects]]
-from = "/*"
-to = "/.netlify/functions/server"
-status = 200
+# [[redirects]]
+# from = "/auth"
+# to = "/"
+# status = 200
 
 [[headers]]
 for = "/build/*"
