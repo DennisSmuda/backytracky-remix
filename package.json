@@ -20,7 +20,7 @@
     "typecheck": "tsc -b && tsc -b cypress",
     "tsc": "tsc -b",
     "prepare": "husky install",
-    "postinstall": "npm run generate:css",
+    "postinstall": "npm run generate:css && prisma generate",
     "prebuild": "npm run generate:css"
   },
   "prisma": {
