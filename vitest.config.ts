@@ -18,7 +18,7 @@ export default defineConfig({
       ".*\\/postgres-data\\/.*",
     ],
     coverage: {
-      reporter: ['lcov', "html"],
+      reporter: ['lcov', "html", 'text', 'json-summary', 'json'],
     }
   },
 });
