@@ -64,7 +64,7 @@ function handleRequest(request, responseStatusCode, responseHeaders, remixContex
   let markup = renderToString(
     /* @__PURE__ */ jsxDEV(RemixServer, { context: remixContext, url: request.url }, void 0, !1, {
       fileName: "app/entry.server.tsx",
-      lineNumber: 13,
+      lineNumber: 12,
       columnNumber: 5
     }, this)
   );
@@ -95,10 +95,7 @@ import clsx from "clsx";
 
 // app/utils/ThemeProvider.tsx
 import { useFetcher } from "@remix-run/react";
-import { useEffect, useRef } from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import { useEffect, useRef, useContext, useState, createContext } from "react";
 import { Fragment, jsxDEV as jsxDEV2 } from "react/jsx-dev-runtime";
 var Theme = /* @__PURE__ */ ((Theme2) => (Theme2.DARK = "dark", Theme2.LIGHT = "light", Theme2))(Theme || {}), ThemeContext = createContext(void 0), prefersDarkMQ = "(prefers-color-scheme: dark)", getPreferredTheme = () => window.matchMedia(prefersDarkMQ).matches ? "dark" /* DARK */ : "light" /* LIGHT */, clientThemeCode = `
 ;(() => {
@@ -123,19 +120,19 @@ function ThemeScript({ ssrTheme }) {
       !1,
       {
         fileName: "app/utils/ThemeProvider.tsx",
-        lineNumber: 39,
+        lineNumber: 36,
         columnNumber: 7
       },
       this
     ),
     ssrTheme ? null : /* @__PURE__ */ jsxDEV2("script", { dangerouslySetInnerHTML: { __html: clientThemeCode } }, void 0, !1, {
       fileName: "app/utils/ThemeProvider.tsx",
-      lineNumber: 45,
+      lineNumber: 42,
       columnNumber: 9
     }, this)
   ] }, void 0, !0, {
     fileName: "app/utils/ThemeProvider.tsx",
-    lineNumber: 38,
+    lineNumber: 35,
     columnNumber: 5
   }, this);
 }
@@ -159,11 +156,11 @@ function ThemeProvider({
     }
     theme && persistThemeRef.current.submit(
       { theme },
-      { action: "action/set-theme", method: "post" }
+      { action: "/set-theme", method: "post" }
     );
   }, [theme]), /* @__PURE__ */ jsxDEV2(ThemeContext.Provider, { value: [theme, setTheme], children }, void 0, !1, {
     fileName: "app/utils/ThemeProvider.tsx",
-    lineNumber: 101,
+    lineNumber: 98,
     columnNumber: 5
   }, this);
 }
@@ -183,7 +180,7 @@ var notifyLogout = () => {
 };
 function Navbar({ user }) {
   let [currentTheme, setTheme] = useTheme(), toggleTheme = () => {
-    console.log("theme"), setTheme(
+    setTheme(
       (prevTheme) => prevTheme === "light" /* LIGHT */ ? "dark" /* DARK */ : "light" /* LIGHT */
     );
   };
@@ -192,37 +189,37 @@ function Navbar({ user }) {
       /* @__PURE__ */ jsxDEV3(Link, { className: "font-black tracking-tighter text-xl", to: "/", children: [
         /* @__PURE__ */ jsxDEV3("span", { className: "hidden sm:inline", children: "BackyTracky" }, void 0, !1, {
           fileName: "app/components/Navbar.tsx",
-          lineNumber: 28,
+          lineNumber: 27,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ jsxDEV3("span", { className: "sm:hidden", children: "BT" }, void 0, !1, {
           fileName: "app/components/Navbar.tsx",
-          lineNumber: 29,
+          lineNumber: 28,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 27,
+        lineNumber: 26,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(NavLink, { to: "/tracks", children: "Tracks" }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 31,
+        lineNumber: 30,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(NavLink, { to: "/generator", children: "Generate" }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 32,
+        lineNumber: 31,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ jsxDEV3(NavLink, { to: "/tuner", children: "Tuner" }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 33,
+        lineNumber: 32,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/Navbar.tsx",
-      lineNumber: 26,
+      lineNumber: 25,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ jsxDEV3("nav", { className: "grid gap-4 grid-flow-col items-center", children: [
@@ -244,7 +241,7 @@ function Navbar({ user }) {
             !1,
             {
               fileName: "app/components/Navbar.tsx",
-              lineNumber: 44,
+              lineNumber: 43,
               columnNumber: 15
             },
             this
@@ -254,45 +251,45 @@ function Navbar({ user }) {
         !1,
         {
           fileName: "app/components/Navbar.tsx",
-          lineNumber: 38,
+          lineNumber: 37,
           columnNumber: 13
         },
         this
       ) }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 37,
+        lineNumber: 36,
         columnNumber: 11
       }, this),
       user ? /* @__PURE__ */ jsxDEV3(Form, { className: "hidden sm:block", method: "post", action: "/logout", children: /* @__PURE__ */ jsxDEV3("button", { onClick: notifyLogout, type: "submit", children: "Logout" }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 54,
+        lineNumber: 53,
         columnNumber: 13
       }, this) }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 53,
+        lineNumber: 52,
         columnNumber: 11
       }, this) : /* @__PURE__ */ jsxDEV3(Fragment2, { children: /* @__PURE__ */ jsxDEV3(NavLink, { className: "hidden sm:block", to: "/login", children: "Login" }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 60,
+        lineNumber: 59,
         columnNumber: 13
       }, this) }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 59,
+        lineNumber: 58,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ jsxDEV3("button", { className: "text-xl", onClick: toggleTheme, children: currentTheme === "light" /* LIGHT */ ? "\u{1F31A}" : "\u{1F60E}" }, void 0, !1, {
         fileName: "app/components/Navbar.tsx",
-        lineNumber: 67,
+        lineNumber: 66,
         columnNumber: 9
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/Navbar.tsx",
-      lineNumber: 35,
+      lineNumber: 34,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/Navbar.tsx",
-    lineNumber: 25,
+    lineNumber: 24,
     columnNumber: 5
   }, this);
 }
@@ -627,6 +624,30 @@ function AppWithProviders() {
   }, this);
 }
 
+// app/routes/_action.set-theme.tsx
+var action_set_theme_exports = {};
+__export(action_set_theme_exports, {
+  action: () => action,
+  loader: () => loader2
+});
+import { json as json3, redirect as redirect2 } from "@remix-run/node";
+var action = async ({ request }) => {
+  let themeSession = await getThemeSession(request), requestText = await request.text(), theme = new URLSearchParams(requestText).get("theme");
+  return isTheme(theme) ? (themeSession.setTheme(theme), json3(
+    {
+      success: !0
+    },
+    {
+      headers: {
+        "Set-Cookie": await themeSession.commit()
+      }
+    }
+  )) : json3({
+    success: !1,
+    message: `theme value of ${theme}\xA0is not valid`
+  });
+}, loader2 = () => redirect2("/", { status: 404 });
+
 // app/routes/_auth.register.tsx
 var auth_register_exports = {};
 __export(auth_register_exports, {
@@ -657,10 +678,10 @@ function RegisterRoute() {
 var track_trackId_exports = {};
 __export(track_trackId_exports, {
   default: () => TrackDetailRoute,
-  loader: () => loader2,
+  loader: () => loader3,
   meta: () => meta
 });
-import { redirect as redirect2, json as json4 } from "@remix-run/node";
+import { redirect as redirect3, json as json5 } from "@remix-run/node";
 import { Link as Link2, useLoaderData as useLoaderData2 } from "@remix-run/react";
 import { Suspense as Suspense2 } from "react";
 
@@ -707,7 +728,7 @@ function PageHeader({
 var import_TrackPlayer = __toESM(require_TrackPlayer(), 1);
 
 // app/utils/tracks.server.ts
-import { json as json3 } from "@remix-run/node";
+import { json as json4 } from "@remix-run/node";
 async function createTrack(trackname, description, chords, userId, authorName, bpm) {
   return await db.track.create({
     data: {
@@ -731,19 +752,19 @@ async function deleteTrack(trackId) {
     let deletedTrack = await db.track.delete({
       where: { id: trackId }
     });
-    return json3({ message: "Delete Success", track: deletedTrack });
+    return json4({ message: "Delete Success", track: deletedTrack });
   } catch {
-    return json3({ message: "Delete Error" }, { status: 400 });
+    return json4({ message: "Delete Error" }, { status: 400 });
   }
 }
 
 // app/routes/track.$trackId.tsx
 import { jsxDEV as jsxDEV7 } from "react/jsx-dev-runtime";
-var loader2 = async ({ params }) => {
+var loader3 = async ({ params }) => {
   if (!params.trackId)
-    return redirect2("/tracks");
+    return redirect3("/tracks");
   let track = await getTrack(params.trackId);
-  return json4({ track });
+  return json5({ track });
 }, meta = ({ data }) => [
   {
     title: `${data.track.name} Backing Track | BackyTracky`
@@ -861,19 +882,19 @@ function TrackDetailRoute() {
 // app/routes/_auth.logout.tsx
 var auth_logout_exports = {};
 __export(auth_logout_exports, {
-  action: () => action,
-  loader: () => loader3
+  action: () => action2,
+  loader: () => loader4
 });
-import { redirect as redirect3 } from "@remix-run/node";
-var action = async ({ request }) => await logout(request), loader3 = async () => redirect3("/login");
+import { redirect as redirect4 } from "@remix-run/node";
+var action2 = async ({ request }) => await logout(request), loader4 = async () => redirect4("/login");
 
 // app/routes/_auth.login.tsx
 var auth_login_exports = {};
 __export(auth_login_exports, {
-  action: () => action2,
+  action: () => action3,
   default: () => LoginRoute
 });
-import { json as json5 } from "@remix-run/node";
+import { json as json6 } from "@remix-run/node";
 import { Form as Form2, useActionData, useNavigation } from "@remix-run/react";
 import { useEffect as useEffect2 } from "react";
 import toast2 from "react-hot-toast";
@@ -1123,7 +1144,7 @@ function validatePassword(password) {
 
 // app/routes/_auth.login.tsx
 import { jsxDEV as jsxDEV10 } from "react/jsx-dev-runtime";
-var badRequest = (data) => json5(data, { status: 400 }), action2 = async ({ request }) => {
+var badRequest = (data) => json6(data, { status: 400 }), action3 = async ({ request }) => {
   let form = await request.formData(), username = form.get("username"), password = form.get("password");
   if (typeof username != "string" || typeof password != "string")
     return badRequest({
@@ -1321,12 +1342,12 @@ function GeneratorRoute() {
 // app/routes/track.new.tsx
 var track_new_exports = {};
 __export(track_new_exports, {
-  action: () => action3,
+  action: () => action4,
   default: () => NewTrackRoute,
-  loader: () => loader4
+  loader: () => loader5
 });
 import { useRef as useRef2, useEffect as useEffect5, useState as useState4, Suspense as Suspense4 } from "react";
-import { redirect as redirect4, json as json6 } from "@remix-run/node";
+import { redirect as redirect5, json as json7 } from "@remix-run/node";
 import { Form as Form3, useActionData as useActionData2, useLoaderData as useLoaderData3 } from "@remix-run/react";
 
 // app/music/utils.ts
@@ -9052,10 +9073,10 @@ var sampleChordConfig = {
   bar: 0,
   beat: 0,
   sixteenth: 0
-}, loader4 = async ({ request }) => {
+}, loader5 = async ({ request }) => {
   let user = await getUser(request);
-  return json6({ user });
-}, action3 = async ({ request }) => {
+  return json7({ user });
+}, action4 = async ({ request }) => {
   let userId = await requireUserId(request), form = await request.formData(), trackname = form.get("trackname"), description = form.get("description"), authorName = form.get("author-name"), bpm = form.get("bpm"), chords = form.get("chords");
   if (typeof trackname != "string" || typeof chords != "string" || typeof description != "string" || typeof authorName != "string" || typeof bpm != "string")
     return badRequest2({
@@ -9069,10 +9090,10 @@ var sampleChordConfig = {
     authorName,
     bpm
   );
-  return newTrack ? redirect4(`/track/${newTrack.id}`) : badRequest2({
+  return newTrack ? redirect5(`/track/${newTrack.id}`) : badRequest2({
     formError: "couldn't create track!"
   });
-}, badRequest2 = (data) => json6(data, { status: 400 });
+}, badRequest2 = (data) => json7(data, { status: 400 });
 function NewTrackRoute() {
   let actionData = useActionData2(), loaderData = useLoaderData3(), [isChordEditorOpen, setIsChordEditorOpen] = useState4(!1), [chords, setChords] = useState4([]), selectedChord = useRef2(null), lastChord = useRef2(null);
   useEffect5(() => {
@@ -9885,12 +9906,12 @@ function Index() {
 // app/routes/tracks.tsx
 var tracks_exports = {};
 __export(tracks_exports, {
-  action: () => action4,
+  action: () => action5,
   default: () => TracksRoute,
-  loader: () => loader5,
+  loader: () => loader6,
   meta: () => meta4
 });
-import { json as json7 } from "@remix-run/node";
+import { json as json8 } from "@remix-run/node";
 import {
   Link as Link7,
   useActionData as useActionData3,
@@ -10043,18 +10064,18 @@ function TrackListing({
 
 // app/routes/tracks.tsx
 import { jsxDEV as jsxDEV17 } from "react/jsx-dev-runtime";
-var loader5 = async ({ request }) => {
+var loader6 = async ({ request }) => {
   let data = {
     tracks: await db.track.findMany(),
     user: await getUser(request)
   };
-  return json7(data);
-}, action4 = async ({ request }) => {
+  return json8(data);
+}, action5 = async ({ request }) => {
   let trackId = (await request.formData()).get("trackId"), response = await deleteTrack(trackId);
   return response.status === 400 ? badRequest3({
     error: "Error deleting track"
-  }) : json7({ response });
-}, badRequest3 = (data) => json7(data, { status: 400 }), meta4 = () => [
+  }) : json8({ response });
+}, badRequest3 = (data) => json8(data, { status: 400 }), meta4 = () => [
   {
     title: "All Tracks | BackyTracky"
   },
@@ -10221,7 +10242,7 @@ function Tuner() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-IKERMS2W.js", imports: ["/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-WEL37Y7B.js", "/build/_shared/chunk-XU7DNSPJ.js", "/build/_shared/chunk-AB26UJ6G.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-V74OTGWN.js", imports: ["/build/_shared/chunk-ONLNHW7P.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.login-LEOKPLFH.js", imports: ["/build/_shared/chunk-PWSAHRFS.js", "/build/_shared/chunk-7MEWGV2P.js", "/build/_shared/chunk-V22J52NZ.js"], hasAction: !0, hasLoader: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.logout-TQQKM25O.js", imports: void 0, hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.register-7MPE3FWW.js", imports: void 0, hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-XVJHIXI4.js", imports: ["/build/_shared/chunk-6DJUASJP.js", "/build/_shared/chunk-PWSAHRFS.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/build/routes/generator-NLYSTVAB.js", imports: ["/build/_shared/chunk-P6IXS4CZ.js", "/build/_shared/chunk-4NFPUYXC.js", "/build/_shared/chunk-4TNCM64E.js", "/build/_shared/chunk-YDUQ6HJN.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/build/routes/track.$trackId-KE3MOCD3.js", imports: ["/build/_shared/chunk-P6IXS4CZ.js", "/build/_shared/chunk-4NFPUYXC.js", "/build/_shared/chunk-Q37BEO7O.js", "/build/_shared/chunk-AYITFWIO.js", "/build/_shared/chunk-YDUQ6HJN.js"], hasAction: !1, hasLoader: !0, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/build/routes/track.new-HKRWYVIU.js", imports: ["/build/_shared/chunk-Q37BEO7O.js", "/build/_shared/chunk-AYITFWIO.js", "/build/_shared/chunk-7MEWGV2P.js", "/build/_shared/chunk-V22J52NZ.js", "/build/_shared/chunk-4TNCM64E.js", "/build/_shared/chunk-YDUQ6HJN.js"], hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/build/routes/tracks-NC3HFQMD.js", imports: ["/build/_shared/chunk-6DJUASJP.js", "/build/_shared/chunk-PWSAHRFS.js", "/build/_shared/chunk-4NFPUYXC.js", "/build/_shared/chunk-AYITFWIO.js", "/build/_shared/chunk-V22J52NZ.js"], hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/build/routes/tuner-M7L7HKK4.js", imports: ["/build/_shared/chunk-6DJUASJP.js", "/build/_shared/chunk-4NFPUYXC.js", "/build/_shared/chunk-YDUQ6HJN.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 } }, version: "a51c106c", hmr: { runtime: "/build/_shared/chunk-AB26UJ6G.js", timestamp: 1698099388410 }, url: "/build/manifest-A51C106C.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-JWKTC22P.js", imports: ["/build/_shared/chunk-ZWGWGGVF.js", "/build/_shared/chunk-GIAAE3CH.js", "/build/_shared/chunk-WEL37Y7B.js", "/build/_shared/chunk-XU7DNSPJ.js", "/build/_shared/chunk-AB26UJ6G.js", "/build/_shared/chunk-UWV35TSL.js", "/build/_shared/chunk-BOXFZXVX.js", "/build/_shared/chunk-PNG5AS42.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-REVCKDL7.js", imports: ["/build/_shared/chunk-ONLNHW7P.js", "/build/_shared/chunk-G7CHZRZX.js"], hasAction: !1, hasLoader: !0, hasErrorBoundary: !1 }, "routes/_action.set-theme": { id: "routes/_action.set-theme", parentId: "root", path: "set-theme", index: void 0, caseSensitive: void 0, module: "/build/routes/_action.set-theme-5KROQWND.js", imports: void 0, hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/_auth.login": { id: "routes/_auth.login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.login-BOOWBBD7.js", imports: ["/build/_shared/chunk-7MEWGV2P.js", "/build/_shared/chunk-V22J52NZ.js", "/build/_shared/chunk-PWSAHRFS.js"], hasAction: !0, hasLoader: !1, hasErrorBoundary: !1 }, "routes/_auth.logout": { id: "routes/_auth.logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.logout-TQQKM25O.js", imports: void 0, hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/_auth.register": { id: "routes/_auth.register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/_auth.register-7MPE3FWW.js", imports: void 0, hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-XVJHIXI4.js", imports: ["/build/_shared/chunk-6DJUASJP.js", "/build/_shared/chunk-PWSAHRFS.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 }, "routes/generator": { id: "routes/generator", parentId: "root", path: "generator", index: void 0, caseSensitive: void 0, module: "/build/routes/generator-YIYKFJE2.js", imports: ["/build/_shared/chunk-4TNCM64E.js", "/build/_shared/chunk-P6IXS4CZ.js", "/build/_shared/chunk-YDUQ6HJN.js", "/build/_shared/chunk-4NFPUYXC.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 }, "routes/track.$trackId": { id: "routes/track.$trackId", parentId: "root", path: "track/:trackId", index: void 0, caseSensitive: void 0, module: "/build/routes/track.$trackId-K4UEOVU4.js", imports: ["/build/_shared/chunk-Q37BEO7O.js", "/build/_shared/chunk-AYITFWIO.js", "/build/_shared/chunk-P6IXS4CZ.js", "/build/_shared/chunk-YDUQ6HJN.js", "/build/_shared/chunk-4NFPUYXC.js"], hasAction: !1, hasLoader: !0, hasErrorBoundary: !1 }, "routes/track.new": { id: "routes/track.new", parentId: "root", path: "track/new", index: void 0, caseSensitive: void 0, module: "/build/routes/track.new-HKRWYVIU.js", imports: ["/build/_shared/chunk-Q37BEO7O.js", "/build/_shared/chunk-AYITFWIO.js", "/build/_shared/chunk-7MEWGV2P.js", "/build/_shared/chunk-V22J52NZ.js", "/build/_shared/chunk-4TNCM64E.js", "/build/_shared/chunk-YDUQ6HJN.js"], hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/tracks": { id: "routes/tracks", parentId: "root", path: "tracks", index: void 0, caseSensitive: void 0, module: "/build/routes/tracks-RTXXMUVY.js", imports: ["/build/_shared/chunk-6DJUASJP.js", "/build/_shared/chunk-AYITFWIO.js", "/build/_shared/chunk-V22J52NZ.js", "/build/_shared/chunk-PWSAHRFS.js", "/build/_shared/chunk-4NFPUYXC.js"], hasAction: !0, hasLoader: !0, hasErrorBoundary: !1 }, "routes/tuner": { id: "routes/tuner", parentId: "root", path: "tuner", index: void 0, caseSensitive: void 0, module: "/build/routes/tuner-ILZ3Z7E3.js", imports: ["/build/_shared/chunk-6DJUASJP.js", "/build/_shared/chunk-YDUQ6HJN.js", "/build/_shared/chunk-4NFPUYXC.js"], hasAction: !1, hasLoader: !1, hasErrorBoundary: !1 } }, version: "52587722", hmr: { runtime: "/build/_shared/chunk-AB26UJ6G.js", timestamp: 1698100344481 }, url: "/build/manifest-52587722.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public/build", future = {}, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
@@ -10232,6 +10253,14 @@ var mode = "development", assetsBuildDirectory = "public/build", future = {}, pu
     index: void 0,
     caseSensitive: void 0,
     module: root_exports
+  },
+  "routes/_action.set-theme": {
+    id: "routes/_action.set-theme",
+    parentId: "root",
+    path: "set-theme",
+    index: void 0,
+    caseSensitive: void 0,
+    module: action_set_theme_exports
   },
   "routes/_auth.register": {
     id: "routes/_auth.register",

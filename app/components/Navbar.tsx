@@ -16,7 +16,6 @@ export default function Navbar({ user }: NavbarProps) {
   const [currentTheme, setTheme] = useTheme();
 
   const toggleTheme = () => {
-    console.log("theme"); // TODO: Fix theme button
     setTheme((prevTheme) =>
       prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
     );
