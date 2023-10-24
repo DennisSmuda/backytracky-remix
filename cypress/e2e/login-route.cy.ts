@@ -15,6 +15,13 @@ describe("Login Route", () => {
     cy.findByRole("status").should("contain", "You are logged in");
   });
 
+
+  it("needs both fields to be able submit", () => {
+    cy.get("input[name=username]").type(faker.name.firstName());
+    cy.get("input[name=password]").type(`{enter}`);
+    cy.findByRole("status").should("contain", "error");
+  });
+
   it("shows a server error on wrong credentials", () => {
     cy.get("input[name=username]").type(
       faker.name.firstName() + faker.name.lastName()
@@ -23,11 +30,5 @@ describe("Login Route", () => {
       `${faker.random.word()}${faker.random.word()}{enter}`
     );
     cy.findByRole("alert").should("contain", "combination is incorrect");
-  });
-
-  it("needs both fields to be able submit", () => {
-    cy.get("input[name=username]").type(faker.name.firstName());
-    cy.get("input[name=password]").type(`{enter}`);
-    cy.findByRole("status").should("contain", "error");
   });
 });
