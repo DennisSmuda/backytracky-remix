@@ -3,6 +3,7 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import EditChord from "../app/components/track/EditChord";
 import type { Subdivision } from "tone/build/esm/core/type/Units";
+import { vi, expect } from "vitest";
 
 const sampleChord = {
   note: ["C3", "E3", "G3", "B3"],
@@ -31,11 +32,11 @@ const overflowChord = {
 };
 
 describe("Play Chord Component", () => {
-  const shortenChord = jest.fn();
-  const lengthenChord = jest.fn();
-  const clickChord = jest.fn();
-  const deleteChord = jest.fn();
-  const editChord = jest.fn();
+  const shortenChord = vi.fn();
+  const lengthenChord = vi.fn();
+  const clickChord = vi.fn();
+  const deleteChord = vi.fn();
+  const editChord = vi.fn();
 
   it("Can show a chord", async () => {
     const { getByRole } = render(

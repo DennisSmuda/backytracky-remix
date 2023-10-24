@@ -1,13 +1,15 @@
+export type ActionData = {
+  fields: { name: string };
+  fieldErrors?: { name: string };
+};
+
 interface InputProps {
   name: string;
   label: string;
   placeholder?: string;
   required?: boolean;
   type?: string;
-  actionData?: {
-    fields: { name: string };
-    fieldErrors: { name: string };
-  };
+  actionData?: ActionData;
 }
 
 export default function TextInput({

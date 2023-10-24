@@ -9,7 +9,7 @@ import {
   Link,
   useActionData,
   useLoaderData,
-  useTransition,
+  useNavigation,
 } from "@remix-run/react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
@@ -47,46 +47,37 @@ export const action: ActionFunction = async ({ request }) => {
 
 const badRequest = (data: any) => json(data, { status: 400 });
 
-const notifyDeleting = () =>
-  toast.loading("Deleting...", { id: `track-delete-toast` });
-
-const notifyErrorDeleting = () =>
-  toast.error("Couldn't delete track...", {
-    id: `track-delete-toast`,
-  });
-
-const notifySuccessDeleting = () =>
-  toast.success("Deleted track!", { id: `track-delete-toast` });
-
-export const meta: MetaFunction = () => ({
-  title: "All Tracks | BackyTracky",
-  description:
-    "Explore all published backing tracks. Grab your instrument and practice some chord changes!",
-});
+export const meta: MetaFunction = () => [
+  {
+    title: "All Tracks | BackyTracky",
+  },
+  {
+    description:
+      "Explore all published backing tracks. Grab your instrument and practice some chord changes!",
+  },
+];
 
 export default function TracksRoute() {
-  const actionData = useActionData();
-  const loaderData = useLoaderData();
-  const transition = useTransition();
+  const actionData = useActionData<typeof action>();
+  const loaderData = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    switch (transition.type) {
-      case "actionSubmission":
-        if (transition.submission.action === "/tracks") {
-          notifyDeleting();
-        }
-        break;
-      case "actionRedirect":
-        break;
-      case "actionReload":
-        if (actionData.error) {
-          notifyErrorDeleting();
-        } else {
-          notifySuccessDeleting();
-        }
-        break;
+    if (
+      navigation.state === "submitting" &&
+      navigation.formMethod === "delete"
+    ) {
+      toast.loading("Deleting...", { id: `track-delete-toast` });
     }
-  }, [transition, actionData]);
+    if (navigation.state === "idle" && actionData?.error) {
+      toast.error("Couldn't delete track...", {
+        id: `track-delete-toast`,
+      });
+    }
+    if (navigation.state === "idle" && actionData?.response) {
+      toast.success("Deleted track!", { id: `track-delete-toast` });
+    }
+  }, [navigation, actionData]);
 
   return (
     <main className="main">

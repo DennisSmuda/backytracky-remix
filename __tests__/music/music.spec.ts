@@ -1,11 +1,12 @@
 import Music from "../../app/music/Music";
+import { expect } from 'vitest'
 
 describe("Music Class", () => {
   it("can construct a new MusicInstance from JSON or String", () => {
     const music = new Music({ sheet: sampleSheet.sheet });
 
     expect(music).toBeTruthy();
-    const { chords, groove } = music.generateMusic();
+    const { chords, groove } = music.generateMusic('asdf');
     expect(chords).toBeTruthy();
     expect(groove).toBeTruthy();
 

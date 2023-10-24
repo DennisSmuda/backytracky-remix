@@ -1,6 +1,21 @@
 import { Link } from "@remix-run/react";
 import BackgroundNotes from "../components/BackgroundNotes";
 import Footer from "../components/Footer";
+import type { MetaFunction } from "@remix-run/node";
+
+export const meta: MetaFunction = () => {
+  return [
+    { charset: "utf-8" },
+    {
+      title: "Free Backing Tracks for Musicians! | BackyTracky Homepage",
+    },
+    {
+      name: "description",
+      content:
+        "Create and play-along Lead-Sheets to level up your chops! Practice scales, licks or solos. Discover chord progressions others are using or make your own!",
+    },
+  ];
+};
 
 export default function Index() {
   return (

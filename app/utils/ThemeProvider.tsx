@@ -3,10 +3,7 @@
  */
 import { useFetcher } from "@remix-run/react";
 import type { Dispatch, ReactNode, SetStateAction } from "react";
-import { useEffect, useRef } from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import { useEffect, useRef, useContext, useState, createContext } from "react";
 
 enum Theme {
   DARK = "dark",
@@ -93,7 +90,7 @@ function ThemeProvider({
     if (!theme) return;
     persistThemeRef.current.submit(
       { theme },
-      { action: "action/set-theme", method: "post" }
+      { action: "/set-theme", method: "post" }
     );
   }, [theme]);
 

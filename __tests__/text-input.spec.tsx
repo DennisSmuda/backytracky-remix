@@ -1,9 +1,11 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 
+import type { ActionData } from "../app/components/TextInput";
 import TextInput from "../app/components/TextInput";
+import { expect } from "vitest";
 
-const setup = (actionData) => {
+const setup = (actionData: ActionData) => {
   const utils = render(
     <TextInput name="username" label="Username" actionData={actionData} />
   );

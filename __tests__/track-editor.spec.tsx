@@ -3,31 +3,32 @@ import { fireEvent, render } from "@testing-library/react";
 import type { Subdivision } from "tone/build/esm/core/type/Units";
 
 import TrackEditor from "../app/components/track/TrackEditor.client";
+import { vi, expect } from "vitest";
 
-jest.mock("tone", () => ({
-  start: jest.fn(),
-  now: jest.fn(),
-  Sampler: jest.fn(() => ({
-    triggerAttackRelease: jest.fn(),
-    toDestination: jest.fn(),
+vi.mock("tone", () => ({
+  start: vi.fn(),
+  now: vi.fn(),
+  Sampler: vi.fn(() => ({
+    triggerAttackRelease: vi.fn(),
+    toDestination: vi.fn(),
   })),
-  Transport: jest.fn(() => ({
-    start: jest.fn(),
-    stop: jest.fn(),
-    loop: jest.fn(),
-    dispose: jest.fn(),
+  Transport: vi.fn(() => ({
+    start: vi.fn(),
+    stop: vi.fn(),
+    loop: vi.fn(),
+    dispose: vi.fn(),
   })),
-  Synth: jest.fn(() => ({
-    toDestination: jest.fn(),
+  Synth: vi.fn(() => ({
+    toDestination: vi.fn(),
   })),
-  Part: jest.fn().mockImplementation(() => ({
-    start: jest.fn(),
-    stop: jest.fn(),
-    dispose: jest.fn(),
+  Part: vi.fn().mockImplementation(() => ({
+    start: vi.fn(),
+    stop: vi.fn(),
+    dispose: vi.fn(),
   })),
 }));
 
-jest.mock("../app/music/loader", () => ({
+vi.mock("../app/music/loader", () => ({
   loadInstruments: () => ({
     pianoSampler: {},
     drumSampler: {},
@@ -49,7 +50,7 @@ const sampleChord = {
 
 describe("Track Editor Component", () => {
   it("Renders a component to edit tracks", () => {
-    const clickChord = jest.fn();
+    const clickChord = vi.fn();
 
     const { getAllByText, getByRole } = render(
       <TrackEditor
@@ -71,7 +72,7 @@ describe("Track Editor Component", () => {
   });
 
   it("shows appropriate message if there are no chords", () => {
-    const clickChord = jest.fn();
+    const clickChord = vi.fn();
 
     const { getByText } = render(
       <TrackEditor

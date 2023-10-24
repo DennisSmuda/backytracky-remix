@@ -1,44 +1,51 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 
 import DrumSequencer from "../app/components/sequencer/DrumSequence";
 import { timeBeats } from "../app/components/sequencer/timeBeats";
+import { vi } from "vitest";
 
-jest.mock("tone", () => ({
-  start: jest.fn(),
-  now: jest.fn(),
-  Sampler: jest.fn(() => ({
-    triggerAttackRelease: jest.fn(),
-    toDestination: jest.fn(),
+vi.mock("tone", () => ({
+  start: vi.fn(),
+  now: vi.fn(),
+  Sampler: vi.fn(() => ({
+    triggerAttackRelease: vi.fn(),
+    toDestination: vi.fn(),
   })),
   // "Transport.scheduleRepeat": {},
-  // Transport: jest.fn(() => ({
-  Transport: jest.fn().mockImplementation(() => ({
-    scheduleRepeat: jest.fn(),
-    start: jest.fn(),
-    stop: jest.fn(),
-    loop: jest.fn(),
-    dispose: jest.fn(),
+  // Transport: vi.fn(() => ({
+  Transport: vi.fn().mockImplementation(() => ({
+    scheduleRepeat: vi.fn(),
+    start: vi.fn(),
+    stop: vi.fn(),
+    loop: vi.fn(),
+    dispose: vi.fn(),
   })),
-  Part: jest.fn().mockImplementation(() => ({
-    start: jest.fn(),
-    stop: jest.fn(),
-    dispose: jest.fn(),
+  Part: vi.fn().mockImplementation(() => ({
+    start: vi.fn(),
+    stop: vi.fn(),
+    dispose: vi.fn(),
   })),
 }));
 
 describe("DrumSequencer Component", () => {
   it("renders correctly and has buttons to control kick/snare/hihat sounds", () => {
-    const change = jest.fn();
+    const change = vi.fn();
     const sequencer = render(
       <DrumSequencer onChange={change} timeBeats={timeBeats} mute={false} />
     );
 
     const hihatButtons = sequencer.getAllByRole("button", { name: /hihat/i });
-    hihatButtons[0].click();
+    act(() => {
+      hihatButtons[0].click();
+    });
     const snareButtons = sequencer.getAllByRole("button", { name: /snare/i });
-    snareButtons[0].click();
+    act(() => {
+      snareButtons[0].click();
+    });
     const kickButtons = sequencer.getAllByRole("button", { name: /kick/i });
-    kickButtons[0].click();
+    act(() => {
+      kickButtons[0].click();
+    });
   });
 });
