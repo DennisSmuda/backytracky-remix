@@ -54,8 +54,8 @@ jobs:
       - name: 🤖 Cypress run
         uses: cypress-io/github-action@v6
         with:
-          # build: npm run test:build
-          start: npm run dev
+          build: npm run test:build
+          start: npm run test:start
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
