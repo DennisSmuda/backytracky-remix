@@ -15,7 +15,7 @@
     "test:e2e": "cypress open",
     "test:unit": "vitest",
     "test:coverage": "vitest --coverage",
-    "test:start": "cross-env NODE_ENV=production remix-serve ./build",
+    "test:start": "cross-env NODE_ENV=development remix-serve ./build",
     "start:netlify": "cross-env NODE_ENV=production netlify dev",
     "typecheck": "tsc -b && tsc -b cypress",
     "tsc": "tsc -b",
