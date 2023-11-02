@@ -5,17 +5,17 @@ export default function Footer() {
     <footer className="p-3 sm:p-6 mt-24">
       <div className="container max-w-4xl mx-auto pt-8">
         <div className="flex flex-col md:flex-row justify-between">
-          <div className="flex items-baseline">
+          <div className="flex flex-col md:flex-row gap-4 items-baseline">
             <Link className="font-black tracking-tighter text-xl" to="/">
               BackyTracky™
             </Link>
-            <Link className="ml-8 text-xs opacity-50" to="/tracks">
+            <Link className="text-xs opacity-50" to="/tracks">
               Tracks
             </Link>
-            <Link className="ml-8 text-xs opacity-50" to="/generator">
+            <Link className="text-xs opacity-50" to="/generator">
               Sequencer
             </Link>
-            <Link className="ml-8 text-xs opacity-50" to="/tuner">
+            <Link className="text-xs opacity-50" to="/tuner">
               Guitar Tuner
             </Link>
           </div>

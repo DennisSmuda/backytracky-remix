@@ -20,15 +20,16 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <main className="main relative">
-      <div className="bg-white dark:bg-black absolute -top-32 left-0 right-0 h-[280px] -z-10 rotate-1">
-        <div className="color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none"></div>
+      <div className="overflow-hidden absolute w-full h-[360px] -top-32 pointer-events-none ">
+        <div className="bg-white dark:bg-black absolute -top-16 left-0 right-0 h-full -z-10 rotate-1 border-b border-zinc-500 border-opacity-10" />
       </div>
       <section className="relative">
         <BackgroundNotes />
         <div className="container max-w-4xl mx-auto pt-8 relative z-10">
           <div className="bt-prose mx-auto my-12">
             <h1 className="mb-0 rounded-md relative -ml-2 inline-block px-1 font-black">
-              Welcome to BackyTracky
+              Welcome to <br />
+              <span className="md:text-6xl">BackyTracky</span>
             </h1>
             <p className="max-w-lg bg-zinc-50 dark:bg-zinc-900 bg-opacity-10 rounded-md">
               <span className="sr-only">Free </span>
@@ -37,42 +38,44 @@ export default function Index() {
               ahead and try making something of your own! Practice scales, licks
               or solos.
             </p>
-            <Link
-              className="button no-underline px-8 dark:text-white"
-              to="/tracks"
-            >
-              <span>see some tracks</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+            <div className="flex flex-col md:flex-row gap-4">
+              <Link
+                className="button no-underline px-8 dark:text-white"
+                to="/tracks"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </Link>
-            <Link
-              className="button button--submit no-underline px-8 ml-4 dark:text-white"
-              to="/generator"
-            >
-              <span>make your own</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                viewBox="0 0 20 20"
-                fill="currentColor"
+                <span>see some tracks</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
+              <Link
+                className="button button--submit no-underline px-8 dark:text-white"
+                to="/generator"
               >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </Link>
+                <span>make your own</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
