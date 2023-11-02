@@ -9,9 +9,7 @@ export default function PageHeader({
 }) {
   return (
     <section className="border-b border-zinc-500 border-opacity-10 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-gray-1000">
-      <div className="bg-white dark:bg-black absolute top-0 left-0 right-0 h-1 -z-10">
-        <div className="color-change z-10 w-full top-0 h-full bg-opacity-10 absolute pointer-events-none"></div>
-      </div>
+      <div className="bg-white dark:bg-black absolute top-0 left-0 right-0 h-1 -z-10" />
       <div className="max-w-4xl mx-auto relative">
         <div className="page-header__breadcrumbs">{children}</div>
         <h1 className="font-black">{title}</h1>
