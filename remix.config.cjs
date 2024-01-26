@@ -12,9 +12,6 @@ const baseConfig =
 module.exports = {
   ...baseConfig,
   ignoredRouteFiles: ["**/.*"],
-  future: {
-    v2_routeConvention: true,
-  },
   serverDependenciesToBundle: [
     /^remix-utils.*/,
     "remix-utils",
