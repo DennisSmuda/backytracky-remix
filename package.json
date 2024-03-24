@@ -34,13 +34,13 @@
     "@remix-run/node": "2.1.0",
     "@remix-run/react": "2.1.0",
     "@remix-run/serve": "^2.1.0",
-    "@tonaljs/tonal": "^4.6.5",
+    "@tonaljs/tonal": "^4.10.0",
     "bcryptjs": "^2.4.3",
-    "clsx": "^1.2.1",
+    "clsx": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.3.0",
-    "remix-utils": "^7.0.0-pre.7",
+    "react-hot-toast": "^2.4.1",
+    "remix-utils": "^7.5.0",
     "tone": "^14.7.77"
   },
   "devDependencies": {
