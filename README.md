@@ -1,5 +1,6 @@
 # Welcome to BackyTracky!
 
+> This project is currently broken since the database provider decided to cancel their free-tier 😅 I am working on a replacement which is a rewrite + restructure in nuxt. You can see a first implementation live [here](https://sequencer.backytracky.com/)
 
 [![Cypress Tests](https://github.com/DennisSmuda/backytracky-remix/actions/workflows/main.yaml/badge.svg)](https://github.com/DennisSmuda/backytracky-remix/actions/workflows/main.yaml)
 
